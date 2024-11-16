@@ -12,11 +12,19 @@ using System.Windows.Forms;
 
 namespace PawMateApp
 {
+
+
     public partial class Login : Form
     {
+
+
         public Login()
         {
+            MoveForm moveForm = new MoveForm(this);
             InitializeComponent();
+            this.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
+            this.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
+            this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
         }
 
         public static class Globals
@@ -87,6 +95,40 @@ namespace PawMateApp
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+    }
+    public class MoveForm
+    {
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+
+
+        private Form form;
+
+        public MoveForm(Form form)
+        {
+            this.form = form;
+        }
+        public void Form_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = form.Location;
+        }
+
+        public void Form_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point diff = new Point(Cursor.Position.X - dragCursorPoint.X, Cursor.Position.Y - dragCursorPoint.Y);
+                form.Location = new Point(dragFormPoint.X + diff.X, dragFormPoint.Y + diff.Y);
+            }
+        }
+
+        public void Form_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
         }
     }
 }
