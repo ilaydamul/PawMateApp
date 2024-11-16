@@ -24,7 +24,7 @@ namespace PawMateApp
             public static int CurrentUserID { get; set; } 
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
                                                                                                                            //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Login_Paint(object sender, PaintEventArgs e)
         {
@@ -54,8 +54,7 @@ namespace PawMateApp
                 if (dr.Read())
                 {
                     MessageBox.Show("Giriş Başarıyla Yapıldı!" );
-                    int user_id = Convert.ToInt32(dr["user_id"]);
-                    Globals.CurrentUserID = user_id;
+                    Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
                 }
                 else
                 {
