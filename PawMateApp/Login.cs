@@ -75,9 +75,9 @@ namespace PawMateApp
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void cb_showPass_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (cb_showPass.Checked)
             {
                 // Şifreyi görünür yap
                 txt_password.PasswordChar = '\0';
@@ -89,14 +89,21 @@ namespace PawMateApp
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btn_exitApp_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void btn_minimizeApp_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void lbl_goRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Register register = new Register();
+            this.Hide();
+            register.Show();
         }
     }
     public class MoveForm
