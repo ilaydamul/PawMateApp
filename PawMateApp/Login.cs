@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -63,6 +64,7 @@ namespace PawMateApp
                 {
                     MessageBox.Show("Giriş Başarıyla Yapıldı!" );
                     Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+                    Debug.WriteLine("Current User ID: " + Globals.CurrentUserID);
                 }
                 else
                 {
