@@ -48,7 +48,7 @@ namespace PawMateApp
         }
         /// 
         /// <returns>Boş alan olursa messagebox ile false döner, boş alan yok ise true ile messagebox döner</returns>
-        public bool Check(string MessageBoxTextForSuccess , string MessageBoxTextForError)
+        public bool Check(string MessageBoxTextForSuccess)
         {
             foreach (string input in strings)
             {
@@ -58,8 +58,15 @@ namespace PawMateApp
                     return false;
                 }
             }
-            MessageBox.Show(MessageBoxTextForSuccess, "Başarılı", MessageBoxButtons.OK);
-            return true;
+            if (MessageBoxTextForSuccess == "")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(MessageBoxTextForSuccess, "Başarılı", MessageBoxButtons.OK);
+                return true;
+            }
         }
     }
 }

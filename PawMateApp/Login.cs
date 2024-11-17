@@ -18,11 +18,13 @@ namespace PawMateApp
     public partial class Login : Form
     {
 
-
+        public CheckInputs checkinputs;
         public Login()
         {
+         
             MoveForm moveForm = new MoveForm(this);
             InitializeComponent();
+            
             this.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
             this.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
             this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
@@ -33,13 +35,14 @@ namespace PawMateApp
             public static int CurrentUserID { get; set; } 
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
                                                                                                                            //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Login_Paint(object sender, PaintEventArgs e)
         {
+
             Color leftColor = ColorTranslator.FromHtml("#B5B3F1");
             Color rightColor = ColorTranslator.FromHtml("#2A21DC");
-
+            
             using (LinearGradientBrush lgb = new LinearGradientBrush(this.ClientRectangle, leftColor, rightColor, 0F))
             {
                 e.Graphics.FillRectangle(lgb, this.ClientRectangle);
@@ -48,10 +51,10 @@ namespace PawMateApp
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            
-            if (txt_username.Text == "" || txt_password.Text == "")
+            checkinputs = new CheckInputs(new string[] { txt_username.Text , txt_password.Text});
+            if (!checkinputs.Check(""))
             {
-                MessageBox.Show("Lütfen boş alanları doldurunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else
             {
@@ -68,7 +71,6 @@ namespace PawMateApp
                     panel.Show();
 
                     Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
-                    Debug.WriteLine("Current User ID: " + Globals.CurrentUserID);
                 }
                 else
                 {
