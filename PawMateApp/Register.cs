@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using System.Diagnostics;
 
 namespace PawMateApp
 {
@@ -68,8 +69,8 @@ namespace PawMateApp
         private void btn_register_Click(object sender, EventArgs e)
         {
             CheckInputs checkInputs = new CheckInputs(new string[] { txt_username.Text, txt_password.Text, txt_email.Text, txt_name.Text, txt_surname.Text});
-
-
+            checkInputs.Check("Başarılı bir şekilde giriş yapıldı", "Lütfen boş alanları doldurunuz.");
+            
         }
     }
 }

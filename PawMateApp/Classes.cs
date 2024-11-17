@@ -40,13 +40,15 @@ namespace PawMateApp
     public class CheckInputs
     {
         private string[] strings;
+        /// <param name="Inputs">txt_degiskenismi.Text olarak değerleri array şeklinde girin.</param
         public CheckInputs(string[] Inputs)
         {
 
             this.strings = Inputs;
         }
-
-        public bool Check()
+        /// 
+        /// <returns>Boş alan olursa messagebox ile false döner, boş alan yok ise true ile messagebox döner</returns>
+        public bool Check(string MessageBoxTextForSuccess , string MessageBoxTextForError)
         {
             foreach (string input in strings)
             {
@@ -56,9 +58,8 @@ namespace PawMateApp
                     return false;
                 }
             }
+            MessageBox.Show(MessageBoxTextForSuccess, "Başarılı", MessageBoxButtons.OK);
             return true;
         }
-
-
     }
 }
