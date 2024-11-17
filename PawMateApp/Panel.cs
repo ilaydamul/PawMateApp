@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PawMateApp.Screens;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,7 +39,7 @@ namespace PawMateApp
                 Globals.CurrentUserID = 0;                
                 this.Close();
                 Login login = new Login();
-                this.Hide();
+                //this.Hide();
                 login.Show();
             } 
             else
@@ -70,6 +71,21 @@ namespace PawMateApp
         private void topMenuPanel_MouseDown(object sender, MouseEventArgs e)
         {
            
+        }
+
+        private void btn_showBlogCategories_Click(object sender, EventArgs e)
+        {
+            Advertisements advertisements = new Advertisements();
+            showForm(advertisements);
+        }
+
+        public void showForm(Form form)
+        {
+            contentPanel.Controls.Clear();
+            form.MdiParent = this;
+            form.FormBorderStyle = FormBorderStyle.None;
+            contentPanel.Controls.Add(form);
+            form.Show();
         }
     }
 }

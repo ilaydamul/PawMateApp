@@ -81,6 +81,7 @@
             this.btn_showBlogCategories.TabIndex = 11;
             this.btn_showBlogCategories.Text = "İlanlar";
             this.btn_showBlogCategories.UseVisualStyleBackColor = false;
+            this.btn_showBlogCategories.Click += new System.EventHandler(this.btn_showBlogCategories_Click);
             // 
             // btn_showMyBlogs
             // 
@@ -181,6 +182,7 @@
             // 
             this.contentPanel.AutoScroll = true;
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.contentPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.contentPanel.Location = new System.Drawing.Point(192, 26);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(608, 424);
@@ -190,10 +192,10 @@
             // 
             this.topMenuPanel.Controls.Add(this.btn_minimizeApp);
             this.topMenuPanel.Controls.Add(this.btn_closeApp);
-            this.topMenuPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.topMenuPanel.Location = new System.Drawing.Point(192, 0);
             this.topMenuPanel.Name = "topMenuPanel";
-            this.topMenuPanel.Size = new System.Drawing.Size(608, 28);
+            this.topMenuPanel.Size = new System.Drawing.Size(608, 26);
             this.topMenuPanel.TabIndex = 18;
             this.topMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topMenuPanel_MouseDown);
             // 
@@ -236,6 +238,7 @@
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.menuPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.IsMdiContainer = true;
             this.Name = "Panel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hone";
@@ -255,11 +258,11 @@
         private System.Windows.Forms.Button btn_showFriends;
         private System.Windows.Forms.Button btn_showNotifications;
         private System.Windows.Forms.Panel menuPanel;
-        private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.Panel topMenuPanel;
         private System.Windows.Forms.PictureBox btn_minimizeApp;
         private System.Windows.Forms.PictureBox btn_closeApp;
         private System.Windows.Forms.PictureBox logoBox;
         private System.Windows.Forms.Button btn_logout;
+        private System.Windows.Forms.Panel contentPanel;
     }
 }
