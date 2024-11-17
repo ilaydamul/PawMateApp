@@ -101,7 +101,7 @@ namespace PawMateApp
                         else
                         {
                             NpgsqlCommand cmdCheckEmail = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE email = @P1", baglan);
-                            cmdCheck.Parameters.AddWithValue("@P1", txt_email.Text);
+                            cmdCheckEmail.Parameters.AddWithValue("@P1", txt_email.Text);
                             int userExitsEmail = Convert.ToInt32(cmdCheckEmail.ExecuteScalar());
                             if (userExitsEmail > 0)
                             {
