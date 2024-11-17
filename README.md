@@ -1,19 +1,21 @@
-Proje Tanımı
-PawMate, hayvan sahiplenme sürecini kolaylaştırmak amacıyla geliştirilen bir otomasyon sistemidir. Kullanıcılar, hayvan ilanlarını listeleyebilir, favorilere ekleyebilir ve sahiplenme taleplerini yönetebilir. Windows Forms tabanlı bu uygulama, kullanıcı dostu bir arayüz ve güçlü bir altyapıyla hayvan sahiplendirme süreçlerini dijital bir platforma taşır.
+# 🐾 PawMate - Hayvan İlan Otomasyon Sistemi
 
-Proje Özellikleri
-Kullanıcı Yönetimi
-Giriş yapma ve kayıt olma.
-Kullanıcı profili düzenleme.
-Hesap silme.
-İlan Yönetimi
-Hayvan ilanlarını listeleme, arama ve filtreleme (tür, yaş, cinsiyet).
-Yeni ilan ekleme ve mevcut ilanları düzenleme/silme.
-Favori Yönetimi
-İlanları favorilere ekleme ve favori listesi oluşturma.
-Sahiplenme Süreci
-İlan sahipleriyle iletişime geçme ve sahiplenme talepleri gönderme.
-Talepleri onaylama veya reddetme.
-Raporlama ve İstatistik
-En çok görüntülenen ilanları listeleme.
-Kullanıcı ve ilan analizleri.
+![PawMate Logo](https://github.com/ilaydamul/PawMateApp/blob/master/logo.png) <!-- Kendi logonuzu buraya ekleyin -->
+
+PawMate, hayvan sahiplendirme sürecini kolaylaştırmak için geliştirilen bir otomasyon sistemidir. Kullanıcı dostu arayüzü ve güçlü özellikleriyle, hayvanların kolayca sahiplenilmesini sağlar.
+
+## 🚀 Özellikler
+
+- **Kullanıcı Yönetimi:** Kayıt ol, giriş yap, profili düzenle.  
+- **İlan Yönetimi:** Hayvan ilanlarını listele, filtrele, düzenle, ve sil.  
+- **Favoriler:** Beğendiğiniz ilanları favorilere ekleyin.  
+- **Sahiplendirme:** İlan sahipleriyle iletişime geçin ve taleplerinizi yönetin.  
+- **Raporlama:** En çok görüntülenen ilanları ve kullanıcı istatistiklerini görüntüleyin.
+
+---
+
+## 📦 Kurulum
+
+1. Bu projeyi klonlayın:
+   ```bash
+   git clone https://github.com/ilaydamul/PawMateApp

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,8 @@ namespace PawMateApp
             this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
         }
 
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+                                                                                                                           //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Register_Paint(object sender, PaintEventArgs e)
         {
             Color leftColor = ColorTranslator.FromHtml("#B5B3F1");

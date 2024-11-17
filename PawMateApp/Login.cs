@@ -33,7 +33,7 @@ namespace PawMateApp
             public static int CurrentUserID { get; set; } 
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
                                                                                                                            //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Login_Paint(object sender, PaintEventArgs e)
         {
@@ -48,6 +48,7 @@ namespace PawMateApp
 
         private void btn_login_Click(object sender, EventArgs e)
         {
+            
             if (txt_username.Text == "" || txt_password.Text == "")
             {
                 MessageBox.Show("Lütfen boş alanları doldurunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -62,7 +63,10 @@ namespace PawMateApp
 
                 if (dr.Read())
                 {
-                    MessageBox.Show("Giriş Başarıyla Yapıldı!" );
+                    Panel panel = new Panel();//messagebox yerine panel eklendi. 
+                    this.Hide();
+                    panel.Show();
+
                     Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
                     Debug.WriteLine("Current User ID: " + Globals.CurrentUserID);
                 }
