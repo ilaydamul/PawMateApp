@@ -18,4 +18,4 @@ PawMate, hayvan sahiplendirme sürecini kolaylaştırmak için geliştirilen bir
 
 1. Bu projeyi klonlayın:
    ```bash
-   git clone https://github.com/ilaydamul/pawmate.git
+   git clone https://github.com/ilaydamul/PawMateApp
