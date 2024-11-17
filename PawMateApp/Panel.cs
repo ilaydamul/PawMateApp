@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PawMateApp.Login;
 
 namespace PawMateApp
 {
@@ -30,7 +31,19 @@ namespace PawMateApp
 
         private void btn_logout_Click(object sender, EventArgs e)
         {
-            //Çıkış yapmak istediğinize emin misiniz? Uyarısı ardından çıkış yapılması gerekiyor
+            DialogResult result = MessageBox.Show( "Çıkış yapmak istediğinize emin misiniz?", "Çıkış",  MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {       
+                Globals.CurrentUserID = 0;                
+                this.Close();
+                Login login = new Login();
+                this.Hide();
+                login.Show();
+            } 
+            else
+            {             
+                MessageBox.Show("Çıkış işlemi iptal edildi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btn_closeApp_MouseEnter(object sender, EventArgs e)

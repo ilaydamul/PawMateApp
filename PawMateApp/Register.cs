@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,8 @@ namespace PawMateApp
             this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
         }
 
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+                                                                                                                           //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Register_Paint(object sender, PaintEventArgs e)
         {
             Color leftColor = ColorTranslator.FromHtml("#B5B3F1");
@@ -61,6 +64,56 @@ namespace PawMateApp
             {
                 // Şifreyi gizle
                 txt_password.PasswordChar = '*';
+            }
+        }
+
+        private void btn_register_Click(object sender, EventArgs e)
+        {
+            if (txt_name.Text == "" || txt_username.Text == "" || txt_email.Text == "" || txt_password.Text == "")
+            {
+                MessageBox.Show("Lütfen boş alanları doldurunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    baglan.Open();
+                    NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1", baglan);
+                    cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
+                    int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
+
+                    if (userExists > 0)
+                    {
+
+                        MessageBox.Show("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password) values(@name,@surname,@username,@email,@password)", baglan);
+                        komut.Parameters.AddWithValue("@name", txt_name.Text);
+                        komut.Parameters.AddWithValue("@surname", txt_surname.Text);
+                        komut.Parameters.AddWithValue("@username", txt_username.Text);
+                        komut.Parameters.AddWithValue("@email", txt_email.Text);
+                        komut.Parameters.AddWithValue("@password", txt_password.Text);
+
+                        komut.ExecuteNonQuery();
+                        MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Bir hata oluştu: " + ex.Message);
+                }
+                finally
+                {
+                    baglan.Close();
+                }
+
+                    this.Close();
+                    Login login = new Login();
+                    this.Hide();
+                    login.Show();
+                
             }
         }
     }
