@@ -1,6 +1,6 @@
 # 🐾 PawMate - Hayvan İlan Otomasyon Sistemi
 
-![PawMate Logo](https://via.placeholder.com/728x90.png) <!-- Kendi logonuzu buraya ekleyin -->
+![PawMate Logo](https://github.com/ilaydamul/PawMateApp/blob/master/logo.png) <!-- Kendi logonuzu buraya ekleyin -->
 
 PawMate, hayvan sahiplendirme sürecini kolaylaştırmak için geliştirilen bir otomasyon sistemidir. Kullanıcı dostu arayüzü ve güçlü özellikleriyle, hayvanların kolayca sahiplenilmesini sağlar.
 
