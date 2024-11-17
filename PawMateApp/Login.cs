@@ -18,7 +18,7 @@ namespace PawMateApp
     public partial class Login : Form
     {
 
-        public CheckInputs checkinputs;
+        public CheckClass checkinputs;
         public Login()
         {
          
@@ -51,7 +51,7 @@ namespace PawMateApp
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            checkinputs = new CheckInputs(new string[] { txt_username.Text , txt_password.Text});
+            checkinputs = new CheckClass(new string[] { txt_username.Text , txt_password.Text});
             if (!checkinputs.Check(""))
             {
                 return;

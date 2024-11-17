@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace PawMateApp
@@ -37,11 +40,11 @@ namespace PawMateApp
             dragging = false;
         }
     }
-    public class CheckInputs
+    public class CheckClass
     {
         private string[] strings;
         /// <param name="Inputs">txt_degiskenismi.Text olarak değerleri array şeklinde girin.</param
-        public CheckInputs(string[] Inputs)
+        public CheckClass(string[] Inputs)
         {
 
             this.strings = Inputs;
@@ -66,6 +69,19 @@ namespace PawMateApp
             {
                 MessageBox.Show(MessageBoxTextForSuccess, "Başarılı", MessageBoxButtons.OK);
                 return true;
+            }
+        }
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var mailAddress = new MailAddress(email);
+                Debug.WriteLine(email);
+                return true; 
+            }
+            catch (FormatException)
+            {
+                return false;
             }
         }
     }

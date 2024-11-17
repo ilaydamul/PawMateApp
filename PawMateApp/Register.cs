@@ -72,58 +72,67 @@ namespace PawMateApp
 
         private void btn_register_Click(object sender, EventArgs e)
         {
-            CheckInputs checkInputs = new CheckInputs(new string[] { txt_username.Text, txt_password.Text, txt_email.Text, txt_name.Text, txt_surname.Text });
+            CheckClass checkInputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text, txt_email.Text, txt_name.Text, txt_surname.Text });
             if (!checkInputs.Check(""))
             {
                 return;
             }
             else
             {
-                try
+                if (!CheckClass.IsValidEmail(txt_email.Text))
                 {
-                    baglan.Open();
-                    NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1", baglan);
-                    cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
-                    int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
-
-                    if (userExists > 0)
+                    MessageBox.Show("Lütfen geçerli bir mail adresi giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    try
                     {
+                        baglan.Open();
+                        NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1", baglan);
+                        cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
+                        int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
 
-                        MessageBox.Show("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        NpgsqlCommand cmdCheckEmail = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE email = @P1", baglan);
-                        cmdCheck.Parameters.AddWithValue("@P1", txt_email.Text);
-                        int userExitsEmail = Convert.ToInt32(cmdCheckEmail.ExecuteScalar());
-                        if (userExitsEmail > 0)
+                        if (userExists > 0)
                         {
-                            MessageBox.Show("Bu e-posta adresi zaten alınmış. Lütfen başka bir e-posta adresi seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            MessageBox.Show("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                        else {
+                        else
+                        {
+                            NpgsqlCommand cmdCheckEmail = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE email = @P1", baglan);
+                            cmdCheck.Parameters.AddWithValue("@P1", txt_email.Text);
+                            int userExitsEmail = Convert.ToInt32(cmdCheckEmail.ExecuteScalar());
+                            if (userExitsEmail > 0)
+                            {
+                                MessageBox.Show("Bu e-posta adresi zaten alınmış. Lütfen başka bir e-posta adresi seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            else
+                            {
 
 
-                            NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password) values(@name,@surname,@username,@email,@password)", baglan);
-                            komut.Parameters.AddWithValue("@name", txt_name.Text);
-                            komut.Parameters.AddWithValue("@surname", txt_surname.Text);
-                            komut.Parameters.AddWithValue("@username", txt_username.Text);
-                            komut.Parameters.AddWithValue("@email", txt_email.Text);
-                            komut.Parameters.AddWithValue("@password", txt_password.Text);
+                                NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password) values(@name,@surname,@username,@email,@password)", baglan);
+                                komut.Parameters.AddWithValue("@name", txt_name.Text);
+                                komut.Parameters.AddWithValue("@surname", txt_surname.Text);
+                                komut.Parameters.AddWithValue("@username", txt_username.Text);
+                                komut.Parameters.AddWithValue("@email", txt_email.Text);
+                                komut.Parameters.AddWithValue("@password", txt_password.Text);
 
-                            komut.ExecuteNonQuery();
-                            MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+                                komut.ExecuteNonQuery();
+                                MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Bir hata oluştu: " + ex.Message);
-                }
-                finally
-                {
-                    baglan.Close();
-                }
 
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Bir hata oluştu: " + ex.Message);
+                    }
+                    finally
+                    {
+                        baglan.Close();
+                    }
+                }
                 this.Close();
                 Login login = new Login();
                 this.Hide();
