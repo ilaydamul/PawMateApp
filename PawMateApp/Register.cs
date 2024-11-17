@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace PawMateApp
 {
@@ -62,6 +63,13 @@ namespace PawMateApp
                 // Şifreyi gizle
                 txt_password.PasswordChar = '*';
             }
+        }
+
+        private void btn_register_Click(object sender, EventArgs e)
+        {
+            CheckInputs checkInputs = new CheckInputs(new string[] { txt_username.Text, txt_password.Text, txt_email.Text, txt_name.Text, txt_surname.Text});
+
+
         }
     }
 }

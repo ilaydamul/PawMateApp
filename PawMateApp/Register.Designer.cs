@@ -196,6 +196,7 @@
             this.btn_register.TabIndex = 6;
             this.btn_register.Text = "Kayıt Ol";
             this.btn_register.UseVisualStyleBackColor = false;
+            this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
             // 
             // label1
             // 
