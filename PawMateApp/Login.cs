@@ -48,30 +48,33 @@ namespace PawMateApp
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (txt_username.Text == "" || txt_password.Text == "")
-            {
-                MessageBox.Show("Lütfen boş alanları doldurunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                baglan.Open();
-                NpgsqlCommand cmd = new NpgsqlCommand("Select * from users where username=@P1 AND password=@P2", baglan);
-                cmd.Parameters.AddWithValue("@P1", txt_username.Text);
-                cmd.Parameters.AddWithValue("@P2", txt_password.Text);
-                NpgsqlDataReader dr = cmd.ExecuteReader();
+            Panel panel = new Panel();
+            this.Hide();
+            panel.Show();
+            //if (txt_username.Text == "" || txt_password.Text == "")
+            //{
+            //    MessageBox.Show("Lütfen boş alanları doldurunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //else
+            //{
+            //    baglan.Open();
+            //    NpgsqlCommand cmd = new NpgsqlCommand("Select * from users where username=@P1 AND password=@P2", baglan);
+            //    cmd.Parameters.AddWithValue("@P1", txt_username.Text);
+            //    cmd.Parameters.AddWithValue("@P2", txt_password.Text);
+            //    NpgsqlDataReader dr = cmd.ExecuteReader();
 
-                if (dr.Read())
-                {
-                    MessageBox.Show("Giriş Başarıyla Yapıldı!" );
-                    Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
-                    Debug.WriteLine("Current User ID: " + Globals.CurrentUserID);
-                }
-                else
-                {
-                    MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                baglan.Close();
-            }
+            //    if (dr.Read())
+            //    {
+            //        MessageBox.Show("Giriş Başarıyla Yapıldı!" );
+            //        Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+            //        Debug.WriteLine("Current User ID: " + Globals.CurrentUserID);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    baglan.Close();
+            //}
 
         }
 
