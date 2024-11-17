@@ -53,7 +53,7 @@
             this.ProfileButton.BackColor = System.Drawing.Color.Transparent;
             this.ProfileButton.FlatAppearance.BorderSize = 0;
             this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProfileButton.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.25F);
+            this.ProfileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.ProfileButton.Image = ((System.Drawing.Image)(resources.GetObject("ProfileButton.Image")));
             this.ProfileButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ProfileButton.Location = new System.Drawing.Point(8, 354);
@@ -195,6 +195,7 @@
             this.topMenuPanel.Name = "topMenuPanel";
             this.topMenuPanel.Size = new System.Drawing.Size(608, 28);
             this.topMenuPanel.TabIndex = 18;
+            this.topMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topMenuPanel_MouseDown);
             // 
             // btn_minimizeApp
             // 

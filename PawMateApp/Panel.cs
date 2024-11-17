@@ -13,10 +13,11 @@ namespace PawMateApp
 {
     public partial class Panel : Form
     {
+       
         public Panel()
         {
             InitializeComponent();
-            //topMenuPanel'e basılı tutulduğunda uygulama hareket ettirilebilmeli
+            // Taşıma yapılcak
         }
 
         private void btn_closeApp_Click(object sender, EventArgs e)
@@ -64,6 +65,11 @@ namespace PawMateApp
         private void btn_minimizeApp_MouseLeave(object sender, EventArgs e)
         {
             btn_minimizeApp.BackColor = Color.FromArgb(41, 33, 230);
+        }
+
+        private void topMenuPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+           
         }
     }
 }
