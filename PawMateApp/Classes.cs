@@ -95,6 +95,7 @@ namespace PawMateApp
             this.name = name;
             this.mailadress = mailadress;
         }
+        
 
         public void SendMailForOTP()
         {
