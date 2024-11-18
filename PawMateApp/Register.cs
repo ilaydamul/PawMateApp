@@ -10,11 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
+using System.Net;
+using System.Diagnostics;
 
 namespace PawMateApp
 {
     public partial class Register : Form
     {
+
+       
+
+     
 
         public Register()
         {
@@ -26,7 +32,9 @@ namespace PawMateApp
             
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+     
+
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
         //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Register_Paint(object sender, PaintEventArgs e)
         {
@@ -117,9 +125,11 @@ namespace PawMateApp
                                 komut.Parameters.AddWithValue("@username", txt_username.Text);
                                 komut.Parameters.AddWithValue("@email", txt_email.Text);
                                 komut.Parameters.AddWithValue("@password", txt_password.Text);
-
+                                SendMail sendMail = new SendMail(txt_name.Text, txt_email.Text);
+                                sendMail.SendMailForOTP();
                                 komut.ExecuteNonQuery();
                                 MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+    
                             }
                         }
                     }
