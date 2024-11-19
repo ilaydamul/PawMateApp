@@ -97,7 +97,7 @@ namespace PawMateApp
         }
         
 
-        public void SendMailForOTP()
+        public int SendMailForOTP()
         {
             try
             {
@@ -148,10 +148,12 @@ namespace PawMateApp
                 smtpClient.Send(mailMessage);
                 Debug.WriteLine("E-posta başarıyla gönderildi!");
                 Debug.WriteLine("Gönderilen OTP kodu: " + user_otp);
+                return Convert.ToInt32(user_otp);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("E-posta gönderilirken hata oluştu: " + ex.Message);
+                return 0;
             }
         }
         public string GenerateOtpCode()

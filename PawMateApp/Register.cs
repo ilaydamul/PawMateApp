@@ -117,18 +117,35 @@ namespace PawMateApp
                             }
                             else
                             {
-
-
-                                NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password) values(@name,@surname,@username,@email,@password)", baglan);
-                                komut.Parameters.AddWithValue("@name", txt_name.Text);
-                                komut.Parameters.AddWithValue("@surname", txt_surname.Text);
-                                komut.Parameters.AddWithValue("@username", txt_username.Text);
-                                komut.Parameters.AddWithValue("@email", txt_email.Text);
-                                komut.Parameters.AddWithValue("@password", txt_password.Text);
                                 SendMail sendMail = new SendMail(txt_name.Text, txt_email.Text);
-                                sendMail.SendMailForOTP();
-                                komut.ExecuteNonQuery();
-                                MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+                                int user_otp_code = sendMail.SendMailForOTP();
+                                if (user_otp_code != 0)
+                                {
+                                    try
+                                    {
+                                        NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password,isadmin,otp_code,otp_status,two_factor_code) values(@name,@surname,@username,@email,@password,@isadmin,@otp_code,@otp_status,@two_factor_code)", baglan);
+                                        komut.Parameters.AddWithValue("@name", txt_name.Text);
+                                        komut.Parameters.AddWithValue("@surname", txt_surname.Text);
+                                        komut.Parameters.AddWithValue("@username", txt_username.Text);
+                                        komut.Parameters.AddWithValue("@email", txt_email.Text);
+                                        komut.Parameters.AddWithValue("@password", txt_password.Text);
+                                        komut.Parameters.AddWithValue("@isadmin", false);
+                                        komut.Parameters.AddWithValue("@otp_code", user_otp_code);
+                                        komut.Parameters.AddWithValue("@otp_status", 0);
+                                        komut.Parameters.AddWithValue("@two_factor_code", 0);
+                                        komut.ExecuteNonQuery();
+                                        MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+                                    }catch(Exception exception)
+                                    {
+                                        MessageBox.Show("Bir hata oluştu: " + exception.Message);
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Bir hata oluştu. Lütfen tekrar deneyin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                                }
+                              
     
                             }
                         }
