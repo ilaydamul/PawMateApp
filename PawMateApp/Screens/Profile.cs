@@ -128,10 +128,37 @@ namespace PawMateApp.Screens
         {
             if (checkBox1.Checked)
             {
-                NpgsqlCommand cmdCheck = new NpgsqlCommand("UPDATE users SET ", baglan);
-                cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
-                cmdCheck.Parameters.AddWithValue("@UserID", Globals.CurrentUserID);
-                int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
+                try
+                {
+                    baglan.Open();
+                    NpgsqlCommand cmdCheck = new NpgsqlCommand($"UPDATE users SET two_factor_status = TRUE WHERE user_id = {Globals.CurrentUserID};", baglan);
+                    cmdCheck.ExecuteNonQuery();
+                    baglan.Close();
+                    MessageBox.Show("İki faktörlü kimlik doğrulama etkinleştirildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    checkBox1.Text = "Açık";
+                }
+                catch (Exception ex)
+                {
+                    baglan.Close();
+                    MessageBox.Show("Bir hata oluştu: " + ex.Message);
+                }
+            }
+            if (!checkBox1.Checked)
+            {
+                try
+                {
+                    baglan.Open();
+                    NpgsqlCommand cmdCheck = new NpgsqlCommand($"UPDATE users SET two_factor_status = FALSE WHERE user_id = {Globals.CurrentUserID};", baglan);
+                    cmdCheck.ExecuteNonQuery();
+                    baglan.Close();
+                    MessageBox.Show("İki faktörlü kimlik doğrulama kapatıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    checkBox1.Text = "Kapalı";
+                }
+                catch (Exception ex)
+                {
+                    baglan.Close();
+                    MessageBox.Show("Bir hata oluştu: " + ex.Message);
+                }
             }
         }
     }
