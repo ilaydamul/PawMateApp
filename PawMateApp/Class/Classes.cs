@@ -106,7 +106,7 @@ namespace PawMateApp
                 string fromPassword = "shiw ndqo tvfw dzte";
                 string toAddress = mailadress;
                 string subject = "Merhaba " + name + " ! Doğrulama Kodun:" + user_otp;
-                Debug.WriteLine("mailadress: "+mailadress +"name:"+ name);
+                Debug.WriteLine("mailadress: "+mailadress +" name: "+ name);
                 string body = $@"<td bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px"">
   <table class=""m_2678050691631740021email-width"" align=""center"" width=""500"" border=""0"" cellpadding=""0"" cellspacing=""0"" role=""presentation"" style=""width:500px"">
     <tbody>
@@ -139,7 +139,7 @@ namespace PawMateApp
                 };
                 MailMessage mailMessage = new MailMessage
                 {
-                    From = new MailAddress(fromAddress),
+                    From = new MailAddress(fromAddress, "PawMate"),
                     Subject = subject,
                     Body = body,
                     IsBodyHtml = true
@@ -149,12 +149,19 @@ namespace PawMateApp
                 Debug.WriteLine("E-posta başarıyla gönderildi!");
                 Debug.WriteLine("Gönderilen OTP kodu: " + user_otp);
                 return Convert.ToInt32(user_otp);
+            }catch(SmtpException smtpexception)
+            {
+                MessageBox.Show("E-posta gönderilirken hata oluştu! Lütfen daha sonra tekrar deneyin!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("E-posta gönderilirken hata oluştu: " + smtpexception.Message);
+                return 0;
             }
             catch (Exception ex)
             {
+                MessageBox.Show("E-posta gönderilirken hata oluştu! Lütfen daha sonra tekrar deneyin!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine("E-posta gönderilirken hata oluştu: " + ex.Message);
                 return 0;
             }
+            
         }
         public string GenerateOtpCode()
         {
