@@ -32,10 +32,10 @@ namespace PawMateApp
 
         public static class Globals
         {
-            public static int CurrentUserID { get; set; } 
+            public static int CurrentUserID { get; set; }           
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
                                                                                                                            //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Login_Paint(object sender, PaintEventArgs e)
         {
@@ -51,38 +51,35 @@ namespace PawMateApp
 
         private void btn_login_Click(object sender, EventArgs e)
         {
+         
 
-            Panel panel = new Panel();//messagebox yerine panel eklendi. 
-            this.Hide();
-            panel.Show();
+            checkinputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text });
+            if (!checkinputs.Check(""))
+            {
+                return;
+            }
+            else
+            {
+                baglan.Open();
+                NpgsqlCommand cmd = new NpgsqlCommand("Select * from users where username=@P1 AND password=@P2", baglan);
+                cmd.Parameters.AddWithValue("@P1", txt_username.Text);
+                cmd.Parameters.AddWithValue("@P2", txt_password.Text);
+                NpgsqlDataReader dr = cmd.ExecuteReader();
 
-            //checkinputs = new CheckClass(new string[] { txt_username.Text , txt_password.Text});
-            //if (!checkinputs.Check(""))
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    baglan.Open();
-            //    NpgsqlCommand cmd = new NpgsqlCommand("Select * from users where username=@P1 AND password=@P2", baglan);
-            //    cmd.Parameters.AddWithValue("@P1", txt_username.Text);
-            //    cmd.Parameters.AddWithValue("@P2", txt_password.Text);
-            //    NpgsqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    Panel panel = new Panel();//messagebox yerine panel eklendi. 
+                    this.Hide();
+                    panel.Show();
 
-            //    if (dr.Read())
-            //    {
-            //        Panel panel = new Panel();//messagebox yerine panel eklendi. 
-            //        this.Hide();
-            //        panel.Show();
-
-            //        Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //    baglan.Close();
-            //}
+                    Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+                }
+                else
+                {
+                    MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                baglan.Close();
+            }
 
         }
 
