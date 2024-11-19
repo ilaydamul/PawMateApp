@@ -63,6 +63,7 @@
             this.ProfileButton.Text = "      Profilimi Görüntüle";
             this.ProfileButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ProfileButton.UseVisualStyleBackColor = false;
+            this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
             // 
             // btn_showBlogCategories
             // 
@@ -190,6 +191,7 @@
             // 
             // topMenuPanel
             // 
+            this.topMenuPanel.BackColor = System.Drawing.Color.White;
             this.topMenuPanel.Controls.Add(this.btn_minimizeApp);
             this.topMenuPanel.Controls.Add(this.btn_closeApp);
             this.topMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -203,7 +205,7 @@
             // 
             this.btn_minimizeApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_minimizeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_minimizeApp.Image")));
-            this.btn_minimizeApp.Location = new System.Drawing.Point(561, 2);
+            this.btn_minimizeApp.Location = new System.Drawing.Point(561, 1);
             this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2);
             this.btn_minimizeApp.Name = "btn_minimizeApp";
             this.btn_minimizeApp.Size = new System.Drawing.Size(20, 24);
@@ -218,7 +220,7 @@
             // 
             this.btn_closeApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_closeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_closeApp.Image")));
-            this.btn_closeApp.Location = new System.Drawing.Point(585, 2);
+            this.btn_closeApp.Location = new System.Drawing.Point(585, 1);
             this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2);
             this.btn_closeApp.Name = "btn_closeApp";
             this.btn_closeApp.Size = new System.Drawing.Size(21, 24);

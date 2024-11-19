@@ -122,6 +122,12 @@
     <Compile Include="Screens\Advertisements.Designer.cs">
       <DependentUpon>Advertisements.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Profile.Designer.cs">
+      <DependentUpon>Profile.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Advertisements.resx">
       <DependentUpon>Advertisements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Profile.resx">
+      <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

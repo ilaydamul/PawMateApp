@@ -39,13 +39,8 @@ namespace PawMateApp
                 Globals.CurrentUserID = 0;                
                 this.Close();
                 Login login = new Login();
-                //this.Hide();
                 login.Show();
             } 
-            else
-            {             
-                MessageBox.Show("Çıkış işlemi iptal edildi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void btn_closeApp_MouseEnter(object sender, EventArgs e)
@@ -86,6 +81,12 @@ namespace PawMateApp
             form.FormBorderStyle = FormBorderStyle.None;
             contentPanel.Controls.Add(form);
             form.Show();
+        }
+
+        private void ProfileButton_Click(object sender, EventArgs e)
+        {
+            Profile profile = new Profile();
+            showForm(profile);
         }
     }
 }
