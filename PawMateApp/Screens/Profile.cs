@@ -45,7 +45,6 @@ namespace PawMateApp.Screens
                             txt_email.Text = reader["email"].ToString();
                             txt_username.Text = reader["username"].ToString();                          
                             txt_password.Text = reader["password"].ToString();
-
                             lbl_name.Text = $"Hoş geldiniz, {reader["name"].ToString()}!"; 
                         }
                     }
@@ -74,8 +73,9 @@ namespace PawMateApp.Screens
             {
                 baglan.Open();
 
-                NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1", baglan);
+                NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1 AND user_id != @UserID", baglan);
                 cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
+                cmdCheck.Parameters.AddWithValue("@UserID", Globals.CurrentUserID);
                 int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
 
                 if (userExists > 0)
