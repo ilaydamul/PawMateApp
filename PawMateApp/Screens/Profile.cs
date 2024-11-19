@@ -123,5 +123,16 @@ namespace PawMateApp.Screens
             }
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                NpgsqlCommand cmdCheck = new NpgsqlCommand("UPDATE users SET ", baglan);
+                cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
+                cmdCheck.Parameters.AddWithValue("@UserID", Globals.CurrentUserID);
+                int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
+            }
+        }
     }
 }

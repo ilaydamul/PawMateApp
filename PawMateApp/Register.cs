@@ -133,6 +133,7 @@ namespace PawMateApp
                                         komut.Parameters.AddWithValue("@otp_code", user_otp_code);
                                         komut.Parameters.AddWithValue("@otp_status", 0);
                                         komut.Parameters.AddWithValue("@two_factor_code", 0);
+                                        komut.Parameters.AddWithValue("@two_factor_status", false);
                                         komut.ExecuteNonQuery();
                                         MessageBox.Show("Başarılı bir şekilde kayıt oldunuz! Giriş yapmak için mail adresinize gönderilen doğrulama kodunu giriş yaparken giriniz.", "Başarılı Kayıt", MessageBoxButtons.OK);
                                     }catch(Exception exception)
