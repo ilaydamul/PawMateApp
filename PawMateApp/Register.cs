@@ -34,7 +34,7 @@ namespace PawMateApp
 
      
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
         //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Register_Paint(object sender, PaintEventArgs e)
         {
@@ -134,7 +134,7 @@ namespace PawMateApp
                                         komut.Parameters.AddWithValue("@otp_status", 0);
                                         komut.Parameters.AddWithValue("@two_factor_code", 0);
                                         komut.ExecuteNonQuery();
-                                        MessageBox.Show("Başarılı bir şekilde kayıt oldunuz!", "Başarılı Kayıt", MessageBoxButtons.OK);
+                                        MessageBox.Show("Başarılı bir şekilde kayıt oldunuz! Giriş yapmak için mail adresinize gönderilen doğrulama kodunu giriş yaparken giriniz.", "Başarılı Kayıt", MessageBoxButtons.OK);
                                     }catch(Exception exception)
                                     {
                                         MessageBox.Show("Bir hata oluştu: " + exception.Message);
