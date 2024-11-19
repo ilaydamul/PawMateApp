@@ -24,7 +24,6 @@ namespace PawMateApp
          
             MoveForm moveForm = new MoveForm(this);
             InitializeComponent();
-            
             this.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
             this.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
             this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
@@ -32,11 +31,12 @@ namespace PawMateApp
 
         public static class Globals
         {
-            public static int CurrentUserID { get; set; }           
+            public static int CurrentUserID { get; set; }   
+            
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
-                                                                                                                           //şifreyi kendi veritabanı şifrenize göre değiştirin.
+        NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
+                                                                                                                          
         private void Login_Paint(object sender, PaintEventArgs e)
         {
 

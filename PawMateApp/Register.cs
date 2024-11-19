@@ -34,7 +34,7 @@ namespace PawMateApp
 
      
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localHost; port=5432; Database=pawmatedb; user ID=postgres; password=1234");
+        NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
         //şifreyi kendi veritabanı şifrenize göre değiştirin.
         private void Register_Paint(object sender, PaintEventArgs e)
         {
