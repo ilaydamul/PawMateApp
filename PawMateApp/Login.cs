@@ -80,10 +80,17 @@ namespace PawMateApp
                         }
                         else
                         {
-                            Panel panel = new Panel();//messagebox yerine panel eklendi. 
-                            this.Hide();
-                            panel.Show();
-                            Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+                            if (Convert.ToBoolean(dr["two_factor_status"]) == true)
+                            {
+                                //Two factor için kodlar buraya
+                            }
+                            else
+                            {
+                                Panel panel = new Panel();//messagebox yerine panel eklendi. 
+                                this.Hide();
+                                panel.Show();
+                                Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+                            }
                         }
                     }
                     else

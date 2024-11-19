@@ -134,6 +134,12 @@
     <Compile Include="Screens\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\TwoFactorScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\TwoFactorScreen.Designer.cs">
+      <DependentUpon>TwoFactorScreen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

@@ -123,7 +123,7 @@ namespace PawMateApp
                                 {
                                     try
                                     {
-                                        NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password,isadmin,otp_code,otp_status,two_factor_code) values(@name,@surname,@username,@email,@password,@isadmin,@otp_code,@otp_status,@two_factor_code)", baglan);
+                                        NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password,isadmin,otp_code,otp_status,two_factor_code,two_factor_status) values(@name,@surname,@username,@email,@password,@isadmin,@otp_code,@otp_status,@two_factor_code,@two_factor_status)", baglan);
                                         komut.Parameters.AddWithValue("@name", txt_name.Text);
                                         komut.Parameters.AddWithValue("@surname", txt_surname.Text);
                                         komut.Parameters.AddWithValue("@username", txt_username.Text);
