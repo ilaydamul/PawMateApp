@@ -19,7 +19,7 @@ namespace PawMateApp.Screens
             InitializeComponent();
         }
 
-        NpgsqlConnection baglan = new NpgsqlConnection("server=localhost; port=5432; Database=pawmatedb; user ID=postgres; password=sila123");
+        NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
 
         private void Profile_Load(object sender, EventArgs e)
         {

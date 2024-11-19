@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using PawMateApp.Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace PawMateApp
             this.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
             this.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
             this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
+            
         }
 
         public static class Globals
@@ -70,11 +72,19 @@ namespace PawMateApp
 
                     if (dr.Read())
                     {
-                        Panel panel = new Panel();//messagebox yerine panel eklendi. 
-                        this.Hide();
-                        panel.Show();
-
-                        Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+                        if (dr["otp_status"].ToString() != "0")
+                        {
+                            this.Hide();
+                            OtpScreen otpScreen = new OtpScreen();
+                            otpScreen.Show();
+                        }
+                        else
+                        {
+                            Panel panel = new Panel();//messagebox yerine panel eklendi. 
+                            this.Hide();
+                            panel.Show();
+                            Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+                        }
                     }
                     else
                     {
