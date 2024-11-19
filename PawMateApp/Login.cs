@@ -129,6 +129,26 @@ namespace PawMateApp
             this.Hide();
             register.Show();
         }
+
+        private void txt_password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                btn_login.PerformClick(); 
+                e.Handled = true;        
+                e.SuppressKeyPress = true; 
+            }
+        }
+
+        private void txt_username_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_login.PerformClick();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 
 }
