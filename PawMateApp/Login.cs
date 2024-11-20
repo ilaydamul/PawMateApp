@@ -53,56 +53,59 @@ namespace PawMateApp
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-         
 
-            checkinputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text });
-            if (!checkinputs.Check(""))
-            {
-                return;
-            }
-            else
-            {
-                try
-                {
-                    baglan.Open();
-                    NpgsqlCommand cmd = new NpgsqlCommand("Select * from users where username=@P1 AND password=@P2", baglan);
-                    cmd.Parameters.AddWithValue("@P1", txt_username.Text);
-                    cmd.Parameters.AddWithValue("@P2", txt_password.Text);
-                    NpgsqlDataReader dr = cmd.ExecuteReader();
+            Panel panel = new Panel();//messagebox yerine panel eklendi. 
+            this.Hide();
+            panel.Show();
 
-                    if (dr.Read())
-                    {
-                        if (dr["otp_status"].ToString() != "0")
-                        {
-                            this.Hide();
-                            OtpScreen otpScreen = new OtpScreen();
-                            otpScreen.Show();
-                        }
-                        else
-                        {
-                            if (Convert.ToBoolean(dr["two_factor_status"]) == true)
-                            {
-                                //Two factor için kodlar buraya
-                            }
-                            else
-                            {
-                                Panel panel = new Panel();//messagebox yerine panel eklendi. 
-                                this.Hide();
-                                panel.Show();
-                                Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    baglan.Close();
-                }catch(Exception ex)
-                {
-                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            //checkinputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text });
+            //if (!checkinputs.Check(""))
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        baglan.Open();
+            //        NpgsqlCommand cmd = new NpgsqlCommand("Select * from users where username=@P1 AND password=@P2", baglan);
+            //        cmd.Parameters.AddWithValue("@P1", txt_username.Text);
+            //        cmd.Parameters.AddWithValue("@P2", txt_password.Text);
+            //        NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            //        if (dr.Read())
+            //        {
+            //            if (dr["otp_status"].ToString() != "0")
+            //            {
+            //                this.Hide();
+            //                OtpScreen otpScreen = new OtpScreen();
+            //                otpScreen.Show();
+            //            }
+            //            else
+            //            {
+            //                if (Convert.ToBoolean(dr["two_factor_status"]) == true)
+            //                {
+            //                    //Two factor için kodlar buraya
+            //                }
+            //                else
+            //                {
+            //                    Panel panel = new Panel();//messagebox yerine panel eklendi. 
+            //                    this.Hide();
+            //                    panel.Show();
+            //                    Globals.CurrentUserID = Convert.ToInt32(dr["user_id"]);
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //        baglan.Close();
+            //    }catch(Exception ex)
+            //    {
+            //        MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
 
         }
 

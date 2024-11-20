@@ -244,6 +244,7 @@
             this.Name = "Panel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hone";
+            this.Load += new System.EventHandler(this.Panel_Load);
             this.menuPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.topMenuPanel.ResumeLayout(false);

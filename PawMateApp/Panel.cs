@@ -88,5 +88,11 @@ namespace PawMateApp
             Profile profile = new Profile();
             showForm(profile);
         }
+
+        private void Panel_Load(object sender, EventArgs e)
+        {
+            Advertisements advertisements = new Advertisements();
+            showForm(advertisements);
+        }
     }
 }
