@@ -116,11 +116,29 @@
     <Compile Include="Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\AddAdvert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\AddAdvert.Designer.cs">
+      <DependentUpon>AddAdvert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\AdvertDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\AdvertDetail.Designer.cs">
+      <DependentUpon>AdvertDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Advertisements.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Screens\Advertisements.Designer.cs">
       <DependentUpon>Advertisements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\MyAdverts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\MyAdverts.Designer.cs">
+      <DependentUpon>MyAdverts.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\OtpScreen.cs">
       <SubType>Form</SubType>
@@ -159,8 +177,17 @@
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\AddAdvert.resx">
+      <DependentUpon>AddAdvert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\AdvertDetail.resx">
+      <DependentUpon>AdvertDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Screens\Advertisements.resx">
       <DependentUpon>Advertisements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\MyAdverts.resx">
+      <DependentUpon>MyAdverts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\OtpScreen.resx">
       <DependentUpon>OtpScreen.cs</DependentUpon>

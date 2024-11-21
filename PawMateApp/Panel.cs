@@ -94,5 +94,11 @@ namespace PawMateApp
             Advertisements advertisements = new Advertisements();
             showForm(advertisements);
         }
+
+        private void btn_showMyBlogs_Click(object sender, EventArgs e)
+        {
+            MyAdverts myAdverts = new MyAdverts();
+            showForm(myAdverts);
+        }
     }
 }

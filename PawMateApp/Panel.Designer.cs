@@ -100,6 +100,7 @@
             this.btn_showMyBlogs.TabIndex = 12;
             this.btn_showMyBlogs.Text = "İlanlarım";
             this.btn_showMyBlogs.UseVisualStyleBackColor = false;
+            this.btn_showMyBlogs.Click += new System.EventHandler(this.btn_showMyBlogs_Click);
             // 
             // btn_showFriends
             // 
