@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddAdvert));
             this.lbl_title = new System.Windows.Forms.Label();
             this.txt_title = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,7 +36,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.txt_species = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_breed = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,7 +44,10 @@
             this.radio_genderMan = new System.Windows.Forms.RadioButton();
             this.radio_genderGirl = new System.Windows.Forms.RadioButton();
             this.btn_addAdvert = new System.Windows.Forms.Button();
+            this.btn_closeApp = new System.Windows.Forms.PictureBox();
+            this.combobox_species = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_title
@@ -97,6 +100,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.combobox_species);
             this.panel1.Controls.Add(this.btn_addAdvert);
             this.panel1.Controls.Add(this.radio_genderGirl);
             this.panel1.Controls.Add(this.radio_genderMan);
@@ -106,7 +110,6 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.txt_breed);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txt_species);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txt_content);
             this.panel1.Controls.Add(this.txt_title);
@@ -125,14 +128,6 @@
             this.label3.Size = new System.Drawing.Size(26, 14);
             this.label3.TabIndex = 105;
             this.label3.Text = "Tür";
-            // 
-            // txt_species
-            // 
-            this.txt_species.BackColor = System.Drawing.Color.White;
-            this.txt_species.Location = new System.Drawing.Point(15, 70);
-            this.txt_species.Name = "txt_species";
-            this.txt_species.Size = new System.Drawing.Size(171, 20);
-            this.txt_species.TabIndex = 104;
             // 
             // label4
             // 
@@ -214,18 +209,42 @@
             this.btn_addAdvert.Text = "Ekle";
             this.btn_addAdvert.UseVisualStyleBackColor = false;
             // 
+            // btn_closeApp
+            // 
+            this.btn_closeApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
+            this.btn_closeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_closeApp.Image")));
+            this.btn_closeApp.Location = new System.Drawing.Point(575, 11);
+            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_closeApp.Name = "btn_closeApp";
+            this.btn_closeApp.Size = new System.Drawing.Size(21, 24);
+            this.btn_closeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_closeApp.TabIndex = 105;
+            this.btn_closeApp.TabStop = false;
+            this.btn_closeApp.Click += new System.EventHandler(this.btn_closeApp_Click);
+            // 
+            // combobox_species
+            // 
+            this.combobox_species.FormattingEnabled = true;
+            this.combobox_species.Location = new System.Drawing.Point(15, 70);
+            this.combobox_species.Name = "combobox_species";
+            this.combobox_species.Size = new System.Drawing.Size(167, 21);
+            this.combobox_species.TabIndex = 114;
+            // 
             // AddAdvert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 424);
+            this.Controls.Add(this.btn_closeApp);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lbl_title);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddAdvert";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddAdvert";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,7 +266,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_breed;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_species;
         private System.Windows.Forms.Button btn_addAdvert;
+        private System.Windows.Forms.PictureBox btn_closeApp;
+        private System.Windows.Forms.ComboBox combobox_species;
     }
 }

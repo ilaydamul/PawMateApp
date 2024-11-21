@@ -16,11 +16,20 @@ namespace PawMateApp.Screens
         {
             InitializeComponent();
         }
-
+        private AddAdvert addAdvertForm = null;
         private void btn_addAdvert_Click(object sender, EventArgs e)
         {
-            AddAdvert addAdvert = new AddAdvert();
-            //addAdvert.Show();
+            // Eğer form hâlâ açık ise tekrar açmaya çalışma
+            if (addAdvertForm == null || addAdvertForm.IsDisposed)
+            {
+                addAdvertForm = new AddAdvert();
+                addAdvertForm.Show();
+            }
+            else
+            {
+                // Form zaten açık ise öne getir
+                addAdvertForm.Focus();
+            }
         }
     }
 }

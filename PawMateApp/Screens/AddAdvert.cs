@@ -16,5 +16,10 @@ namespace PawMateApp.Screens
         {
             InitializeComponent();
         }
+
+        private void btn_closeApp_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
