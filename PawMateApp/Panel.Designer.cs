@@ -31,13 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Panel));
             this.menuPanel = new System.Windows.Forms.Panel();
             this.adminPanel = new System.Windows.Forms.Panel();
+            this.btn_showUserManagement = new System.Windows.Forms.Button();
             this.btn_showBusinessManagement = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
-            this.logoBox = new System.Windows.Forms.PictureBox();
-            this.ProfileButton = new System.Windows.Forms.Button();
-            this.contentPanel = new System.Windows.Forms.Panel();
             this.businessPanel = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -46,13 +44,16 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.logoBox = new System.Windows.Forms.PictureBox();
+            this.ProfileButton = new System.Windows.Forms.Button();
+            this.contentPanel = new System.Windows.Forms.Panel();
             this.topMenuPanel = new System.Windows.Forms.Panel();
             this.btn_minimizeApp = new System.Windows.Forms.PictureBox();
             this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
             this.adminPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.businessPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.topMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).BeginInit();
@@ -74,13 +75,33 @@
             // 
             // adminPanel
             // 
+            this.adminPanel.BackColor = System.Drawing.Color.White;
+            this.adminPanel.Controls.Add(this.btn_showUserManagement);
             this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
             this.adminPanel.Controls.Add(this.button3);
             this.adminPanel.Controls.Add(this.button2);
             this.adminPanel.Location = new System.Drawing.Point(0, 65);
             this.adminPanel.Name = "adminPanel";
-            this.adminPanel.Size = new System.Drawing.Size(192, 158);
+            this.adminPanel.Size = new System.Drawing.Size(192, 241);
             this.adminPanel.TabIndex = 21;
+            // 
+            // btn_showUserManagement
+            // 
+            this.btn_showUserManagement.BackColor = System.Drawing.Color.White;
+            this.btn_showUserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_showUserManagement.FlatAppearance.BorderSize = 0;
+            this.btn_showUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_showUserManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_showUserManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showUserManagement.Image")));
+            this.btn_showUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_showUserManagement.Location = new System.Drawing.Point(0, 49);
+            this.btn_showUserManagement.Name = "btn_showUserManagement";
+            this.btn_showUserManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_showUserManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showUserManagement.TabIndex = 21;
+            this.btn_showUserManagement.Text = "Kullanıcılar";
+            this.btn_showUserManagement.UseVisualStyleBackColor = false;
+            this.btn_showUserManagement.Click += new System.EventHandler(this.btn_showUserManagement_Click);
             // 
             // btn_showBusinessManagement
             // 
@@ -109,7 +130,7 @@
             this.button3.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(0, 99);
+            this.button3.Location = new System.Drawing.Point(0, 145);
             this.button3.Name = "button3";
             this.button3.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.button3.Size = new System.Drawing.Size(192, 48);
@@ -126,7 +147,7 @@
             this.button2.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 51);
+            this.button2.Location = new System.Drawing.Point(0, 97);
             this.button2.Name = "button2";
             this.button2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.button2.Size = new System.Drawing.Size(192, 48);
@@ -151,42 +172,6 @@
             this.btn_logout.Text = "Çıkış Yap";
             this.btn_logout.UseVisualStyleBackColor = false;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
-            // 
-            // logoBox
-            // 
-            this.logoBox.Image = ((System.Drawing.Image)(resources.GetObject("logoBox.Image")));
-            this.logoBox.Location = new System.Drawing.Point(8, 9);
-            this.logoBox.Name = "logoBox";
-            this.logoBox.Size = new System.Drawing.Size(175, 48);
-            this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logoBox.TabIndex = 16;
-            this.logoBox.TabStop = false;
-            // 
-            // ProfileButton
-            // 
-            this.ProfileButton.BackColor = System.Drawing.Color.Transparent;
-            this.ProfileButton.FlatAppearance.BorderSize = 0;
-            this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProfileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.ProfileButton.Image = ((System.Drawing.Image)(resources.GetObject("ProfileButton.Image")));
-            this.ProfileButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ProfileButton.Location = new System.Drawing.Point(8, 517);
-            this.ProfileButton.Name = "ProfileButton";
-            this.ProfileButton.Size = new System.Drawing.Size(175, 44);
-            this.ProfileButton.TabIndex = 15;
-            this.ProfileButton.Text = "          Profilimi Görüntüle";
-            this.ProfileButton.UseVisualStyleBackColor = false;
-            this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
-            // 
-            // contentPanel
-            // 
-            this.contentPanel.AutoScroll = true;
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.contentPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.contentPanel.Location = new System.Drawing.Point(192, 30);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(808, 590);
-            this.contentPanel.TabIndex = 17;
             // 
             // businessPanel
             // 
@@ -322,6 +307,42 @@
             this.button6.Text = "Hasta Yönetimi";
             this.button6.UseVisualStyleBackColor = false;
             // 
+            // logoBox
+            // 
+            this.logoBox.Image = ((System.Drawing.Image)(resources.GetObject("logoBox.Image")));
+            this.logoBox.Location = new System.Drawing.Point(8, 9);
+            this.logoBox.Name = "logoBox";
+            this.logoBox.Size = new System.Drawing.Size(175, 48);
+            this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoBox.TabIndex = 16;
+            this.logoBox.TabStop = false;
+            // 
+            // ProfileButton
+            // 
+            this.ProfileButton.BackColor = System.Drawing.Color.Transparent;
+            this.ProfileButton.FlatAppearance.BorderSize = 0;
+            this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ProfileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.ProfileButton.Image = ((System.Drawing.Image)(resources.GetObject("ProfileButton.Image")));
+            this.ProfileButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ProfileButton.Location = new System.Drawing.Point(8, 517);
+            this.ProfileButton.Name = "ProfileButton";
+            this.ProfileButton.Size = new System.Drawing.Size(175, 44);
+            this.ProfileButton.TabIndex = 15;
+            this.ProfileButton.Text = "          Profilimi Görüntüle";
+            this.ProfileButton.UseVisualStyleBackColor = false;
+            this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
+            // 
+            // contentPanel
+            // 
+            this.contentPanel.AutoScroll = true;
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.contentPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.contentPanel.Location = new System.Drawing.Point(192, 30);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(808, 590);
+            this.contentPanel.TabIndex = 17;
+            // 
             // topMenuPanel
             // 
             this.topMenuPanel.BackColor = System.Drawing.Color.White;
@@ -380,8 +401,8 @@
             this.Load += new System.EventHandler(this.Panel_Load);
             this.menuPanel.ResumeLayout(false);
             this.adminPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.businessPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.topMenuPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).EndInit();
@@ -410,5 +431,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btn_showUserManagement;
     }
 }

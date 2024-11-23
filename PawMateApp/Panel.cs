@@ -107,5 +107,11 @@ namespace PawMateApp
             BusinessManagement businessManagement = new BusinessManagement();
             showForm(businessManagement);
         }
+
+        private void btn_showUserManagement_Click(object sender, EventArgs e)
+        {
+            UserManagement userManagement = new UserManagement();
+            showForm(userManagement);
+        }
     }
 }
