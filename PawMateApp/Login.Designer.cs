@@ -134,6 +134,9 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.logoBox);
@@ -143,7 +146,7 @@
             this.panel1.Controls.Add(this.txt_username);
             this.panel1.Controls.Add(this.lbl_goRegister);
             this.panel1.Controls.Add(this.txt_password);
-            this.panel1.Location = new System.Drawing.Point(271, 88);
+            this.panel1.Location = new System.Drawing.Point(371, 174);
             this.panel1.Name = "panel1";
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel1.Size = new System.Drawing.Size(258, 273);
@@ -153,7 +156,7 @@
             // 
             this.btn_exitApp.BackColor = System.Drawing.Color.Transparent;
             this.btn_exitApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_exitApp.Image")));
-            this.btn_exitApp.Location = new System.Drawing.Point(756, 11);
+            this.btn_exitApp.Location = new System.Drawing.Point(956, 11);
             this.btn_exitApp.Margin = new System.Windows.Forms.Padding(2);
             this.btn_exitApp.Name = "btn_exitApp";
             this.btn_exitApp.Size = new System.Drawing.Size(33, 28);
@@ -166,7 +169,7 @@
             // 
             this.btn_minimizeApp.BackColor = System.Drawing.Color.Transparent;
             this.btn_minimizeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_minimizeApp.Image")));
-            this.btn_minimizeApp.Location = new System.Drawing.Point(707, 12);
+            this.btn_minimizeApp.Location = new System.Drawing.Point(907, 12);
             this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2);
             this.btn_minimizeApp.Name = "btn_minimizeApp";
             this.btn_minimizeApp.Size = new System.Drawing.Size(32, 28);
@@ -179,14 +182,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1000, 620);
             this.Controls.Add(this.btn_minimizeApp);
             this.Controls.Add(this.btn_exitApp);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Giriş Yap";
+            this.Text = "PawMate Giriş Yap";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Login_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.panel1.ResumeLayout(false);

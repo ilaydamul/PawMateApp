@@ -33,19 +33,16 @@
             this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.txt_username = new System.Windows.Forms.TextBox();
+            this.txt_phone = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txt_email = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_surname = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.logoBox = new System.Windows.Forms.PictureBox();
-            this.cb_showPass = new System.Windows.Forms.CheckBox();
+            this.txt_authName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_businessEmail = new System.Windows.Forms.TextBox();
             this.btn_register = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_name = new System.Windows.Forms.TextBox();
+            this.txt_businessName = new System.Windows.Forms.TextBox();
             this.lbl_goLogin = new System.Windows.Forms.LinkLabel();
-            this.txt_password = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).BeginInit();
             this.panel1.SuspendLayout();
@@ -56,8 +53,8 @@
             // 
             this.btn_minimizeApp.BackColor = System.Drawing.Color.Transparent;
             this.btn_minimizeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_minimizeApp.Image")));
-            this.btn_minimizeApp.Location = new System.Drawing.Point(707, 12);
-            this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_minimizeApp.Location = new System.Drawing.Point(907, 12);
+            this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2);
             this.btn_minimizeApp.Name = "btn_minimizeApp";
             this.btn_minimizeApp.Size = new System.Drawing.Size(32, 28);
             this.btn_minimizeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -69,8 +66,8 @@
             // 
             this.btn_closeApp.BackColor = System.Drawing.Color.Transparent;
             this.btn_closeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_closeApp.Image")));
-            this.btn_closeApp.Location = new System.Drawing.Point(756, 11);
-            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_closeApp.Location = new System.Drawing.Point(956, 11);
+            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2);
             this.btn_closeApp.Name = "btn_closeApp";
             this.btn_closeApp.Size = new System.Drawing.Size(33, 28);
             this.btn_closeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,20 +79,17 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.txt_username);
+            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txt_email);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txt_surname);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.logoBox);
-            this.panel1.Controls.Add(this.cb_showPass);
+            this.panel1.Controls.Add(this.txt_authName);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.txt_businessEmail);
             this.panel1.Controls.Add(this.btn_register);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_name);
+            this.panel1.Controls.Add(this.txt_businessName);
             this.panel1.Controls.Add(this.lbl_goLogin);
-            this.panel1.Controls.Add(this.txt_password);
-            this.panel1.Location = new System.Drawing.Point(271, 45);
+            this.panel1.Location = new System.Drawing.Point(371, 131);
             this.panel1.Name = "panel1";
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panel1.Size = new System.Drawing.Size(258, 358);
@@ -105,85 +99,65 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(14, 186);
+            this.label5.Location = new System.Drawing.Point(13, 229);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 14);
+            this.label5.Size = new System.Drawing.Size(100, 14);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Kullanıcı Adı";
+            this.label5.Text = "İşletme Telefonu";
             // 
-            // txt_username
+            // txt_phone
             // 
-            this.txt_username.BackColor = System.Drawing.Color.White;
-            this.txt_username.Location = new System.Drawing.Point(16, 204);
-            this.txt_username.Name = "txt_username";
-            this.txt_username.Size = new System.Drawing.Size(226, 20);
-            this.txt_username.TabIndex = 3;
+            this.txt_phone.BackColor = System.Drawing.Color.White;
+            this.txt_phone.Location = new System.Drawing.Point(15, 247);
+            this.txt_phone.Name = "txt_phone";
+            this.txt_phone.Size = new System.Drawing.Size(226, 20);
+            this.txt_phone.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(14, 143);
+            this.label4.Location = new System.Drawing.Point(13, 140);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 14);
+            this.label4.Size = new System.Drawing.Size(84, 14);
             this.label4.TabIndex = 10;
-            this.label4.Text = "E-Mail";
-            // 
-            // txt_email
-            // 
-            this.txt_email.BackColor = System.Drawing.Color.White;
-            this.txt_email.Location = new System.Drawing.Point(16, 161);
-            this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(226, 20);
-            this.txt_email.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(135, 99);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 14);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Soyadınız";
-            // 
-            // txt_surname
-            // 
-            this.txt_surname.BackColor = System.Drawing.Color.White;
-            this.txt_surname.Location = new System.Drawing.Point(138, 116);
-            this.txt_surname.Name = "txt_surname";
-            this.txt_surname.Size = new System.Drawing.Size(105, 20);
-            this.txt_surname.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 230);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 14);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Şifre";
+            this.label4.Text = "Yetkili Kişi Adı";
             // 
             // logoBox
             // 
             this.logoBox.Image = ((System.Drawing.Image)(resources.GetObject("logoBox.Image")));
-            this.logoBox.Location = new System.Drawing.Point(17, 12);
+            this.logoBox.Location = new System.Drawing.Point(16, 13);
             this.logoBox.Name = "logoBox";
             this.logoBox.Size = new System.Drawing.Size(226, 72);
             this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoBox.TabIndex = 1;
             this.logoBox.TabStop = false;
             // 
-            // cb_showPass
+            // txt_authName
             // 
-            this.cb_showPass.AutoSize = true;
-            this.cb_showPass.Location = new System.Drawing.Point(226, 251);
-            this.cb_showPass.Name = "cb_showPass";
-            this.cb_showPass.Size = new System.Drawing.Size(15, 14);
-            this.cb_showPass.TabIndex = 5;
-            this.cb_showPass.UseVisualStyleBackColor = true;
-            this.cb_showPass.CheckedChanged += new System.EventHandler(this.cb_showPass_CheckedChanged);
+            this.txt_authName.BackColor = System.Drawing.Color.White;
+            this.txt_authName.Location = new System.Drawing.Point(15, 158);
+            this.txt_authName.Name = "txt_authName";
+            this.txt_authName.Size = new System.Drawing.Size(226, 20);
+            this.txt_authName.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 186);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(84, 14);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "İşletme E-Mail";
+            // 
+            // txt_businessEmail
+            // 
+            this.txt_businessEmail.BackColor = System.Drawing.Color.White;
+            this.txt_businessEmail.Location = new System.Drawing.Point(15, 203);
+            this.txt_businessEmail.Name = "txt_businessEmail";
+            this.txt_businessEmail.Size = new System.Drawing.Size(226, 20);
+            this.txt_businessEmail.TabIndex = 2;
             // 
             // btn_register
             // 
@@ -193,7 +167,7 @@
             this.btn_register.Location = new System.Drawing.Point(16, 303);
             this.btn_register.Name = "btn_register";
             this.btn_register.Size = new System.Drawing.Size(226, 37);
-            this.btn_register.TabIndex = 6;
+            this.btn_register.TabIndex = 4;
             this.btn_register.Text = "Kayıt Ol";
             this.btn_register.UseVisualStyleBackColor = false;
             this.btn_register.Click += new System.EventHandler(this.btn_register_Click);
@@ -202,19 +176,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 98);
+            this.label1.Location = new System.Drawing.Point(13, 94);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 14);
+            this.label1.Size = new System.Drawing.Size(86, 14);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Adınız";
+            this.label1.Text = "İşletme Adınız";
             // 
-            // txt_name
+            // txt_businessName
             // 
-            this.txt_name.BackColor = System.Drawing.Color.White;
-            this.txt_name.Location = new System.Drawing.Point(17, 116);
-            this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(105, 20);
-            this.txt_name.TabIndex = 0;
+            this.txt_businessName.BackColor = System.Drawing.Color.White;
+            this.txt_businessName.Location = new System.Drawing.Point(15, 112);
+            this.txt_businessName.Name = "txt_businessName";
+            this.txt_businessName.Size = new System.Drawing.Size(226, 20);
+            this.txt_businessName.TabIndex = 0;
             // 
             // lbl_goLogin
             // 
@@ -230,28 +204,18 @@
             this.lbl_goLogin.VisitedLinkColor = System.Drawing.Color.Black;
             this.lbl_goLogin.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_goLogin_LinkClicked);
             // 
-            // txt_password
-            // 
-            this.txt_password.BackColor = System.Drawing.Color.White;
-            this.txt_password.Location = new System.Drawing.Point(17, 248);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.PasswordChar = '*';
-            this.txt_password.Size = new System.Drawing.Size(226, 20);
-            this.txt_password.TabIndex = 4;
-            this.txt_password.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_password_KeyDown);
-            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1000, 620);
             this.Controls.Add(this.btn_minimizeApp);
             this.Controls.Add(this.btn_closeApp);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Register";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Register";
+            this.Text = "PawMate\'e Kayıt Ol";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Register_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).EndInit();
@@ -267,19 +231,16 @@
         private System.Windows.Forms.PictureBox btn_minimizeApp;
         private System.Windows.Forms.PictureBox btn_closeApp;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox logoBox;
-        private System.Windows.Forms.CheckBox cb_showPass;
         private System.Windows.Forms.Button btn_register;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.TextBox txt_businessName;
         private System.Windows.Forms.LinkLabel lbl_goLogin;
-        private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txt_username;
+        private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txt_email;
+        private System.Windows.Forms.TextBox txt_authName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_surname;
+        private System.Windows.Forms.TextBox txt_businessEmail;
     }
 }
