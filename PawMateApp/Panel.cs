@@ -1,4 +1,5 @@
 ﻿using PawMateApp.Screens;
+using PawMateApp.Screens.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -91,14 +92,20 @@ namespace PawMateApp
 
         private void Panel_Load(object sender, EventArgs e)
         {
-            Advertisements advertisements = new Advertisements();
-            showForm(advertisements);
+            //Panelde 3 kullanıcı girişi var, bunlara göre paneldeki menülerin getirilmesi gerekiyor
+            //Admin Paneli; isAppAdmin ise adminPanel görünecek
+            //İşletme Paneli; isBusinessAdmin ise businessPanel görünecek ve Veteriner Yönetimi açık olacak
+            //Veteriner Paneli; isBusinessAdmin değil ise businessPanel görünecek ve Veteriner Yönetimi KAPALI olacak
+
+
+
+
         }
 
-        private void btn_showMyBlogs_Click(object sender, EventArgs e)
+        private void btn_showBusinessManagement_Click(object sender, EventArgs e)
         {
-            MyAdverts myAdverts = new MyAdverts();
-            showForm(myAdverts);
+            BusinessManagement businessManagement = new BusinessManagement();
+            showForm(businessManagement);
         }
     }
 }

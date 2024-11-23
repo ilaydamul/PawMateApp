@@ -35,17 +35,17 @@
             this.txt_content = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txt_breed = new System.Windows.Forms.TextBox();
+            this.combobox_species = new System.Windows.Forms.ComboBox();
+            this.btn_addAdvert = new System.Windows.Forms.Button();
+            this.radio_genderGirl = new System.Windows.Forms.RadioButton();
+            this.radio_genderMan = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_age = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.radio_genderMan = new System.Windows.Forms.RadioButton();
-            this.radio_genderGirl = new System.Windows.Forms.RadioButton();
-            this.btn_addAdvert = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txt_breed = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btn_closeApp = new System.Windows.Forms.PictureBox();
-            this.combobox_species = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).BeginInit();
             this.SuspendLayout();
@@ -119,33 +119,57 @@
             this.panel1.Size = new System.Drawing.Size(584, 368);
             this.panel1.TabIndex = 104;
             // 
-            // label3
+            // combobox_species
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 14);
-            this.label3.TabIndex = 105;
-            this.label3.Text = "Tür";
+            this.combobox_species.FormattingEnabled = true;
+            this.combobox_species.Location = new System.Drawing.Point(15, 70);
+            this.combobox_species.Name = "combobox_species";
+            this.combobox_species.Size = new System.Drawing.Size(167, 21);
+            this.combobox_species.TabIndex = 114;
             // 
-            // label4
+            // btn_addAdvert
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(203, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 14);
-            this.label4.TabIndex = 107;
-            this.label4.Text = "Cins";
+            this.btn_addAdvert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
+            this.btn_addAdvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addAdvert.ForeColor = System.Drawing.Color.White;
+            this.btn_addAdvert.Location = new System.Drawing.Point(423, 311);
+            this.btn_addAdvert.Name = "btn_addAdvert";
+            this.btn_addAdvert.Size = new System.Drawing.Size(147, 37);
+            this.btn_addAdvert.TabIndex = 113;
+            this.btn_addAdvert.Text = "Ekle";
+            this.btn_addAdvert.UseVisualStyleBackColor = false;
             // 
-            // txt_breed
+            // radio_genderGirl
             // 
-            this.txt_breed.BackColor = System.Drawing.Color.White;
-            this.txt_breed.Location = new System.Drawing.Point(206, 70);
-            this.txt_breed.Name = "txt_breed";
-            this.txt_breed.Size = new System.Drawing.Size(171, 20);
-            this.txt_breed.TabIndex = 106;
+            this.radio_genderGirl.AutoSize = true;
+            this.radio_genderGirl.Location = new System.Drawing.Point(74, 234);
+            this.radio_genderGirl.Name = "radio_genderGirl";
+            this.radio_genderGirl.Size = new System.Drawing.Size(42, 17);
+            this.radio_genderGirl.TabIndex = 112;
+            this.radio_genderGirl.TabStop = true;
+            this.radio_genderGirl.Text = "Dişi";
+            this.radio_genderGirl.UseVisualStyleBackColor = true;
+            // 
+            // radio_genderMan
+            // 
+            this.radio_genderMan.AutoSize = true;
+            this.radio_genderMan.Location = new System.Drawing.Point(15, 234);
+            this.radio_genderMan.Name = "radio_genderMan";
+            this.radio_genderMan.Size = new System.Drawing.Size(53, 17);
+            this.radio_genderMan.TabIndex = 111;
+            this.radio_genderMan.TabStop = true;
+            this.radio_genderMan.Text = "Erkek";
+            this.radio_genderMan.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(12, 217);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 14);
+            this.label6.TabIndex = 110;
+            this.label6.Text = "Cinsiyet";
             // 
             // label5
             // 
@@ -165,49 +189,33 @@
             this.txt_age.Size = new System.Drawing.Size(171, 20);
             this.txt_age.TabIndex = 108;
             // 
-            // label6
+            // label4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 217);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 14);
-            this.label6.TabIndex = 110;
-            this.label6.Text = "Cinsiyet";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(203, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 14);
+            this.label4.TabIndex = 107;
+            this.label4.Text = "Cins";
             // 
-            // radio_genderMan
+            // txt_breed
             // 
-            this.radio_genderMan.AutoSize = true;
-            this.radio_genderMan.Location = new System.Drawing.Point(15, 234);
-            this.radio_genderMan.Name = "radio_genderMan";
-            this.radio_genderMan.Size = new System.Drawing.Size(53, 17);
-            this.radio_genderMan.TabIndex = 111;
-            this.radio_genderMan.TabStop = true;
-            this.radio_genderMan.Text = "Erkek";
-            this.radio_genderMan.UseVisualStyleBackColor = true;
+            this.txt_breed.BackColor = System.Drawing.Color.White;
+            this.txt_breed.Location = new System.Drawing.Point(206, 70);
+            this.txt_breed.Name = "txt_breed";
+            this.txt_breed.Size = new System.Drawing.Size(171, 20);
+            this.txt_breed.TabIndex = 106;
             // 
-            // radio_genderGirl
+            // label3
             // 
-            this.radio_genderGirl.AutoSize = true;
-            this.radio_genderGirl.Location = new System.Drawing.Point(74, 234);
-            this.radio_genderGirl.Name = "radio_genderGirl";
-            this.radio_genderGirl.Size = new System.Drawing.Size(42, 17);
-            this.radio_genderGirl.TabIndex = 112;
-            this.radio_genderGirl.TabStop = true;
-            this.radio_genderGirl.Text = "Dişi";
-            this.radio_genderGirl.UseVisualStyleBackColor = true;
-            // 
-            // btn_addAdvert
-            // 
-            this.btn_addAdvert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
-            this.btn_addAdvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addAdvert.ForeColor = System.Drawing.Color.White;
-            this.btn_addAdvert.Location = new System.Drawing.Point(423, 311);
-            this.btn_addAdvert.Name = "btn_addAdvert";
-            this.btn_addAdvert.Size = new System.Drawing.Size(147, 37);
-            this.btn_addAdvert.TabIndex = 113;
-            this.btn_addAdvert.Text = "Ekle";
-            this.btn_addAdvert.UseVisualStyleBackColor = false;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 14);
+            this.label3.TabIndex = 105;
+            this.label3.Text = "Tür";
             // 
             // btn_closeApp
             // 
@@ -221,14 +229,6 @@
             this.btn_closeApp.TabIndex = 105;
             this.btn_closeApp.TabStop = false;
             this.btn_closeApp.Click += new System.EventHandler(this.btn_closeApp_Click);
-            // 
-            // combobox_species
-            // 
-            this.combobox_species.FormattingEnabled = true;
-            this.combobox_species.Location = new System.Drawing.Point(15, 70);
-            this.combobox_species.Name = "combobox_species";
-            this.combobox_species.Size = new System.Drawing.Size(167, 21);
-            this.combobox_species.TabIndex = 114;
             // 
             // AddAdvert
             // 

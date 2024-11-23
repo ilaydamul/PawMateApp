@@ -125,6 +125,12 @@
     <Compile Include="Screens\AddAdvert.Designer.cs">
       <DependentUpon>AddAdvert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Admin\BusinessManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Admin\BusinessManagement.Designer.cs">
+      <DependentUpon>BusinessManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\AdvertDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\AddAdvert.resx">
       <DependentUpon>AddAdvert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Admin\BusinessManagement.resx">
+      <DependentUpon>BusinessManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\AdvertDetail.resx">
       <DependentUpon>AdvertDetail.cs</DependentUpon>
