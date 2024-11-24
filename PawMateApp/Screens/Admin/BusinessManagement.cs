@@ -18,19 +18,70 @@ namespace PawMateApp.Screens.Admin
             InitializeComponent();
         }
 
+      
+
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
 
         //Listede herhangi bir işletmeye tıklanılınca soldaki inputlar dolacak. Değişiklik yapıldığında güncelleme yapılacak
         //Dikkat! Üstüne tıklanıldığında ve input içerikleri silindiğinde uyarı verilmeli, dolu olan veriler boş kaydedilmemeli!
+
         private void btn_addUpdateBusiness_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+                if (businessesList.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Lütfen güncellemek için bir işletme seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txt_businessName.Text) || string.IsNullOrWhiteSpace(txt_authName.Text) ||
+                    string.IsNullOrWhiteSpace(txt_businessEmail.Text) || string.IsNullOrWhiteSpace(txt_phone.Text) ||
+                    string.IsNullOrWhiteSpace(txt_address.Text))
+                {
+                    MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (baglan.State == ConnectionState.Closed) 
+                    
+                    baglan.Open();
+
+                string query = "UPDATE \"Businesses\" SET \"BusinessName\" = @BusinessName, \"AuthorizedName\" = @AuthorizedName, " +
+                               "\"Email\" = @Email, \"Phone\" = @Phone, \"Address\" = @Address, \"IsApproved\" = @IsApproved " +
+                               "WHERE \"BusinessId\" = @BusinessId";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                    cmd.Parameters.AddWithValue("@AuthorizedName", txt_authName.Text);
+                    cmd.Parameters.AddWithValue("@Email", txt_businessEmail.Text);
+                    cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
+                    cmd.Parameters.AddWithValue("@Address", txt_address.Text);
+                    cmd.Parameters.AddWithValue("@IsApproved", radio_approved.Checked);
+                    cmd.Parameters.AddWithValue("@BusinessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["BusinessId"].Value));
+
+                    cmd.ExecuteNonQuery();
+                    baglan.Close();//hata yüzünden bağlantıyı burada kapattım.
+                }
+
+                MessageBox.Show("İşletme bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                BusinessManagement_Load(null, null); // Listeyi yeniden yükle
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btn_addBusiness_Click(object sender, EventArgs e)
         {
             //Soldaki input alanlarının içi temizlenmeli, btn_addUpdateBusiness buton Texti Ekle olmalı, herhangi listede -
             //bir işletmeye tıklanıldığında Güncelle yazmalı.
+
+              // Yeni işletme ekleme işlemi
+              
         }
 
         //Ekrana gelindiğinde işletme bilgilerinin businessesList'de görünmesi
@@ -70,6 +121,8 @@ namespace PawMateApp.Screens.Admin
                 txt_address.Text = row.Cells["Address"].Value?.ToString();
                 radio_approved.Checked = Convert.ToBoolean(row.Cells["IsApproved"].Value);
 
+                btn_addUpdateBusiness.Text = "Güncelle";
+
             }
         }
 
@@ -89,7 +142,7 @@ namespace PawMateApp.Screens.Admin
             {
                 try
                 {                   
-                    baglan.Open();//işletme silinse bile 'connection already open' hatası var düzeltilmesi gerek
+                    baglan.Open();
 
                     
                     string query = "DELETE FROM \"Businesses\" WHERE \"BusinessId\" = @BusinessId";
@@ -99,6 +152,8 @@ namespace PawMateApp.Screens.Admin
                         
                         cmd.Parameters.AddWithValue("@BusinessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["BusinessId"].Value));
                         cmd.ExecuteNonQuery();
+                        baglan.Close();
+
                     }
                     
                     MessageBox.Show("İşletme başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -107,15 +162,6 @@ namespace PawMateApp.Screens.Admin
                 catch (Exception ex)
                 {
                     MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                finally
-                {
-                    
-                    if (baglan.State == ConnectionState.Open)
-                    {
-                        baglan.Close();
-                    }
                 }
 
             }
