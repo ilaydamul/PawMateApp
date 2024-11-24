@@ -65,6 +65,9 @@ namespace PawMateApp
             //Bu bilgiler girildikten sonra "Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız."
             //yazısı gelecek. 
 
+            //Bunların ardından notifications veritabanına bilgi gidecek. businesses veritabanına ilgili veri eklendikten sonra
+            //idsi ile birlikte kaydedilecek.
+
 
 
             //CheckClass checkInputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text, txt_email.Text, txt_name.Text, txt_surname.Text });
