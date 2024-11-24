@@ -28,8 +28,7 @@ namespace PawMateApp
         }
 
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
-        //şifreyi kendi veritabanı şifrenize göre değiştirin.
-
+        
         private void Register_Paint(object sender, PaintEventArgs e)
         {
             Color leftColor = ColorTranslator.FromHtml("#B5B3F1");
@@ -61,102 +60,60 @@ namespace PawMateApp
    
         private void btn_register_Click(object sender, EventArgs e)
         {
+
             //businesses veritabanına ilgili veriler gelecek, boş olanlar boş kalacak.
-            //Bu bilgiler girildikten sonra "Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız."
-            //yazısı gelecek. 
+            //Bu bilgiler girildikten sonra "Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız."  yazısı gelecek.  
 
             //Bunların ardından notifications veritabanına bilgi gidecek. businesses veritabanına ilgili veri eklendikten sonra
             //idsi ile birlikte kaydedilecek.
 
+            try
+            {              
+                baglan.Open();
+               
+                string insertBusinessQuery = "INSERT INTO \"Businesses\" (\"BusinessName\", \"AuthorizedName\", \"Email\", \"Phone\", \"IsApproved\") " +
+                                             "VALUES (@BusinessName, @AuthorizedName, @Email, @Phone, FALSE) RETURNING \"BusinessId\"";
 
+                using (NpgsqlCommand cmd = new NpgsqlCommand(insertBusinessQuery, baglan))
+                {
+                    
+                    cmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                    cmd.Parameters.AddWithValue("@AuthorizedName", txt_authName.Text);
+                    cmd.Parameters.AddWithValue("@Email", txt_businessEmail.Text);
+                    cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
 
-            //CheckClass checkInputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text, txt_email.Text, txt_name.Text, txt_surname.Text });
-            //if (!checkInputs.Check(""))
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    if (!CheckClass.IsValidEmail(txt_email.Text))
-            //    {
-            //        MessageBox.Show("Lütfen geçerli bir mail adresi giriniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        try
-            //        {
-            //            baglan.Open();
-            //            NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1", baglan);
-            //            cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
-            //            int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
+                    
+                    int businessId = Convert.ToInt32(cmd.ExecuteScalar());
 
-            //            if (userExists > 0)
-            //            {
+                    
+                    string insertNotificationQuery = "INSERT INTO \"Notifications\" (\"BusinessId\", \"BusinessName\", \"NotificationDescription\", \"IsRead\") " +
+                                                     "VALUES (@BusinessId, @BusinessName, @Description, FALSE)";
 
-            //                MessageBox.Show("Bu kullanıcı adı zaten alınmış. Lütfen başka bir kullanıcı adı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            }
-            //            else
-            //            {
-            //                NpgsqlCommand cmdCheckEmail = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE email = @P1", baglan);
-            //                cmdCheckEmail.Parameters.AddWithValue("@P1", txt_email.Text);
-            //                int userExitsEmail = Convert.ToInt32(cmdCheckEmail.ExecuteScalar());
-            //                if (userExitsEmail > 0)
-            //                {
-            //                    MessageBox.Show("Bu e-posta adresi zaten alınmış. Lütfen başka bir e-posta adresi seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                }
-            //                else
-            //                {
-            //                    SendMail sendMail = new SendMail(txt_name.Text, txt_email.Text);
-            //                    int user_otp_code = sendMail.SendMailForOTP();
-            //                    if (user_otp_code != 0)
-            //                    {
-            //                        try
-            //                        {
-            //                            NpgsqlCommand komut = new NpgsqlCommand("insert into users(name,surname,username,email,password,isadmin,otp_code,otp_status,two_factor_code,two_factor_status) values(@name,@surname,@username,@email,@password,@isadmin,@otp_code,@otp_status,@two_factor_code,@two_factor_status)", baglan);
-            //                            komut.Parameters.AddWithValue("@name", txt_name.Text);
-            //                            komut.Parameters.AddWithValue("@surname", txt_surname.Text);
-            //                            komut.Parameters.AddWithValue("@username", txt_username.Text);
-            //                            komut.Parameters.AddWithValue("@email", txt_email.Text);
-            //                            //komut.Parameters.AddWithValue("@password", txt_password.Text);
-            //                            komut.Parameters.AddWithValue("@isadmin", false);
-            //                            komut.Parameters.AddWithValue("@otp_code", user_otp_code);
-            //                            komut.Parameters.AddWithValue("@otp_status", 0);
-            //                            komut.Parameters.AddWithValue("@two_factor_code", 0);
-            //                            komut.Parameters.AddWithValue("@two_factor_status", false);
-            //                            komut.ExecuteNonQuery();
-            //                            MessageBox.Show("Başarılı bir şekilde kayıt oldunuz! Giriş yapmak için mail adresinize gönderilen doğrulama kodunu giriş yaparken giriniz.", "Başarılı Kayıt", MessageBoxButtons.OK);
-            //                        }catch(Exception exception)
-            //                        {
-            //                            MessageBox.Show("Bir hata oluştu: " + exception.Message);
-            //                        }
-                                    
-            //                    }
-            //                    else
-            //                    {
-            //                        MessageBox.Show("Bir hata oluştu. Lütfen tekrar deneyin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-            //                    }
-                              
-    
-            //                }
-            //            }
-            //        }
+                    using (NpgsqlCommand notificationCmd = new NpgsqlCommand(insertNotificationQuery, baglan))
+                    {
+                       
+                        notificationCmd.Parameters.AddWithValue("@BusinessId", businessId);
+                        notificationCmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                        notificationCmd.Parameters.AddWithValue("@Description", "Yeni işletme kaydı talebi alındı.");
 
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show("Bir hata oluştu: " + ex.Message);
-            //        }
-            //        finally
-            //        {
-            //            baglan.Close();
-            //        }
-            //    }
-            //    this.Close();
-            //    Login login = new Login();
-            //    this.Hide();
-            //    login.Show();
+                        notificationCmd.ExecuteNonQuery();
+                    }
+                }
 
-            //}
+                
+                MessageBox.Show("Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız.",
+                                "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                
+                baglan.Close();
+            }
+
         }
 
     }
