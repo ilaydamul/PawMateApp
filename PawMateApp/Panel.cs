@@ -77,11 +77,18 @@ namespace PawMateApp
 
         public void showForm(Form form)
         {
-            contentPanel.Controls.Clear();
-            form.MdiParent = this;
-            form.FormBorderStyle = FormBorderStyle.None;
-            contentPanel.Controls.Add(form);
+            contentPanel.Controls.Clear(); // Paneli temizle
+            form.TopLevel = false;         // Alt form olarak ayarla
+            contentPanel.Controls.Add(form); // Panel'e ekle
+            form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
             form.Show();
+
+            //contentPanel.Controls.Clear();
+            //form.MdiParent = this;
+            //form.FormBorderStyle = FormBorderStyle.None;
+            //contentPanel.Controls.Add(form);
+            //form.Show();
         }
 
         private void ProfileButton_Click(object sender, EventArgs e)
@@ -97,7 +104,7 @@ namespace PawMateApp
             //İşletme Paneli; isBusinessAdmin ise businessPanel görünecek ve Veteriner Yönetimi açık olacak
             //Veteriner Paneli; isBusinessAdmin değil ise businessPanel görünecek ve Veteriner Yönetimi KAPALI olacak
 
-
+            //Admin Paneli olursa ProfileButton görünmemesi gerekiyor.
 
 
         }
@@ -112,6 +119,18 @@ namespace PawMateApp
         {
             UserManagement userManagement = new UserManagement();
             showForm(userManagement);
+        }
+
+        private void btn_showTreatmentManagement_Click(object sender, EventArgs e)
+        {
+            TreatmentManagement treatmentManagement = new TreatmentManagement();
+            showForm(treatmentManagement);
+        }
+
+        private void btn_showNotifications_Click(object sender, EventArgs e)
+        {
+            Notifications notifications = new Notifications();
+            showForm(notifications);
         }
     }
 }

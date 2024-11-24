@@ -32,9 +32,8 @@
             this.txt_title = new System.Windows.Forms.Label();
             this.businessesList = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_addUpdateBusiness = new System.Windows.Forms.Button();
-            this.radio_approved = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_address = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_phone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,11 +42,13 @@
             this.txt_businessEmail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txt_businessName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txt_address = new System.Windows.Forms.TextBox();
+            this.btn_addUpdateBusiness = new System.Windows.Forms.Button();
+            this.radio_approved = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_addBusiness = new System.Windows.Forms.Button();
             this.businessLogo = new System.Windows.Forms.PictureBox();
+            this.btn_deleteBusiness = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.businessesList)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.businessLogo)).BeginInit();
@@ -68,7 +69,7 @@
             this.businessesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.businessesList.Location = new System.Drawing.Point(274, 75);
             this.businessesList.Name = "businessesList";
-            this.businessesList.Size = new System.Drawing.Size(522, 500);
+            this.businessesList.Size = new System.Drawing.Size(522, 466);
             this.businessesList.TabIndex = 5;
             // 
             // panel1
@@ -93,39 +94,24 @@
             this.panel1.Size = new System.Drawing.Size(256, 500);
             this.panel1.TabIndex = 105;
             // 
-            // btn_addUpdateBusiness
+            // label2
             // 
-            this.btn_addUpdateBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
-            this.btn_addUpdateBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_addUpdateBusiness.ForeColor = System.Drawing.Color.White;
-            this.btn_addUpdateBusiness.Location = new System.Drawing.Point(13, 451);
-            this.btn_addUpdateBusiness.Name = "btn_addUpdateBusiness";
-            this.btn_addUpdateBusiness.Size = new System.Drawing.Size(226, 37);
-            this.btn_addUpdateBusiness.TabIndex = 6;
-            this.btn_addUpdateBusiness.Text = "Ekle";
-            this.btn_addUpdateBusiness.UseVisualStyleBackColor = false;
-            this.btn_addUpdateBusiness.Click += new System.EventHandler(this.btn_addUpdateBusiness_Click);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(11, 261);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 14);
+            this.label2.TabIndex = 124;
+            this.label2.Text = "İşletme Adresi";
             // 
-            // radio_approved
+            // txt_address
             // 
-            this.radio_approved.AutoSize = true;
-            this.radio_approved.Location = new System.Drawing.Point(13, 368);
-            this.radio_approved.Name = "radio_approved";
-            this.radio_approved.Size = new System.Drawing.Size(47, 17);
-            this.radio_approved.TabIndex = 5;
-            this.radio_approved.TabStop = true;
-            this.radio_approved.Text = "Evet";
-            this.radio_approved.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 351);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 14);
-            this.label6.TabIndex = 110;
-            this.label6.Text = "Hesap Onaylı mı?";
+            this.txt_address.BackColor = System.Drawing.Color.White;
+            this.txt_address.Location = new System.Drawing.Point(13, 279);
+            this.txt_address.Multiline = true;
+            this.txt_address.Name = "txt_address";
+            this.txt_address.Size = new System.Drawing.Size(226, 60);
+            this.txt_address.TabIndex = 4;
             // 
             // label1
             // 
@@ -199,24 +185,39 @@
             this.txt_businessName.Size = new System.Drawing.Size(226, 20);
             this.txt_businessName.TabIndex = 0;
             // 
-            // label2
+            // btn_addUpdateBusiness
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 261);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 14);
-            this.label2.TabIndex = 124;
-            this.label2.Text = "İşletme Adresi";
+            this.btn_addUpdateBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
+            this.btn_addUpdateBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addUpdateBusiness.ForeColor = System.Drawing.Color.White;
+            this.btn_addUpdateBusiness.Location = new System.Drawing.Point(13, 451);
+            this.btn_addUpdateBusiness.Name = "btn_addUpdateBusiness";
+            this.btn_addUpdateBusiness.Size = new System.Drawing.Size(226, 37);
+            this.btn_addUpdateBusiness.TabIndex = 6;
+            this.btn_addUpdateBusiness.Text = "Ekle";
+            this.btn_addUpdateBusiness.UseVisualStyleBackColor = false;
+            this.btn_addUpdateBusiness.Click += new System.EventHandler(this.btn_addUpdateBusiness_Click);
             // 
-            // txt_address
+            // radio_approved
             // 
-            this.txt_address.BackColor = System.Drawing.Color.White;
-            this.txt_address.Location = new System.Drawing.Point(13, 279);
-            this.txt_address.Multiline = true;
-            this.txt_address.Name = "txt_address";
-            this.txt_address.Size = new System.Drawing.Size(226, 60);
-            this.txt_address.TabIndex = 4;
+            this.radio_approved.AutoSize = true;
+            this.radio_approved.Location = new System.Drawing.Point(13, 368);
+            this.radio_approved.Name = "radio_approved";
+            this.radio_approved.Size = new System.Drawing.Size(47, 17);
+            this.radio_approved.TabIndex = 5;
+            this.radio_approved.TabStop = true;
+            this.radio_approved.Text = "Evet";
+            this.radio_approved.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(12, 351);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 14);
+            this.label6.TabIndex = 110;
+            this.label6.Text = "Hesap Onaylı mı?";
             // 
             // label5
             // 
@@ -252,12 +253,25 @@
             this.businessLogo.TabIndex = 122;
             this.businessLogo.TabStop = false;
             // 
+            // btn_deleteBusiness
+            // 
+            this.btn_deleteBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
+            this.btn_deleteBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deleteBusiness.ForeColor = System.Drawing.Color.White;
+            this.btn_deleteBusiness.Location = new System.Drawing.Point(638, 545);
+            this.btn_deleteBusiness.Name = "btn_deleteBusiness";
+            this.btn_deleteBusiness.Size = new System.Drawing.Size(158, 30);
+            this.btn_deleteBusiness.TabIndex = 133;
+            this.btn_deleteBusiness.Text = "Sil";
+            this.btn_deleteBusiness.UseVisualStyleBackColor = false;
+            // 
             // BusinessManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(808, 590);
+            this.Controls.Add(this.btn_deleteBusiness);
             this.Controls.Add(this.btn_addBusiness);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
@@ -296,5 +310,6 @@
         private System.Windows.Forms.PictureBox businessLogo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_addBusiness;
+        private System.Windows.Forms.Button btn_deleteBusiness;
     }
 }

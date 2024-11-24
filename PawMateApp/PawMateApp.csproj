@@ -99,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Classes.cs" />
+    <Compile Include="Components\NotifItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\NotifItem.Designer.cs">
+      <DependentUpon>NotifItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,18 @@
     </Compile>
     <Compile Include="Screens\Admin\BusinessManagement.Designer.cs">
       <DependentUpon>BusinessManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\Notifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Admin\Notifications.Designer.cs">
+      <DependentUpon>Notifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Admin\TreatmentManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Admin\TreatmentManagement.Designer.cs">
+      <DependentUpon>TreatmentManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\Admin\UserManagement.cs">
       <SubType>Form</SubType>
@@ -173,6 +191,9 @@
     <Compile Include="Screens\TwoFactorScreen.Designer.cs">
       <DependentUpon>TwoFactorScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Components\NotifItem.resx">
+      <DependentUpon>NotifItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +218,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Admin\BusinessManagement.resx">
       <DependentUpon>BusinessManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Admin\Notifications.resx">
+      <DependentUpon>Notifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Admin\TreatmentManagement.resx">
+      <DependentUpon>TreatmentManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Admin\UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>

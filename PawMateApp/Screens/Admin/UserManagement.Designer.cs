@@ -32,6 +32,10 @@
             this.btn_addUser = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.isBusinessAdmin = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cb_businesses = new System.Windows.Forms.ComboBox();
+            this.txt_email = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_phone = new System.Windows.Forms.TextBox();
@@ -43,10 +47,7 @@
             this.txt_fullname = new System.Windows.Forms.TextBox();
             this.btn_addUpdateUser = new System.Windows.Forms.Button();
             this.userList = new System.Windows.Forms.DataGridView();
-            this.txt_email = new System.Windows.Forms.TextBox();
-            this.cb_businesses = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.isBusinessAdmin = new System.Windows.Forms.CheckBox();
+            this.btn_deleteUser = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userList)).BeginInit();
             this.SuspendLayout();
@@ -105,6 +106,42 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(256, 500);
             this.panel1.TabIndex = 110;
+            // 
+            // isBusinessAdmin
+            // 
+            this.isBusinessAdmin.AutoSize = true;
+            this.isBusinessAdmin.Location = new System.Drawing.Point(12, 265);
+            this.isBusinessAdmin.Name = "isBusinessAdmin";
+            this.isBusinessAdmin.Size = new System.Drawing.Size(93, 17);
+            this.isBusinessAdmin.TabIndex = 130;
+            this.isBusinessAdmin.Text = "İşletme Admini";
+            this.isBusinessAdmin.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(10, 216);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 14);
+            this.label4.TabIndex = 127;
+            this.label4.Text = "İşletme Seçiniz";
+            // 
+            // cb_businesses
+            // 
+            this.cb_businesses.FormattingEnabled = true;
+            this.cb_businesses.Location = new System.Drawing.Point(12, 233);
+            this.cb_businesses.Name = "cb_businesses";
+            this.cb_businesses.Size = new System.Drawing.Size(227, 21);
+            this.cb_businesses.TabIndex = 126;
+            // 
+            // txt_email
+            // 
+            this.txt_email.BackColor = System.Drawing.Color.White;
+            this.txt_email.Location = new System.Drawing.Point(12, 193);
+            this.txt_email.Name = "txt_email";
+            this.txt_email.Size = new System.Drawing.Size(226, 20);
+            this.txt_email.TabIndex = 125;
             // 
             // label2
             // 
@@ -205,44 +242,20 @@
             this.userList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.userList.Location = new System.Drawing.Point(274, 75);
             this.userList.Name = "userList";
-            this.userList.Size = new System.Drawing.Size(522, 500);
+            this.userList.Size = new System.Drawing.Size(522, 466);
             this.userList.TabIndex = 108;
             // 
-            // txt_email
+            // btn_deleteUser
             // 
-            this.txt_email.BackColor = System.Drawing.Color.White;
-            this.txt_email.Location = new System.Drawing.Point(12, 193);
-            this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(226, 20);
-            this.txt_email.TabIndex = 125;
-            // 
-            // cb_businesses
-            // 
-            this.cb_businesses.FormattingEnabled = true;
-            this.cb_businesses.Location = new System.Drawing.Point(12, 233);
-            this.cb_businesses.Name = "cb_businesses";
-            this.cb_businesses.Size = new System.Drawing.Size(227, 21);
-            this.cb_businesses.TabIndex = 126;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 216);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 14);
-            this.label4.TabIndex = 127;
-            this.label4.Text = "İşletme Seçiniz";
-            // 
-            // isBusinessAdmin
-            // 
-            this.isBusinessAdmin.AutoSize = true;
-            this.isBusinessAdmin.Location = new System.Drawing.Point(12, 265);
-            this.isBusinessAdmin.Name = "isBusinessAdmin";
-            this.isBusinessAdmin.Size = new System.Drawing.Size(93, 17);
-            this.isBusinessAdmin.TabIndex = 130;
-            this.isBusinessAdmin.Text = "İşletme Admini";
-            this.isBusinessAdmin.UseVisualStyleBackColor = true;
+            this.btn_deleteUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
+            this.btn_deleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deleteUser.ForeColor = System.Drawing.Color.White;
+            this.btn_deleteUser.Location = new System.Drawing.Point(638, 545);
+            this.btn_deleteUser.Name = "btn_deleteUser";
+            this.btn_deleteUser.Size = new System.Drawing.Size(158, 30);
+            this.btn_deleteUser.TabIndex = 132;
+            this.btn_deleteUser.Text = "Sil";
+            this.btn_deleteUser.UseVisualStyleBackColor = false;
             // 
             // UserManagement
             // 
@@ -250,6 +263,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(808, 590);
+            this.Controls.Add(this.btn_deleteUser);
             this.Controls.Add(this.btn_addUser);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
@@ -288,5 +302,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cb_businesses;
         private System.Windows.Forms.CheckBox isBusinessAdmin;
+        private System.Windows.Forms.Button btn_deleteUser;
     }
 }
