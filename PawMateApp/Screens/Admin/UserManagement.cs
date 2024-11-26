@@ -28,8 +28,13 @@ namespace PawMateApp.Screens.Admin
 
         private void btn_addUser_Click(object sender, EventArgs e)
         {
-            //Soldaki input alanlarının içi temizlenmeli, btn_addUpdateUser buton Texti Ekle olmalı, herhangi listede -
-            //bir işletmeye tıklanıldığında Güncelle yazmalı.
+            Inputs inputs = new Inputs(txt_fullname, txt_email, txt_password, txt_phone, txt_username,cb_businesses);
+            inputs.ClearInputs();
+        }
+
+        private void btn_addUpdateUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

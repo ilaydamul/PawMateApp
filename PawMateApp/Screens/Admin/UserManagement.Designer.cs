@@ -236,6 +236,7 @@
             this.btn_addUpdateUser.TabIndex = 6;
             this.btn_addUpdateUser.Text = "Ekle";
             this.btn_addUpdateUser.UseVisualStyleBackColor = false;
+            this.btn_addUpdateUser.Click += new System.EventHandler(this.btn_addUpdateUser_Click);
             // 
             // userList
             // 

@@ -170,3 +170,30 @@ namespace PawMateApp
         }
     }
 }
+
+public class Inputs
+{
+    private Control[] controls;
+
+    public Inputs(params Control[] controls)
+    {
+        this.controls = controls;
+    }
+
+    public void ClearInputs()
+    {
+        foreach (var control in controls)
+        {
+            if (control is TextBox textBox)
+            {
+                textBox.Text = ""; 
+            }
+            else if (control is ComboBox comboBox)
+            {
+                comboBox.SelectedIndex = -1; 
+                comboBox.Text = "";        
+            }
+        }
+    }
+}
+
