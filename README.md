@@ -1,21 +1,35 @@
-# 🐾 PawMate - Hayvan İlan Otomasyon Sistemi
+# 🐾 PawMate - Veteriner Otomasyon Sistemi
 
 ![PawMate Logo](https://github.com/ilaydamul/PawMateApp/blob/master/logo.png) <!-- Kendi logonuzu buraya ekleyin -->
 
-PawMate, hayvan sahiplendirme sürecini kolaylaştırmak için geliştirilen bir otomasyon sistemidir. Kullanıcı dostu arayüzü ve güçlü özellikleriyle, hayvanların kolayca sahiplenilmesini sağlar.
+PawMate, veteriner kliniklerinin iş süreçlerini dijitalleştirerek daha verimli ve düzenli bir yönetim deneyimi sunmayı hedefleyen kapsamlı bir otomasyon yazılımıdır. Kullanıcı dostu arayüzü ve modüler yapısıyla kliniklerin ihtiyaçlarına göre özelleştirilebilir bir çözüm sunar.  
 
-## 🚀 Özellikler
+---
 
-- **Kullanıcı Yönetimi:** Kayıt ol, giriş yap, profili düzenle.  
-- **İlan Yönetimi:** Hayvan ilanlarını listele, filtrele, düzenle, ve sil.  
-- **Favoriler:** Beğendiğiniz ilanları favorilere ekleyin.  
-- **Sahiplendirme:** İlan sahipleriyle iletişime geçin ve taleplerinizi yönetin.  
-- **Raporlama:** En çok görüntülenen ilanları ve kullanıcı istatistiklerini görüntüleyin.
+## 🚀 Proje Özellikleri
+
+### 🏥 **Hasta Yönetimi**  
+- Hastaların detaylı bilgilerini kaydedin ve yönetin.  
+- Hayvan sahiplerine kolay erişim sağlayın.  
+
+### 📅 **Randevu Planlama**  
+- Hasta randevularını hızlıca oluşturun ve düzenleyin.  
+- Randevular yaklaşırken hayvan sahiplerine otomatik hatırlatma mailleri gönderin.  
+
+### 💊 **Tedavi ve Reçete Planlama**  
+- Tedavi süreçlerini yönetin ve reçeteleri kaydedin.  
+- Tedavi geçmişine kolayca erişim sağlayın.  
+
+### 📦 **Stok Takibi**  
+- Klinik stoklarınızı kontrol altında tutun.  
+- İlaç ve ekipmanların azalan stok seviyeleri için otomatik uyarılar alın.  
 
 ---
 
 ## 📦 Kurulum
 
-1. Bu projeyi klonlayın:
+**Projeyi klonlayın:**  
    ```bash
    git clone https://github.com/ilaydamul/PawMateApp
+   cd PawMateApp
+   ```
