@@ -31,5 +31,4 @@ PawMate, veteriner kliniklerinin iş süreçlerini dijitalleştirerek daha verim
 **Projeyi klonlayın:**  
    ```bash
    git clone https://github.com/ilaydamul/PawMateApp
-   cd PawMateApp
    ```
