@@ -13,12 +13,12 @@ namespace PawMateApp.Screens.Admin
 {
     public partial class BusinessManagement : Form
     {
+        
         public BusinessManagement()
         {
             InitializeComponent();
+            
         }
-
-      
 
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
 
@@ -77,11 +77,9 @@ namespace PawMateApp.Screens.Admin
 
         private void btn_addBusiness_Click(object sender, EventArgs e)
         {
-            //Soldaki input alanlarının içi temizlenmeli, btn_addUpdateBusiness buton Texti Ekle olmalı, herhangi listede -
-            //bir işletmeye tıklanıldığında Güncelle yazmalı.
-
-              // Yeni işletme ekleme işlemi
-              
+            Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone,txt_address);
+            inputs.ClearInputs();
+            btn_addUpdateBusiness.Text = "Ekle";
         }
 
         //Ekrana gelindiğinde işletme bilgilerinin businessesList'de görünmesi
