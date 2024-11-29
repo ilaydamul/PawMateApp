@@ -87,7 +87,6 @@ namespace PawMateApp
     }
     public class SendMailClass
     {
-        private string name;
         private string mailadress;
         private string fromadress;
         private string frompassword;
@@ -95,10 +94,8 @@ namespace PawMateApp
         private int port;
         private SmtpClient smtpClient;
 
-        public SendMailClass(string name, string mailadress, string fromadress, string frompassword, string smtp, int port)
+        public SendMailClass(string fromadress, string frompassword, string smtp, int port)
         {
-            this.name = name;
-            this.mailadress = mailadress;
             this.fromadress = fromadress;
             this.frompassword = frompassword;
             this.smtp = smtp;
@@ -109,40 +106,13 @@ namespace PawMateApp
                 EnableSsl = true
             };
         }
-        
 
-        public int SendMailForOTP()
+        public void SendMail(string subject , string body , string mailadress)
         {
             try
             {
-                string user_otp = GenerateOtpCode();
                 string toAddress = mailadress;
-                string subject = "Merhaba " + name + " ! Doğrulama Kodun:" + user_otp;
-                Debug.WriteLine("mailadress: "+mailadress +" name: "+ name);
-                string body = $@"<td bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px"">
-  <table class=""m_2678050691631740021email-width"" align=""center"" width=""500"" border=""0"" cellpadding=""0"" cellspacing=""0"" role=""presentation"" style=""width:500px"">
-    <tbody>
-      <tr>
-        <td style=""color:#ff3c00;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:12px;line-height:18px;padding-top:50px"">
-          <img alt=""Logo"" src=""https://i.hizliresim.com/8wrfqod.png"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""color:#ff3c00;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:12px;line-height:18px;display:block;vertical-align:top"" class=""CToWUd"" data-bit=""iit"">
-        </td>
-      </tr>
-      <tr>
-        <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:65px"">
-          Doğrulama kodunuz:<br><br> 
-          <strong style=""font-size:28px;line-height:32px"">{user_otp}</strong><br><br>
-          Bu istek sizin tarafınızdan gönderilmemiş olsa bile hesabınız bu doğrulama kodu olmadan oluşturulamaz.<br><br>
-        </td>
-      </tr>
-      <tr>
-        <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px"">
-          Sorularınız varsa lütfen Destek birimiyle iletişime geçin.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</td>
-";
+                Debug.WriteLine("mailadress: " + mailadress);
                 MailMessage mailMessage = new MailMessage
                 {
                     From = new MailAddress(this.fromadress, "PawMate"),
@@ -152,32 +122,13 @@ namespace PawMateApp
                 };
                 mailMessage.To.Add(toAddress);
                 smtpClient.Send(mailMessage);
-                Debug.WriteLine("E-posta başarıyla gönderildi!");
-                Debug.WriteLine("Gönderilen OTP kodu: " + user_otp);
-                return Convert.ToInt32(user_otp);
-            }catch(SmtpException smtpexception)
-            {
-                MessageBox.Show("E-posta gönderilirken hata oluştu! Lütfen daha sonra tekrar deneyin!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Debug.WriteLine("E-posta gönderilirken hata oluştu: " + smtpexception.Message);
-                return 0;
+                Debug.WriteLine("Mail gönderildi.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("E-posta gönderilirken hata oluştu! Lütfen daha sonra tekrar deneyin!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Debug.WriteLine("E-posta gönderilirken hata oluştu: " + ex.Message);
-                return 0;
+                Debug.WriteLine("Mail gönderme hatası: " + ex.Message);
+
             }
-            
-        }
-        public string GenerateOtpCode()
-        {
-            Random random = new Random();
-            return random.Next(100000, 1000000).ToString();
-        }
-
-        public void SendMail(string body , string subject)
-        {
-
         }
     }
 }
