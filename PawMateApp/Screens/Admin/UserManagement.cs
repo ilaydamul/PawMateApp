@@ -127,5 +127,42 @@ namespace PawMateApp.Screens.Admin
             }
 
         }
+
+        private void btn_deleteUser_Click(object sender, EventArgs e)
+        {
+            if (userList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen silmek için bir kullanıcı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("Seçilen kullanıcıyı silmek istediğinizden emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    baglan.Open();
+
+                    string query = "DELETE FROM \"Users\" WHERE \"UserId\" = @UserId"; //kullanıcı silme işlemi yaptırıyoruz.
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value)); 
+                        cmd.ExecuteNonQuery();
+                        baglan.Close();//hata yüzünden burada kapattım. Daha sonra kontrol edilecek.
+                    }
+
+                    MessageBox.Show("Kullanıcı başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UserManagement_Load(null, null); 
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+        }
     }
 }
