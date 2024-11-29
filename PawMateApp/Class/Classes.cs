@@ -85,7 +85,7 @@ namespace PawMateApp
             }
         }
     }
-    public class SendMail
+    public class SendMailClass
     {
         private string name;
         private string mailadress;
@@ -93,8 +93,9 @@ namespace PawMateApp
         private string frompassword;
         private string smtp;
         private int port;
+        private SmtpClient smtpClient;
 
-        public SendMail(string name, string mailadress, string fromadress, string frompassword, string smtp, int port)
+        public SendMailClass(string name, string mailadress, string fromadress, string frompassword, string smtp, int port)
         {
             this.name = name;
             this.mailadress = mailadress;
@@ -102,6 +103,11 @@ namespace PawMateApp
             this.frompassword = frompassword;
             this.smtp = smtp;
             this.port = port;
+            this.smtpClient = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(this.fromadress, this.frompassword),
+                EnableSsl = true
+            };
         }
         
 
@@ -110,8 +116,6 @@ namespace PawMateApp
             try
             {
                 string user_otp = GenerateOtpCode();
-                string fromAddress = "pawmateinfo@gmail.com";
-                string fromPassword = "shiw ndqo tvfw dzte";
                 string toAddress = mailadress;
                 string subject = "Merhaba " + name + " ! Doğrulama Kodun:" + user_otp;
                 Debug.WriteLine("mailadress: "+mailadress +" name: "+ name);
@@ -138,16 +142,10 @@ namespace PawMateApp
     </tbody>
   </table>
 </td>
-"
-;
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587)
-                {
-                    Credentials = new NetworkCredential(fromAddress, fromPassword),
-                    EnableSsl = true
-                };
+";
                 MailMessage mailMessage = new MailMessage
                 {
-                    From = new MailAddress(fromAddress, "PawMate"),
+                    From = new MailAddress(this.fromadress, "PawMate"),
                     Subject = subject,
                     Body = body,
                     IsBodyHtml = true
@@ -175,6 +173,11 @@ namespace PawMateApp
         {
             Random random = new Random();
             return random.Next(100000, 1000000).ToString();
+        }
+
+        public void SendMail(string body , string subject)
+        {
+
         }
     }
 }
