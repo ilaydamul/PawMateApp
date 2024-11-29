@@ -89,11 +89,19 @@ namespace PawMateApp
     {
         private string name;
         private string mailadress;
+        private string fromadress;
+        private string frompassword;
+        private string smtp;
+        private int port;
 
-       public SendMail(string name, string mailadress)
+        public SendMail(string name, string mailadress, string fromadress, string frompassword, string smtp, int port)
         {
             this.name = name;
             this.mailadress = mailadress;
+            this.fromadress = fromadress;
+            this.frompassword = frompassword;
+            this.smtp = smtp;
+            this.port = port;
         }
         
 

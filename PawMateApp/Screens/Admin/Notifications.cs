@@ -26,7 +26,7 @@ namespace PawMateApp.Screens.Admin
 
         private void NotifItems()
         {
-            NotifItem[] notifItems = new NotifItem[20];
+            NotifItem[] notifItems = new NotifItem[5];
 
             for (int i = 0; i < notifItems.Length; i++)
             {
