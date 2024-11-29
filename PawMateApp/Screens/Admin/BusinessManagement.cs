@@ -16,14 +16,10 @@ namespace PawMateApp.Screens.Admin
         
         public BusinessManagement()
         {
-            InitializeComponent();
-            
+            InitializeComponent();           
         }
 
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
-
-        //Listede herhangi bir işletmeye tıklanılınca soldaki inputlar dolacak. Değişiklik yapıldığında güncelleme yapılacak
-        //Dikkat! Üstüne tıklanıldığında ve input içerikleri silindiğinde uyarı verilmeli, dolu olan veriler boş kaydedilmemeli!
 
         private void btn_addUpdateBusiness_Click(object sender, EventArgs e)
         {
@@ -67,7 +63,7 @@ namespace PawMateApp.Screens.Admin
                 }
 
                 MessageBox.Show("İşletme bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                BusinessManagement_Load(null, null); // Listeyi yeniden yükle
+                BusinessManagement_Load(null, null); 
             }
             catch (Exception ex)
             {
@@ -134,7 +130,7 @@ namespace PawMateApp.Screens.Admin
                 return;
             } 
             
-            DialogResult dialogResult = MessageBox.Show("Seçilen işletmeyi silmek istediğinizden emin misiniz?",                                                        "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("Seçilen işletmeyi silmek istediğinizden emin misiniz?","Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialogResult == DialogResult.Yes)
             {
