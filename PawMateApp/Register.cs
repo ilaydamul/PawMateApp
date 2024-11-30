@@ -65,46 +65,50 @@ namespace PawMateApp
             //Bu bilgiler girildikten sonra "Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız."  yazısı gelecek.  
 
             //Bunların ardından notifications veritabanına bilgi gidecek. businesses veritabanına ilgili veri eklendikten sonra
-            //idsi ile birlikte kaydedilecek.
-            CheckClass checkClass = new CheckClass(new string[] { });
+            //idsi ile birlikte kaydedilecek
             if (!CheckClass.IsValidEmail(txt_businessEmail.Text))
             {
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-            { 
-                if(int)
-                try
+            {
+                if (txt_phone.Text.GetType() != typeof(int))
                 {
-
-                    baglan.Open();
-                    string insertBusinessQuery = "INSERT INTO \"Businesses\" (\"BusinessName\", \"AuthorizedName\", \"Email\", \"Phone\", \"IsApproved\") " +
-                                                 "VALUES (@BusinessName, @AuthorizedName, @Email, @Phone, FALSE) RETURNING \"BusinessId\"";
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(insertBusinessQuery, baglan))
+                    MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    try
                     {
 
-                        cmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
-                        cmd.Parameters.AddWithValue("@AuthorizedName", txt_authName.Text);
-                        cmd.Parameters.AddWithValue("@Email", txt_businessEmail.Text);
-                        cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
-
-
-                        int businessId = Convert.ToInt32(cmd.ExecuteScalar());
-
-
-                        string insertNotificationQuery = "INSERT INTO \"Notifications\" (\"BusinessId\", \"BusinessName\", \"NotificationDescription\", \"IsRead\") " +
-                                                         "VALUES (@BusinessId, @BusinessName, @Description, FALSE)";
-
-                        using (NpgsqlCommand notificationCmd = new NpgsqlCommand(insertNotificationQuery, baglan))
+                        baglan.Open();
+                        string insertBusinessQuery = "INSERT INTO \"Businesses\" (\"BusinessName\", \"AuthorizedName\", \"Email\", \"Phone\", \"IsApproved\") " +
+                                                     "VALUES (@BusinessName, @AuthorizedName, @Email, @Phone, FALSE) RETURNING \"BusinessId\"";
+                        using (NpgsqlCommand cmd = new NpgsqlCommand(insertBusinessQuery, baglan))
                         {
 
-                            notificationCmd.Parameters.AddWithValue("@BusinessId", businessId);
-                            notificationCmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
-                            notificationCmd.Parameters.AddWithValue("@Description", "Yeni işletme kaydı talebi alındı.");
-                            notificationCmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                            cmd.Parameters.AddWithValue("@AuthorizedName", txt_authName.Text);
+                            cmd.Parameters.AddWithValue("@Email", txt_businessEmail.Text);
+                            cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
+
+
+                            int businessId = Convert.ToInt32(cmd.ExecuteScalar());
+
+
+                            string insertNotificationQuery = "INSERT INTO \"Notifications\" (\"BusinessId\", \"BusinessName\", \"NotificationDescription\", \"IsRead\") " +
+                                                             "VALUES (@BusinessId, @BusinessName, @Description, FALSE)";
+
+                            using (NpgsqlCommand notificationCmd = new NpgsqlCommand(insertNotificationQuery, baglan))
+                            {
+
+                                notificationCmd.Parameters.AddWithValue("@BusinessId", businessId);
+                                notificationCmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                                notificationCmd.Parameters.AddWithValue("@Description", "Yeni işletme kaydı talebi alındı.");
+                                notificationCmd.ExecuteNonQuery();
+                            }
                         }
-                    }
-                    string body = $@"<td bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px"">
+                        string body = $@"<td bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px"">
   <table class=""m_2678050691631740021email-width"" align=""center"" width=""500"" border=""0"" cellpadding=""0"" cellspacing=""0"" role=""presentation"" style=""width:500px"">
     <tbody>
       <tr>
@@ -128,22 +132,23 @@ namespace PawMateApp
   </table>
 </td>
 ";
-                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
-                    sendMail.SendMail("Pawmate Kayıt Talebi", body, txt_businessEmail.Text);
+                        SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                        sendMail.SendMail("Pawmate Kayıt Talebi", body, txt_businessEmail.Text);
 
-                    MessageBox.Show("Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız.",
-                                    "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
+                        MessageBox.Show("Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız.",
+                                        "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
 
-                    baglan.Close();
-                }
+                        baglan.Close();
+                    }
 
+                }
             }
         }
 
