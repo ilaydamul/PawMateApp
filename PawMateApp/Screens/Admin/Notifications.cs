@@ -8,11 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Npgsql;
+using System.Diagnostics;
+
 
 namespace PawMateApp.Screens.Admin
 {
     public partial class Notifications : Form
     {
+        NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
         public Notifications()
         {
             InitializeComponent();
@@ -26,22 +30,36 @@ namespace PawMateApp.Screens.Admin
 
         private void NotifItems()
         {
-            NotifItem[] notifItems = new NotifItem[5];
-
-            for (int i = 0; i < notifItems.Length; i++)
+            try
             {
-                notifItems[i] = new NotifItem();
-                notifItems[i].BusinessName = "İşletme Adı";
-                
-                //if (flowLayoutPanel1.Controls.Count>0) {
-                //    flowLayoutPanel1.Controls.Clear();
-                //}
-                //else
-                flowLayoutPanel1.Controls.Add(notifItems[i]);
-            }
-        }
+                baglan.Open();
+                string query = "SELECT * FROM \"Notifications\" WHERE IsRead=false";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, baglan);
 
-        
+                using (NpgsqlDataReader dr = cmd.ExecuteReader())
+                {
+                    flowLayoutPanel1.Controls.Clear();
+
+                    while (dr.Read())
+                    {
+                        NotifItem notifItem = new NotifItem();
+                        notifItem.BusinessName = dr["BusinessName"].ToString();
+                        notifItem.BusinessId = dr["BusinessId"].ToString();
+                        flowLayoutPanel1.Controls.Add(notifItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message);
+            }
+            finally
+            {
+                baglan.Close();
+            }
+
+
+        }
 
     }
 }
