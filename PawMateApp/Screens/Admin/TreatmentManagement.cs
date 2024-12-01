@@ -12,15 +12,32 @@ namespace PawMateApp.Screens.Admin
 {
     public partial class TreatmentManagement : Form
     {
+        public bool isUpdate = false;
         public TreatmentManagement()
         {
             InitializeComponent();
         }
-
         private void userList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            try
+            {
+      
+                if (e.RowIndex >= 0)
+                {
+                    DataGridViewRow selectedRow = userList.Rows[e.RowIndex];
+                    string treatmentName = selectedRow.Cells["TreatmentName"].Value.ToString();
+                    string treatmentDescription = selectedRow.Cells["TreatmentDescription"].Value.ToString();
+                    txt_treatmenttitle.Text = treatmentName;
+                    txt_treatmentdesc.Text = treatmentDescription;
+                    isUpdate = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void btn_addUpdateUser_Click(object sender, EventArgs e)
         {
