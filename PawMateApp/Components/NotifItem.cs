@@ -98,7 +98,62 @@ namespace PawMateApp.Components
 
         private void btn_declineBusiness_Click(object sender, EventArgs e)
         {
-            // businessId ile işlemleri yapabiliriz.
+            Notifications notificationsForm = Application.OpenForms["Notifications"] as Notifications;
+            if (notificationsForm != null)
+            {
+                try
+                {
+                    baglan.Open();
+                    string query = "UPDATE \"Notifications\" SET isread=true WHERE \"BusinessId\"=" + BusinessId;
+                    Npgsql.NpgsqlCommand cmd = new Npgsql.NpgsqlCommand(query, baglan);
+                    cmd.ExecuteNonQuery();
+                    baglan.Close();
+                    Debug.WriteLine(BusinessId + " ID'li İşletme red edildi..");
+                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                    string body = $@"
+<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/8wrfqod.png"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Üzgünüz, Veteriner Kliniğinizin Başvurusu Reddedildi 😞</strong><br><br>
+        Ne yazık ki, başvurunuz bazı kriterlere uymadığı için şu anda kabul edilememiştir. Ancak endişelenmeyin, bu son değil!<br><br>
+        <strong style=""font-size:20px;color:#ff3c00;"">Başvurunuzu gözden geçirebilir ve tekrar deneyebilirsiniz.</strong><br><br>
+        Veteriner kliniğinizin başvurusunu tekrar gönderebilmeniz için gerekli tüm bilgilere sahip olmanız önemli. Sabırlı olun, başarıya ulaşmak sadece bir adım uzağınızda! 🌟<br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:20px;color:#2d2d2d;"">Başvurunuzu Yeniden Göndermek İçin Hazır Mısınız? 🚀</strong><br><br>
+        Umutsuz olmayın, birlikte her zaman daha iyisini başarabiliriz!<br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>
+";
+                    sendMail.SendMail("Pawmate Onay Süreci", body, BusinessEmail);
+                    Debug.WriteLine("Kayıt Talebi bilgilendirilmesi başarıyla gönderildi..");
+                    MessageBox.Show("İşletme red edildi., bilgilendirme maili yollandı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    notificationsForm.RefreshFlowLayoutPanel();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Bir hata oluştu: " + ex.Message);
+                }
+                finally
+                {
+                    baglan.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Notifications formu açılamadı.");
+            }
         }
     }
 }
