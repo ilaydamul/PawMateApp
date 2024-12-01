@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net;
@@ -56,7 +57,7 @@ namespace PawMateApp
         {
             foreach (string input in strings)
             {
-                if (string.IsNullOrEmpty(input))
+                if (string.IsNullOrEmpty(input.Trim()))
                 {
                     MessageBox.Show("Lütfen boş alanları doldurunuz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
@@ -181,10 +182,13 @@ public class DatabaseManagament
     {
         try
         {
-            string query = "INSERT INTO \"Treatments\" (\"TreatmentName\", \"TreatmentDescription\") VALUES ('" + treatmentName + "', '" + treatmentDescription + "')";
-            Npgsql.NpgsqlCommand cmd = new Npgsql.NpgsqlCommand(query, baglan);
-            cmd.ExecuteNonQuery();
-            baglan.Close();
+            string query = "INSERT INTO \"Treatments\" (\"TreatmentName\", \"TreatmentDescription\") VALUES (@name, @description)";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("name", treatmentName);
+                cmd.Parameters.AddWithValue("description", treatmentDescription);
+                cmd.ExecuteNonQuery();
+            }
             Debug.WriteLine("Tedavi eklendi.");
         }
         catch (Exception ex)
@@ -195,15 +199,39 @@ public class DatabaseManagament
 
     public void CloseConnection()
     {
+        if (baglan != null && baglan.State == ConnectionState.Open)
+        {
+            baglan.Close();
+            Debug.WriteLine("Bağlantı kapatıldı.");
+        }
+    }
+
+    public DataTable GetTreatments()
+    {
+        DataTable dataTable = new DataTable();
         try
         {
-            this.baglan.Close();
-            Debug.WriteLine("Bağlantı kapatıldı.");
+            if (baglan == null || baglan.State != ConnectionState.Open)
+            {
+                OpenConnection();
+            }
+
+            string query = "SELECT \"TreatmentId\", \"TreatmentName\", \"TreatmentDescription\" FROM \"Treatments\"";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
+                {
+                    Debug.WriteLine("Tedaviler çekildi.");
+                    adapter.Fill(dataTable);
+                    CloseConnection();
+                }
+            }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine("Bağlantı kapatma hatası: " + ex.Message);
+            Debug.WriteLine("Veri çekme hatası: " + ex.Message);
         }
+        return dataTable;
     }
 }
 

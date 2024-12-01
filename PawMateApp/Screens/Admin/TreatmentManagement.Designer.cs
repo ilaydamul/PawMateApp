@@ -190,6 +190,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TreatmentManagement";
             this.Text = "TreatmentManagement";
+            this.Load += new System.EventHandler(this.TreatmentManagement_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userList)).EndInit();
