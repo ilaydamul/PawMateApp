@@ -233,5 +233,25 @@ public class DatabaseManagament
         }
         return dataTable;
     }
+    public void UpdateTreatment(int id, string treatmentName, string treatmentDescription)
+    {
+        try
+        {
+            Debug.WriteLine(treatmentName +" "+ treatmentDescription);
+            string query = "UPDATE \"Treatments\" SET \"TreatmentName\" = @name, \"TreatmentDescription\" = @description WHERE \"TreatmentId\" = @id";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("name", treatmentName);
+                cmd.Parameters.AddWithValue("description", treatmentDescription);
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Tedavi güncellendi.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Tedavi güncelleme hatası: " + ex.Message);
+        }
+    }
 }
 

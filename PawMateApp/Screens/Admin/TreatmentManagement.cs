@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,23 @@ namespace PawMateApp.Screens.Admin
 {
     public partial class TreatmentManagement : Form
     {
-        public bool isUpdate = false;
+        private bool _isUpdate = false;
+        private string treatmentName;
+        string treatmentDescription;
+        int treatmentId;
+
+        public bool IsUpdate
+        {
+            get { return _isUpdate; }
+            set
+            {
+                if (_isUpdate != value)
+                {
+                    _isUpdate = value;
+                    UpdateButtonText();
+                }
+            }
+        }
         public TreatmentManagement()
         {
             InitializeComponent();
@@ -25,11 +42,14 @@ namespace PawMateApp.Screens.Admin
                 if (e.RowIndex >= 0)
                 {
                     DataGridViewRow selectedRow = userList.Rows[e.RowIndex];
-                    string treatmentName = selectedRow.Cells["TreatmentName"].Value.ToString();
-                    string treatmentDescription = selectedRow.Cells["TreatmentDescription"].Value.ToString();
+                    treatmentName = selectedRow.Cells["TreatmentName"].Value.ToString();
+                    treatmentDescription = selectedRow.Cells["TreatmentDescription"].Value.ToString();
+                    treatmentId = selectedRow.Cells["TreatmentId"].Value.GetHashCode();
+                    Debug.WriteLine(treatmentId);
                     txt_treatmenttitle.Text = treatmentName;
                     txt_treatmentdesc.Text = treatmentDescription;
-                    isUpdate = true;
+                    IsUpdate = true;
+
                 }
             }
             catch (Exception ex)
@@ -41,16 +61,31 @@ namespace PawMateApp.Screens.Admin
 
         private void btn_addUpdateUser_Click(object sender, EventArgs e)
         {
-            CheckClass checkClass = new CheckClass(new string[] { txt_treatmenttitle.Text, txt_treatmentdesc.Text });
-            if (checkClass.Check(""))
+            if(btn_addUpdateUser.Text == "Güncelle")
             {
-                DatabaseManagament databaseManagament = new DatabaseManagament();
-                databaseManagament.OpenConnection();
-                databaseManagament.AddTreatmentToDatabase(txt_treatmenttitle.Text, txt_treatmentdesc.Text);
-                databaseManagament.CloseConnection();
-                MessageBox.Show("Tedavi başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadTreatments();
-
+                CheckClass checkclassone = new CheckClass(new string[] { txt_treatmenttitle.Text, txt_treatmentdesc.Text });
+                if (checkclassone.Check(""))
+                {
+                    DatabaseManagament databaseManagament = new DatabaseManagament();
+                    databaseManagament.OpenConnection();
+                    databaseManagament.UpdateTreatment(treatmentId, txt_treatmenttitle.Text, txt_treatmentdesc.Text);
+                    databaseManagament.CloseConnection();
+                    MessageBox.Show("Tedavi başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadTreatments();
+                }
+            }
+            else
+            {
+                CheckClass checkClasstwo = new CheckClass(new string[] { txt_treatmenttitle.Text, txt_treatmentdesc.Text });
+                if (checkClasstwo.Check(""))
+                {
+                    DatabaseManagament databaseManagament = new DatabaseManagament();
+                    databaseManagament.OpenConnection();
+                    databaseManagament.AddTreatmentToDatabase(txt_treatmenttitle.Text, txt_treatmentdesc.Text);
+                    databaseManagament.CloseConnection();
+                    MessageBox.Show("Tedavi başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadTreatments();
+                }
             }
          
         }
@@ -59,6 +94,7 @@ namespace PawMateApp.Screens.Admin
         {
             txt_treatmenttitle.Text = "";
             txt_treatmentdesc.Text = "";
+            IsUpdate = false;
         }
 
         private void ConfigureDataGridView()
@@ -90,12 +126,22 @@ namespace PawMateApp.Screens.Admin
             }
         }
 
-
-
         private void TreatmentManagement_Load_1(object sender, EventArgs e)
         {
             ConfigureDataGridView();
             LoadTreatments();
+        }
+        private void UpdateButtonText()
+        {
+            if (IsUpdate)
+            {
+
+                btn_addUpdateUser.Text = "Güncelle";
+            }
+            else
+            {
+                btn_addUpdateUser.Text = "Ekle";
+            }
         }
     }
 }
