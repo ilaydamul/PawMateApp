@@ -16,5 +16,23 @@ namespace PawMateApp.Screens.Admin
         {
             InitializeComponent();
         }
+
+        private void userList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btn_addUpdateUser_Click(object sender, EventArgs e)
+        {
+            DatabaseManagament databaseManagament = new DatabaseManagament();
+            databaseManagament.OpenConnection();
+            databaseManagament.AddTreatmentToDatabase(txt_treatmenttitle.Text, txt_treatmentdesc.Text);
+            databaseManagament.CloseConnection();
+        }
+
+        private void btn_addUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

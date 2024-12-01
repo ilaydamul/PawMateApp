@@ -35,9 +35,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.txt_username = new System.Windows.Forms.TextBox();
+            this.txt_treatmentdesc = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txt_fullname = new System.Windows.Forms.TextBox();
+            this.txt_treatmenttitle = new System.Windows.Forms.TextBox();
             this.btn_addUpdateUser = new System.Windows.Forms.Button();
             this.userList = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -79,6 +79,7 @@
             this.btn_addUser.TabIndex = 135;
             this.btn_addUser.Text = "Tedavi Ekle";
             this.btn_addUser.UseVisualStyleBackColor = false;
+            this.btn_addUser.Click += new System.EventHandler(this.btn_addUser_Click);
             // 
             // label5
             // 
@@ -94,9 +95,9 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txt_username);
+            this.panel1.Controls.Add(this.txt_treatmentdesc);
             this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.txt_fullname);
+            this.panel1.Controls.Add(this.txt_treatmenttitle);
             this.panel1.Controls.Add(this.btn_addUpdateUser);
             this.panel1.Location = new System.Drawing.Point(12, 221);
             this.panel1.Name = "panel1";
@@ -113,14 +114,14 @@
             this.label3.TabIndex = 120;
             this.label3.Text = "Açıklama";
             // 
-            // txt_username
+            // txt_treatmentdesc
             // 
-            this.txt_username.BackColor = System.Drawing.Color.White;
-            this.txt_username.Location = new System.Drawing.Point(13, 70);
-            this.txt_username.Multiline = true;
-            this.txt_username.Name = "txt_username";
-            this.txt_username.Size = new System.Drawing.Size(226, 113);
-            this.txt_username.TabIndex = 1;
+            this.txt_treatmentdesc.BackColor = System.Drawing.Color.White;
+            this.txt_treatmentdesc.Location = new System.Drawing.Point(13, 70);
+            this.txt_treatmentdesc.Multiline = true;
+            this.txt_treatmentdesc.Name = "txt_treatmentdesc";
+            this.txt_treatmentdesc.Size = new System.Drawing.Size(226, 113);
+            this.txt_treatmentdesc.TabIndex = 1;
             // 
             // label8
             // 
@@ -132,13 +133,13 @@
             this.label8.TabIndex = 118;
             this.label8.Text = "Tedavi Adı";
             // 
-            // txt_fullname
+            // txt_treatmenttitle
             // 
-            this.txt_fullname.BackColor = System.Drawing.Color.White;
-            this.txt_fullname.Location = new System.Drawing.Point(13, 30);
-            this.txt_fullname.Name = "txt_fullname";
-            this.txt_fullname.Size = new System.Drawing.Size(226, 20);
-            this.txt_fullname.TabIndex = 0;
+            this.txt_treatmenttitle.BackColor = System.Drawing.Color.White;
+            this.txt_treatmenttitle.Location = new System.Drawing.Point(13, 30);
+            this.txt_treatmenttitle.Name = "txt_treatmenttitle";
+            this.txt_treatmenttitle.Size = new System.Drawing.Size(226, 20);
+            this.txt_treatmenttitle.TabIndex = 0;
             // 
             // btn_addUpdateUser
             // 
@@ -151,6 +152,7 @@
             this.btn_addUpdateUser.TabIndex = 6;
             this.btn_addUpdateUser.Text = "Ekle";
             this.btn_addUpdateUser.UseVisualStyleBackColor = false;
+            this.btn_addUpdateUser.Click += new System.EventHandler(this.btn_addUpdateUser_Click);
             // 
             // userList
             // 
@@ -159,6 +161,7 @@
             this.userList.Name = "userList";
             this.userList.Size = new System.Drawing.Size(522, 466);
             this.userList.TabIndex = 134;
+            this.userList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userList_CellContentClick);
             // 
             // pictureBox1
             // 
@@ -204,9 +207,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_username;
+        private System.Windows.Forms.TextBox txt_treatmentdesc;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txt_fullname;
+        private System.Windows.Forms.TextBox txt_treatmenttitle;
         private System.Windows.Forms.Button btn_addUpdateUser;
         private System.Windows.Forms.DataGridView userList;
         private System.Windows.Forms.PictureBox pictureBox1;

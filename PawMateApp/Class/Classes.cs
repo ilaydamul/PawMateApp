@@ -159,3 +159,51 @@ public class Inputs
     }
 }
 
+public class DatabaseManagament
+{
+    private Npgsql.NpgsqlConnection baglan;
+
+    public void OpenConnection()
+    {
+        this.baglan = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
+        try
+        {
+            this.baglan.Open();
+            Debug.WriteLine("Bağlantı açıldı.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Bağlantı hatası: " + ex.Message);
+        }
+    }
+
+    public void AddTreatmentToDatabase(string treatmentName, string treatmentDescription)
+    {
+        try
+        {
+            string query = "INSERT INTO \"Treatments\" (\"TreatmentName\", \"TreatmentDescription\") VALUES ('" + treatmentName + "', '" + treatmentDescription + "')";
+            Npgsql.NpgsqlCommand cmd = new Npgsql.NpgsqlCommand(query, baglan);
+            cmd.ExecuteNonQuery();
+            baglan.Close();
+            Debug.WriteLine("Tedavi eklendi.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Tedavi ekleme hatası: " + ex.Message);
+        }
+    }
+
+    public void CloseConnection()
+    {
+        try
+        {
+            this.baglan.Close();
+            Debug.WriteLine("Bağlantı kapatıldı.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Bağlantı kapatma hatası: " + ex.Message);
+        }
+    }
+}
+
