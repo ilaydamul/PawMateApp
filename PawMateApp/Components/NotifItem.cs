@@ -64,7 +64,7 @@ namespace PawMateApp.Components
     </tr>
     <tr>
       <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
-        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Tebrikler! Veteriner Klini Başvurunuz Onaylandı 🎉</strong><br><br>
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Tebrikler! Veteriner Kliniği Başvurunuz Onaylandı 🎉</strong><br><br>
         Harika bir haber! Kliniğiniz başarıyla sisteme kaydedildi. Şimdi, veteriner hizmetlerinizi sunmaya başlamak için tek yapmanız gereken giriş yapmak! 🌟<br><br>
         <strong style=""font-size:20px;color:#ff3c00;"">Veterinerlik hizmetlerinizi kolayca yönetin!</strong><br><br>
         Giriş yaparak, kliniğinizin yönetim paneline erişebilir ve işlerinizi hızlıca organize edebilirsiniz. Hayalinizdeki başarıyı elde etmek için burada olacağız!<br><br>
