@@ -72,12 +72,7 @@ namespace PawMateApp
             }
             else
             {
-                if (txt_phone.Text.GetType() != typeof(int))
-                {
-                    MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
+             
                     try
                     {
 
@@ -96,44 +91,50 @@ namespace PawMateApp
                             int businessId = Convert.ToInt32(cmd.ExecuteScalar());
 
 
-                            string insertNotificationQuery = "INSERT INTO \"Notifications\" (\"BusinessId\", \"BusinessName\", \"NotificationDescription\", \"IsRead\") " +
-                                                             "VALUES (@BusinessId, @BusinessName, @Description, FALSE)";
+                            string insertNotificationQuery = "INSERT INTO \"Notifications\" (\"BusinessId\", \"BusinessName\", \"NotificationDescription\", isread, businessmail) " +
+                                                             "VALUES (@BusinessId, @BusinessName, @Description, FALSE, @businessmail)";
 
                             using (NpgsqlCommand notificationCmd = new NpgsqlCommand(insertNotificationQuery, baglan))
                             {
 
                                 notificationCmd.Parameters.AddWithValue("@BusinessId", businessId);
                                 notificationCmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                                notificationCmd.Parameters.AddWithValue("@businessmail", txt_businessEmail.Text);
                                 notificationCmd.Parameters.AddWithValue("@Description", "Yeni işletme kaydı talebi alındı.");
                                 notificationCmd.ExecuteNonQuery();
                             }
                         }
-                        string body = $@"<td bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px"">
-  <table class=""m_2678050691631740021email-width"" align=""center"" width=""500"" border=""0"" cellpadding=""0"" cellspacing=""0"" role=""presentation"" style=""width:500px"">
-    <tbody>
-      <tr>
-        <td style=""color:#ff3c00;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:12px;line-height:18px;padding-top:50px"">
-          <img alt=""Logo"" src=""https://i.hizliresim.com/8wrfqod.png"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""color:#ff3c00;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:12px;line-height:18px;display:block;vertical-align:top"" class=""CToWUd"" data-bit=""iit"">
-        </td>
-      </tr>
-      <tr>
-        <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:65px"">
-          Doğrulama kodunuz:<br><br> 
-          <strong style=""font-size:28px;line-height:32px"">Deneme</strong><br><br>
-          Bu istek sizin tarafınızdan gönderilmemiş olsa bile hesabınız bu doğrulama kodu olmadan oluşturulamaz.<br><br>
-        </td>
-      </tr>
-      <tr>
-        <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px"">
-          Sorularınız varsa lütfen Destek birimiyle iletişime geçin.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</td>
+                    string body = $@"
+<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/8wrfqod.png"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Tebrikler! Veteriner Kliniğiniz Başarıyla Oluşturuldu 🎉</strong><br><br>
+        Harika bir haber! Veteriner kliniğiniz başarıyla sistemimize kaydedildi. Artık onay sürecini başlatabiliriz! 🐾<br><br>
+        <strong style=""font-size:20px;color:#ff3c00;"">Hesabınız onaylandığında bilgilendirme maili alacaksınız.</strong><br><br>
+        Veteriner kliniğinizin onayı tamamlandığında, giriş yapabilmeniz için size bir bilgilendirme maili gönderilecektir. Sabırlı olduğunuz için teşekkür ederiz! 🌟<br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:20px;color:#2d2d2d;"">Veteriner kliniğinizi yönetin ve başarılı bir başlangıç yapın! 🚀</strong><br><br>
+        Sabırsızlanıyoruz, birlikte büyük işler başaracağız!<br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>
 ";
-                        SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
-                        sendMail.SendMail("Pawmate Kayıt Talebi", body, txt_businessEmail.Text);
+
+
+
+                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                        sendMail.SendMail("Pawmate Kayıt Bilgilendirme", body, txt_businessEmail.Text);
 
                         MessageBox.Show("Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız.",
                                         "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -148,7 +149,7 @@ namespace PawMateApp
                         baglan.Close();
                     }
 
-                }
+                
             }
         }
 
