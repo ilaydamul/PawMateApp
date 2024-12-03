@@ -24,6 +24,7 @@ namespace PawMateApp
             this.topMenuPanel.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
             this.topMenuPanel.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
             this.topMenuPanel.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
+            
         }
 
         private void btn_closeApp_Click(object sender, EventArgs e)

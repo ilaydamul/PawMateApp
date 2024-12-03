@@ -31,16 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Panel));
             this.menuPanel = new System.Windows.Forms.Panel();
             this.adminPanel = new System.Windows.Forms.Panel();
-            this.businessPanel = new System.Windows.Forms.Panel();
-            this.contentPanel = new System.Windows.Forms.Panel();
-            this.topMenuPanel = new System.Windows.Forms.Panel();
-            this.btn_minimizeApp = new System.Windows.Forms.PictureBox();
-            this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.btn_showUserManagement = new System.Windows.Forms.Button();
             this.btn_showBusinessManagement = new System.Windows.Forms.Button();
             this.btn_showNotifications = new System.Windows.Forms.Button();
             this.btn_showTreatmentManagement = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
+            this.businessPanel = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -50,13 +46,17 @@
             this.button6 = new System.Windows.Forms.Button();
             this.logoBox = new System.Windows.Forms.PictureBox();
             this.ProfileButton = new System.Windows.Forms.Button();
+            this.contentPanel = new System.Windows.Forms.Panel();
+            this.topMenuPanel = new System.Windows.Forms.Panel();
+            this.btn_minimizeApp = new System.Windows.Forms.PictureBox();
+            this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
             this.adminPanel.SuspendLayout();
             this.businessPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.topMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuPanel
@@ -84,73 +84,6 @@
             this.adminPanel.Name = "adminPanel";
             this.adminPanel.Size = new System.Drawing.Size(193, 241);
             this.adminPanel.TabIndex = 21;
-            // 
-            // businessPanel
-            // 
-            this.businessPanel.Controls.Add(this.button10);
-            this.businessPanel.Controls.Add(this.button9);
-            this.businessPanel.Controls.Add(this.button8);
-            this.businessPanel.Controls.Add(this.button7);
-            this.businessPanel.Controls.Add(this.button4);
-            this.businessPanel.Controls.Add(this.button5);
-            this.businessPanel.Controls.Add(this.button6);
-            this.businessPanel.Location = new System.Drawing.Point(0, 63);
-            this.businessPanel.Name = "businessPanel";
-            this.businessPanel.Size = new System.Drawing.Size(192, 349);
-            this.businessPanel.TabIndex = 22;
-            this.businessPanel.Visible = false;
-            // 
-            // contentPanel
-            // 
-            this.contentPanel.AutoScroll = true;
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.contentPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.contentPanel.Location = new System.Drawing.Point(192, 30);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(808, 590);
-            this.contentPanel.TabIndex = 17;
-            // 
-            // topMenuPanel
-            // 
-            this.topMenuPanel.BackColor = System.Drawing.Color.White;
-            this.topMenuPanel.Controls.Add(this.btn_minimizeApp);
-            this.topMenuPanel.Controls.Add(this.btn_closeApp);
-            this.topMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topMenuPanel.Location = new System.Drawing.Point(192, 0);
-            this.topMenuPanel.Name = "topMenuPanel";
-            this.topMenuPanel.Size = new System.Drawing.Size(808, 30);
-            this.topMenuPanel.TabIndex = 18;
-            this.topMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topMenuPanel_MouseDown);
-            // 
-            // btn_minimizeApp
-            // 
-            this.btn_minimizeApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
-            this.btn_minimizeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_minimizeApp.Image")));
-            this.btn_minimizeApp.Location = new System.Drawing.Point(761, 2);
-            this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_minimizeApp.Name = "btn_minimizeApp";
-            this.btn_minimizeApp.Size = new System.Drawing.Size(20, 24);
-            this.btn_minimizeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_minimizeApp.TabIndex = 9;
-            this.btn_minimizeApp.TabStop = false;
-            this.btn_minimizeApp.Click += new System.EventHandler(this.btn_minimizeApp_Click);
-            this.btn_minimizeApp.MouseEnter += new System.EventHandler(this.btn_minimizeApp_MouseEnter);
-            this.btn_minimizeApp.MouseLeave += new System.EventHandler(this.btn_minimizeApp_MouseLeave);
-            // 
-            // btn_closeApp
-            // 
-            this.btn_closeApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
-            this.btn_closeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_closeApp.Image")));
-            this.btn_closeApp.Location = new System.Drawing.Point(785, 2);
-            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_closeApp.Name = "btn_closeApp";
-            this.btn_closeApp.Size = new System.Drawing.Size(21, 24);
-            this.btn_closeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_closeApp.TabIndex = 8;
-            this.btn_closeApp.TabStop = false;
-            this.btn_closeApp.Click += new System.EventHandler(this.btn_closeApp_Click);
-            this.btn_closeApp.MouseEnter += new System.EventHandler(this.btn_closeApp_MouseEnter);
-            this.btn_closeApp.MouseLeave += new System.EventHandler(this.btn_closeApp_MouseLeave);
             // 
             // btn_showUserManagement
             // 
@@ -241,6 +174,21 @@
             this.btn_logout.Text = "Çıkış Yap";
             this.btn_logout.UseVisualStyleBackColor = false;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            // 
+            // businessPanel
+            // 
+            this.businessPanel.Controls.Add(this.button10);
+            this.businessPanel.Controls.Add(this.button9);
+            this.businessPanel.Controls.Add(this.button8);
+            this.businessPanel.Controls.Add(this.button7);
+            this.businessPanel.Controls.Add(this.button4);
+            this.businessPanel.Controls.Add(this.button5);
+            this.businessPanel.Controls.Add(this.button6);
+            this.businessPanel.Location = new System.Drawing.Point(0, 63);
+            this.businessPanel.Name = "businessPanel";
+            this.businessPanel.Size = new System.Drawing.Size(192, 349);
+            this.businessPanel.TabIndex = 22;
+            this.businessPanel.Visible = false;
             // 
             // button10
             // 
@@ -388,6 +336,58 @@
             this.ProfileButton.Visible = false;
             this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
             // 
+            // contentPanel
+            // 
+            this.contentPanel.AutoScroll = true;
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.contentPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.contentPanel.Location = new System.Drawing.Point(192, 30);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(808, 590);
+            this.contentPanel.TabIndex = 17;
+            // 
+            // topMenuPanel
+            // 
+            this.topMenuPanel.BackColor = System.Drawing.Color.White;
+            this.topMenuPanel.Controls.Add(this.btn_minimizeApp);
+            this.topMenuPanel.Controls.Add(this.btn_closeApp);
+            this.topMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.topMenuPanel.Location = new System.Drawing.Point(192, 0);
+            this.topMenuPanel.Name = "topMenuPanel";
+            this.topMenuPanel.Size = new System.Drawing.Size(808, 30);
+            this.topMenuPanel.TabIndex = 18;
+            this.topMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topMenuPanel_MouseDown);
+            // 
+            // btn_minimizeApp
+            // 
+            this.btn_minimizeApp.BackColor = System.Drawing.Color.Transparent;
+            this.btn_minimizeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_minimizeApp.Image")));
+            this.btn_minimizeApp.Location = new System.Drawing.Point(761, 2);
+            this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_minimizeApp.Name = "btn_minimizeApp";
+            this.btn_minimizeApp.Size = new System.Drawing.Size(20, 24);
+            this.btn_minimizeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_minimizeApp.TabIndex = 9;
+            this.btn_minimizeApp.TabStop = false;
+            this.btn_minimizeApp.Click += new System.EventHandler(this.btn_minimizeApp_Click);
+            this.btn_minimizeApp.MouseEnter += new System.EventHandler(this.btn_minimizeApp_MouseEnter);
+            this.btn_minimizeApp.MouseLeave += new System.EventHandler(this.btn_minimizeApp_MouseLeave);
+            // 
+            // btn_closeApp
+            // 
+            this.btn_closeApp.BackColor = System.Drawing.Color.Transparent;
+            this.btn_closeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_closeApp.Image")));
+            this.btn_closeApp.Location = new System.Drawing.Point(785, 2);
+            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_closeApp.Name = "btn_closeApp";
+            this.btn_closeApp.Size = new System.Drawing.Size(21, 24);
+            this.btn_closeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_closeApp.TabIndex = 8;
+            this.btn_closeApp.TabStop = false;
+            this.btn_closeApp.Click += new System.EventHandler(this.btn_closeApp_Click);
+            this.btn_closeApp.MouseEnter += new System.EventHandler(this.btn_closeApp_MouseEnter);
+            this.btn_closeApp.MouseLeave += new System.EventHandler(this.btn_closeApp_MouseLeave);
+            // 
             // Panel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,10 +405,10 @@
             this.menuPanel.ResumeLayout(false);
             this.adminPanel.ResumeLayout(false);
             this.businessPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.topMenuPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closeApp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.ResumeLayout(false);
 
         }
