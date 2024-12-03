@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using Npgsql;
+using System.Diagnostics;
 
 namespace PawMateApp.Screens.Admin
 {
@@ -31,19 +32,28 @@ namespace PawMateApp.Screens.Admin
             {
                 baglan.Open();
                 string query = "SELECT * FROM \"Notifications\" WHERE IsRead=false ORDER BY \"NotificationId\" DESC";
-                NpgsqlCommand cmd = new NpgsqlCommand(query, baglan);
-
-                using (NpgsqlDataReader dr = cmd.ExecuteReader())
+                string countQuery = "SELECT COUNT(*) FROM \"Notifications\" WHERE IsRead=false";
+                NpgsqlCommand countCmd = new NpgsqlCommand(countQuery, baglan);
+                int rowCount = Convert.ToInt32(countCmd.ExecuteScalar());
+                if (rowCount == 0)
                 {
-                    flowLayoutPanel1.Controls.Clear();
-
-                    while (dr.Read())
+                    Debug.WriteLine("Bildirim yoktur");
+                    // Bildirim sayısı 0 ise "Bildirim yoktur" yazılacak ben yapamıyorum siz yapın lütfen (Barış)
+                }
+                else
+                {
+                    NpgsqlCommand cmd = new NpgsqlCommand(query, baglan);
+                    using (NpgsqlDataReader dr = cmd.ExecuteReader())
                     {
-                        NotifItem notifItem = new NotifItem();
-                        notifItem.BusinessName = dr["BusinessName"].ToString();
-                        notifItem.BusinessId = dr["BusinessId"].ToString();
-                        notifItem.BusinessEmail = dr["businessmail"].ToString();
-                        flowLayoutPanel1.Controls.Add(notifItem);
+                        flowLayoutPanel1.Controls.Clear();
+                        while (dr.Read())
+                        {
+                            NotifItem notifItem = new NotifItem();
+                            notifItem.BusinessName = dr["BusinessName"].ToString();
+                            notifItem.BusinessId = dr["BusinessId"].ToString();
+                            notifItem.BusinessEmail = dr["businessmail"].ToString();
+                            flowLayoutPanel1.Controls.Add(notifItem);
+                        }
                     }
                 }
             }
