@@ -22,7 +22,7 @@ namespace PawMateApp
         public CheckClass checkinputs;
         public Login()
         {
-         
+            
             MoveForm moveForm = new MoveForm(this);
             InitializeComponent();
             this.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
