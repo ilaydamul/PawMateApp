@@ -162,7 +162,7 @@
             this.userList.Name = "userList";
             this.userList.Size = new System.Drawing.Size(522, 466);
             this.userList.TabIndex = 134;
-            this.userList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userList_CellContentClick);
+            this.userList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userList_CellClick);
             // 
             // pictureBox1
             // 

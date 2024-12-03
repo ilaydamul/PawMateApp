@@ -34,11 +34,12 @@ namespace PawMateApp.Screens.Admin
         {
             InitializeComponent();
         }
-        private void userList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void userList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-      
+
                 if (e.RowIndex >= 0)
                 {
                     DataGridViewRow selectedRow = userList.Rows[e.RowIndex];
@@ -151,7 +152,17 @@ namespace PawMateApp.Screens.Admin
 
         private void btn_deleteUser_Click(object sender, EventArgs e)
         {
-
+            if(userList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen silmek için bir tedavi seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
+            }
+            else
+            {
+                MessageBox.Show($"{treatmentId} IDli tedavi seçildi... Silmek istediğinize emin misiniz?");
+            }
         }
+
+  
     }
 }
