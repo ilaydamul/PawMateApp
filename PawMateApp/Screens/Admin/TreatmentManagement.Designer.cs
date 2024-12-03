@@ -67,6 +67,7 @@
             this.btn_deleteUser.TabIndex = 138;
             this.btn_deleteUser.Text = "Sil";
             this.btn_deleteUser.UseVisualStyleBackColor = false;
+            this.btn_deleteUser.Click += new System.EventHandler(this.btn_deleteUser_Click);
             // 
             // btn_addUser
             // 

@@ -73,6 +73,7 @@ namespace PawMateApp.Screens.Admin
                     MessageBox.Show("Tedavi başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txt_treatmenttitle.Text = "";
                     txt_treatmentdesc.Text = "";
+                    btn_addUpdateUser.Text = "Ekle";
                     LoadTreatments();
                 }
             }
@@ -146,6 +147,11 @@ namespace PawMateApp.Screens.Admin
             {
                 btn_addUpdateUser.Text = "Ekle";
             }
+        }
+
+        private void btn_deleteUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
