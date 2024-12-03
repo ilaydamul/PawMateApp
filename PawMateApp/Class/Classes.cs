@@ -254,5 +254,23 @@ public class DatabaseManagament
             Debug.WriteLine("Tedavi güncelleme hatası: " + ex.Message);
         }
     }
+
+    public void DeleteTreatment(int id)
+    {
+        try
+        {
+            string query = "DELETE FROM \"Treatments\" WHERE \"TreatmentId\" = @id";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Tedavi silindi.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Tedavi silme hatası: " + ex.Message);
+        }
+    }
 }
 

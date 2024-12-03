@@ -152,14 +152,34 @@ namespace PawMateApp.Screens.Admin
 
         private void btn_deleteUser_Click(object sender, EventArgs e)
         {
-            if(userList.SelectedRows.Count == 0)
+            if(userList.SelectedRows.Count == 0 || treatmentId == 0)
             {
                 MessageBox.Show("Lütfen silmek için bir tedavi seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 
             }
             else
             {
-                MessageBox.Show($"{treatmentId} IDli tedavi seçildi... Silmek istediğinize emin misiniz?");
+                DialogResult result = MessageBox.Show(
+                "Seçilen tedavi silinecek. Silmek istediğinizden emin misiniz?",
+                "Emin misiniz?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                ); 
+
+
+                if(result == DialogResult.Yes)
+                {
+                    DatabaseManagament databaseManagament = new DatabaseManagament();
+                    databaseManagament.OpenConnection();
+                    databaseManagament.DeleteTreatment(treatmentId);
+                    databaseManagament.CloseConnection();
+                    MessageBox.Show("Tedavi başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadTreatments();
+                }
+                else
+                {
+                    MessageBox.Show("Silme işlemi iptal edildi.", "İptal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
