@@ -71,6 +71,8 @@ namespace PawMateApp.Screens.Admin
                     databaseManagament.UpdateTreatment(treatmentId, txt_treatmenttitle.Text, txt_treatmentdesc.Text);
                     databaseManagament.CloseConnection();
                     MessageBox.Show("Tedavi başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txt_treatmenttitle.Text = "";
+                    txt_treatmentdesc.Text = "";
                     LoadTreatments();
                 }
             }
@@ -84,6 +86,8 @@ namespace PawMateApp.Screens.Admin
                     databaseManagament.AddTreatmentToDatabase(txt_treatmenttitle.Text, txt_treatmentdesc.Text);
                     databaseManagament.CloseConnection();
                     MessageBox.Show("Tedavi başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txt_treatmenttitle.Text = "";
+                    txt_treatmentdesc.Text = "";
                     LoadTreatments();
                 }
             }
