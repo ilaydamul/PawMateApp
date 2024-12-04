@@ -27,7 +27,7 @@ namespace PawMateApp.Screens.Admin
             try
             {
                 baglan.Open();
-                string query = "SELECT \"UserId\", \"Username\", \"Password\", \"FullName\", \"Phone\", \"Email\", \"BusinessId\", \"IsBusinessAdmin\", \"IsAppAdmin\" FROM \"Users\"";
+                string query = "SELECT \"userId\", \"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\", \"isAppAdmin\" FROM \"users\"";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -73,20 +73,20 @@ namespace PawMateApp.Screens.Admin
                 
                     baglan.Open();
 
-                string query = "UPDATE \"Users\" SET \"Username\" = @Username, \"Password\" = @Password, \"FullName\" = @FullName, " +
-                               "\"Phone\" = @Phone, \"Email\" = @Email, \"BusinessId\" = @BusinessId, \"IsBusinessAdmin\" = @IsBusinessAdmin " +
-                               "WHERE \"UserId\" = @UserId";
+                string query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
+                               "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
+                               "WHERE \"userId\" = @userId";
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                 {
-                    cmd.Parameters.AddWithValue("@Username", txt_username.Text);
-                    cmd.Parameters.AddWithValue("@Password", txt_password.Text);
-                    cmd.Parameters.AddWithValue("@FullName", txt_fullname.Text);
-                    cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
-                    cmd.Parameters.AddWithValue("@Email", txt_email.Text);
-                    cmd.Parameters.AddWithValue("@BusinessId", Convert.ToInt32(cb_businesses.SelectedValue)); 
-                    cmd.Parameters.AddWithValue("@IsBusinessAdmin", isBusinessAdmin.Checked);
-                    cmd.Parameters.AddWithValue("@UserId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value));
+                    cmd.Parameters.AddWithValue("@username", txt_username.Text);
+                    cmd.Parameters.AddWithValue("@password", txt_password.Text);
+                    cmd.Parameters.AddWithValue("@fullName", txt_fullname.Text);
+                    cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                    cmd.Parameters.AddWithValue("@email", txt_email.Text);
+                    cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(cb_businesses.SelectedValue)); 
+                    cmd.Parameters.AddWithValue("@isBusinessAdmin", isBusinessAdmin.Checked);
+                    cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value));
                     cmd.ExecuteNonQuery();
                     baglan.Close();
                 }
@@ -107,22 +107,22 @@ namespace PawMateApp.Screens.Admin
             {
                 DataGridViewRow row = userList.Rows[e.RowIndex]; //Satıra tıklandığında verileri alıyoruz.
 
-                txt_fullname.Text = row.Cells["FullName"].Value?.ToString();
-                txt_username.Text = row.Cells["Username"].Value?.ToString();
-                txt_password.Text = row.Cells["Password"].Value?.ToString();
-                txt_phone.Text = row.Cells["Phone"].Value?.ToString();
-                txt_email.Text = row.Cells["Email"].Value?.ToString();
+                txt_fullname.Text = row.Cells["fullName"].Value?.ToString();
+                txt_username.Text = row.Cells["username"].Value?.ToString();
+                txt_password.Text = row.Cells["password"].Value?.ToString();
+                txt_phone.Text = row.Cells["phone"].Value?.ToString();
+                txt_email.Text = row.Cells["email"].Value?.ToString();
                 
-                if (row.Cells["BusinessId"].Value != DBNull.Value && row.Cells["BusinessId"].Value != null)
+                if (row.Cells["businessId"].Value != DBNull.Value && row.Cells["businessId"].Value != null)
                 {
-                    cb_businesses.SelectedValue = Convert.ToInt32(row.Cells["BusinessId"].Value);//comboboxa verilerin getirilmesi gerekiyor!!!
+                    cb_businesses.SelectedValue = Convert.ToInt32(row.Cells["businessId"].Value);//comboboxa verilerin getirilmesi gerekiyor!!!
                 }
                 else
                 {
                     cb_businesses.SelectedIndex = -1; 
                 }
 
-                isBusinessAdmin.Checked = Convert.ToBoolean(row.Cells["IsBusinessAdmin"].Value);
+                isBusinessAdmin.Checked = Convert.ToBoolean(row.Cells["isBusinessAdmin"].Value);
                 btn_addUpdateUser.Text = "Güncelle"; 
             }
 
@@ -144,11 +144,11 @@ namespace PawMateApp.Screens.Admin
                 {
                     baglan.Open();
 
-                    string query = "DELETE FROM \"Users\" WHERE \"UserId\" = @UserId"; //kullanıcı silme işlemi yaptırıyoruz.
+                    string query = "DELETE FROM \"users\" WHERE \"userId\" = @userId"; //kullanıcı silme işlemi yaptırıyoruz.
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                     {
-                        cmd.Parameters.AddWithValue("@UserId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value)); 
+                        cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["userId"].Value)); 
                         cmd.ExecuteNonQuery();
                         baglan.Close();//hata yüzünden burada kapattım. Daha sonra kontrol edilecek.
                     }

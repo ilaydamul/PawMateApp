@@ -60,48 +60,46 @@ namespace PawMateApp
             }
             else
             {
-               // try
-                //{
-                    //    baglan.Open();
-                    //    NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM \"Users\" WHERE \"Username\"=@P1 AND \"Password\"=@P2", baglan);
-                    //    cmd.Parameters.AddWithValue("@P1", txt_username.Text);
-                    //    cmd.Parameters.AddWithValue("@P2", txt_password.Text);
-                    //    NpgsqlDataReader dr = cmd.ExecuteReader();
+                try
+                {
+                    baglan.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM \"users\" WHERE \"username\"=@P1 AND \"password\"=@P2", baglan);
+                    cmd.Parameters.AddWithValue("@P1", txt_username.Text);
+                    cmd.Parameters.AddWithValue("@P2", txt_password.Text);
+                    NpgsqlDataReader dr = cmd.ExecuteReader();
 
-                    //    if (dr.Read())
-                    //    {
+                    if (dr.Read())
+                    {
 
-                    //        this.Hide();
-                    //        Panel panel = new Panel(); // messagebox yerine panel eklendi.
-                    //        panel.Show();
-                    //        Globals.CurrentUserID = Convert.ToInt32(dr["UserId"]);
-                    //    }
-                    //    else
-                    //    {
+                        this.Hide();
+                        Panel panel = new Panel(); // messagebox yerine panel eklendi.
+                        panel.Show();
+                        Globals.CurrentUserID = Convert.ToInt32(dr["userId"]);
+                    }
+                    else
+                    {
 
-                    //        MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //    }
-                    //}
-
-
-                    //catch (Exception ex)
-                    //{
-
-                    //    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //}
-                    //finally
-                    //{
-
-                    //    {
-                    //        baglan.Close();
-                    //    }
-                    //}
-
-                    this.Hide();
-                    Panel panel = new Panel(); // messagebox yerine panel eklendi.
-                    panel.Show();
-
+                        MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+
+
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+
+                    {
+                        baglan.Close();
+                    }
+                }
+
+
+
+            }
 
         }
 

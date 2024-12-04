@@ -86,17 +86,17 @@ namespace PawMateApp.Screens
                 else
                 {
 
-                    string sql = "UPDATE users SET name = @Name, surname = @Surname, email = @Email, username = @Username, password = @Password WHERE user_id = @UserID";
+                    string sql = "UPDATE users SET name = @name, surname = @surname, email = @email, username = @username, password = @password WHERE userId = @UserID";
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(sql, baglan))
                     {
 
-                        cmd.Parameters.AddWithValue("@Name", txt_name.Text);
-                        cmd.Parameters.AddWithValue("@Surname", txt_surname.Text);
-                        cmd.Parameters.AddWithValue("@Email", txt_email.Text);
-                        cmd.Parameters.AddWithValue("@Username", txt_username.Text);
-                        cmd.Parameters.AddWithValue("@Password", txt_password.Text);
-                        cmd.Parameters.AddWithValue("@UserID", Globals.CurrentUserID);
+                        cmd.Parameters.AddWithValue("@name", txt_name.Text);
+                        cmd.Parameters.AddWithValue("@surname", txt_surname.Text);
+                        cmd.Parameters.AddWithValue("@email", txt_email.Text);
+                        cmd.Parameters.AddWithValue("@username", txt_username.Text);
+                        cmd.Parameters.AddWithValue("@password", txt_password.Text);
+                        cmd.Parameters.AddWithValue("@userID", Globals.CurrentUserID);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
 
@@ -131,7 +131,7 @@ namespace PawMateApp.Screens
                 try
                 {
                     baglan.Open();
-                    NpgsqlCommand cmdCheck = new NpgsqlCommand($"UPDATE users SET two_factor_status = TRUE WHERE user_id = {Globals.CurrentUserID};", baglan);
+                    NpgsqlCommand cmdCheck = new NpgsqlCommand($"UPDATE users SET two_factor_status = TRUE WHERE userId = {Globals.CurrentUserID};", baglan);
                     cmdCheck.ExecuteNonQuery();
                     baglan.Close();
                     MessageBox.Show("İki faktörlü kimlik doğrulama etkinleştirildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -148,7 +148,7 @@ namespace PawMateApp.Screens
                 try
                 {
                     baglan.Open();
-                    NpgsqlCommand cmdCheck = new NpgsqlCommand($"UPDATE users SET two_factor_status = FALSE WHERE user_id = {Globals.CurrentUserID};", baglan);
+                    NpgsqlCommand cmdCheck = new NpgsqlCommand($"UPDATE users SET two_factor_status = FALSE WHERE userId = {Globals.CurrentUserID};", baglan);
                     cmdCheck.ExecuteNonQuery();
                     baglan.Close();
                     MessageBox.Show("İki faktörlü kimlik doğrulama kapatıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);

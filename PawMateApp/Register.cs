@@ -61,11 +61,6 @@ namespace PawMateApp
         private void btn_register_Click(object sender, EventArgs e)
         {
 
-            //businesses veritabanına ilgili veriler gelecek, boş olanlar boş kalacak.
-            //Bu bilgiler girildikten sonra "Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız."  yazısı gelecek.  
-
-            //Bunların ardından notifications veritabanına bilgi gidecek. businesses veritabanına ilgili veri eklendikten sonra
-            //idsi ile birlikte kaydedilecek
             if (!CheckClass.IsValidEmail(txt_businessEmail.Text))
             {
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -77,30 +72,30 @@ namespace PawMateApp
                     {
 
                         baglan.Open();
-                        string insertBusinessQuery = "INSERT INTO \"Businesses\" (\"BusinessName\", \"AuthorizedName\", \"Email\", \"Phone\", \"IsApproved\") " +
-                                                     "VALUES (@BusinessName, @AuthorizedName, @Email, @Phone, FALSE) RETURNING \"BusinessId\"";
+                        string insertBusinessQuery = "INSERT INTO \"businesses\" (\"businessName\", \"authorizedName\", \"email\", \"phone\", \"isApproved\") " +
+                                                     "VALUES (@businessName, @authorizedName, @email, @phone, FALSE) RETURNING \"businessId\"";
                         using (NpgsqlCommand cmd = new NpgsqlCommand(insertBusinessQuery, baglan))
                         {
 
-                            cmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
-                            cmd.Parameters.AddWithValue("@AuthorizedName", txt_authName.Text);
-                            cmd.Parameters.AddWithValue("@Email", txt_businessEmail.Text);
-                            cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
+                            cmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
+                            cmd.Parameters.AddWithValue("@authorizedName", txt_authName.Text);
+                            cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
+                            cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
 
 
                             int businessId = Convert.ToInt32(cmd.ExecuteScalar());
 
 
-                            string insertNotificationQuery = "INSERT INTO \"Notifications\" (\"BusinessId\", \"BusinessName\", \"NotificationDescription\", isread, businessmail) " +
-                                                             "VALUES (@BusinessId, @BusinessName, @Description, FALSE, @businessmail)";
+                            string insertNotificationQuery = "INSERT INTO \"notifications\" (\"businessId\", \"businessName\", \"notificationDescription\", isread, businessmail) " +
+                                                             "VALUES (@businessId, @businessName, @description, FALSE, @businessmail)";
 
                             using (NpgsqlCommand notificationCmd = new NpgsqlCommand(insertNotificationQuery, baglan))
                             {
 
-                                notificationCmd.Parameters.AddWithValue("@BusinessId", businessId);
-                                notificationCmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
+                                notificationCmd.Parameters.AddWithValue("@businessId", businessId);
+                                notificationCmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
                                 notificationCmd.Parameters.AddWithValue("@businessmail", txt_businessEmail.Text);
-                                notificationCmd.Parameters.AddWithValue("@Description", "Yeni işletme kaydı talebi alındı.");
+                                notificationCmd.Parameters.AddWithValue("@description", "Yeni işletme kaydı talebi alındı.");
                                 notificationCmd.ExecuteNonQuery();
                             }
                         }

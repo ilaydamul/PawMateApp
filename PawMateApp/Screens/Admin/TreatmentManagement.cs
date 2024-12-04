@@ -43,9 +43,9 @@ namespace PawMateApp.Screens.Admin
                 if (e.RowIndex >= 0)
                 {
                     DataGridViewRow selectedRow = userList.Rows[e.RowIndex];
-                    treatmentName = selectedRow.Cells["TreatmentName"].Value.ToString();
-                    treatmentDescription = selectedRow.Cells["TreatmentDescription"].Value.ToString();
-                    treatmentId = selectedRow.Cells["TreatmentId"].Value.GetHashCode();
+                    treatmentName = selectedRow.Cells["treatmentName"].Value.ToString();
+                    treatmentDescription = selectedRow.Cells["treatmentDescription"].Value.ToString();
+                    treatmentId = selectedRow.Cells["treatmentId"].Value.GetHashCode();
                     Debug.WriteLine(treatmentId);
                     txt_treatmenttitle.Text = treatmentName;
                     txt_treatmentdesc.Text = treatmentDescription;
@@ -122,9 +122,9 @@ namespace PawMateApp.Screens.Admin
                 databaseManagament.OpenConnection();
                 DataTable treatments = databaseManagament.GetTreatments();
                 userList.DataSource = treatments;
-                userList.Columns["TreatmentId"].HeaderText = "Tedavi ID";
-                userList.Columns["TreatmentName"].HeaderText = "Tedavi Adı";
-                userList.Columns["TreatmentDescription"].HeaderText = "Tedavi Açıklama";
+                userList.Columns["treatmentId"].HeaderText = "Tedavi ID";
+                userList.Columns["treatmentName"].HeaderText = "Tedavi Adı";
+                userList.Columns["treatmentDescription"].HeaderText = "Tedavi Açıklama";
             }
             catch (Exception ex)
             {

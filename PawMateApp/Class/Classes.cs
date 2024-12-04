@@ -18,8 +18,8 @@ namespace PawMateApp
 
         public MoveForm(Form form)
         {
-            form.Icon = new Icon("C:\\Users\\Barış\\source\\repos\\ilaydamul\\PawMateApp\\PawMateApp\\favicon.ico");
-            this.form = form;
+            //form.Icon = new Icon("C:\\Users\\Barış\\source\\repos\\ilaydamul\\PawMateApp\\PawMateApp\\favicon.ico");
+            //this.form = form;
         }
 
         public void Form_MouseDown(object sender, MouseEventArgs e)
@@ -183,7 +183,7 @@ public class DatabaseManagament
     {
         try
         {
-            string query = "INSERT INTO \"Treatments\" (\"TreatmentName\", \"TreatmentDescription\") VALUES (@name, @description)";
+            string query = "INSERT INTO \"treatments\" (\"treatmentName\", \"treatmentDescription\") VALUES (@name, @description)";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("name", treatmentName);
@@ -217,7 +217,7 @@ public class DatabaseManagament
                 OpenConnection();
             }
 
-            string query = "SELECT \"TreatmentId\", \"TreatmentName\", \"TreatmentDescription\" FROM \"Treatments\"";
+            string query = "SELECT \"treatmentId\", \"treatmentName\", \"treatmentDescription\" FROM \"treatments\"";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
@@ -239,7 +239,7 @@ public class DatabaseManagament
         try
         {
             Debug.WriteLine(treatmentName +" "+ treatmentDescription);
-            string query = "UPDATE \"Treatments\" SET \"TreatmentName\" = @name, \"TreatmentDescription\" = @description WHERE \"TreatmentId\" = @id";
+            string query = "UPDATE \"treatments\" SET \"treatmentName\" = @name, \"treatmentDescription\" = @description WHERE \"treatmentId\" = @id";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("name", treatmentName);
@@ -259,7 +259,7 @@ public class DatabaseManagament
     {
         try
         {
-            string query = "DELETE FROM \"Treatments\" WHERE \"TreatmentId\" = @id";
+            string query = "DELETE FROM \"treatments\" WHERE \"treatmentId\" = @id";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("id", id);

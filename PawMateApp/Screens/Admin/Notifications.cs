@@ -31,8 +31,8 @@ namespace PawMateApp.Screens.Admin
             try
             {
                 baglan.Open();
-                string query = "SELECT * FROM \"Notifications\" WHERE IsRead=false ORDER BY \"NotificationId\" DESC";
-                string countQuery = "SELECT COUNT(*) FROM \"Notifications\" WHERE IsRead=false";
+                string query = "SELECT * FROM \"notifications\" WHERE \"isRead\"=false ORDER BY \"notificationId\" DESC";
+                string countQuery = "SELECT COUNT(*) FROM \"notifications\" WHERE \"isRead\"=false";
                 NpgsqlCommand countCmd = new NpgsqlCommand(countQuery, baglan);
                 int rowCount = Convert.ToInt32(countCmd.ExecuteScalar());
                 if (rowCount == 0)
@@ -49,10 +49,10 @@ namespace PawMateApp.Screens.Admin
                         while (dr.Read())
                         {
                             NotifItem notifItem = new NotifItem();
-                            notifItem.BusinessName = dr["BusinessName"].ToString();
-                            notifItem.BusinessId = dr["BusinessId"].ToString();
+                            notifItem.BusinessName = dr["businessName"].ToString();
+                            notifItem.BusinessId = dr["businessId"].ToString();
                             notifItem.BusinessEmail = dr["businessmail"].ToString();
-                            flowLayoutPanel1.Controls.Add(notifItem);
+                            flowLayoutPanel1.Controls.Add(notifItem); 
                         }
                     }
                 }

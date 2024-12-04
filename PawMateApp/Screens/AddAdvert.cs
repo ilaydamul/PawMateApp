@@ -21,5 +21,10 @@ namespace PawMateApp.Screens
         {
             this.Close();
         }
+
+        private void btn_addAdvert_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

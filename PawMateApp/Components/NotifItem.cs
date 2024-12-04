@@ -42,16 +42,16 @@ namespace PawMateApp.Components
 
         private void btn_approveBusiness_Click(object sender, EventArgs e)
         {
-            Notifications notificationsForm = Application.OpenForms["Notifications"] as Notifications;
+            Notifications notificationsForm = Application.OpenForms["notifications"] as Notifications;
             if (notificationsForm != null)
             {
                 try
                 {
                     baglan.Open();
-                    string query = "UPDATE \"Notifications\" SET isread=true WHERE \"BusinessId\"=" + BusinessId;
+                    string query = "UPDATE \"notifications\" SET \"isRead\"=true WHERE \"businessId\"=" + BusinessId;
                     Npgsql.NpgsqlCommand cmd = new Npgsql.NpgsqlCommand(query, baglan);
                     cmd.ExecuteNonQuery();
-                    baglan.Close();                  
+                    baglan.Close();
                     Debug.WriteLine(BusinessId + " ID'li İşletme onaylandı.");
                     SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
                     string body = $@"
@@ -98,13 +98,13 @@ namespace PawMateApp.Components
 
         private void btn_declineBusiness_Click(object sender, EventArgs e)
         {
-            Notifications notificationsForm = Application.OpenForms["Notifications"] as Notifications;
+            Notifications notificationsForm = Application.OpenForms["notifications"] as Notifications;
             if (notificationsForm != null)
             {
                 try
                 {
                     baglan.Open();
-                    string query = "UPDATE \"Notifications\" SET isread=true WHERE \"BusinessId\"=" + BusinessId;
+                    string query = "UPDATE \"notifications\" SET \"isRead\"=true WHERE \"businessId\"=" + BusinessId;
                     Npgsql.NpgsqlCommand cmd = new Npgsql.NpgsqlCommand(query, baglan);
                     cmd.ExecuteNonQuery();
                     baglan.Close();
@@ -154,6 +154,11 @@ namespace PawMateApp.Components
             {
                 MessageBox.Show("Notifications formu açılamadı.");
             }
+        }
+
+        private void txt_businessName_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

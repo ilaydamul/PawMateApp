@@ -44,19 +44,19 @@ namespace PawMateApp.Screens.Admin
                     
                     baglan.Open();
 
-                string query = "UPDATE \"Businesses\" SET \"BusinessName\" = @BusinessName, \"AuthorizedName\" = @AuthorizedName, " +
-                               "\"Email\" = @Email, \"Phone\" = @Phone, \"Address\" = @Address, \"IsApproved\" = @IsApproved " +
-                               "WHERE \"BusinessId\" = @BusinessId";
+                string query = "UPDATE \"businesses\" SET \"businessName\" = @businessName, \"authorizedName\" = @authorizedName, " +
+                "\"email\" = @email, \"phone\" = @phone, \"address\" = @address, \"isApproved\" = @isApproved " +
+                "WHERE \"businessId\" = @businessId";
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                 {
-                    cmd.Parameters.AddWithValue("@BusinessName", txt_businessName.Text);
-                    cmd.Parameters.AddWithValue("@AuthorizedName", txt_authName.Text);
-                    cmd.Parameters.AddWithValue("@Email", txt_businessEmail.Text);
-                    cmd.Parameters.AddWithValue("@Phone", txt_phone.Text);
-                    cmd.Parameters.AddWithValue("@Address", txt_address.Text);
-                    cmd.Parameters.AddWithValue("@IsApproved", radio_approved.Checked);
-                    cmd.Parameters.AddWithValue("@BusinessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["BusinessId"].Value));
+                    cmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
+                    cmd.Parameters.AddWithValue("@authorizedName", txt_authName.Text);
+                    cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
+                    cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                    cmd.Parameters.AddWithValue("@address", txt_address.Text);
+                    cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
+                    cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["businessId"].Value));
 
                     cmd.ExecuteNonQuery();
                     baglan.Close();//hata yüzünden bağlantıyı burada kapattım.
@@ -85,7 +85,7 @@ namespace PawMateApp.Screens.Admin
             try
             {
                 baglan.Open();
-                string query = "SELECT \"BusinessId\", \"BusinessName\", \"AuthorizedName\", \"Email\", \"Phone\", \"Address\", \"IsApproved\" FROM \"Businesses\"";
+                string query = "SELECT \"businessId\", \"businessName\", \"authorizedName\", \"email\", \"phone\", \"address\", \"isApproved\" FROM \"businesses\"";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -108,12 +108,12 @@ namespace PawMateApp.Screens.Admin
             {
 
                 DataGridViewRow row = businessesList.Rows[e.RowIndex];//satıra tıklandığında inputların dolması
-                txt_businessName.Text = row.Cells["BusinessName"].Value?.ToString();
-                txt_authName.Text = row.Cells["AuthorizedName"].Value?.ToString();
-                txt_businessEmail.Text = row.Cells["Email"].Value?.ToString();
-                txt_phone.Text = row.Cells["Phone"].Value?.ToString();
-                txt_address.Text = row.Cells["Address"].Value?.ToString();
-                radio_approved.Checked = Convert.ToBoolean(row.Cells["IsApproved"].Value);
+                txt_businessName.Text = row.Cells["businessName"].Value?.ToString();
+                txt_authName.Text = row.Cells["authorizedName"].Value?.ToString();
+                txt_businessEmail.Text = row.Cells["email"].Value?.ToString();
+                txt_phone.Text = row.Cells["phone"].Value?.ToString();
+                txt_address.Text = row.Cells["address"].Value?.ToString();
+                radio_approved.Checked = Convert.ToBoolean(row.Cells["isApproved"].Value);
 
                 btn_addUpdateBusiness.Text = "Güncelle";
 
@@ -138,18 +138,18 @@ namespace PawMateApp.Screens.Admin
                 {                   
                     baglan.Open();
 
-                    
-                    string query = "DELETE FROM \"Businesses\" WHERE \"BusinessId\" = @BusinessId";
+
+                    string query = "DELETE FROM \"businesses\" WHERE \"businessId\" = @businessId";
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                     {
-                        
-                        cmd.Parameters.AddWithValue("@BusinessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["BusinessId"].Value));
+
+                        cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["businessId"].Value));
                         cmd.ExecuteNonQuery();
                         baglan.Close();
 
                     }
-                    
+
                     MessageBox.Show("İşletme başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BusinessManagement_Load(null, null); 
                 }
