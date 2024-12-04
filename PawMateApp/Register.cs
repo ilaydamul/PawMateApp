@@ -86,15 +86,15 @@ namespace PawMateApp
                             int businessId = Convert.ToInt32(cmd.ExecuteScalar());
 
 
-                            string insertNotificationQuery = "INSERT INTO \"notifications\" (\"businessId\", \"businessName\", \"notificationDescription\", isread, businessmail) " +
-                                                             "VALUES (@businessId, @businessName, @description, FALSE, @businessmail)";
+                            string insertNotificationQuery = "INSERT INTO \"notifications\" (\"businessId\", \"businessName\", \"notificationDescription\", \"isRead\", \"email\") " +
+                                                             "VALUES (@businessId, @businessName, @description, FALSE, @email)";
 
                             using (NpgsqlCommand notificationCmd = new NpgsqlCommand(insertNotificationQuery, baglan))
                             {
 
                                 notificationCmd.Parameters.AddWithValue("@businessId", businessId);
                                 notificationCmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
-                                notificationCmd.Parameters.AddWithValue("@businessmail", txt_businessEmail.Text);
+                                notificationCmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
                                 notificationCmd.Parameters.AddWithValue("@description", "Yeni işletme kaydı talebi alındı.");
                                 notificationCmd.ExecuteNonQuery();
                             }

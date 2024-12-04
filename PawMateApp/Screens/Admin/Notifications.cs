@@ -51,7 +51,7 @@ namespace PawMateApp.Screens.Admin
                             NotifItem notifItem = new NotifItem();
                             notifItem.BusinessName = dr["businessName"].ToString();
                             notifItem.BusinessId = dr["businessId"].ToString();
-                            notifItem.BusinessEmail = dr["businessmail"].ToString();
+                            notifItem.BusinessEmail = dr["email"].ToString();
                             flowLayoutPanel1.Controls.Add(notifItem); 
                         }
                     }
