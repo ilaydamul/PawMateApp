@@ -57,6 +57,7 @@ namespace PawMateApp.Screens.Admin
             if (!CheckClass.IsValidEmail(txt_email.Text))
             {
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else
 
@@ -64,6 +65,7 @@ namespace PawMateApp.Screens.Admin
                 if (!int.TryParse(txt_phone.Text, out int parsedValue))
                 {
                         MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
                 else
                 { 

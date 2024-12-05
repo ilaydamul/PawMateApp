@@ -45,74 +45,85 @@ namespace PawMateApp.Screens.Admin
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            try
+            else
             {
-                if (baglan.State == ConnectionState.Closed)
-                    baglan.Open();
-
-                string query;
-
-                if (btn_addUpdateBusiness.Text == "Güncelle")
+                if (int.TryParse(txt_phone.Text, out int phone) == false)
                 {
-                    // İşletme güncelleme işlemi
-                    if (businessesList.SelectedRows.Count == 0)
-                    {
-                        MessageBox.Show("Lütfen güncellemek için bir işletme seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    query = "UPDATE \"businesses\" SET \"businessName\" = @businessName, \"authorizedName\" = @authorizedName, " +
-                            "\"email\" = @email, \"phone\" = @phone, \"address\" = @address, \"isApproved\" = @isApproved " +
-                            "WHERE \"businessId\" = @businessId";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
-                    {
-                        cmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
-                        cmd.Parameters.AddWithValue("@authorizedName", txt_authName.Text);
-                        cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
-                        cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
-                        cmd.Parameters.AddWithValue("@address", txt_address.Text);
-                        cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
-                        cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["businessId"].Value));
-                        cmd.ExecuteNonQuery();
-                        baglan.Close();
-                        Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
-                        inputs.ClearInputs();
-                    }
-
-                    MessageBox.Show("İşletme bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-
-                else if (btn_addUpdateBusiness.Text == "Ekle")
+                else
                 {
-                    
-                    // işletme ekleme işlemi
-                    query = "INSERT INTO \"businesses\" (\"businessName\", \"authorizedName\", \"email\", \"phone\", \"address\", \"isApproved\") " +
-                     "VALUES (@businessName, @authorizedName, @email, @phone, @address, @isApproved)";
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    try
                     {
-                        cmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
-                        cmd.Parameters.AddWithValue("@authorizedName", txt_authName.Text);
-                        cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
-                        cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
-                        cmd.Parameters.AddWithValue("@address", txt_address.Text);
-                        cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
-                        cmd.ExecuteNonQuery();
-                        baglan.Close();
-                        Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
-                        inputs.ClearInputs();
+                        if (baglan.State == ConnectionState.Closed)
+                            baglan.Open();
+
+                        string query;
+
+                        if (btn_addUpdateBusiness.Text == "Güncelle")
+                        {
+                            // İşletme güncelleme işlemi
+                            if (businessesList.SelectedRows.Count == 0)
+                            {
+                                MessageBox.Show("Lütfen güncellemek için bir işletme seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            query = "UPDATE \"businesses\" SET \"businessName\" = @businessName, \"authorizedName\" = @authorizedName, " +
+                                    "\"email\" = @email, \"phone\" = @phone, \"address\" = @address, \"isApproved\" = @isApproved " +
+                                    "WHERE \"businessId\" = @businessId";
+
+                            using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                            {
+                                cmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
+                                cmd.Parameters.AddWithValue("@authorizedName", txt_authName.Text);
+                                cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
+                                cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                                cmd.Parameters.AddWithValue("@address", txt_address.Text);
+                                cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
+                                cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["businessId"].Value));
+                                cmd.ExecuteNonQuery();
+                                baglan.Close();
+                                Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
+                                inputs.ClearInputs();
+                            }
+
+                            MessageBox.Show("İşletme bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+                        else if (btn_addUpdateBusiness.Text == "Ekle")
+                        {
+
+                            // işletme ekleme işlemi
+                            query = "INSERT INTO \"businesses\" (\"businessName\", \"authorizedName\", \"email\", \"phone\", \"address\", \"isApproved\") " +
+                             "VALUES (@businessName, @authorizedName, @email, @phone, @address, @isApproved)";
+
+                            using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                            {
+                                cmd.Parameters.AddWithValue("@businessName", txt_businessName.Text);
+                                cmd.Parameters.AddWithValue("@authorizedName", txt_authName.Text);
+                                cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
+                                cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                                cmd.Parameters.AddWithValue("@address", txt_address.Text);
+                                cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
+                                cmd.ExecuteNonQuery();
+                                baglan.Close();
+                                Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
+                                inputs.ClearInputs();
+                            }
+
+                            MessageBox.Show("Kullanıcı başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+                        BusinessManagement_Load(null, null);
                     }
-
-                    MessageBox.Show("Kullanıcı başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
-                BusinessManagement_Load(null, null); 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
            
         }
