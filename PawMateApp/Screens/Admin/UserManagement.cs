@@ -61,52 +61,59 @@ namespace PawMateApp.Screens.Admin
             else
 
             {
-                try
+                if (!int.TryParse(txt_phone.Text, out int parsedValue))
                 {
-                    if (userList.SelectedRows.Count == 0)
-                    {
-                        MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(txt_fullname.Text) || string.IsNullOrWhiteSpace(txt_username.Text) ||
-                        string.IsNullOrWhiteSpace(txt_password.Text) || string.IsNullOrWhiteSpace(txt_phone.Text) ||
-                        string.IsNullOrWhiteSpace(txt_email.Text) || cb_businesses.SelectedIndex == -1)
-                    {
-                        MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-
-                    baglan.Open();
-
-                    string query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
-                                   "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
-                                   "WHERE \"userId\" = @userId";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
-                    {
-                        cmd.Parameters.AddWithValue("@username", txt_username.Text);
-                        cmd.Parameters.AddWithValue("@password", txt_password.Text);
-                        cmd.Parameters.AddWithValue("@fullName", txt_fullname.Text);
-                        cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
-                        cmd.Parameters.AddWithValue("@email", txt_email.Text);
-                        cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(cb_businesses.SelectedValue));
-                        cmd.Parameters.AddWithValue("@isBusinessAdmin", isBusinessAdmin.Checked);
-                        cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value));
-                        cmd.ExecuteNonQuery();
-                        baglan.Close();
-                    }
-
-                    MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    UserManagement_Load(null, null);
+                        MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                { 
+
+                    try
+                    {
+                        if (userList.SelectedRows.Count == 0)
+                        {
+                            MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        if (string.IsNullOrWhiteSpace(txt_fullname.Text) || string.IsNullOrWhiteSpace(txt_username.Text) ||
+                            string.IsNullOrWhiteSpace(txt_password.Text) || string.IsNullOrWhiteSpace(txt_phone.Text) ||
+                            string.IsNullOrWhiteSpace(txt_email.Text) || cb_businesses.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+
+                        baglan.Open();
+
+                        string query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
+                                       "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
+                                       "WHERE \"userId\" = @userId";
+
+                        using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                        {
+                            cmd.Parameters.AddWithValue("@username", txt_username.Text);
+                            cmd.Parameters.AddWithValue("@password", txt_password.Text);
+                            cmd.Parameters.AddWithValue("@fullName", txt_fullname.Text);
+                            cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                            cmd.Parameters.AddWithValue("@email", txt_email.Text);
+                            cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(cb_businesses.SelectedValue));
+                            cmd.Parameters.AddWithValue("@isBusinessAdmin", isBusinessAdmin.Checked);
+                            cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value));
+                            cmd.ExecuteNonQuery();
+                            baglan.Close();
+                        }
+
+                        MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UserManagement_Load(null, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
-
         }
 
         private void userList_CellClick(object sender, DataGridViewCellEventArgs e)
