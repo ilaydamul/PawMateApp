@@ -67,9 +67,10 @@
             // 
             // businessesList
             // 
+            this.businessesList.AllowUserToAddRows = false;
             this.businessesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.businessesList.Location = new System.Drawing.Point(365, 92);
-            this.businessesList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.businessesList.Margin = new System.Windows.Forms.Padding(4);
             this.businessesList.Name = "businessesList";
             this.businessesList.RowHeadersWidth = 51;
             this.businessesList.Size = new System.Drawing.Size(696, 574);
@@ -94,7 +95,7 @@
             this.panel1.Controls.Add(this.radio_approved);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Location = new System.Drawing.Point(16, 92);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(341, 615);
             this.panel1.TabIndex = 105;
@@ -114,7 +115,7 @@
             // 
             this.txt_address.BackColor = System.Drawing.Color.White;
             this.txt_address.Location = new System.Drawing.Point(17, 343);
-            this.txt_address.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_address.Margin = new System.Windows.Forms.Padding(4);
             this.txt_address.Multiline = true;
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(300, 73);
@@ -125,7 +126,7 @@
             this.businessLogo.BackColor = System.Drawing.Color.White;
             this.businessLogo.Image = ((System.Drawing.Image)(resources.GetObject("businessLogo.Image")));
             this.businessLogo.Location = new System.Drawing.Point(19, 14);
-            this.businessLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.businessLogo.Margin = new System.Windows.Forms.Padding(4);
             this.businessLogo.Name = "businessLogo";
             this.businessLogo.Size = new System.Drawing.Size(301, 97);
             this.businessLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -147,7 +148,7 @@
             // 
             this.txt_phone.BackColor = System.Drawing.Color.White;
             this.txt_phone.Location = new System.Drawing.Point(17, 293);
-            this.txt_phone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_phone.Margin = new System.Windows.Forms.Padding(4);
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(300, 22);
             this.txt_phone.TabIndex = 3;
@@ -167,7 +168,7 @@
             // 
             this.txt_authName.BackColor = System.Drawing.Color.White;
             this.txt_authName.Location = new System.Drawing.Point(17, 193);
-            this.txt_authName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_authName.Margin = new System.Windows.Forms.Padding(4);
             this.txt_authName.Name = "txt_authName";
             this.txt_authName.Size = new System.Drawing.Size(300, 22);
             this.txt_authName.TabIndex = 1;
@@ -187,7 +188,7 @@
             // 
             this.txt_businessEmail.BackColor = System.Drawing.Color.White;
             this.txt_businessEmail.Location = new System.Drawing.Point(17, 242);
-            this.txt_businessEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_businessEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txt_businessEmail.Name = "txt_businessEmail";
             this.txt_businessEmail.Size = new System.Drawing.Size(300, 22);
             this.txt_businessEmail.TabIndex = 2;
@@ -207,7 +208,7 @@
             // 
             this.txt_businessName.BackColor = System.Drawing.Color.White;
             this.txt_businessName.Location = new System.Drawing.Point(19, 143);
-            this.txt_businessName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_businessName.Margin = new System.Windows.Forms.Padding(4);
             this.txt_businessName.Name = "txt_businessName";
             this.txt_businessName.Size = new System.Drawing.Size(300, 22);
             this.txt_businessName.TabIndex = 0;
@@ -218,7 +219,7 @@
             this.btn_addUpdateBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addUpdateBusiness.ForeColor = System.Drawing.Color.White;
             this.btn_addUpdateBusiness.Location = new System.Drawing.Point(17, 555);
-            this.btn_addUpdateBusiness.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_addUpdateBusiness.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addUpdateBusiness.Name = "btn_addUpdateBusiness";
             this.btn_addUpdateBusiness.Size = new System.Drawing.Size(301, 46);
             this.btn_addUpdateBusiness.TabIndex = 6;
@@ -230,7 +231,7 @@
             // 
             this.radio_approved.AutoSize = true;
             this.radio_approved.Location = new System.Drawing.Point(17, 453);
-            this.radio_approved.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radio_approved.Margin = new System.Windows.Forms.Padding(4);
             this.radio_approved.Name = "radio_approved";
             this.radio_approved.Size = new System.Drawing.Size(55, 20);
             this.radio_approved.TabIndex = 5;
@@ -266,7 +267,7 @@
             this.btn_addBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addBusiness.ForeColor = System.Drawing.Color.White;
             this.btn_addBusiness.Location = new System.Drawing.Point(851, 48);
-            this.btn_addBusiness.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_addBusiness.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addBusiness.Name = "btn_addBusiness";
             this.btn_addBusiness.Size = new System.Drawing.Size(211, 41);
             this.btn_addBusiness.TabIndex = 7;
@@ -280,7 +281,7 @@
             this.btn_deleteBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_deleteBusiness.ForeColor = System.Drawing.Color.White;
             this.btn_deleteBusiness.Location = new System.Drawing.Point(851, 671);
-            this.btn_deleteBusiness.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_deleteBusiness.Margin = new System.Windows.Forms.Padding(4);
             this.btn_deleteBusiness.Name = "btn_deleteBusiness";
             this.btn_deleteBusiness.Size = new System.Drawing.Size(211, 37);
             this.btn_deleteBusiness.TabIndex = 133;
@@ -301,7 +302,7 @@
             this.Controls.Add(this.businessesList);
             this.Controls.Add(this.txt_title);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BusinessManagement";
             this.Text = "İşletme Yönetimi";
             this.Load += new System.EventHandler(this.BusinessManagement_Load);

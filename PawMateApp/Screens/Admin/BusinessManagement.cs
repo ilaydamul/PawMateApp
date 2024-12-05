@@ -19,6 +19,8 @@ namespace PawMateApp.Screens.Admin
             InitializeComponent();           
         }
 
+
+
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
 
         private void btn_addUpdateBusiness_Click(object sender, EventArgs e)
@@ -28,7 +30,7 @@ namespace PawMateApp.Screens.Admin
             {
                 if (businessesList.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Lütfen güncellemek için bir işletme seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -114,7 +116,6 @@ namespace PawMateApp.Screens.Admin
                 txt_phone.Text = row.Cells["phone"].Value?.ToString();
                 txt_address.Text = row.Cells["address"].Value?.ToString();
                 radio_approved.Checked = Convert.ToBoolean(row.Cells["isApproved"].Value);
-
                 btn_addUpdateBusiness.Text = "Güncelle";
 
             }
@@ -152,11 +153,17 @@ namespace PawMateApp.Screens.Admin
 
                     MessageBox.Show("İşletme başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BusinessManagement_Load(null, null); 
+                    
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
+                inputs.ClearInputs();
+
+
 
             }
         }

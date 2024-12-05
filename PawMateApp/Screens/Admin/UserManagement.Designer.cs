@@ -69,7 +69,7 @@
             this.btn_addUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addUser.ForeColor = System.Drawing.Color.White;
             this.btn_addUser.Location = new System.Drawing.Point(851, 48);
-            this.btn_addUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_addUser.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addUser.Name = "btn_addUser";
             this.btn_addUser.Size = new System.Drawing.Size(211, 41);
             this.btn_addUser.TabIndex = 109;
@@ -106,7 +106,7 @@
             this.panel1.Controls.Add(this.txt_fullname);
             this.panel1.Controls.Add(this.btn_addUpdateUser);
             this.panel1.Location = new System.Drawing.Point(16, 92);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(341, 615);
             this.panel1.TabIndex = 110;
@@ -115,7 +115,7 @@
             // 
             this.isBusinessAdmin.AutoSize = true;
             this.isBusinessAdmin.Location = new System.Drawing.Point(16, 326);
-            this.isBusinessAdmin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.isBusinessAdmin.Margin = new System.Windows.Forms.Padding(4);
             this.isBusinessAdmin.Name = "isBusinessAdmin";
             this.isBusinessAdmin.Size = new System.Drawing.Size(116, 20);
             this.isBusinessAdmin.TabIndex = 130;
@@ -137,7 +137,7 @@
             // 
             this.cb_businesses.FormattingEnabled = true;
             this.cb_businesses.Location = new System.Drawing.Point(16, 287);
-            this.cb_businesses.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cb_businesses.Margin = new System.Windows.Forms.Padding(4);
             this.cb_businesses.Name = "cb_businesses";
             this.cb_businesses.Size = new System.Drawing.Size(301, 24);
             this.cb_businesses.TabIndex = 126;
@@ -146,7 +146,7 @@
             // 
             this.txt_email.BackColor = System.Drawing.Color.White;
             this.txt_email.Location = new System.Drawing.Point(16, 238);
-            this.txt_email.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_email.Margin = new System.Windows.Forms.Padding(4);
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(300, 22);
             this.txt_email.TabIndex = 125;
@@ -177,7 +177,7 @@
             // 
             this.txt_phone.BackColor = System.Drawing.Color.White;
             this.txt_phone.Location = new System.Drawing.Point(16, 188);
-            this.txt_phone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_phone.Margin = new System.Windows.Forms.Padding(4);
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(300, 22);
             this.txt_phone.TabIndex = 3;
@@ -197,7 +197,7 @@
             // 
             this.txt_username.BackColor = System.Drawing.Color.White;
             this.txt_username.Location = new System.Drawing.Point(16, 89);
-            this.txt_username.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_username.Margin = new System.Windows.Forms.Padding(4);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(300, 22);
             this.txt_username.TabIndex = 1;
@@ -217,7 +217,7 @@
             // 
             this.txt_password.BackColor = System.Drawing.Color.White;
             this.txt_password.Location = new System.Drawing.Point(16, 138);
-            this.txt_password.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_password.Margin = new System.Windows.Forms.Padding(4);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(300, 22);
             this.txt_password.TabIndex = 2;
@@ -237,7 +237,7 @@
             // 
             this.txt_fullname.BackColor = System.Drawing.Color.White;
             this.txt_fullname.Location = new System.Drawing.Point(17, 38);
-            this.txt_fullname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_fullname.Margin = new System.Windows.Forms.Padding(4);
             this.txt_fullname.Name = "txt_fullname";
             this.txt_fullname.Size = new System.Drawing.Size(300, 22);
             this.txt_fullname.TabIndex = 0;
@@ -248,7 +248,7 @@
             this.btn_addUpdateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addUpdateUser.ForeColor = System.Drawing.Color.White;
             this.btn_addUpdateUser.Location = new System.Drawing.Point(17, 555);
-            this.btn_addUpdateUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_addUpdateUser.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addUpdateUser.Name = "btn_addUpdateUser";
             this.btn_addUpdateUser.Size = new System.Drawing.Size(301, 46);
             this.btn_addUpdateUser.TabIndex = 6;
@@ -258,9 +258,10 @@
             // 
             // userList
             // 
+            this.userList.AllowUserToAddRows = false;
             this.userList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.userList.Location = new System.Drawing.Point(365, 92);
-            this.userList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.userList.Margin = new System.Windows.Forms.Padding(4);
             this.userList.Name = "userList";
             this.userList.RowHeadersWidth = 51;
             this.userList.Size = new System.Drawing.Size(696, 574);
@@ -273,7 +274,7 @@
             this.btn_deleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_deleteUser.ForeColor = System.Drawing.Color.White;
             this.btn_deleteUser.Location = new System.Drawing.Point(851, 671);
-            this.btn_deleteUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_deleteUser.Margin = new System.Windows.Forms.Padding(4);
             this.btn_deleteUser.Name = "btn_deleteUser";
             this.btn_deleteUser.Size = new System.Drawing.Size(211, 37);
             this.btn_deleteUser.TabIndex = 132;
@@ -294,7 +295,7 @@
             this.Controls.Add(this.userList);
             this.Controls.Add(this.txt_title);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserManagement";
             this.Text = "UserManagement";
             this.Load += new System.EventHandler(this.UserManagement_Load);

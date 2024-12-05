@@ -58,7 +58,7 @@ namespace PawMateApp.Screens.Admin
             {
                 if (userList.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Lütfen güncellemek için bir kullanıcı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
