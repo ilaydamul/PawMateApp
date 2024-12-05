@@ -29,7 +29,7 @@ namespace PawMateApp.Screens
                 baglan.Open();
 
 
-                string sql = "SELECT name, surname, username, email, password FROM users WHERE user_id = @UserID";
+                string sql = "SELECT name, surname, username, email, password FROM users WHERE userId = @UserID";
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(sql, baglan))
                 {
@@ -73,7 +73,7 @@ namespace PawMateApp.Screens
             {
                 baglan.Open();
 
-                NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1 AND user_id != @UserID", baglan);
+                NpgsqlCommand cmdCheck = new NpgsqlCommand("SELECT COUNT(*) FROM users WHERE username = @P1 AND userId != @UserID", baglan);
                 cmdCheck.Parameters.AddWithValue("@P1", txt_username.Text);
                 cmdCheck.Parameters.AddWithValue("@UserID", Globals.CurrentUserID);
                 int userExists = Convert.ToInt32(cmdCheck.ExecuteScalar());
