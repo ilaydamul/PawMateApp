@@ -86,6 +86,29 @@ namespace PawMateApp
                 return false;
             }
         }
+        public static bool IsValidPhone(string phone)
+        {
+            phone = phone.ToString();
+            if (phone.Substring(0, 1) == "0")
+            {
+                MessageBox.Show("Lütfen telefon numarasının başına 0 koymayınız.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                if (phone.Length == 10)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            
+        }
+            
     }
     public class SendMailClass
     {
