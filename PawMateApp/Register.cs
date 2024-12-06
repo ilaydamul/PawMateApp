@@ -125,10 +125,7 @@ namespace PawMateApp
     </tr>
   </tbody>
 </table>
-";
-
-
-
+"
                         SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
                         sendMail.SendMail("Pawmate Kayıt Bilgilendirme", body, txt_businessEmail.Text);
 
