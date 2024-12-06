@@ -34,6 +34,8 @@ namespace PawMateApp
         public static class Globals
         {
             public static int CurrentUserID { get; set; }   
+            public static bool CurrentUserBusinessAdminStatus { get; set; }   
+            public static bool CurrentUserAppAdminStatus { get; set; }   
             
         }
 
@@ -75,6 +77,8 @@ namespace PawMateApp
                         Panel panel = new Panel(); // messagebox yerine panel eklendi.
                         panel.Show();
                         Globals.CurrentUserID = Convert.ToInt32(dr["userId"]);
+                        Globals.CurrentUserBusinessAdminStatus = Convert.ToBoolean(dr["IsBusinessAdmin"]);
+                        Globals.CurrentUserAppAdminStatus = Convert.ToBoolean(dr["IsAppAdmin"]);
                     }
                     else
                     {

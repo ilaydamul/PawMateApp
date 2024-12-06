@@ -62,7 +62,6 @@
             // menuPanel
             // 
             this.menuPanel.BackColor = System.Drawing.Color.White;
-            this.menuPanel.Controls.Add(this.adminPanel);
             this.menuPanel.Controls.Add(this.btn_logout);
             this.menuPanel.Controls.Add(this.businessPanel);
             this.menuPanel.Controls.Add(this.logoBox);
@@ -80,7 +79,7 @@
             this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
             this.adminPanel.Controls.Add(this.btn_showNotifications);
             this.adminPanel.Controls.Add(this.btn_showTreatmentManagement);
-            this.adminPanel.Location = new System.Drawing.Point(0, 65);
+            this.adminPanel.Location = new System.Drawing.Point(0, 3);
             this.adminPanel.Name = "adminPanel";
             this.adminPanel.Size = new System.Drawing.Size(193, 241);
             this.adminPanel.TabIndex = 21;
@@ -177,6 +176,7 @@
             // 
             // businessPanel
             // 
+            this.businessPanel.Controls.Add(this.adminPanel);
             this.businessPanel.Controls.Add(this.button10);
             this.businessPanel.Controls.Add(this.button9);
             this.businessPanel.Controls.Add(this.button8);
@@ -189,6 +189,7 @@
             this.businessPanel.Size = new System.Drawing.Size(192, 349);
             this.businessPanel.TabIndex = 22;
             this.businessPanel.Visible = false;
+            this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
             // 
             // button10
             // 

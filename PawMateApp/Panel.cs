@@ -104,14 +104,19 @@ namespace PawMateApp
 
         private void Panel_Load(object sender, EventArgs e)
         {
-            //Panelde 3 kullanıcı girişi var, bunlara göre paneldeki menülerin getirilmesi gerekiyor
-            //Admin Paneli; isAppAdmin ise adminPanel görünecek
-            //İşletme Paneli; isBusinessAdmin ise businessPanel görünecek ve Veteriner Yönetimi açık olacak
-            //Veteriner Paneli; isBusinessAdmin değil ise businessPanel görünecek ve Veteriner Yönetimi KAPALI olacak
+            if (Globals.CurrentUserAppAdminStatus == true)
+            {
+                // Eğer kullanıcı uygulama adminiyse uygulama adminin panelini göster Ör: uygulamapaneli.visible = true;
+            }
+            else if (Globals.CurrentUserBusinessAdminStatus == true)
+            {
+                // Eğer kullanıcı işletme adminiyse işletme adminin panelini göster Ör: işletmepaneli.visible = true;
+            }
+            else
+            {
+                // Eğer kullanıcı normal kullanıcıysa normal kullanıcının panelini göster Ör: normalpanel.visible = true;
 
-            //Admin Paneli olursa ProfileButton görünmemesi gerekiyor.
-
-
+            }
         }
 
         private void btn_showBusinessManagement_Click(object sender, EventArgs e)
@@ -136,6 +141,11 @@ namespace PawMateApp
         {
             Notifications notifications = new Notifications();
             showForm(notifications);
+        }
+
+        private void businessPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
