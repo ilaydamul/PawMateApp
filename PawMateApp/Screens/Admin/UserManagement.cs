@@ -24,6 +24,8 @@ namespace PawMateApp.Screens.Admin
         {
 
             //İşletmeler cb_businesses içine gelmeli
+            LoadBusinesses();
+
             try
             {
                 baglan.Open();
@@ -44,6 +46,38 @@ namespace PawMateApp.Screens.Admin
             }
         }
 
+        private void LoadBusinesses()//burası dbmanagement classına eklenebilir.
+        {
+            try
+            {
+                if (baglan.State == ConnectionState.Closed)
+                    baglan.Open();
+
+                string query = "SELECT \"businessId\", \"businessName\" FROM \"businesses\" ORDER BY \"businessName\" ASC";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                {
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        DataTable businessesTable = new DataTable();
+                        businessesTable.Load(reader);
+                        DataRow emptyRow = businessesTable.NewRow();
+                        emptyRow["businessId"] = DBNull.Value;
+                        emptyRow["businessName"] = "Seçiniz...";
+                        businessesTable.Rows.InsertAt(emptyRow, 0); //Boş satır en başa eklendi. //Burası da değişebilir.
+                        cb_businesses.DataSource = businessesTable;
+                        cb_businesses.DisplayMember = "businessName";
+                        cb_businesses.ValueMember = "businessId";
+                    }
+                }
+                baglan.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btn_addUser_Click(object sender, EventArgs e)
         {
             Inputs inputs = new Inputs(txt_fullname, txt_email, txt_password, txt_phone, txt_username,cb_businesses);
@@ -51,38 +85,50 @@ namespace PawMateApp.Screens.Admin
             btn_addUpdateUser.Text = "Ekle";
 
         }
+        private void btn_addUpdateUser_Click(object sender, EventArgs e)//kullanıcı ekleme ve güncelleme işlemleri
+        {        
+            var inputsToCheck = new string[]
+             {
+                   txt_fullname.Text,
+                   txt_username.Text,
+                   txt_password.Text,
+                   txt_phone.Text,
+                   txt_email.Text,
+                   cb_businesses.SelectedIndex >= 0 ? cb_businesses.SelectedValue.ToString() : ""
+             };//hata aldığım için böyle yaptım başka türlü olabiiyorsa değiştirebilirsiniz.
 
-        private void btn_addUpdateUser_Click(object sender, EventArgs e)
-        {
+
+            CheckClass checkClass = new CheckClass(inputsToCheck);
+
+            if (!checkClass.Check(""))
+            {
+                return;
+            }
+
             if (!CheckClass.IsValidEmail(txt_email.Text))
             {
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
 
+            try
             {
-                try
+                if (baglan.State == ConnectionState.Closed)
+                    baglan.Open();
+
+                string query;
+
+                if (btn_addUpdateUser.Text == "Güncelle")
                 {
                     if (userList.SelectedRows.Count == 0)
                     {
-                        MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Lütfen güncellemek için bir kullanıcı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    if (string.IsNullOrWhiteSpace(txt_fullname.Text) || string.IsNullOrWhiteSpace(txt_username.Text) ||
-                        string.IsNullOrWhiteSpace(txt_password.Text) || string.IsNullOrWhiteSpace(txt_phone.Text) ||
-                        string.IsNullOrWhiteSpace(txt_email.Text) || cb_businesses.SelectedIndex == -1)
-                    {
-                        MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-
-
-                    baglan.Open();
-
-                    string query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
-                                   "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
-                                   "WHERE \"userId\" = @userId";
+                    query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
+                            "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
+                            "WHERE \"userId\" = @userId";
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                     {
@@ -96,15 +142,40 @@ namespace PawMateApp.Screens.Admin
                         cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value));
                         cmd.ExecuteNonQuery();
                         baglan.Close();
+                        
                     }
 
                     MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    UserManagement_Load(null, null);
                 }
-                catch (Exception ex)
+                else if (btn_addUpdateUser.Text == "Ekle")
                 {
-                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    query = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\") " +
+                            "VALUES (@username, @password, @fullName, @phone, @email, @businessId, @isBusinessAdmin)";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@username", txt_username.Text);
+                        cmd.Parameters.AddWithValue("@password", txt_password.Text);
+                        cmd.Parameters.AddWithValue("@fullName", txt_fullname.Text);
+                        cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                        cmd.Parameters.AddWithValue("@email", txt_email.Text);
+                        cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(cb_businesses.SelectedValue));
+                        cmd.Parameters.AddWithValue("@isBusinessAdmin", isBusinessAdmin.Checked);
+                        cmd.ExecuteNonQuery();
+                        baglan.Close();
+                        Inputs inputs = new Inputs(txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses);
+                        inputs.ClearInputs();
+                    }
+
+                    MessageBox.Show("Kullanıcı başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                UserManagement_Load(null, null); 
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -123,7 +194,7 @@ namespace PawMateApp.Screens.Admin
                 
                 if (row.Cells["businessId"].Value != DBNull.Value && row.Cells["businessId"].Value != null)
                 {
-                    cb_businesses.SelectedValue = Convert.ToInt32(row.Cells["businessId"].Value);//comboboxa verilerin getirilmesi gerekiyor!!!
+                    cb_businesses.SelectedValue = Convert.ToInt32(row.Cells["businessId"].Value);
                 }
                 else
                 {
