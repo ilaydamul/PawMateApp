@@ -67,7 +67,8 @@ namespace PawMateApp
             }
             else
             {
-             
+                if (CheckClass.IsValidPhone(txt_phone.Text))
+                {
                     try
                     {
 
@@ -99,7 +100,7 @@ namespace PawMateApp
                                 notificationCmd.ExecuteNonQuery();
                             }
                         }
-                    string body = $@"
+                        string body = $@"
 <table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
   <tbody>
     <tr>
@@ -124,11 +125,8 @@ namespace PawMateApp
     </tr>
   </tbody>
 </table>
-";
-
-
-
-                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+"
+                        SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
                         sendMail.SendMail("Pawmate Kayıt Bilgilendirme", body, txt_businessEmail.Text);
 
                         MessageBox.Show("Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız.",
@@ -143,7 +141,7 @@ namespace PawMateApp
 
                         baglan.Close();
                     }
-
+                }
                 
             }
         }

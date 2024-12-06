@@ -174,6 +174,9 @@ namespace PawMateApp.Screens.Admin
                     databaseManagament.DeleteTreatment(treatmentId);
                     databaseManagament.CloseConnection();
                     MessageBox.Show("Tedavi başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txt_treatmentdesc.Text = "";
+                    txt_treatmenttitle.Text = "";
+                    btn_addUpdateUser.Text = "Ekle";
                     LoadTreatments();
                 }
                 else
