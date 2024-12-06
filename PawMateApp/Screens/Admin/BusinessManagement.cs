@@ -138,6 +138,8 @@ namespace PawMateApp.Screens.Admin
         private void BusinessManagement_Load(object sender, EventArgs e)//Ekrana gelindiğinde işletme bilgilerinin businessesList'de görünmesi
         {
 
+
+
             try
             {
                 baglan.Open();
