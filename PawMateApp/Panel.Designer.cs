@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Panel));
             this.menuPanel = new System.Windows.Forms.Panel();
-            this.btn_logout = new System.Windows.Forms.Button();
-            this.businessPanel = new System.Windows.Forms.Panel();
             this.adminPanel = new System.Windows.Forms.Panel();
             this.btn_showUserManagement = new System.Windows.Forms.Button();
             this.btn_showBusinessManagement = new System.Windows.Forms.Button();
             this.btn_showNotifications = new System.Windows.Forms.Button();
             this.btn_showTreatmentManagement = new System.Windows.Forms.Button();
+            this.btn_logout = new System.Windows.Forms.Button();
+            this.businessPanel = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.btn_vetManagement = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -45,14 +45,14 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.logoBox = new System.Windows.Forms.PictureBox();
-            this.ProfileButton = new System.Windows.Forms.Button();
+            this.btn_profile = new System.Windows.Forms.Button();
             this.contentPanel = new System.Windows.Forms.Panel();
             this.topMenuPanel = new System.Windows.Forms.Panel();
             this.btn_minimizeApp = new System.Windows.Forms.PictureBox();
             this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
-            this.businessPanel.SuspendLayout();
             this.adminPanel.SuspendLayout();
+            this.businessPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.topMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).BeginInit();
@@ -66,46 +66,12 @@
             this.menuPanel.Controls.Add(this.btn_logout);
             this.menuPanel.Controls.Add(this.businessPanel);
             this.menuPanel.Controls.Add(this.logoBox);
-            this.menuPanel.Controls.Add(this.ProfileButton);
+            this.menuPanel.Controls.Add(this.btn_profile);
             this.menuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuPanel.Location = new System.Drawing.Point(0, 0);
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(192, 620);
             this.menuPanel.TabIndex = 16;
-            // 
-            // btn_logout
-            // 
-            this.btn_logout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
-            this.btn_logout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.btn_logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_logout.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.btn_logout.ForeColor = System.Drawing.Color.White;
-            this.btn_logout.Image = ((System.Drawing.Image)(resources.GetObject("btn_logout.Image")));
-            this.btn_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_logout.Location = new System.Drawing.Point(8, 569);
-            this.btn_logout.Name = "btn_logout";
-            this.btn_logout.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btn_logout.Size = new System.Drawing.Size(175, 42);
-            this.btn_logout.TabIndex = 17;
-            this.btn_logout.Text = "Çıkış Yap";
-            this.btn_logout.UseVisualStyleBackColor = false;
-            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
-            // 
-            // businessPanel
-            // 
-            this.businessPanel.Controls.Add(this.button10);
-            this.businessPanel.Controls.Add(this.btn_vetManagement);
-            this.businessPanel.Controls.Add(this.button8);
-            this.businessPanel.Controls.Add(this.button7);
-            this.businessPanel.Controls.Add(this.button4);
-            this.businessPanel.Controls.Add(this.button5);
-            this.businessPanel.Controls.Add(this.button6);
-            this.businessPanel.Location = new System.Drawing.Point(0, 63);
-            this.businessPanel.Name = "businessPanel";
-            this.businessPanel.Size = new System.Drawing.Size(192, 349);
-            this.businessPanel.TabIndex = 22;
-            this.businessPanel.Visible = false;
-            this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
             // 
             // adminPanel
             // 
@@ -191,6 +157,40 @@
             this.btn_showTreatmentManagement.Text = "Tedaviler";
             this.btn_showTreatmentManagement.UseVisualStyleBackColor = false;
             this.btn_showTreatmentManagement.Click += new System.EventHandler(this.btn_showTreatmentManagement_Click);
+            // 
+            // btn_logout
+            // 
+            this.btn_logout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
+            this.btn_logout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_logout.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_logout.ForeColor = System.Drawing.Color.White;
+            this.btn_logout.Image = ((System.Drawing.Image)(resources.GetObject("btn_logout.Image")));
+            this.btn_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_logout.Location = new System.Drawing.Point(8, 569);
+            this.btn_logout.Name = "btn_logout";
+            this.btn_logout.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
+            this.btn_logout.Size = new System.Drawing.Size(175, 42);
+            this.btn_logout.TabIndex = 17;
+            this.btn_logout.Text = "Çıkış Yap";
+            this.btn_logout.UseVisualStyleBackColor = false;
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            // 
+            // businessPanel
+            // 
+            this.businessPanel.Controls.Add(this.button10);
+            this.businessPanel.Controls.Add(this.btn_vetManagement);
+            this.businessPanel.Controls.Add(this.button8);
+            this.businessPanel.Controls.Add(this.button7);
+            this.businessPanel.Controls.Add(this.button4);
+            this.businessPanel.Controls.Add(this.button5);
+            this.businessPanel.Controls.Add(this.button6);
+            this.businessPanel.Location = new System.Drawing.Point(0, 63);
+            this.businessPanel.Name = "businessPanel";
+            this.businessPanel.Size = new System.Drawing.Size(192, 349);
+            this.businessPanel.TabIndex = 22;
+            this.businessPanel.Visible = false;
+            this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
             // 
             // button10
             // 
@@ -321,22 +321,22 @@
             this.logoBox.TabIndex = 16;
             this.logoBox.TabStop = false;
             // 
-            // ProfileButton
+            // btn_profile
             // 
-            this.ProfileButton.BackColor = System.Drawing.Color.Transparent;
-            this.ProfileButton.FlatAppearance.BorderSize = 0;
-            this.ProfileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ProfileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.ProfileButton.Image = ((System.Drawing.Image)(resources.GetObject("ProfileButton.Image")));
-            this.ProfileButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ProfileButton.Location = new System.Drawing.Point(8, 517);
-            this.ProfileButton.Name = "ProfileButton";
-            this.ProfileButton.Size = new System.Drawing.Size(175, 44);
-            this.ProfileButton.TabIndex = 15;
-            this.ProfileButton.Text = "          Profilimi Görüntüle";
-            this.ProfileButton.UseVisualStyleBackColor = false;
-            this.ProfileButton.Visible = false;
-            this.ProfileButton.Click += new System.EventHandler(this.ProfileButton_Click);
+            this.btn_profile.BackColor = System.Drawing.Color.Transparent;
+            this.btn_profile.FlatAppearance.BorderSize = 0;
+            this.btn_profile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_profile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.btn_profile.Image = ((System.Drawing.Image)(resources.GetObject("btn_profile.Image")));
+            this.btn_profile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_profile.Location = new System.Drawing.Point(8, 517);
+            this.btn_profile.Name = "btn_profile";
+            this.btn_profile.Size = new System.Drawing.Size(175, 44);
+            this.btn_profile.TabIndex = 15;
+            this.btn_profile.Text = "          Profilimi Görüntüle";
+            this.btn_profile.UseVisualStyleBackColor = false;
+            this.btn_profile.Visible = false;
+            this.btn_profile.Click += new System.EventHandler(this.btn_profile_Click);
             // 
             // contentPanel
             // 
@@ -405,8 +405,8 @@
             this.Text = "Anasayfa";
             this.Load += new System.EventHandler(this.Panel_Load);
             this.menuPanel.ResumeLayout(false);
-            this.businessPanel.ResumeLayout(false);
             this.adminPanel.ResumeLayout(false);
+            this.businessPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.topMenuPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).EndInit();
@@ -416,7 +416,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button ProfileButton;
+        private System.Windows.Forms.Button btn_profile;
         private System.Windows.Forms.Panel menuPanel;
         private System.Windows.Forms.Panel topMenuPanel;
         private System.Windows.Forms.PictureBox btn_minimizeApp;

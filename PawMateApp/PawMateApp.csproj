@@ -210,6 +210,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\profile_img2.png" />
+    <None Include="Resources\profile_img2.jpg" />
+    <None Include="Resources\profile_img.jpg" />
     <None Include="Resources\favicon.ico" />
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
