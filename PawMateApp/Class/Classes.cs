@@ -18,8 +18,8 @@ namespace PawMateApp
 
         public MoveForm(Form form)
         {
-            //form.Icon = new Icon("C:\\Users\\Barış\\source\\repos\\ilaydamul\\PawMateApp\\PawMateApp\\favicon.ico");
-            //this.form = form;
+            form.Icon = Properties.Resources.favicon;
+            this.form = form;
         }
 
         public void Form_MouseDown(object sender, MouseEventArgs e)

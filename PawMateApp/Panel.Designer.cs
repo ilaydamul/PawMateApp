@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Panel));
             this.menuPanel = new System.Windows.Forms.Panel();
+            this.btn_logout = new System.Windows.Forms.Button();
+            this.businessPanel = new System.Windows.Forms.Panel();
             this.adminPanel = new System.Windows.Forms.Panel();
             this.btn_showUserManagement = new System.Windows.Forms.Button();
             this.btn_showBusinessManagement = new System.Windows.Forms.Button();
             this.btn_showNotifications = new System.Windows.Forms.Button();
             this.btn_showTreatmentManagement = new System.Windows.Forms.Button();
-            this.btn_logout = new System.Windows.Forms.Button();
-            this.businessPanel = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btn_vetManagement = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -51,8 +51,8 @@
             this.btn_minimizeApp = new System.Windows.Forms.PictureBox();
             this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
-            this.adminPanel.SuspendLayout();
             this.businessPanel.SuspendLayout();
+            this.adminPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.topMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).BeginInit();
@@ -62,6 +62,7 @@
             // menuPanel
             // 
             this.menuPanel.BackColor = System.Drawing.Color.White;
+            this.menuPanel.Controls.Add(this.adminPanel);
             this.menuPanel.Controls.Add(this.btn_logout);
             this.menuPanel.Controls.Add(this.businessPanel);
             this.menuPanel.Controls.Add(this.logoBox);
@@ -71,90 +72,6 @@
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(192, 620);
             this.menuPanel.TabIndex = 16;
-            // 
-            // adminPanel
-            // 
-            this.adminPanel.BackColor = System.Drawing.Color.White;
-            this.adminPanel.Controls.Add(this.btn_showUserManagement);
-            this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
-            this.adminPanel.Controls.Add(this.btn_showNotifications);
-            this.adminPanel.Controls.Add(this.btn_showTreatmentManagement);
-            this.adminPanel.Location = new System.Drawing.Point(0, 3);
-            this.adminPanel.Name = "adminPanel";
-            this.adminPanel.Size = new System.Drawing.Size(193, 241);
-            this.adminPanel.TabIndex = 21;
-            // 
-            // btn_showUserManagement
-            // 
-            this.btn_showUserManagement.BackColor = System.Drawing.Color.White;
-            this.btn_showUserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.btn_showUserManagement.FlatAppearance.BorderSize = 0;
-            this.btn_showUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_showUserManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.btn_showUserManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showUserManagement.Image")));
-            this.btn_showUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showUserManagement.Location = new System.Drawing.Point(0, 49);
-            this.btn_showUserManagement.Name = "btn_showUserManagement";
-            this.btn_showUserManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showUserManagement.Size = new System.Drawing.Size(192, 48);
-            this.btn_showUserManagement.TabIndex = 21;
-            this.btn_showUserManagement.Text = "Kullanıcılar";
-            this.btn_showUserManagement.UseVisualStyleBackColor = false;
-            this.btn_showUserManagement.Click += new System.EventHandler(this.btn_showUserManagement_Click);
-            // 
-            // btn_showBusinessManagement
-            // 
-            this.btn_showBusinessManagement.BackColor = System.Drawing.Color.White;
-            this.btn_showBusinessManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.btn_showBusinessManagement.FlatAppearance.BorderSize = 0;
-            this.btn_showBusinessManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_showBusinessManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.btn_showBusinessManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showBusinessManagement.Image")));
-            this.btn_showBusinessManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showBusinessManagement.Location = new System.Drawing.Point(0, 3);
-            this.btn_showBusinessManagement.Name = "btn_showBusinessManagement";
-            this.btn_showBusinessManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showBusinessManagement.Size = new System.Drawing.Size(192, 48);
-            this.btn_showBusinessManagement.TabIndex = 18;
-            this.btn_showBusinessManagement.Text = "İşletmeler";
-            this.btn_showBusinessManagement.UseVisualStyleBackColor = false;
-            this.btn_showBusinessManagement.Click += new System.EventHandler(this.btn_showBusinessManagement_Click);
-            // 
-            // btn_showNotifications
-            // 
-            this.btn_showNotifications.BackColor = System.Drawing.Color.White;
-            this.btn_showNotifications.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.btn_showNotifications.FlatAppearance.BorderSize = 0;
-            this.btn_showNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_showNotifications.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.btn_showNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btn_showNotifications.Image")));
-            this.btn_showNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showNotifications.Location = new System.Drawing.Point(0, 145);
-            this.btn_showNotifications.Name = "btn_showNotifications";
-            this.btn_showNotifications.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showNotifications.Size = new System.Drawing.Size(192, 48);
-            this.btn_showNotifications.TabIndex = 20;
-            this.btn_showNotifications.Text = "Bildirimler";
-            this.btn_showNotifications.UseVisualStyleBackColor = false;
-            this.btn_showNotifications.Click += new System.EventHandler(this.btn_showNotifications_Click);
-            // 
-            // btn_showTreatmentManagement
-            // 
-            this.btn_showTreatmentManagement.BackColor = System.Drawing.Color.White;
-            this.btn_showTreatmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.btn_showTreatmentManagement.FlatAppearance.BorderSize = 0;
-            this.btn_showTreatmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_showTreatmentManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.btn_showTreatmentManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showTreatmentManagement.Image")));
-            this.btn_showTreatmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showTreatmentManagement.Location = new System.Drawing.Point(0, 97);
-            this.btn_showTreatmentManagement.Name = "btn_showTreatmentManagement";
-            this.btn_showTreatmentManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showTreatmentManagement.Size = new System.Drawing.Size(192, 48);
-            this.btn_showTreatmentManagement.TabIndex = 19;
-            this.btn_showTreatmentManagement.Text = "Tedaviler";
-            this.btn_showTreatmentManagement.UseVisualStyleBackColor = false;
-            this.btn_showTreatmentManagement.Click += new System.EventHandler(this.btn_showTreatmentManagement_Click);
             // 
             // btn_logout
             // 
@@ -176,9 +93,8 @@
             // 
             // businessPanel
             // 
-            this.businessPanel.Controls.Add(this.adminPanel);
             this.businessPanel.Controls.Add(this.button10);
-            this.businessPanel.Controls.Add(this.button9);
+            this.businessPanel.Controls.Add(this.btn_vetManagement);
             this.businessPanel.Controls.Add(this.button8);
             this.businessPanel.Controls.Add(this.button7);
             this.businessPanel.Controls.Add(this.button4);
@@ -190,6 +106,91 @@
             this.businessPanel.TabIndex = 22;
             this.businessPanel.Visible = false;
             this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
+            // 
+            // adminPanel
+            // 
+            this.adminPanel.BackColor = System.Drawing.Color.White;
+            this.adminPanel.Controls.Add(this.btn_showUserManagement);
+            this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
+            this.adminPanel.Controls.Add(this.btn_showNotifications);
+            this.adminPanel.Controls.Add(this.btn_showTreatmentManagement);
+            this.adminPanel.Location = new System.Drawing.Point(0, 64);
+            this.adminPanel.Name = "adminPanel";
+            this.adminPanel.Size = new System.Drawing.Size(192, 206);
+            this.adminPanel.TabIndex = 21;
+            this.adminPanel.Visible = false;
+            // 
+            // btn_showUserManagement
+            // 
+            this.btn_showUserManagement.BackColor = System.Drawing.Color.White;
+            this.btn_showUserManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_showUserManagement.FlatAppearance.BorderSize = 0;
+            this.btn_showUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_showUserManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_showUserManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showUserManagement.Image")));
+            this.btn_showUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_showUserManagement.Location = new System.Drawing.Point(-1, 49);
+            this.btn_showUserManagement.Name = "btn_showUserManagement";
+            this.btn_showUserManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_showUserManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showUserManagement.TabIndex = 21;
+            this.btn_showUserManagement.Text = "Kullanıcılar";
+            this.btn_showUserManagement.UseVisualStyleBackColor = false;
+            this.btn_showUserManagement.Click += new System.EventHandler(this.btn_showUserManagement_Click);
+            // 
+            // btn_showBusinessManagement
+            // 
+            this.btn_showBusinessManagement.BackColor = System.Drawing.Color.White;
+            this.btn_showBusinessManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_showBusinessManagement.FlatAppearance.BorderSize = 0;
+            this.btn_showBusinessManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_showBusinessManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_showBusinessManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showBusinessManagement.Image")));
+            this.btn_showBusinessManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_showBusinessManagement.Location = new System.Drawing.Point(-1, 3);
+            this.btn_showBusinessManagement.Name = "btn_showBusinessManagement";
+            this.btn_showBusinessManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_showBusinessManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showBusinessManagement.TabIndex = 18;
+            this.btn_showBusinessManagement.Text = "İşletmeler";
+            this.btn_showBusinessManagement.UseVisualStyleBackColor = false;
+            this.btn_showBusinessManagement.Click += new System.EventHandler(this.btn_showBusinessManagement_Click);
+            // 
+            // btn_showNotifications
+            // 
+            this.btn_showNotifications.BackColor = System.Drawing.Color.White;
+            this.btn_showNotifications.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_showNotifications.FlatAppearance.BorderSize = 0;
+            this.btn_showNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_showNotifications.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_showNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btn_showNotifications.Image")));
+            this.btn_showNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_showNotifications.Location = new System.Drawing.Point(-1, 145);
+            this.btn_showNotifications.Name = "btn_showNotifications";
+            this.btn_showNotifications.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_showNotifications.Size = new System.Drawing.Size(192, 48);
+            this.btn_showNotifications.TabIndex = 20;
+            this.btn_showNotifications.Text = "Bildirimler";
+            this.btn_showNotifications.UseVisualStyleBackColor = false;
+            this.btn_showNotifications.Click += new System.EventHandler(this.btn_showNotifications_Click);
+            // 
+            // btn_showTreatmentManagement
+            // 
+            this.btn_showTreatmentManagement.BackColor = System.Drawing.Color.White;
+            this.btn_showTreatmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_showTreatmentManagement.FlatAppearance.BorderSize = 0;
+            this.btn_showTreatmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_showTreatmentManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_showTreatmentManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showTreatmentManagement.Image")));
+            this.btn_showTreatmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_showTreatmentManagement.Location = new System.Drawing.Point(-1, 97);
+            this.btn_showTreatmentManagement.Name = "btn_showTreatmentManagement";
+            this.btn_showTreatmentManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_showTreatmentManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showTreatmentManagement.TabIndex = 19;
+            this.btn_showTreatmentManagement.Text = "Tedaviler";
+            this.btn_showTreatmentManagement.UseVisualStyleBackColor = false;
+            this.btn_showTreatmentManagement.Click += new System.EventHandler(this.btn_showTreatmentManagement_Click);
             // 
             // button10
             // 
@@ -208,22 +209,22 @@
             this.button10.Text = "Tedavi ve Reçete Planlama";
             this.button10.UseVisualStyleBackColor = false;
             // 
-            // button9
+            // btn_vetManagement
             // 
-            this.button9.BackColor = System.Drawing.Color.White;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
-            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button9.Location = new System.Drawing.Point(0, 291);
-            this.button9.Name = "button9";
-            this.button9.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button9.Size = new System.Drawing.Size(192, 48);
-            this.button9.TabIndex = 23;
-            this.button9.Text = "    Veteriner Yönetimi";
-            this.button9.UseVisualStyleBackColor = false;
+            this.btn_vetManagement.BackColor = System.Drawing.Color.White;
+            this.btn_vetManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_vetManagement.FlatAppearance.BorderSize = 0;
+            this.btn_vetManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_vetManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_vetManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_vetManagement.Image")));
+            this.btn_vetManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_vetManagement.Location = new System.Drawing.Point(0, 291);
+            this.btn_vetManagement.Name = "btn_vetManagement";
+            this.btn_vetManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_vetManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_vetManagement.TabIndex = 23;
+            this.btn_vetManagement.Text = "    Veteriner Yönetimi";
+            this.btn_vetManagement.UseVisualStyleBackColor = false;
             // 
             // button8
             // 
@@ -404,8 +405,8 @@
             this.Text = "Anasayfa";
             this.Load += new System.EventHandler(this.Panel_Load);
             this.menuPanel.ResumeLayout(false);
-            this.adminPanel.ResumeLayout(false);
             this.businessPanel.ResumeLayout(false);
+            this.adminPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.topMenuPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).EndInit();
@@ -432,7 +433,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btn_vetManagement;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button btn_showUserManagement;

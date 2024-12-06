@@ -125,12 +125,6 @@
     <Compile Include="Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\AddAdvert.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Screens\AddAdvert.Designer.cs">
-      <DependentUpon>AddAdvert.cs</DependentUpon>
-    </Compile>
     <Compile Include="Screens\Admin\BusinessManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,41 +149,11 @@
     <Compile Include="Screens\Admin\UserManagement.Designer.cs">
       <DependentUpon>UserManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Screens\AdvertDetail.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Screens\AdvertDetail.Designer.cs">
-      <DependentUpon>AdvertDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Screens\Advertisements.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Screens\Advertisements.Designer.cs">
-      <DependentUpon>Advertisements.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Screens\MyAdverts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Screens\MyAdverts.Designer.cs">
-      <DependentUpon>MyAdverts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Screens\OtpScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Screens\OtpScreen.Designer.cs">
-      <DependentUpon>OtpScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Screens\Profile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Screens\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Screens\TwoFactorScreen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Screens\TwoFactorScreen.Designer.cs">
-      <DependentUpon>TwoFactorScreen.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Components\NotifItem.resx">
       <DependentUpon>NotifItem.cs</DependentUpon>
@@ -213,9 +177,6 @@
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\AddAdvert.resx">
-      <DependentUpon>AddAdvert.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Screens\Admin\BusinessManagement.resx">
       <DependentUpon>BusinessManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -228,23 +189,8 @@
     <EmbeddedResource Include="Screens\Admin\UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Screens\AdvertDetail.resx">
-      <DependentUpon>AdvertDetail.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Screens\Advertisements.resx">
-      <DependentUpon>Advertisements.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Screens\MyAdverts.resx">
-      <DependentUpon>MyAdverts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Screens\OtpScreen.resx">
-      <DependentUpon>OtpScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Screens\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Screens\TwoFactorScreen.resx">
-      <DependentUpon>TwoFactorScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -264,7 +210,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
-    <None Include="Resources\icon.ico" />
+    <None Include="Resources\favicon.ico" />
+    <None Include="Resources\Icon1.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />

@@ -74,11 +74,6 @@ namespace PawMateApp
            
         }
 
-        private void btn_showBlogCategories_Click(object sender, EventArgs e)
-        {
-            Advertisements advertisements = new Advertisements();
-            showForm(advertisements);
-        }
 
         public void showForm(Form form)
         {
@@ -106,16 +101,16 @@ namespace PawMateApp
         {
             if (Globals.CurrentUserAppAdminStatus == true)
             {
-                // Eğer kullanıcı uygulama adminiyse uygulama adminin panelini göster Ör: uygulamapaneli.visible = true;
+                adminPanel.Visible = true;
             }
             else if (Globals.CurrentUserBusinessAdminStatus == true)
             {
-                // Eğer kullanıcı işletme adminiyse işletme adminin panelini göster Ör: işletmepaneli.visible = true;
+                businessPanel.Visible = true;
             }
             else
             {
-                // Eğer kullanıcı normal kullanıcıysa normal kullanıcının panelini göster Ör: normalpanel.visible = true;
-
+                businessPanel.Visible = true;
+                btn_vetManagement.Visible = false;
             }
         }
 

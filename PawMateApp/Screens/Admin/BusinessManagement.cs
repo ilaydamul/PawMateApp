@@ -47,7 +47,7 @@ namespace PawMateApp.Screens.Admin
             }
             else
             {
-                if (int.TryParse(txt_phone.Text, out int phone) == false)
+                if (long.TryParse(txt_phone.Text, out long phone) == false)
                 {
                     MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -82,7 +82,7 @@ namespace PawMateApp.Screens.Admin
                                 cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
                                 cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
                                 cmd.Parameters.AddWithValue("@address", txt_address.Text);
-                                cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
+                                cmd.Parameters.AddWithValue("@isApproved", cb_approved.Checked);
                                 cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["businessId"].Value));
                                 cmd.ExecuteNonQuery();
                                 baglan.Close();
@@ -107,7 +107,7 @@ namespace PawMateApp.Screens.Admin
                                 cmd.Parameters.AddWithValue("@email", txt_businessEmail.Text);
                                 cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
                                 cmd.Parameters.AddWithValue("@address", txt_address.Text);
-                                cmd.Parameters.AddWithValue("@isApproved", radio_approved.Checked);
+                                cmd.Parameters.AddWithValue("@isApproved", cb_approved.Checked);
                                 cmd.ExecuteNonQuery();
                                 baglan.Close();
                                 Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
@@ -171,7 +171,7 @@ namespace PawMateApp.Screens.Admin
                 txt_businessEmail.Text = row.Cells["email"].Value?.ToString();
                 txt_phone.Text = row.Cells["phone"].Value?.ToString();
                 txt_address.Text = row.Cells["address"].Value?.ToString();
-                radio_approved.Checked = Convert.ToBoolean(row.Cells["isApproved"].Value);
+                cb_approved.Checked = Convert.ToBoolean(row.Cells["isApproved"].Value);
                 btn_addUpdateBusiness.Text = "Güncelle";
 
             }

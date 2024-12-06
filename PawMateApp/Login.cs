@@ -73,12 +73,14 @@ namespace PawMateApp
                     if (dr.Read())
                     {
 
-                        this.Hide();
-                        Panel panel = new Panel(); // messagebox yerine panel eklendi.
-                        panel.Show();
                         Globals.CurrentUserID = Convert.ToInt32(dr["userId"]);
                         Globals.CurrentUserBusinessAdminStatus = Convert.ToBoolean(dr["IsBusinessAdmin"]);
                         Globals.CurrentUserAppAdminStatus = Convert.ToBoolean(dr["IsAppAdmin"]);
+
+                        this.Hide();
+                        Panel panel = new Panel(); // messagebox yerine panel eklendi.
+                        panel.Show();
+
                     }
                     else
                     {
@@ -86,7 +88,6 @@ namespace PawMateApp
                         MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
 
                 catch (Exception ex)
                 {

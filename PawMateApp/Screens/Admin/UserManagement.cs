@@ -23,16 +23,29 @@ namespace PawMateApp.Screens.Admin
         private void UserManagement_Load(object sender, EventArgs e)
         {
 
-            //İşletmeler cb_businesses içine gelmeli
             try
             {
                 baglan.Open();
-                string query = "SELECT \"userId\", \"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\", \"isAppAdmin\" FROM \"users\"";
+
+                string query = "SELECT \"userId\", \"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\", \"isAppAdmin\"\r\nFROM \"users\"\r\nWHERE \"isAppAdmin\" = FALSE;";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 userList.DataSource = dt;
 
+                string query2 = "SELECT \"businessId\", \"businessName\" FROM public.businesses ORDER BY \"businessId\" ASC";
+                NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(query2, baglan);
+                DataTable dtBusinesses = new DataTable();
+                da2.Fill(dtBusinesses);
+
+                DataRow dr = dtBusinesses.NewRow();
+                dr["businessId"] = DBNull.Value; 
+                dr["businessName"] = "İşletme Seçiniz"; 
+                dtBusinesses.Rows.InsertAt(dr, 0);
+
+                cb_businesses.DataSource = dtBusinesses;
+                cb_businesses.DisplayMember = "businessName"; 
+                cb_businesses.ValueMember = "businessId";    
             }
             catch (Exception ex)
             {
@@ -42,6 +55,8 @@ namespace PawMateApp.Screens.Admin
             {
                 baglan.Close();
             }
+
+
         }
 
         private void btn_addUser_Click(object sender, EventArgs e)
@@ -60,9 +75,8 @@ namespace PawMateApp.Screens.Admin
                 return;
             }
             else
-
             {
-                if (!int.TryParse(txt_phone.Text, out int parsedValue))
+                if (!long.TryParse(txt_phone.Text, out long parsedValue))
                 {
                         MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

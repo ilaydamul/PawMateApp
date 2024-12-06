@@ -38,7 +38,7 @@ namespace PawMateApp.Screens.Admin
                 if (rowCount == 0)
                 {
                     Debug.WriteLine("Bildirim yoktur");
-                    // Bildirim sayısı 0 ise "Bildirim yoktur" yazılacak ben yapamıyorum siz yapın lütfen (Barış)
+                    txt_noNotif.Visible = true;
                 }
                 else
                 {
@@ -55,6 +55,7 @@ namespace PawMateApp.Screens.Admin
                             flowLayoutPanel1.Controls.Add(notifItem); 
                         }
                     }
+                    txt_noNotif.Visible = false;
                 }
             }
             catch (Exception ex)
