@@ -225,6 +225,7 @@
             this.btn_vetManagement.TabIndex = 23;
             this.btn_vetManagement.Text = "    Veteriner Yönetimi";
             this.btn_vetManagement.UseVisualStyleBackColor = false;
+            this.btn_vetManagement.Click += new System.EventHandler(this.btn_vetManagement_Click);
             // 
             // button8
             // 

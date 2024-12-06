@@ -107,6 +107,7 @@ namespace PawMateApp
             else if (Globals.CurrentUserBusinessAdminStatus == true)
             {
                 businessPanel.Visible = true;
+                btn_vetManagement.Visible = true;
                 btn_profile.Visible = true;
             }
             else
@@ -150,6 +151,12 @@ namespace PawMateApp
         {
             Profile profile = new Profile();
             showForm(profile);
+        }
+
+        private void btn_vetManagement_Click(object sender, EventArgs e)
+        {
+            VetManagement vetManagement = new VetManagement();
+            showForm(vetManagement);
         }
     }
 }
