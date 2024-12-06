@@ -176,6 +176,7 @@ namespace PawMateApp.Screens.Admin
                     MessageBox.Show("Tedavi başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txt_treatmentdesc.Text = "";
                     txt_treatmenttitle.Text = "";
+                    btn_addUpdateUser.Text = "Ekle";
                     LoadTreatments();
                 }
                 else
