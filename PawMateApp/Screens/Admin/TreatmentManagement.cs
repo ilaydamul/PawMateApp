@@ -50,6 +50,7 @@ namespace PawMateApp.Screens.Admin
                     txt_treatmenttitle.Text = treatmentName;
                     txt_treatmentdesc.Text = treatmentDescription;
                     IsUpdate = true;
+                    btn_addUpdateUser.Text = "Güncelle";
 
                 }
             }
@@ -90,6 +91,7 @@ namespace PawMateApp.Screens.Admin
                     MessageBox.Show("Tedavi başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txt_treatmenttitle.Text = "";
                     txt_treatmentdesc.Text = "";
+                    btn_addUpdateUser.Text = "Ekle";
                     LoadTreatments();
                 }
             }
@@ -182,6 +184,7 @@ namespace PawMateApp.Screens.Admin
                 else
                 {
                     MessageBox.Show("Silme işlemi iptal edildi.", "İptal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btn_addUpdateUser.Text = "Ekle";
                 }
             }
         }
