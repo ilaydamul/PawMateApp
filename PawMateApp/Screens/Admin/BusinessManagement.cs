@@ -200,7 +200,8 @@ namespace PawMateApp.Screens.Admin
                     {
                         cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(businessesList.SelectedRows[0].Cells["businessId"].Value));
                         cmd.ExecuteNonQuery();
-                        baglan.Close();
+                        baglan.Close();                    
+                        
                     }
                     MessageBox.Show("İşletme başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BusinessManagement_Load(null, null); 
@@ -213,7 +214,7 @@ namespace PawMateApp.Screens.Admin
 
                 Inputs inputs = new Inputs(txt_businessName, txt_authName, txt_businessEmail, txt_phone, txt_address);
                 inputs.ClearInputs();
-
+                btn_addUpdateBusiness.Text = "Ekle";
 
 
             }

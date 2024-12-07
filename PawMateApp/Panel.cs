@@ -91,26 +91,30 @@ namespace PawMateApp
             //form.Show();
         }
 
-        private void ProfileButton_Click(object sender, EventArgs e)
-        {
-            Profile profile = new Profile();
-            showForm(profile);
-        }
+        //private void ProfileButton_Click(object sender, EventArgs e)
+        //{
+        //    Profile profile = new Profile();
+        //    showForm(profile);
+        //}
 
         private void Panel_Load(object sender, EventArgs e)
         {
             if (Globals.CurrentUserAppAdminStatus == true)
             {
                 adminPanel.Visible = true;
+                btn_profile.Visible = false;
             }
             else if (Globals.CurrentUserBusinessAdminStatus == true)
             {
                 businessPanel.Visible = true;
+                btn_vetManagement.Visible = true;
+                btn_profile.Visible = true;
             }
             else
             {
                 businessPanel.Visible = true;
                 btn_vetManagement.Visible = false;
+                btn_profile.Visible = true;
             }
         }
 
@@ -141,6 +145,18 @@ namespace PawMateApp
         private void businessPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btn_profile_Click(object sender, EventArgs e)
+        {
+            Profile profile = new Profile();
+            showForm(profile);
+        }
+
+        private void btn_vetManagement_Click(object sender, EventArgs e)
+        {
+            VetManagement vetManagement = new VetManagement();
+            showForm(vetManagement);
         }
     }
 }

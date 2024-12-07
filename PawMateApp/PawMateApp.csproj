@@ -155,6 +155,12 @@
     <Compile Include="Screens\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\VetManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\VetManagement.Designer.cs">
+      <DependentUpon>VetManagement.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Components\NotifItem.resx">
       <DependentUpon>NotifItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,6 +198,9 @@
     <EmbeddedResource Include="Screens\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\VetManagement.resx">
+      <DependentUpon>VetManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -210,6 +219,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\profile_img2.png" />
+    <None Include="Resources\profile_img2.jpg" />
+    <None Include="Resources\profile_img.jpg" />
     <None Include="Resources\favicon.ico" />
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>

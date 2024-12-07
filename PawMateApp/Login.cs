@@ -76,6 +76,9 @@ namespace PawMateApp
                         Globals.CurrentUserID = Convert.ToInt32(dr["userId"]);
                         Globals.CurrentUserBusinessAdminStatus = Convert.ToBoolean(dr["IsBusinessAdmin"]);
                         Globals.CurrentUserAppAdminStatus = Convert.ToBoolean(dr["IsAppAdmin"]);
+                        //bool qwe = Convert.ToBoolean(dr["IsBusinessAdmin"]);
+                        //MessageBox.Show(qwe);
+
 
                         this.Hide();
                         Panel panel = new Panel(); // messagebox yerine panel eklendi.

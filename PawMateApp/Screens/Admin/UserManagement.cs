@@ -67,45 +67,58 @@ namespace PawMateApp.Screens.Admin
 
         }
 
+
         private void btn_addUpdateUser_Click(object sender, EventArgs e)
         {
+            var inputsToCheck = new string[]
+      {
+           txt_fullname.Text,
+           txt_username.Text,
+           txt_password.Text,
+           txt_phone.Text,
+           txt_email.Text,
+           cb_businesses.SelectedIndex >= 0 ? cb_businesses.SelectedValue.ToString() : ""
+      };//hata aldığım için böyle yaptım başka türlü olabiiyorsa değiştirebilirsiniz.
+
+
+            CheckClass checkClass = new CheckClass(inputsToCheck);
+
+            if (!checkClass.Check(""))
+            {
+                return;
+            }
+
             if (!CheckClass.IsValidEmail(txt_email.Text))
             {
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if (!long.TryParse(txt_phone.Text, out long parsedValue))
+            {
+                MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             else
             {
-                if (!long.TryParse(txt_phone.Text, out long parsedValue))
+                try
                 {
-                        MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else
-                { 
+                    if (baglan.State == ConnectionState.Closed)
+                        baglan.Open();
 
-                    try
+                    string query;
+
+                    if (btn_addUpdateUser.Text == "Güncelle")
                     {
                         if (userList.SelectedRows.Count == 0)
                         {
-                            MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Lütfen güncellemek için bir kullanıcı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        if (string.IsNullOrWhiteSpace(txt_fullname.Text) || string.IsNullOrWhiteSpace(txt_username.Text) ||
-                            string.IsNullOrWhiteSpace(txt_password.Text) || string.IsNullOrWhiteSpace(txt_phone.Text) ||
-                            string.IsNullOrWhiteSpace(txt_email.Text) || cb_businesses.SelectedIndex == -1)
-                        {
-                            MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-
-                        baglan.Open();
-
-                        string query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
-                                       "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
-                                       "WHERE \"userId\" = @userId";
+                        query = "UPDATE \"users\" SET \"username\" = @username, \"password\" = @password, \"fullName\" = @fullName, " +
+                                "\"phone\" = @phone, \"email\" = @email, \"businessId\" = @businessId, \"isBusinessAdmin\" = @isBusinessAdmin " +
+                                "WHERE \"userId\" = @userId";
 
                         using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                         {
@@ -119,17 +132,43 @@ namespace PawMateApp.Screens.Admin
                             cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value));
                             cmd.ExecuteNonQuery();
                             baglan.Close();
+
                         }
 
                         MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        UserManagement_Load(null, null);
                     }
-                    catch (Exception ex)
+                    else if (btn_addUpdateUser.Text == "Ekle")
                     {
-                        MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        query = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\") " +
+                                "VALUES (@username, @password, @fullName, @phone, @email, @businessId, @isBusinessAdmin)";
+
+                        using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                        {
+                            cmd.Parameters.AddWithValue("@username", txt_username.Text);
+                            cmd.Parameters.AddWithValue("@password", txt_password.Text);
+                            cmd.Parameters.AddWithValue("@fullName", txt_fullname.Text);
+                            cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
+                            cmd.Parameters.AddWithValue("@email", txt_email.Text);
+                            cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(cb_businesses.SelectedValue));
+                            cmd.Parameters.AddWithValue("@isBusinessAdmin", isBusinessAdmin.Checked);
+                            cmd.ExecuteNonQuery();
+                            baglan.Close();
+                            Inputs inputs = new Inputs(txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses);
+                            inputs.ClearInputs();
+                        }
+
+                        MessageBox.Show("Kullanıcı başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+
+                    UserManagement_Load(null, null);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
         }
 
         private void userList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -182,6 +221,7 @@ namespace PawMateApp.Screens.Admin
                         cmd.Parameters.AddWithValue("@userId", Convert.ToInt32(userList.SelectedRows[0].Cells["userId"].Value)); 
                         cmd.ExecuteNonQuery();
                         baglan.Close();//hata yüzünden burada kapattım. Daha sonra kontrol edilecek.
+                       
                     }
 
                     MessageBox.Show("Kullanıcı başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -192,6 +232,10 @@ namespace PawMateApp.Screens.Admin
                 {
                     MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                Inputs inputs = new Inputs(txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses);
+                inputs.ClearInputs();
+                btn_addUpdateUser.Text = "Ekle";
             }
 
         }
