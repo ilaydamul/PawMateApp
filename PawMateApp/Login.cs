@@ -36,6 +36,7 @@ namespace PawMateApp
             public static int CurrentUserID { get; set; }   
             public static bool CurrentUserBusinessAdminStatus { get; set; }   
             public static bool CurrentUserAppAdminStatus { get; set; }   
+            public static int CurrentUserBusinessAdminID { get; set; }   
             
         }
 
@@ -76,6 +77,7 @@ namespace PawMateApp
                         Globals.CurrentUserID = Convert.ToInt32(dr["userId"]);
                         Globals.CurrentUserBusinessAdminStatus = Convert.ToBoolean(dr["IsBusinessAdmin"]);
                         Globals.CurrentUserAppAdminStatus = Convert.ToBoolean(dr["IsAppAdmin"]);
+                        Globals.CurrentUserBusinessAdminID = Convert.ToInt32(dr["businessId"]);
                         //bool qwe = Convert.ToBoolean(dr["IsBusinessAdmin"]);
                         //MessageBox.Show(qwe);
 

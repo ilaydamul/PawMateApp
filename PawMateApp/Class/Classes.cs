@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
+using static PawMateApp.Login;
 
 namespace PawMateApp
 {
@@ -355,8 +356,8 @@ public class DatabaseManagament
                 }
             }
 
-            string insertQuery = "INSERT INTO users (username, password, email, phone, \"fullName\", \"isBusinessAdmin\") VALUES (@username, @password, @email, @phone, @fullname, @isBusinessAdmin)";
-
+            string insertQuery = "INSERT INTO users (username, password, email, phone, \"fullName\", \"isBusinessAdmin\", \"businessId\") VALUES (@username, @password, @email, @phone, @fullname, @isBusinessAdmin , @businessid)";
+            int id = Globals.CurrentUserBusinessAdminID;
             using (var cmd = new Npgsql.NpgsqlCommand(insertQuery, baglan))
             {
                 cmd.Parameters.AddWithValue("username", username);
@@ -365,6 +366,7 @@ public class DatabaseManagament
                 cmd.Parameters.AddWithValue("phone", phone);
                 cmd.Parameters.AddWithValue("fullname", fullname);
                 cmd.Parameters.AddWithValue("isBusinessAdmin", isBusinessAdmin);
+                cmd.Parameters.AddWithValue("businessid", id);
                 cmd.Parameters.AddWithValue("isAppAdmin", false);
                 cmd.ExecuteNonQuery();
             }
