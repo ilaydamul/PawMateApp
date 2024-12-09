@@ -197,6 +197,11 @@ public class Inputs
             {
                 dateTimePicker.Value = DateTime.Now;
             }
+
+            else if (control is MaskedTextBox maskedTextBox)
+            {
+                maskedTextBox.Text = ""; 
+            }
         }
     }
 }
