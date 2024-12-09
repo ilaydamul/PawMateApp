@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PawMateApp;
+using System;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -300,6 +301,84 @@ public class DatabaseManagament
         catch (Exception ex)
         {
             Debug.WriteLine("Tedavi silme hatası: " + ex.Message);
+        }
+    }
+
+    public void AddUserToDatabase(string username, string password, string email, string phone, string fullname, bool isBusinessAdmin)
+    {
+        try
+        {
+            if (!CheckClass.IsValidEmail(email))
+            {
+                MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!CheckClass.IsValidPhone(phone))
+            {
+                return;
+            }
+
+            string query = @"
+            SELECT username, email, phone 
+            FROM users 
+            WHERE username = @username OR email = @email OR phone = @phone";
+
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("email", email);
+                cmd.Parameters.AddWithValue("phone", phone);
+
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        if (dr["username"].ToString() == username)
+                        {
+                            MessageBox.Show("Bu kullanıcı adı zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        if (dr["email"].ToString() == email)
+                        {
+                            MessageBox.Show("Bu e-posta adresi zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        if (dr["phone"].ToString() == phone)
+                        {
+                            MessageBox.Show("Bu telefon numarası zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                }
+            }
+
+            string insertQuery = "INSERT INTO users (username, password, email, phone, \"fullName\", \"isBusinessAdmin\") VALUES (@username, @password, @email, @phone, @fullname, @isBusinessAdmin)";
+
+            using (var cmd = new Npgsql.NpgsqlCommand(insertQuery, baglan))
+            {
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("password", password);
+                cmd.Parameters.AddWithValue("email", email);
+                cmd.Parameters.AddWithValue("phone", phone);
+                cmd.Parameters.AddWithValue("fullname", fullname);
+                cmd.Parameters.AddWithValue("isBusinessAdmin", isBusinessAdmin);
+                cmd.Parameters.AddWithValue("isAppAdmin", false);
+                cmd.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Kullanıcı başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kullanıcı ekleme hatası: " + ex.Message);
+            MessageBox.Show("Bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            CloseConnection();
         }
     }
 }
