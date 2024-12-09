@@ -93,6 +93,16 @@ namespace PawMateApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap medicineManag {
+            get {
+                object obj = ResourceManager.GetObject("medicineManag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap profile_img2 {
             get {
                 object obj = ResourceManager.GetObject("profile_img2", resourceCulture);
