@@ -14,17 +14,16 @@ namespace PawMateApp.Screens
 {
     public partial class VetManagement : Form
     {
+        public DatabaseManagament db = new DatabaseManagament();
         public VetManagement()
         {
             InitializeComponent();
             LoadUsersToDataGridView();
             CustomizeDataGridView();
-
         }
 
         private void LoadUsersToDataGridView()
         {
-            DatabaseManagament db = new DatabaseManagament();
             DataTable usersTable = db.GetAllUsers();
             vetList.DataSource = usersTable;
         }
@@ -46,6 +45,7 @@ namespace PawMateApp.Screens
 
         private void btn_addUpdateVet_Click(object sender, EventArgs e)
         {
+            db.OpenConnection();
             Debug.WriteLine(isBusinessAdmin.Checked);
             CheckClass checkinputs = new CheckClass(new string[] { txt_email.Text, txt_fullname.Text, txt_password.Text, txt_phone.Text, txt_title.Text, txt_username.Text });
             if (!checkinputs.Check(""))
@@ -54,18 +54,19 @@ namespace PawMateApp.Screens
             }
             else
             {
-                DatabaseManagament database = new DatabaseManagament();
-                database.OpenConnection();
-               if(database.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                
+                
+               if(db.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
                 {
                     Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
                     inputs.ClearInputs();
+                    LoadUsersToDataGridView();
                 }
                 else
                 {
                     MessageBox.Show("Veteriner eklenirken bir hata oluştu.");
                 }
-                database.CloseConnection();
+                db.CloseConnection();
             }
         }
 
@@ -88,6 +89,39 @@ namespace PawMateApp.Screens
             Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
             inputs.ClearInputs();
             btn_addUpdateVet.Text = "Ekle";
+        }
+
+        private void btn_deleteVet_Click(object sender, EventArgs e)
+        {
+            db.OpenConnection();
+            DialogResult result = MessageBox.Show(
+                "Seçilen veteriner silinecek. Silmek istediğinizden emin misiniz?",
+                "Emin misiniz?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
+            if (result == DialogResult.Yes)
+            {
+                int user_id = Convert.ToInt32(vetList.CurrentRow.Cells["userId"].Value);
+                
+                
+                if (db.DeleteUser(user_id))
+                {
+                    LoadUsersToDataGridView();
+                    MessageBox.Show("Veteriner başarılı bir şekilde silindi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Inputs inputs = new Inputs(new Control[] {txt_email, txt_fullname, txt_password, txt_phone,txt_username, isBusinessAdmin});
+                    inputs.ClearInputs();
+                }
+                else
+                {
+                    MessageBox.Show("Veteriner silinirken bir hata oluştu!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                return;
+            }
+            db.CloseConnection();
         }
     }
 }

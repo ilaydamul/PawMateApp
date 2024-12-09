@@ -74,6 +74,7 @@
             this.btn_deleteVet.TabIndex = 138;
             this.btn_deleteVet.Text = "Sil";
             this.btn_deleteVet.UseVisualStyleBackColor = false;
+            this.btn_deleteVet.Click += new System.EventHandler(this.btn_deleteVet_Click);
             // 
             // btn_addVet
             // 
