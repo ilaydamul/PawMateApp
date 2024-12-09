@@ -452,7 +452,89 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
- 
+
+    public bool UpdateUserToDatabase(int userId, string username, string password, string email, string phone, string fullname, bool isBusinessAdmin)
+    {
+        try
+        {
+            if (!CheckClass.IsValidEmail(email))
+            {
+                MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (!CheckClass.IsValidPhone(phone))
+            {
+                MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            string query = "SELECT username, email, phone FROM users WHERE (username = @username OR email = @email OR phone = @phone)AND \"userId\" != @userId"; 
+
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("email", email);
+                cmd.Parameters.AddWithValue("phone", phone);
+                cmd.Parameters.AddWithValue("userId", userId);
+
+                using (var dr = cmd.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            if (dr["username"].ToString() == username)
+                            {
+                                MessageBox.Show("Bu kullanıcı adı zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return false;
+                            }
+
+                            if (dr["email"].ToString() == email)
+                            {
+                                MessageBox.Show("Bu e-posta adresi zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return false;
+                            }
+
+                            if (dr["phone"].ToString() == phone)
+                            {
+                                MessageBox.Show("Bu telefon numarası zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            string updateQuery = "UPDATE users SET username = @username, password = @password, email = @email, phone = @phone, \"fullName\" = @fullname, \"isBusinessAdmin\" = @isBusinessAdmin WHERE \"userId\" = @userId";
+    
+        using (var cmd = new Npgsql.NpgsqlCommand(updateQuery, baglan))
+            {
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("password", password);
+                cmd.Parameters.AddWithValue("email", email);
+                cmd.Parameters.AddWithValue("phone", phone);
+                cmd.Parameters.AddWithValue("fullname", fullname);
+                cmd.Parameters.AddWithValue("isBusinessAdmin", isBusinessAdmin);
+                cmd.Parameters.AddWithValue("userId", userId);
+                cmd.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kullanıcı güncelleme hatası: " + ex.Message);
+            MessageBox.Show("Bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
+
 
 }
 

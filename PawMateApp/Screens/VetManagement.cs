@@ -45,28 +45,60 @@ namespace PawMateApp.Screens
 
         private void btn_addUpdateVet_Click(object sender, EventArgs e)
         {
-            db.OpenConnection();
-            Debug.WriteLine(isBusinessAdmin.Checked);
-            CheckClass checkinputs = new CheckClass(new string[] { txt_email.Text, txt_fullname.Text, txt_password.Text, txt_phone.Text, txt_title.Text, txt_username.Text });
-            if (!checkinputs.Check(""))
+            if (btn_addUpdateVet.Text == "Ekle")
             {
-                return;
-            }
-            else
-            {
-                
-                
-               if(db.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                db.OpenConnection();
+                Debug.WriteLine(isBusinessAdmin.Checked);
+                CheckClass checkinputs = new CheckClass(new string[] { txt_email.Text, txt_fullname.Text, txt_password.Text, txt_phone.Text, txt_title.Text, txt_username.Text });
+                if (!checkinputs.Check(""))
                 {
-                    Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
-                    inputs.ClearInputs();
-                    LoadUsersToDataGridView();
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Veteriner eklenirken bir hata oluştu.");
+
+
+                    if (db.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                    {
+                        Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
+                        inputs.ClearInputs();
+                        LoadUsersToDataGridView();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    db.CloseConnection();
                 }
-                db.CloseConnection();
+            }
+            else
+            {
+               
+                db.OpenConnection();
+                Debug.WriteLine(isBusinessAdmin.Checked);
+                CheckClass checkinputs = new CheckClass(new string[] { txt_email.Text, txt_fullname.Text, txt_password.Text, txt_phone.Text, txt_title.Text, txt_username.Text });
+                if (!checkinputs.Check(""))
+                {
+                    return;
+                }
+                else
+                {
+
+
+                    if (db.UpdateUserToDatabase(Convert.ToInt32(vetList.CurrentRow.Cells["userId"].Value), txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                    {
+                        Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
+                        inputs.ClearInputs();
+                        LoadUsersToDataGridView();
+
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    db.CloseConnection();
+                }
+
             }
         }
 
