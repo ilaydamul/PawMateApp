@@ -424,7 +424,29 @@ public class DatabaseManagament
         }
         return dataTable;
     }
-
+    public bool DeleteUser(int userid)
+    {
+        try
+        {
+            string query = "DELETE FROM \"users\" WHERE \"userId\" = @userid";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("userid", userid);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Kullanıcı silindi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kullanıcı silme hatası: " + ex.Message);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
  
 
 }

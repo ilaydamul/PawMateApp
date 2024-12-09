@@ -60,6 +60,7 @@ namespace PawMateApp.Screens
                 {
                     Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
                     inputs.ClearInputs();
+                    LoadUsersToDataGridView();
                 }
                 else
                 {
@@ -88,6 +89,37 @@ namespace PawMateApp.Screens
             Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
             inputs.ClearInputs();
             btn_addUpdateVet.Text = "Ekle";
+        }
+
+        private void btn_deleteVet_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Seçilen tedavi silinecek. Silmek istediğinizden emin misiniz?",
+                "Emin misiniz?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+                );
+            if (result == DialogResult.Yes)
+            {
+                int user_id = Convert.ToInt32(vetList.CurrentRow.Cells["userId"].Value);
+                DatabaseManagament db2 = new DatabaseManagament();
+                db2.OpenConnection();
+                if (db2.DeleteUser(user_id))
+                {
+                    LoadUsersToDataGridView();
+                    MessageBox.Show("Veteriner başarılı bir şekilde silindi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Inputs inputs = new Inputs(new Control[] {txt_email, txt_fullname, txt_password, txt_phone,txt_username, isBusinessAdmin});
+                    inputs.ClearInputs();
+                }
+                else
+                {
+                    MessageBox.Show("Veteriner silinirken bir hata oluştu!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
