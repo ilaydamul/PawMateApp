@@ -189,6 +189,14 @@ public class Inputs
                 comboBox.SelectedIndex = -1; 
                 comboBox.Text = "";        
             }
+            else if (control is CheckBox checkBox)
+            {
+                checkBox.Checked = false;
+            }
+            else if (control is DateTimePicker dateTimePicker)
+            {
+                dateTimePicker.Value = DateTime.Now;
+            }
         }
     }
 }
@@ -305,19 +313,19 @@ public class DatabaseManagament
         }
     }
 
-    public void AddUserToDatabase(string username, string password, string email, string phone, string fullname, bool isBusinessAdmin)
+    public bool AddUserToDatabase(string username, string password, string email, string phone, string fullname, bool isBusinessAdmin)
     {
         try
         {
             if (!CheckClass.IsValidEmail(email))
             {
                 MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
 
             if (!CheckClass.IsValidPhone(phone))
             {
-                return;
+                return false;
             }
 
             string query = @"
@@ -338,19 +346,19 @@ public class DatabaseManagament
                         if (dr["username"].ToString() == username)
                         {
                             MessageBox.Show("Bu kullanıcı adı zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            return false;
                         }
 
                         if (dr["email"].ToString() == email)
                         {
                             MessageBox.Show("Bu e-posta adresi zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            return false; 
                         }
 
                         if (dr["phone"].ToString() == phone)
                         {
                             MessageBox.Show("Bu telefon numarası zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            return false;
                         }
                     }
                 }
@@ -372,11 +380,13 @@ public class DatabaseManagament
             }
 
             MessageBox.Show("Kullanıcı başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return true;
         }
         catch (Exception ex)
         {
             Debug.WriteLine("Kullanıcı ekleme hatası: " + ex.Message);
             MessageBox.Show("Bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
         finally
         {

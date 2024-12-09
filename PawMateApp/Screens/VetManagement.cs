@@ -33,7 +33,16 @@ namespace PawMateApp.Screens
             {
                 DatabaseManagament database = new DatabaseManagament();
                 database.OpenConnection();
-                database.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked);
+               if(database.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                {
+                    Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
+                    inputs.ClearInputs();
+                }
+                else
+                {
+                    MessageBox.Show("Veteriner eklenirken bir hata oluştu.");
+                }
+                database.CloseConnection();
             }
         }
     }
