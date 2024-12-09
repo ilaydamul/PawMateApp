@@ -34,6 +34,8 @@
             this.btn_addVet = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_email = new System.Windows.Forms.TextBox();
             this.isBusinessAdmin = new System.Windows.Forms.CheckBox();
             this.vetImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,8 +48,6 @@
             this.txt_fullname = new System.Windows.Forms.TextBox();
             this.btn_addUpdateVet = new System.Windows.Forms.Button();
             this.vetList = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txt_email = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vetImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vetList)).BeginInit();
@@ -117,6 +117,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(256, 500);
             this.panel1.TabIndex = 136;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 329);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 14);
+            this.label2.TabIndex = 127;
+            this.label2.Text = "E-Mail Adresi";
+            // 
+            // txt_email
+            // 
+            this.txt_email.BackColor = System.Drawing.Color.White;
+            this.txt_email.Location = new System.Drawing.Point(14, 347);
+            this.txt_email.Name = "txt_email";
+            this.txt_email.Size = new System.Drawing.Size(226, 20);
+            this.txt_email.TabIndex = 4;
             // 
             // isBusinessAdmin
             // 
@@ -222,6 +240,7 @@
             this.btn_addUpdateVet.TabIndex = 6;
             this.btn_addUpdateVet.Text = "Ekle";
             this.btn_addUpdateVet.UseVisualStyleBackColor = false;
+            this.btn_addUpdateVet.Click += new System.EventHandler(this.btn_addUpdateVet_Click);
             // 
             // vetList
             // 
@@ -232,24 +251,6 @@
             this.vetList.RowHeadersWidth = 51;
             this.vetList.Size = new System.Drawing.Size(522, 466);
             this.vetList.TabIndex = 134;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 329);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 14);
-            this.label2.TabIndex = 127;
-            this.label2.Text = "E-Mail Adresi";
-            // 
-            // txt_email
-            // 
-            this.txt_email.BackColor = System.Drawing.Color.White;
-            this.txt_email.Location = new System.Drawing.Point(14, 347);
-            this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(226, 20);
-            this.txt_email.TabIndex = 4;
             // 
             // VetManagement
             // 

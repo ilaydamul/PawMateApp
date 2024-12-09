@@ -35,6 +35,9 @@ namespace PawMateApp.Screens.Admin
                 string countQuery = "SELECT COUNT(*) FROM \"notifications\" WHERE \"isRead\"=false";
                 NpgsqlCommand countCmd = new NpgsqlCommand(countQuery, baglan);
                 int rowCount = Convert.ToInt32(countCmd.ExecuteScalar());
+                flowLayoutPanel1.Controls.Clear(); // FlowLayoutPanel'i temizle
+                flowLayoutPanel1.Refresh(); // Arayüzü yenile
+
                 if (rowCount == 0)
                 {
                     Debug.WriteLine("Bildirim yoktur");
@@ -45,14 +48,13 @@ namespace PawMateApp.Screens.Admin
                     NpgsqlCommand cmd = new NpgsqlCommand(query, baglan);
                     using (NpgsqlDataReader dr = cmd.ExecuteReader())
                     {
-                        flowLayoutPanel1.Controls.Clear();
                         while (dr.Read())
                         {
                             NotifItem notifItem = new NotifItem();
                             notifItem.BusinessName = dr["businessName"].ToString();
                             notifItem.BusinessId = dr["businessId"].ToString();
                             notifItem.BusinessEmail = dr["email"].ToString();
-                            flowLayoutPanel1.Controls.Add(notifItem); 
+                            flowLayoutPanel1.Controls.Add(notifItem);
                         }
                     }
                     txt_noNotif.Visible = false;
