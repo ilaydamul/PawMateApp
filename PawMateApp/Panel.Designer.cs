@@ -37,13 +37,13 @@
             this.btn_showTreatmentManagement = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
             this.businessPanel = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btn_treatmentManagement = new System.Windows.Forms.Button();
             this.btn_vetManagement = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btn_petManagement = new System.Windows.Forms.Button();
+            this.btn_stockManagement = new System.Windows.Forms.Button();
+            this.btn_appointManagement = new System.Windows.Forms.Button();
+            this.btn_medicineManagement = new System.Windows.Forms.Button();
+            this.btn_patientManagement = new System.Windows.Forms.Button();
             this.logoBox = new System.Windows.Forms.PictureBox();
             this.btn_profile = new System.Windows.Forms.Button();
             this.contentPanel = new System.Windows.Forms.Panel();
@@ -80,7 +80,7 @@
             this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
             this.adminPanel.Controls.Add(this.btn_showNotifications);
             this.adminPanel.Controls.Add(this.btn_showTreatmentManagement);
-            this.adminPanel.Location = new System.Drawing.Point(0, 64);
+            this.adminPanel.Location = new System.Drawing.Point(0, 63);
             this.adminPanel.Name = "adminPanel";
             this.adminPanel.Size = new System.Drawing.Size(192, 206);
             this.adminPanel.TabIndex = 21;
@@ -178,13 +178,13 @@
             // 
             // businessPanel
             // 
-            this.businessPanel.Controls.Add(this.button10);
+            this.businessPanel.Controls.Add(this.btn_treatmentManagement);
             this.businessPanel.Controls.Add(this.btn_vetManagement);
-            this.businessPanel.Controls.Add(this.button8);
-            this.businessPanel.Controls.Add(this.button7);
-            this.businessPanel.Controls.Add(this.button4);
-            this.businessPanel.Controls.Add(this.button5);
-            this.businessPanel.Controls.Add(this.button6);
+            this.businessPanel.Controls.Add(this.btn_petManagement);
+            this.businessPanel.Controls.Add(this.btn_stockManagement);
+            this.businessPanel.Controls.Add(this.btn_appointManagement);
+            this.businessPanel.Controls.Add(this.btn_medicineManagement);
+            this.businessPanel.Controls.Add(this.btn_patientManagement);
             this.businessPanel.Location = new System.Drawing.Point(0, 63);
             this.businessPanel.Name = "businessPanel";
             this.businessPanel.Size = new System.Drawing.Size(192, 349);
@@ -192,22 +192,23 @@
             this.businessPanel.Visible = false;
             this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
             // 
-            // button10
+            // btn_treatmentManagement
             // 
-            this.button10.BackColor = System.Drawing.Color.White;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
-            this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button10.Location = new System.Drawing.Point(0, 243);
-            this.button10.Name = "button10";
-            this.button10.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button10.Size = new System.Drawing.Size(192, 48);
-            this.button10.TabIndex = 24;
-            this.button10.Text = "Tedavi ve Reçete Planlama";
-            this.button10.UseVisualStyleBackColor = false;
+            this.btn_treatmentManagement.BackColor = System.Drawing.Color.White;
+            this.btn_treatmentManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_treatmentManagement.FlatAppearance.BorderSize = 0;
+            this.btn_treatmentManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_treatmentManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_treatmentManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_treatmentManagement.Image")));
+            this.btn_treatmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_treatmentManagement.Location = new System.Drawing.Point(0, 243);
+            this.btn_treatmentManagement.Name = "btn_treatmentManagement";
+            this.btn_treatmentManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_treatmentManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_treatmentManagement.TabIndex = 24;
+            this.btn_treatmentManagement.Text = "Tedavi ve Reçete Planlama";
+            this.btn_treatmentManagement.UseVisualStyleBackColor = false;
+            this.btn_treatmentManagement.Click += new System.EventHandler(this.btn_treatmentManagement_Click);
             // 
             // btn_vetManagement
             // 
@@ -227,90 +228,95 @@
             this.btn_vetManagement.UseVisualStyleBackColor = false;
             this.btn_vetManagement.Click += new System.EventHandler(this.btn_vetManagement_Click);
             // 
-            // button8
+            // btn_petManagement
             // 
-            this.button8.BackColor = System.Drawing.Color.White;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(0, 195);
-            this.button8.Name = "button8";
-            this.button8.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button8.Size = new System.Drawing.Size(192, 48);
-            this.button8.TabIndex = 22;
-            this.button8.Text = "     Pet ve Müşteri      Yönetimi\r\n";
-            this.button8.UseVisualStyleBackColor = false;
+            this.btn_petManagement.BackColor = System.Drawing.Color.White;
+            this.btn_petManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_petManagement.FlatAppearance.BorderSize = 0;
+            this.btn_petManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_petManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_petManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_petManagement.Image")));
+            this.btn_petManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_petManagement.Location = new System.Drawing.Point(0, 195);
+            this.btn_petManagement.Name = "btn_petManagement";
+            this.btn_petManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_petManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_petManagement.TabIndex = 22;
+            this.btn_petManagement.Text = "     Pet ve Müşteri      Yönetimi\r\n";
+            this.btn_petManagement.UseVisualStyleBackColor = false;
+            this.btn_petManagement.Click += new System.EventHandler(this.btn_petManagement_Click);
             // 
-            // button7
+            // btn_stockManagement
             // 
-            this.button7.BackColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(0, 147);
-            this.button7.Name = "button7";
-            this.button7.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button7.Size = new System.Drawing.Size(192, 48);
-            this.button7.TabIndex = 21;
-            this.button7.Text = "Stok Yönetimi";
-            this.button7.UseVisualStyleBackColor = false;
+            this.btn_stockManagement.BackColor = System.Drawing.Color.White;
+            this.btn_stockManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_stockManagement.FlatAppearance.BorderSize = 0;
+            this.btn_stockManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_stockManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_stockManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_stockManagement.Image")));
+            this.btn_stockManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_stockManagement.Location = new System.Drawing.Point(0, 147);
+            this.btn_stockManagement.Name = "btn_stockManagement";
+            this.btn_stockManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_stockManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_stockManagement.TabIndex = 21;
+            this.btn_stockManagement.Text = "Stok Yönetimi";
+            this.btn_stockManagement.UseVisualStyleBackColor = false;
+            this.btn_stockManagement.Click += new System.EventHandler(this.btn_stockManagement_Click);
             // 
-            // button4
+            // btn_appointManagement
             // 
-            this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(0, 3);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button4.Size = new System.Drawing.Size(192, 48);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "             Randevu               Planlama";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btn_appointManagement.BackColor = System.Drawing.Color.White;
+            this.btn_appointManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_appointManagement.FlatAppearance.BorderSize = 0;
+            this.btn_appointManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_appointManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_appointManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_appointManagement.Image")));
+            this.btn_appointManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_appointManagement.Location = new System.Drawing.Point(0, 3);
+            this.btn_appointManagement.Name = "btn_appointManagement";
+            this.btn_appointManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_appointManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_appointManagement.TabIndex = 18;
+            this.btn_appointManagement.Text = "             Randevu               Planlama";
+            this.btn_appointManagement.UseVisualStyleBackColor = false;
+            this.btn_appointManagement.Click += new System.EventHandler(this.btn_appointManagement_Click);
             // 
-            // button5
+            // btn_medicineManagement
             // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(0, 99);
-            this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button5.Size = new System.Drawing.Size(192, 48);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "İlaç Yönetimi";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btn_medicineManagement.BackColor = System.Drawing.Color.White;
+            this.btn_medicineManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_medicineManagement.FlatAppearance.BorderSize = 0;
+            this.btn_medicineManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_medicineManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_medicineManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_medicineManagement.Image")));
+            this.btn_medicineManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_medicineManagement.Location = new System.Drawing.Point(0, 99);
+            this.btn_medicineManagement.Name = "btn_medicineManagement";
+            this.btn_medicineManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_medicineManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_medicineManagement.TabIndex = 20;
+            this.btn_medicineManagement.Text = "İlaç Yönetimi";
+            this.btn_medicineManagement.UseVisualStyleBackColor = false;
+            this.btn_medicineManagement.Click += new System.EventHandler(this.btn_medicineManagement_Click);
             // 
-            // button6
+            // btn_patientManagement
             // 
-            this.button6.BackColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(0, 51);
-            this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.button6.Size = new System.Drawing.Size(192, 48);
-            this.button6.TabIndex = 19;
-            this.button6.Text = "Hasta Yönetimi";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btn_patientManagement.BackColor = System.Drawing.Color.White;
+            this.btn_patientManagement.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.btn_patientManagement.FlatAppearance.BorderSize = 0;
+            this.btn_patientManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_patientManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
+            this.btn_patientManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_patientManagement.Image")));
+            this.btn_patientManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_patientManagement.Location = new System.Drawing.Point(0, 51);
+            this.btn_patientManagement.Name = "btn_patientManagement";
+            this.btn_patientManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btn_patientManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_patientManagement.TabIndex = 19;
+            this.btn_patientManagement.Text = "Hasta Yönetimi";
+            this.btn_patientManagement.UseVisualStyleBackColor = false;
+            this.btn_patientManagement.Click += new System.EventHandler(this.btn_patientManagement_Click);
             // 
             // logoBox
             // 
@@ -430,13 +436,13 @@
         private System.Windows.Forms.Button btn_showBusinessManagement;
         private System.Windows.Forms.Panel adminPanel;
         private System.Windows.Forms.Panel businessPanel;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btn_appointManagement;
+        private System.Windows.Forms.Button btn_medicineManagement;
+        private System.Windows.Forms.Button btn_patientManagement;
+        private System.Windows.Forms.Button btn_treatmentManagement;
         private System.Windows.Forms.Button btn_vetManagement;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btn_petManagement;
+        private System.Windows.Forms.Button btn_stockManagement;
         private System.Windows.Forms.Button btn_showUserManagement;
     }
 }

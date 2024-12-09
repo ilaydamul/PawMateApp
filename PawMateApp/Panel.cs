@@ -158,5 +158,41 @@ namespace PawMateApp
             VetManagement vetManagement = new VetManagement();
             showForm(vetManagement);
         }
+
+        private void btn_appointManagement_Click(object sender, EventArgs e)
+        {
+            AppointManagement appointManagement = new AppointManagement();
+            showForm(appointManagement);
+        }
+
+        private void btn_patientManagement_Click(object sender, EventArgs e)
+        {
+            PatientManagement patientManagement = new PatientManagement();
+            showForm(patientManagement);
+        }
+
+        private void btn_medicineManagement_Click(object sender, EventArgs e)
+        {
+            MedicineManagement medicineManagement = new MedicineManagement();
+            showForm(medicineManagement);
+        }
+
+        private void btn_stockManagement_Click(object sender, EventArgs e)
+        {
+            StockManagement stockManagement = new StockManagement();
+            showForm(stockManagement);
+        }
+
+        private void btn_petManagement_Click(object sender, EventArgs e)
+        {
+            PetAndCustomerManagement petManagement = new PetAndCustomerManagement();
+            showForm(petManagement);
+        }
+
+        private void btn_treatmentManagement_Click(object sender, EventArgs e)
+        {
+            TreatmentPresManagement treatmentManagement = new TreatmentPresManagement();
+            showForm(treatmentManagement);
+        }
     }
 }

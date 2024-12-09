@@ -149,11 +149,47 @@
     <Compile Include="Screens\Admin\UserManagement.Designer.cs">
       <DependentUpon>UserManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\AppointManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\AppointManagement.Designer.cs">
+      <DependentUpon>AppointManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\MedicineManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\MedicineManagement.Designer.cs">
+      <DependentUpon>MedicineManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\PatientManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\PatientManagement.Designer.cs">
+      <DependentUpon>PatientManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\PetAndCustomerManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\PetAndCustomerManagement.Designer.cs">
+      <DependentUpon>PetAndCustomerManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Profile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Screens\Profile.Designer.cs">
       <DependentUpon>Profile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\StockManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\StockManagement.Designer.cs">
+      <DependentUpon>StockManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\TreatmentPresManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\TreatmentPresManagement.Designer.cs">
+      <DependentUpon>TreatmentPresManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\VetManagement.cs">
       <SubType>Form</SubType>
@@ -195,8 +231,26 @@
     <EmbeddedResource Include="Screens\Admin\UserManagement.resx">
       <DependentUpon>UserManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\AppointManagement.resx">
+      <DependentUpon>AppointManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\MedicineManagement.resx">
+      <DependentUpon>MedicineManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\PatientManagement.resx">
+      <DependentUpon>PatientManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\PetAndCustomerManagement.resx">
+      <DependentUpon>PetAndCustomerManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Screens\Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\StockManagement.resx">
+      <DependentUpon>StockManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\TreatmentPresManagement.resx">
+      <DependentUpon>TreatmentPresManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\VetManagement.resx">
       <DependentUpon>VetManagement.cs</DependentUpon>
