@@ -86,6 +86,7 @@
             this.btn_addVet.TabIndex = 135;
             this.btn_addVet.Text = "Veteriner Ekle";
             this.btn_addVet.UseVisualStyleBackColor = false;
+            this.btn_addVet.Click += new System.EventHandler(this.btn_addVet_Click);
             // 
             // label5
             // 
@@ -251,6 +252,7 @@
             this.vetList.RowHeadersWidth = 51;
             this.vetList.Size = new System.Drawing.Size(522, 466);
             this.vetList.TabIndex = 134;
+            this.vetList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.vetList_CellClick);
             // 
             // VetManagement
             // 

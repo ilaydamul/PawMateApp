@@ -17,9 +17,32 @@ namespace PawMateApp.Screens
         public VetManagement()
         {
             InitializeComponent();
-            
+            LoadUsersToDataGridView();
+            CustomizeDataGridView();
 
         }
+
+        private void LoadUsersToDataGridView()
+        {
+            DatabaseManagament db = new DatabaseManagament();
+            DataTable usersTable = db.GetAllUsers();
+            vetList.DataSource = usersTable;
+        }
+        private void CustomizeDataGridView()
+        {
+                vetList.ReadOnly = true;
+                vetList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                vetList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                vetList.AllowUserToAddRows = false;
+                vetList.Columns["userId"].HeaderText = "ID";
+                vetList.Columns["username"].HeaderText = "Kullanıcı Adı";
+                vetList.Columns["email"].HeaderText = "E-posta";
+                vetList.Columns["phone"].HeaderText = "Telefon";
+                vetList.Columns["fullName"].HeaderText = "Ad Soyad";
+                vetList.Columns["isBusinessAdmin"].HeaderText = "Yönetici mi?";
+                vetList.Columns["password"].HeaderText= "Şifre";
+        }
+                
 
         private void btn_addUpdateVet_Click(object sender, EventArgs e)
         {
@@ -44,6 +67,27 @@ namespace PawMateApp.Screens
                 }
                 database.CloseConnection();
             }
+        }
+
+        private void vetList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btn_addUpdateVet.Text = "Güncelle";
+            txt_email.Text = vetList.CurrentRow.Cells["email"].Value.ToString();
+            txt_fullname.Text = vetList.CurrentRow.Cells["fullName"].Value.ToString();
+            txt_password.Text = vetList.CurrentRow.Cells["password"].Value.ToString();
+            txt_phone.Text = vetList.CurrentRow.Cells["phone"].Value.ToString();
+            txt_fullname.Text = vetList.CurrentRow.Cells["fullName"].Value.ToString();
+            txt_username.Text = vetList.CurrentRow.Cells["username"].Value.ToString();
+            isBusinessAdmin.Checked = Convert.ToBoolean(vetList.CurrentRow.Cells["isBusinessAdmin"].Value);
+
+
+        }
+
+        private void btn_addVet_Click(object sender, EventArgs e)
+        {
+            Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
+            inputs.ClearInputs();
+            btn_addUpdateVet.Text = "Ekle";
         }
     }
 }

@@ -393,5 +393,39 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
+    public DataTable GetAllUsers()
+    {
+        DataTable dataTable = new DataTable();
+        try
+        {
+            if (baglan == null || baglan.State != ConnectionState.Open)
+            {
+                OpenConnection();
+            }
+
+            string query = "SELECT \"userId\", \"username\", \"email\", \"phone\", \"fullName\", \"isBusinessAdmin\", password FROM \"users\"";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
+                {
+                    adapter.Fill(dataTable);
+                    Debug.WriteLine(dataTable.Rows.Count);
+                }
+            }
+            Debug.WriteLine("Kullanıcılar başarıyla çekildi.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kullanıcıları çekme hatası: " + ex.Message);
+        }
+        finally
+        {
+            CloseConnection();
+        }
+        return dataTable;
+    }
+
+ 
+
 }
 
