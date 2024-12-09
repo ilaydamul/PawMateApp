@@ -74,10 +74,10 @@ namespace PawMateApp
                     if (dr.Read())
                     {
 
-                        Globals.CurrentUserID = Convert.ToInt32(dr["userId"]);
-                        Globals.CurrentUserBusinessAdminStatus = Convert.ToBoolean(dr["IsBusinessAdmin"]);
-                        Globals.CurrentUserAppAdminStatus = Convert.ToBoolean(dr["IsAppAdmin"]);
-                        Globals.CurrentUserBusinessAdminID = Convert.ToInt32(dr["businessId"]);
+                        Globals.CurrentUserID = dr["userId"] != DBNull.Value ? Convert.ToInt32(dr["userId"]) : 0; // Varsayılan olarak 0
+                        Globals.CurrentUserBusinessAdminStatus = dr["IsBusinessAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsBusinessAdmin"]) : false; // Varsayılan olarak false
+                        Globals.CurrentUserAppAdminStatus = dr["IsAppAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsAppAdmin"]) : false; 
+                        Globals.CurrentUserBusinessAdminID = dr["businessId"] != DBNull.Value ? Convert.ToInt32(dr["businessId"]) : 0; 
                         //bool qwe = Convert.ToBoolean(dr["IsBusinessAdmin"]);
                         //MessageBox.Show(qwe);
 
