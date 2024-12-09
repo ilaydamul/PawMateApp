@@ -74,8 +74,9 @@
             // 
             this.btn_deleteMedicine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_deleteMedicine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deleteMedicine.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_deleteMedicine.ForeColor = System.Drawing.Color.White;
-            this.btn_deleteMedicine.Location = new System.Drawing.Point(638, 545);
+            this.btn_deleteMedicine.Location = new System.Drawing.Point(638, 548);
             this.btn_deleteMedicine.Name = "btn_deleteMedicine";
             this.btn_deleteMedicine.Size = new System.Drawing.Size(158, 30);
             this.btn_deleteMedicine.TabIndex = 144;
@@ -112,55 +113,58 @@
             // 
             // txt_medicinePrice
             // 
-            this.txt_medicinePrice.Location = new System.Drawing.Point(13, 196);
+            this.txt_medicinePrice.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_medicinePrice.Location = new System.Drawing.Point(13, 198);
             this.txt_medicinePrice.Mask = "00000";
             this.txt_medicinePrice.Name = "txt_medicinePrice";
-            this.txt_medicinePrice.Size = new System.Drawing.Size(226, 20);
+            this.txt_medicinePrice.Size = new System.Drawing.Size(226, 22);
             this.txt_medicinePrice.TabIndex = 126;
             // 
             // txt_medicineUnit
             // 
-            this.txt_medicineUnit.Location = new System.Drawing.Point(13, 154);
+            this.txt_medicineUnit.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_medicineUnit.Location = new System.Drawing.Point(13, 156);
             this.txt_medicineUnit.Mask = "00000";
             this.txt_medicineUnit.Name = "txt_medicineUnit";
-            this.txt_medicineUnit.Size = new System.Drawing.Size(226, 20);
+            this.txt_medicineUnit.Size = new System.Drawing.Size(226, 22);
             this.txt_medicineUnit.TabIndex = 125;
             this.txt_medicineUnit.ValidatingType = typeof(int);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 178);
+            this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(10, 179);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 14);
+            this.label2.Size = new System.Drawing.Size(36, 16);
             this.label2.TabIndex = 124;
             this.label2.Text = "Fiyat";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 136);
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(9, 137);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 14);
+            this.label1.Size = new System.Drawing.Size(37, 16);
             this.label1.TabIndex = 122;
             this.label1.Text = "Birim";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 53);
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(10, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 14);
+            this.label3.Size = new System.Drawing.Size(61, 16);
             this.label3.TabIndex = 120;
             this.label3.Text = "Açıklama";
             // 
             // txt_medicineDesc
             // 
             this.txt_medicineDesc.BackColor = System.Drawing.Color.White;
-            this.txt_medicineDesc.Location = new System.Drawing.Point(13, 70);
+            this.txt_medicineDesc.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_medicineDesc.Location = new System.Drawing.Point(13, 72);
             this.txt_medicineDesc.Multiline = true;
             this.txt_medicineDesc.Name = "txt_medicineDesc";
             this.txt_medicineDesc.Size = new System.Drawing.Size(226, 61);
@@ -169,25 +173,27 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label8.Location = new System.Drawing.Point(11, 12);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 14);
+            this.label8.Size = new System.Drawing.Size(49, 16);
             this.label8.TabIndex = 118;
             this.label8.Text = "İlaç Adı";
             // 
             // txt_medicineTitle
             // 
             this.txt_medicineTitle.BackColor = System.Drawing.Color.White;
-            this.txt_medicineTitle.Location = new System.Drawing.Point(13, 30);
+            this.txt_medicineTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_medicineTitle.Location = new System.Drawing.Point(13, 31);
             this.txt_medicineTitle.Name = "txt_medicineTitle";
-            this.txt_medicineTitle.Size = new System.Drawing.Size(226, 20);
+            this.txt_medicineTitle.Size = new System.Drawing.Size(226, 22);
             this.txt_medicineTitle.TabIndex = 0;
             // 
             // btn_addMedicine
             // 
             this.btn_addMedicine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addMedicine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addMedicine.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addMedicine.ForeColor = System.Drawing.Color.White;
             this.btn_addMedicine.Location = new System.Drawing.Point(13, 305);
             this.btn_addMedicine.Name = "btn_addMedicine";
@@ -209,6 +215,7 @@
             // 
             this.btn_addMedicineBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addMedicineBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addMedicineBtn.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addMedicineBtn.ForeColor = System.Drawing.Color.White;
             this.btn_addMedicineBtn.Location = new System.Drawing.Point(638, 39);
             this.btn_addMedicineBtn.Name = "btn_addMedicineBtn";

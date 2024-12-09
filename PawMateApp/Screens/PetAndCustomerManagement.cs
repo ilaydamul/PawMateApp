@@ -16,5 +16,15 @@ namespace PawMateApp.Screens
         {
             InitializeComponent();
         }
+
+        private void btn_deleteMedicine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_addMedicine_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
