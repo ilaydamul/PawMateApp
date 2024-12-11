@@ -99,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\Classes.cs" />
+    <Compile Include="Components\AppointItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\AppointItem.Designer.cs">
+      <DependentUpon>AppointItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\NotifItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     <Compile Include="Screens\VetManagement.Designer.cs">
       <DependentUpon>VetManagement.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Components\AppointItem.resx">
+      <DependentUpon>AppointItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\NotifItem.resx">
       <DependentUpon>NotifItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +291,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\appoint_img.png" />
+    <None Include="Resources\dog_pic.png" />
+    <None Include="Resources\cat_pic.png" />
+    <None Include="Resources\date-calendar.png" />
     <None Include="Resources\green_light.png" />
     <None Include="Resources\red_light.png" />
     <None Include="Resources\stock_img.png" />

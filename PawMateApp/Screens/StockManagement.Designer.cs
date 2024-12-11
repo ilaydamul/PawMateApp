@@ -145,15 +145,16 @@
             this.btn_addStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_addStock.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addStock.ForeColor = System.Drawing.Color.White;
-            this.btn_addStock.Location = new System.Drawing.Point(15, 155);
+            this.btn_addStock.Location = new System.Drawing.Point(14, 156);
             this.btn_addStock.Name = "btn_addStock";
-            this.btn_addStock.Size = new System.Drawing.Size(226, 37);
+            this.btn_addStock.Size = new System.Drawing.Size(227, 37);
             this.btn_addStock.TabIndex = 4;
             this.btn_addStock.Text = "Ekle";
             this.btn_addStock.UseVisualStyleBackColor = false;
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(274, 77);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(522, 498);
