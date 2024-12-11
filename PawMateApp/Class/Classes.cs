@@ -408,7 +408,7 @@ public class DatabaseManagament
                 OpenConnection();
             }
 
-            string query = "SELECT \"userId\", \"username\", \"email\", \"phone\", \"fullName\", \"isBusinessAdmin\", password FROM \"users\"";
+            string query = "SELECT \"userId\", \"username\", \"email\", \"phone\", \"fullName\", \"isBusinessAdmin\", password FROM \"users\" ORDER BY \"userId\" ASC";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))

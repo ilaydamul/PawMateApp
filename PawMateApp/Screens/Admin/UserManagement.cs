@@ -156,8 +156,6 @@ namespace PawMateApp.Screens.Admin
                             Inputs inputs = new Inputs(txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses);
                             inputs.ClearInputs();
                         }
-
-                        MessageBox.Show("Kullanıcı başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     UserManagement_Load(null, null);
@@ -225,6 +223,7 @@ namespace PawMateApp.Screens.Admin
                     }
 
                     MessageBox.Show("Kullanıcı başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     UserManagement_Load(null, null); 
 
                 }
