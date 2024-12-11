@@ -121,6 +121,39 @@ namespace PawMateApp.Screens
 
                     if (db.UpdateUserToDatabase(Convert.ToInt32(vetList.CurrentRow.Cells["userId"].Value), txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
                     {
+                        string body = $@"
+<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Bilgileriniz Başarıyla Güncellendi 🎉</strong><br><br>
+        Harika bir haber! Hesap bilgileriniz başarıyla güncellendi. Artık sistemimize yeni bilgilerinizle erişebilirsiniz. 🌟<br><br>
+        <strong style=""font-size:20px;color:#ff3c00;"">Aşağıda güncellenen bilgileriniz yer almaktadır:</strong><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding:20px;text-align:center;border:1px solid #ddd;background-color:#f9f9f9;"">
+        <strong>Kullanıcı Adı:</strong> {txt_username.Text.Trim()}<br>
+        <strong>Şifre:</strong> {txt_password.Text.Trim()}<br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:20px;color:#2d2d2d;"">Güncellenen bilgilerinizle sistemimizi keşfetmeye devam edin! 🚀</strong><br><br>
+        Sistemimizdeki araçlar ve hizmetler her zaman elinizin altında! Sorularınız için bizimle iletişime geçebilirsiniz.<br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>
+";
+                        SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                        sendMail.SendMail("Pawmate Kayıt Bilgilendirmesi", body, txt_email.Text);
                         Inputs inputs = new Inputs(new Control[] { txt_email, txt_fullname, txt_password, txt_phone, txt_username, isBusinessAdmin });
                         inputs.ClearInputs();
                         LoadUsersToDataGridView();
