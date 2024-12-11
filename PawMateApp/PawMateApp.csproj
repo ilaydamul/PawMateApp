@@ -111,6 +111,12 @@
     <Compile Include="Components\NotifItem.Designer.cs">
       <DependentUpon>NotifItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\PrescriptionItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\PrescriptionItem.Designer.cs">
+      <DependentUpon>PrescriptionItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\StockItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -215,6 +221,9 @@
     <EmbeddedResource Include="Components\NotifItem.resx">
       <DependentUpon>NotifItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\PrescriptionItem.resx">
+      <DependentUpon>PrescriptionItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\StockItem.resx">
       <DependentUpon>StockItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -291,6 +300,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\up-down.png" />
+    <None Include="Resources\icon.png" />
     <None Include="Resources\appoint_img.png" />
     <None Include="Resources\dog_pic.png" />
     <None Include="Resources\cat_pic.png" />

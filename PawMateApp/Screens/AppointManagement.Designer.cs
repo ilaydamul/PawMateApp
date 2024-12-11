@@ -127,8 +127,8 @@
             this.txt_visitReason.Location = new System.Drawing.Point(14, 205);
             this.txt_visitReason.Multiline = true;
             this.txt_visitReason.Name = "txt_visitReason";
-            this.txt_visitReason.Size = new System.Drawing.Size(226, 54);
-            this.txt_visitReason.TabIndex = 131;
+            this.txt_visitReason.Size = new System.Drawing.Size(228, 54);
+            this.txt_visitReason.TabIndex = 5;
             // 
             // label2
             // 
@@ -145,7 +145,7 @@
             this.dp_date.Location = new System.Drawing.Point(15, 163);
             this.dp_date.Name = "dp_date";
             this.dp_date.Size = new System.Drawing.Size(226, 20);
-            this.dp_date.TabIndex = 129;
+            this.dp_date.TabIndex = 4;
             // 
             // cb_vets
             // 
@@ -154,7 +154,7 @@
             this.cb_vets.Location = new System.Drawing.Point(15, 119);
             this.cb_vets.Name = "cb_vets";
             this.cb_vets.Size = new System.Drawing.Size(227, 21);
-            this.cb_vets.TabIndex = 127;
+            this.cb_vets.TabIndex = 3;
             // 
             // label6
             // 
@@ -173,7 +173,7 @@
             this.cb_pets.Location = new System.Drawing.Point(14, 75);
             this.cb_pets.Name = "cb_pets";
             this.cb_pets.Size = new System.Drawing.Size(227, 21);
-            this.cb_pets.TabIndex = 125;
+            this.cb_pets.TabIndex = 2;
             // 
             // label4
             // 
@@ -222,8 +222,8 @@
             this.btn_addVisit.ForeColor = System.Drawing.Color.White;
             this.btn_addVisit.Location = new System.Drawing.Point(14, 276);
             this.btn_addVisit.Name = "btn_addVisit";
-            this.btn_addVisit.Size = new System.Drawing.Size(226, 37);
-            this.btn_addVisit.TabIndex = 4;
+            this.btn_addVisit.Size = new System.Drawing.Size(228, 37);
+            this.btn_addVisit.TabIndex = 6;
             this.btn_addVisit.Text = "Ekle";
             this.btn_addVisit.UseVisualStyleBackColor = false;
             // 

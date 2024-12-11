@@ -83,5 +83,9 @@ namespace PawMateApp.Components
             set { _reason = value; txt_reason.Text = value; }
         }
 
+        private void AppointItem_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

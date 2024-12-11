@@ -143,6 +143,16 @@ namespace PawMateApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon {
+            get {
+                object obj = ResourceManager.GetObject("icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap img {
             get {
                 object obj = ResourceManager.GetObject("img", resourceCulture);
@@ -206,6 +216,16 @@ namespace PawMateApp.Properties {
         internal static System.Drawing.Bitmap stock_img {
             get {
                 object obj = ResourceManager.GetObject("stock_img", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap up_down {
+            get {
+                object obj = ResourceManager.GetObject("up_down", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

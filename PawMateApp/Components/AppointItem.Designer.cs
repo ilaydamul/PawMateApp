@@ -212,6 +212,7 @@
             this.Controls.Add(this.btn_deleteStock);
             this.Name = "AppointItem";
             this.Size = new System.Drawing.Size(499, 147);
+            this.Load += new System.EventHandler(this.AppointItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pet_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_stock)).EndInit();
             this.ResumeLayout(false);
