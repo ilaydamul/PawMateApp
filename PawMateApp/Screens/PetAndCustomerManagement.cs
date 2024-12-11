@@ -32,6 +32,8 @@ namespace PawMateApp.Screens
 
         private void PetAndCustomerManagement_Load(object sender, EventArgs e)
         {
+            //Petlerdeki cb_species için species veritabanından çekilmeli.
+
             try
             {
                 baglan.Open();
@@ -229,6 +231,19 @@ namespace PawMateApp.Screens
             }
 
         }
+
+        private void tab_pets_Click(object sender, EventArgs e)
+        {
+            //Sahibi müşterilerden çekilmeli
+           
+        }
+
+        private void btn_addPet_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+      
     }
 }
 

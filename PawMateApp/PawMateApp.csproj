@@ -105,6 +105,12 @@
     <Compile Include="Components\NotifItem.Designer.cs">
       <DependentUpon>NotifItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\StockItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\StockItem.Designer.cs">
+      <DependentUpon>StockItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     <EmbeddedResource Include="Components\NotifItem.resx">
       <DependentUpon>NotifItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\StockItem.resx">
+      <DependentUpon>StockItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -273,6 +282,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\green_light.png" />
+    <None Include="Resources\red_light.png" />
+    <None Include="Resources\stock_img.png" />
+    <None Include="Resources\bin.png" />
+    <None Include="Resources\pets.png" />
     <None Include="Resources\medicineManag.png" />
     <None Include="Resources\profile_img2.png" />
     <None Include="Resources\profile_img2.jpg" />
