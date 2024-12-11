@@ -32,7 +32,12 @@ namespace PawMateApp.Screens
 
         private void btn_deleteMedicine_Click(object sender, EventArgs e)
         {
-            //Seçili ilaç silinecek
+            DialogResult dialogResult = MessageBox.Show("İlaç silinecek. Emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show("İlaç silindi." , "Başarılı" , MessageBoxButtons.OK , MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void btn_addMedicineBtn_Click(object sender, EventArgs e)
