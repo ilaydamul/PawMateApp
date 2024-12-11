@@ -19,8 +19,15 @@ namespace PawMateApp.Screens
 
         private void btn_addMedicine_Click(object sender, EventArgs e)
         {
-            //İlaç ekleme işlemleri yapılacak
-            //Birim ve Fiyat INT girilmeli
+            CheckClass check = new CheckClass(new string[] { txt_medicineDesc.Text, txt_medicinePrice.Text, txt_medicineTitle.Text, txt_medicineUnit.Text });
+            if (!check.Check(""))
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("İlaç eklenicek.");
+            }
         }
 
         private void btn_deleteMedicine_Click(object sender, EventArgs e)
@@ -30,7 +37,8 @@ namespace PawMateApp.Screens
 
         private void btn_addMedicineBtn_Click(object sender, EventArgs e)
         {
-            //İlaç ekleme alanı temizlenecek, önceki yerler gibi
+            Inputs inputs = new Inputs(new Control[] {txt_medicineDesc,txt_medicinePrice,txt_medicineTitle,txt_medicineUnit});
+            inputs.ClearInputs();
         }
     }
 }
