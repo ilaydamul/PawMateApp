@@ -283,7 +283,7 @@ public class DatabaseManagament
     {
         try
         {
-            Debug.WriteLine(treatmentName +" "+ treatmentDescription);
+            Debug.WriteLine(treatmentName + " " + treatmentDescription);
             string query = "UPDATE \"treatments\" SET \"treatmentName\" = @name, \"treatmentDescription\" = @description WHERE \"treatmentId\" = @id";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
@@ -357,7 +357,7 @@ public class DatabaseManagament
                         if (dr["email"].ToString() == email)
                         {
                             MessageBox.Show("Bu e-posta adresi zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return false; 
+                            return false;
                         }
 
                         if (dr["phone"].ToString() == phone)
@@ -469,7 +469,7 @@ public class DatabaseManagament
                 return false;
             }
 
-            string query = "SELECT username, email, phone FROM users WHERE (username = @username OR email = @email OR phone = @phone)AND \"userId\" != @userId"; 
+            string query = "SELECT username, email, phone FROM users WHERE (username = @username OR email = @email OR phone = @phone)AND \"userId\" != @userId";
 
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
@@ -507,8 +507,8 @@ public class DatabaseManagament
             }
 
             string updateQuery = "UPDATE users SET username = @username, password = @password, email = @email, phone = @phone, \"fullName\" = @fullname, \"isBusinessAdmin\" = @isBusinessAdmin WHERE \"userId\" = @userId";
-    
-        using (var cmd = new Npgsql.NpgsqlCommand(updateQuery, baglan))
+
+            using (var cmd = new Npgsql.NpgsqlCommand(updateQuery, baglan))
             {
                 cmd.Parameters.AddWithValue("username", username);
                 cmd.Parameters.AddWithValue("password", password);
@@ -535,6 +535,113 @@ public class DatabaseManagament
         }
     }
 
+    public bool AddMedicineToDatabase(string medicineTitle, string medicineDesc, string medicineUnit, int medicinePrice, int businessid)
+    {
+        try
+        {
+            string query = "INSERT INTO \"medicines\" (\"medicineName\", \"businessId\" , \"description\", \"unit\", \"price\") VALUES (@title, @businessId, @desc, @unit, @price)";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("title", medicineTitle);
+                cmd.Parameters.AddWithValue("desc", medicineDesc);
+                cmd.Parameters.AddWithValue("unit", medicineUnit);
+                cmd.Parameters.AddWithValue("businessId", businessid);
+                cmd.Parameters.AddWithValue("price", medicinePrice);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("İlaç eklendi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("İlaç ekleme hatası: " + ex.Message);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
 
+    public DataTable GetAllMedicine(int businessId)
+    {
+        DataTable dataTable = new DataTable();
+        try
+        {
+            if (baglan == null || baglan.State != ConnectionState.Open)
+            {
+                OpenConnection();
+            }
+            string query = "SELECT \"medicineId\", \"medicineName\", \"description\", \"unit\", \"price\" FROM \"medicines\" WHERE \"businessId\" = " + businessId;
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
+                {
+                    adapter.Fill(dataTable);
+                    Debug.WriteLine(dataTable.Rows.Count + " Adet veri çekildi.");
+                }
+            }
+            Debug.WriteLine("İlaçlar başarıyla çekildi.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("İlaçları çekme hatası: " + ex.Message);
+        }
+        finally
+        {
+            CloseConnection();
+        }
+        return dataTable;
+    }
+    public bool DeleteMedicine(int medicineId)
+    {
+        try
+        {
+            string query = "DELETE FROM \"medicines\" WHERE \"medicineId\" = @medicineId";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("medicineId", medicineId);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("İlaç silindi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("İlaç silme hatası: " + ex.Message);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
+    public bool UpdateMedicine(int medicineId, string medicineTitle, string medicineDesc, string medicineUnit, int medicinePrice)
+    {
+        try
+        {
+            string query = "UPDATE \"medicines\" SET \"medicineName\" = @name, \"description\" = @desc, \"unit\" = @unit, \"price\" = @price WHERE \"medicineId\" = @medicineId";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("name", medicineTitle);
+                cmd.Parameters.AddWithValue("desc", medicineDesc);
+                cmd.Parameters.AddWithValue("unit", medicineUnit);
+                cmd.Parameters.AddWithValue("price", medicinePrice);
+                cmd.Parameters.AddWithValue("medicineId", medicineId);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("İlaç güncellendi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("İlaç güncelleme hatası: " + ex.Message);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
 }
 

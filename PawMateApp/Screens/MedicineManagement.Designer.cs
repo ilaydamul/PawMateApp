@@ -210,6 +210,7 @@
             this.medicineList.Name = "medicineList";
             this.medicineList.Size = new System.Drawing.Size(522, 466);
             this.medicineList.TabIndex = 140;
+            this.medicineList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.medicineList_CellClick);
             // 
             // btn_addMedicineBtn
             // 
