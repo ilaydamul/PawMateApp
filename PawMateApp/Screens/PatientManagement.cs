@@ -16,5 +16,10 @@ namespace PawMateApp.Screens
         {
             InitializeComponent();
         }
+
+        private void PatientManagement_Load(object sender, EventArgs e)
+        {
+            //Componenets'deki PatientItem gelecek
+        }
     }
 }

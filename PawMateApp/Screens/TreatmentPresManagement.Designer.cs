@@ -33,6 +33,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.prescriptionList = new System.Windows.Forms.FlowLayoutPanel();
+            this.txt_noRec = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_usageInstructions = new System.Windows.Forms.TextBox();
@@ -44,10 +45,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_addPrescription = new System.Windows.Forms.Button();
-            this.txt_research = new System.Windows.Forms.TextBox();
+            this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_dateChange = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_noRec = new System.Windows.Forms.Label();
             this.prescriptionList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -92,6 +92,17 @@
             this.prescriptionList.Name = "prescriptionList";
             this.prescriptionList.Size = new System.Drawing.Size(522, 466);
             this.prescriptionList.TabIndex = 163;
+            // 
+            // txt_noRec
+            // 
+            this.txt_noRec.AutoSize = true;
+            this.txt_noRec.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_noRec.Location = new System.Drawing.Point(3, 0);
+            this.txt_noRec.Name = "txt_noRec";
+            this.txt_noRec.Size = new System.Drawing.Size(302, 18);
+            this.txt_noRec.TabIndex = 10;
+            this.txt_noRec.Text = "Aranan kriterlere uygun reçete bulunamadı.";
+            this.txt_noRec.Visible = false;
             // 
             // pictureBox1
             // 
@@ -210,15 +221,15 @@
             this.btn_addPrescription.Text = "Ekle";
             this.btn_addPrescription.UseVisualStyleBackColor = false;
             // 
-            // txt_research
+            // txt_search
             // 
-            this.txt_research.BackColor = System.Drawing.Color.White;
-            this.txt_research.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_research.Location = new System.Drawing.Point(378, 46);
-            this.txt_research.Name = "txt_research";
-            this.txt_research.Size = new System.Drawing.Size(185, 22);
-            this.txt_research.TabIndex = 129;
-            this.txt_research.TextChanged += new System.EventHandler(this.txt_research_TextChanged);
+            this.txt_search.BackColor = System.Drawing.Color.White;
+            this.txt_search.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_search.Location = new System.Drawing.Point(378, 46);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(185, 22);
+            this.txt_search.TabIndex = 129;
+            this.txt_search.TextChanged += new System.EventHandler(this.txt_research_TextChanged);
             // 
             // btn_dateChange
             // 
@@ -248,17 +259,6 @@
             this.label2.TabIndex = 168;
             this.label2.Text = "Arama Yapın:";
             // 
-            // txt_noRec
-            // 
-            this.txt_noRec.AutoSize = true;
-            this.txt_noRec.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_noRec.Location = new System.Drawing.Point(3, 0);
-            this.txt_noRec.Name = "txt_noRec";
-            this.txt_noRec.Size = new System.Drawing.Size(302, 18);
-            this.txt_noRec.TabIndex = 10;
-            this.txt_noRec.Text = "Aranan kriterlere uygun reçete bulunamadı.";
-            this.txt_noRec.Visible = false;
-            // 
             // TreatmentPresManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,7 +267,7 @@
             this.ClientSize = new System.Drawing.Size(808, 590);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_dateChange);
-            this.Controls.Add(this.txt_research);
+            this.Controls.Add(this.txt_search);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.prescriptionList);
@@ -305,7 +305,7 @@
         private System.Windows.Forms.Button btn_addPrescription;
         private System.Windows.Forms.TextBox txt_usageInstructions;
         private System.Windows.Forms.TextBox txt_dosage;
-        private System.Windows.Forms.TextBox txt_research;
+        private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Button btn_dateChange;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label txt_noRec;
