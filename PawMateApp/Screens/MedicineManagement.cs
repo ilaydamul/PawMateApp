@@ -35,7 +35,7 @@ namespace PawMateApp.Screens
                 if (btn_addMedicine.Text == "Ekle")
                 {
 
-                    if (db.AddMedicineToDatabase(txt_medicineTitle.Text, txt_medicineDesc.Text, txt_medicineUnit.Text, Convert.ToInt32(txt_medicinePrice.Text), 4))
+                    if (db.AddMedicineToDatabase(txt_medicineTitle.Text, txt_medicineDesc.Text, txt_medicineUnit.Text, Convert.ToInt32(txt_medicinePrice.Text), Globals.CurrentUserBusinessAdminID))
                     {
                         MessageBox.Show("İlaç eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadMedicines();

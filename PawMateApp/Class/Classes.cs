@@ -400,7 +400,7 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
-    public DataTable GetAllUsers()
+    public DataTable GetAllUsers(int businessid)
     {
         DataTable dataTable = new DataTable();
         try
@@ -410,9 +410,10 @@ public class DatabaseManagament
                 OpenConnection();
             }
 
-            string query = "SELECT \"userId\", \"username\", \"email\", \"phone\", \"fullName\", \"isBusinessAdmin\", password FROM \"users\" ORDER BY \"userId\" ASC";
+            string query = "SELECT \"userId\", \"username\", \"email\", \"phone\", \"fullName\", \"isBusinessAdmin\", password FROM \"users\" WHERE \"businessId\" = @businessid ORDER BY \"userId\" ASC";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
+                cmd.Parameters.AddWithValue("@businessid", businessid);
                 using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
                 {
                     adapter.Fill(dataTable);
@@ -544,11 +545,11 @@ public class DatabaseManagament
             string query = "INSERT INTO \"medicines\" (\"medicineName\", \"businessId\" , \"description\", \"unit\", \"price\") VALUES (@title, @businessId, @desc, @unit, @price)";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
-                cmd.Parameters.AddWithValue("title", medicineTitle);
-                cmd.Parameters.AddWithValue("desc", medicineDesc);
-                cmd.Parameters.AddWithValue("unit", medicineUnit);
-                cmd.Parameters.AddWithValue("businessId", businessid);
-                cmd.Parameters.AddWithValue("price", medicinePrice);
+                cmd.Parameters.AddWithValue("@title", medicineTitle);
+                cmd.Parameters.AddWithValue("@desc", medicineDesc);
+                cmd.Parameters.AddWithValue("@unit", medicineUnit);
+                cmd.Parameters.AddWithValue("@businessId", businessid);
+                cmd.Parameters.AddWithValue("@price", medicinePrice);
                 cmd.ExecuteNonQuery();
             }
             Debug.WriteLine("İlaç eklendi.");
