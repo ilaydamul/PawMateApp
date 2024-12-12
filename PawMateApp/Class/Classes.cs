@@ -7,6 +7,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
 using static PawMateApp.Login;
+using Npgsql;
+
 
 namespace PawMateApp
 {
@@ -643,5 +645,6 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
+
 }
 
