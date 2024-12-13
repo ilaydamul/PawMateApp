@@ -3,16 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PawMateApp.Login;
 
 namespace PawMateApp.Screens
 {
+
     public partial class AppointManagement : Form
     {
+        DatabaseManagament db = new DatabaseManagament();
+
         public AppointManagement()
         {
             InitializeComponent();
@@ -46,6 +51,14 @@ namespace PawMateApp.Screens
             upcomingAppointments.Controls.Add(appointItem);
             upcomingAppointments.Controls.Add(appointItem2);
             upcomingAppointments.Controls.Add(appointItem3);
+            db.OpenConnection();
+            db.GetAppoints(Globals.CurrentUserBusinessAdminID, cb_customers);
+
+        }
+
+        private void btn_addVisit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -14,6 +14,19 @@ using System.Linq;
 
 namespace PawMateApp
 {
+
+    public class ComboBoxItem
+    {
+        public int Id { get; set; }
+        public string DisplayName { get; set; }
+
+        public override string ToString()
+        {
+            return DisplayName;
+        }
+    }
+
+
     public class MoveForm
     {
         private bool dragging = false;
@@ -51,6 +64,7 @@ namespace PawMateApp
     }
     public class CheckClass
     {
+
        public static string GenerateRandomPassword(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -679,7 +693,46 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
-   
+
+    public void GetAppoints(int businessid, Control combobox)
+    {
+        if (combobox is ComboBox comboBox)
+        {
+            try
+            {
+                string query = "SELECT * FROM \"customers\" WHERE \"businessId\" = @businessid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("businessid", businessid);
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        comboBox.Items.Clear();
+                        while (dr.Read())
+                        {
+                            var item = new ComboBoxItem
+                            {
+                                Id = Convert.ToInt32(dr["customerId"]),
+                                DisplayName = dr["fullName"].ToString()
+                            };
+
+                            comboBox.Items.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Randevuları çekme hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+        }
+    }
+
+
 
 }
 

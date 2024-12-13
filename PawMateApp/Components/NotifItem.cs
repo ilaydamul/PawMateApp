@@ -41,10 +41,6 @@ namespace PawMateApp.Components
             set { _businessEmail = value; }
         }
 
-      
-
-
-
         private void btn_approveBusiness_Click(object sender, EventArgs e)
         {
             Notifications notificationsForm = Application.OpenForms["notifications"] as Notifications;
