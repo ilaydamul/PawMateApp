@@ -731,8 +731,137 @@ public class DatabaseManagament
             Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
         }
     }
+    public void GetMedicines(int businessid, Control combobox)
+    {
+        if (combobox is ComboBox comboBox)
+        {
+            try
+            {
+                string query = "SELECT \"medicineId\", \"medicineName\" FROM \"medicines\" WHERE \"businessId\" = @businessid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("businessid", businessid);
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        comboBox.Items.Clear();
+                        while (dr.Read())
+                        {
+                            var item = new ComboBoxItem
+                            {
+                                Id = Convert.ToInt32(dr["medicineId"]),
+                                DisplayName = dr["medicineName"].ToString()
+                            };
+
+                            comboBox.Items.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Randevuları çekme hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+        }
+    }
 
 
 
+    public void AddMedicineStocksToDatabase(int businessid ,int medicineid, string medicinename , int medicinequantity, int redflag)
+    {
+        try
+        {
+            string checkQuery = "SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"medicineId\" = @medicineid";
+            using (var cmd2 = new Npgsql.NpgsqlCommand(checkQuery, baglan))
+            {
+                cmd2.Parameters.AddWithValue("medicineid", medicineid);
+
+                int count = Convert.ToInt32(cmd2.ExecuteScalar());
+
+                if (count > 0)
+                {
+                    MessageBox.Show("Bu İlaç zaten stoklarda mevcut!" , "Hata", MessageBoxButtons.OK , MessageBoxIcon.Error);
+                }
+                else
+                {
+                    string query = "INSERT INTO \"medicineStocks\" (\"medicineId\", quantity , threshold, medicinename, businessid) VALUES (@medicineid, @quantity, @redflag, @medicinename, @businessid)";
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                    {
+                        cmd.Parameters.AddWithValue("medicineid", medicineid);
+                        cmd.Parameters.AddWithValue("quantity", medicinequantity);
+                        cmd.Parameters.AddWithValue("redflag", redflag);
+                        cmd.Parameters.AddWithValue("medicinename", medicinename);
+                        cmd.Parameters.AddWithValue("businessid", businessid);
+                        cmd.ExecuteNonQuery();
+
+                    }
+                    MessageBox.Show("Stok Başarılı bir şekilde eklendi!" , "Başarılı" , MessageBoxButtons.OK , MessageBoxIcon.Information);
+                }
+            }
+        }
+        catch (Exception ex) {
+            Debug.WriteLine("Stok eklenirken hata oluştu: " + ex.Message);
+        }
+        //Debug.WriteLine("Business Id: " + businessid + " Name: " + medicinename + " quantity: " + medicinequantity + " redflag: "+ redflag);
+    }
+
+    public void DeleteMedicineStock(int stockid)
+    {
+        try
+        {
+            // Veritabanı bağlantısını kontrol et
+            if (baglan.State != ConnectionState.Open)
+            {
+                baglan.Open();
+            }
+
+            // Silme işlemi öncesinde kontrol
+            string checkQuery = "SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"stockId\" = @id";
+            using (var checkCmd = new Npgsql.NpgsqlCommand(checkQuery, baglan))
+            {
+                checkCmd.Parameters.AddWithValue("id", stockid);
+                int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    Debug.WriteLine("Belirtilen Stockıd için kayıt bulunamadı.");
+                    return; // İşlemden çık
+                }
+            }
+
+            // Silme sorgusu
+            string query = "DELETE FROM \"medicineStocks\" WHERE \"stockId\" = @id";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("id", stockid);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    Debug.WriteLine("Stok başarıyla silindi.");
+                }
+                else
+                {
+                    Debug.WriteLine("Stok silinemedi.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Stok silme hatası: " + ex.Message);
+        }
+        finally
+        {
+            // Bağlantıyı kapat
+            if (baglan.State == ConnectionState.Open)
+            {
+                baglan.Close();
+            }
+        }
+
+
+    }
 }
 

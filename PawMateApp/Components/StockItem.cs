@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,13 +18,13 @@ namespace PawMateApp.Components
             InitializeComponent();
         }
 
-        public string _stockId { get; set; }
+        public int _stockId { get; set; }
         public string _medicineName { get; set; }
         public string _quantity { get; set; }
         public string _threshold { get; set; }
 
         [Category("Props")]
-        public string StockId
+        public int StockId
         {
             get { return _stockId; }
             set { _stockId = value;}
@@ -40,7 +41,7 @@ namespace PawMateApp.Components
         public string Quantity
         {
             get { return _quantity; }
-            set { _quantity = value; }
+            set { _quantity = value; label1.Text = _quantity; }
         }
 
         [Category("Props")]
@@ -52,12 +53,30 @@ namespace PawMateApp.Components
 
         private void StockItem_Load(object sender, EventArgs e)
         {
-            //İlacın miktarı threshold(eşik)'in altında ise img_stock red_light olması gerekiyor. Resources'ın içinde ilgili resim var.
+            Debug.WriteLine(_quantity + "Kadar Birim var" + _threshold + "Red Line");
+            if(Convert.ToInt32(_quantity) < Convert.ToInt32(_threshold))
+            {
+                img_stock.ImageLocation = "C:\\Users\\ASUS\\source\\repos\\ilaydamul\\PawMateApp\\PawMateApp\\Resources\\green_light.png";
+            }
+            else
+            {
+                return;
+            }
+            
         }
 
         private void btn_deleteStock_Click(object sender, EventArgs e)
         {
-            //Emin misiniz? uyarısından sonra stok silinmeli
+            DialogResult dialogResult = MessageBox.Show("Seçilen stoğu silmek istediğinizden emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes) {
+                Debug.WriteLine(StockId +" Silindi");
+                DatabaseManagament db = new DatabaseManagament();
+                db.OpenConnection();
+                db.DeleteMedicineStock(StockId);
+                db.CloseConnection();
+                MessageBox.Show("Başarılı bir şekilde silindi!");
+            }
         }
     }
 }
