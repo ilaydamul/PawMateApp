@@ -41,14 +41,7 @@ namespace PawMateApp.Components
             set { _businessEmail = value; }
         }
 
-        static string GenerateRandomPassword(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            Random random = new Random();
-            return new string(Enumerable.Repeat(chars, length)
-                                        .Select(s => s[random.Next(s.Length)])
-                                        .ToArray());
-        }
+      
 
 
 
@@ -84,7 +77,7 @@ namespace PawMateApp.Components
                     updateCmd.Parameters.AddWithValue("@businessId", int.Parse(BusinessId));
                     updateCmd.ExecuteNonQuery();
 
-                    string currentPassword = GenerateRandomPassword(12); // Default password for new businesses
+                    string currentPassword = CheckClass.GenerateRandomPassword(12); // Default password for new businesses
 
                   
                     string insertToUsers = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"email\", \"businessId\", \"isBusinessAdmin\")" +

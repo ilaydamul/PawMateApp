@@ -57,27 +57,7 @@ namespace PawMateApp
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        static string ReplaceTurkishCharacters(string text)
-        {
-            // Türkçe karakterler ve karşılıkları
-            var replacements = new (string Turkish, string Normal)[]
-            {
-            ("Ç", "C"), ("ç", "c"),
-            ("Ğ", "G"), ("ğ", "g"),
-            ("İ", "I"), ("ı", "i"),
-            ("Ö", "O"), ("ö", "o"),
-            ("Ş", "S"), ("ş", "s"),
-            ("Ü", "U"), ("ü", "u")
-            };
-
-            // Regex ile değiştirme
-            foreach (var (Turkish, Normal) in replacements)
-            {
-                text = Regex.Replace(text, Regex.Escape(Turkish), Normal);
-            }
-
-            return text;
-        }
+        
 
 
         private void btn_register_Click(object sender, EventArgs e)
@@ -93,7 +73,7 @@ namespace PawMateApp
                 {
                     try
                     {
-                       txt_businessName.Text = ReplaceTurkishCharacters(txt_businessName.Text.Trim().ToLower()); 
+                       txt_businessName.Text = CheckClass.ReplaceTurkishCharacters(txt_businessName.Text.Trim().ToLower()); 
                         baglan.Open();
                         string insertBusinessQuery = "INSERT INTO \"businesses\" (\"businessName\", \"authorizedName\", \"email\", \"phone\", \"isApproved\") " +
                                                      "VALUES (@businessName, @authorizedName, @email, @phone, FALSE) RETURNING \"businessId\"";

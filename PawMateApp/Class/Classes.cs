@@ -8,6 +8,8 @@ using System.Net.Mail;
 using System.Windows.Forms;
 using static PawMateApp.Login;
 using Npgsql;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 
 namespace PawMateApp
@@ -49,6 +51,37 @@ namespace PawMateApp
     }
     public class CheckClass
     {
+       public static string GenerateRandomPassword(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                                        .Select(s => s[random.Next(s.Length)])
+                                        .ToArray());
+        }
+
+
+        public static string ReplaceTurkishCharacters(string text)
+        {
+
+            var replacements = new (string Turkish, string Normal)[]
+            {
+            ("Ç", "C"), ("ç", "c"),
+            ("Ğ", "G"), ("ğ", "g"),
+            ("İ", "I"), ("ı", "i"),
+            ("Ö", "O"), ("ö", "o"),
+            ("Ş", "S"), ("ş", "s"),
+            ("Ü", "U"), ("ü", "u")
+            };
+
+            foreach (var (Turkish, Normal) in replacements)
+            {
+                text = Regex.Replace(text, Regex.Escape(Turkish), Normal);
+            }
+
+            return text;
+        }
+
         private string[] strings;
         /// <param name="Inputs">txt_degiskenismi.Text olarak değerleri array şeklinde girin.</param
         public CheckClass(string[] Inputs)
@@ -646,6 +679,7 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
+   
 
 }
 
