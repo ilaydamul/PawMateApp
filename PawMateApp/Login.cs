@@ -54,8 +54,19 @@ namespace PawMateApp
             }
         }
 
+        static string GenerateRandomPassword(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                                        .Select(s => s[random.Next(s.Length)])
+                                        .ToArray());
+        }
+
+
         private void btn_login_Click(object sender, EventArgs e)
         {
+           
             checkinputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text });
             if (!checkinputs.Check(""))
             {

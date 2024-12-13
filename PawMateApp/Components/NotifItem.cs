@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Npgsql;
 using System.ComponentModel;
+using System.Linq;
 
 namespace PawMateApp.Components
 {
@@ -40,6 +41,17 @@ namespace PawMateApp.Components
             set { _businessEmail = value; }
         }
 
+        static string GenerateRandomPassword(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                                        .Select(s => s[random.Next(s.Length)])
+                                        .ToArray());
+        }
+
+
+
         private void btn_approveBusiness_Click(object sender, EventArgs e)
         {
             Notifications notificationsForm = Application.OpenForms["notifications"] as Notifications;
@@ -72,7 +84,7 @@ namespace PawMateApp.Components
                     updateCmd.Parameters.AddWithValue("@businessId", int.Parse(BusinessId));
                     updateCmd.ExecuteNonQuery();
 
-                    string currentPassword = BusinessName + "pawmate_admin";
+                    string currentPassword = GenerateRandomPassword(12); // Default password for new businesses
 
                   
                     string insertToUsers = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"email\", \"businessId\", \"isBusinessAdmin\")" +
