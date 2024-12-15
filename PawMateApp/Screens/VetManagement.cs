@@ -179,8 +179,6 @@ namespace PawMateApp.Screens
             txt_fullname.Text = vetList.CurrentRow.Cells["fullName"].Value.ToString();
             txt_username.Text = vetList.CurrentRow.Cells["username"].Value.ToString();
             isBusinessAdmin.Checked = Convert.ToBoolean(vetList.CurrentRow.Cells["isBusinessAdmin"].Value);
-
-
         }
 
         private void btn_addVet_Click(object sender, EventArgs e)

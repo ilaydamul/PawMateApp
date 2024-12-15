@@ -257,7 +257,7 @@ public class Inputs
 
 public class DatabaseManagament
 {
-    private Npgsql.NpgsqlConnection baglan;
+    public Npgsql.NpgsqlConnection baglan;
 
     public void OpenConnection()
     {
@@ -696,6 +696,7 @@ public class DatabaseManagament
 
     public void GetAppoints(int businessid, Control combobox)
     {
+
         if (combobox is ComboBox comboBox)
         {
             try
@@ -715,6 +716,7 @@ public class DatabaseManagament
                                 Id = Convert.ToInt32(dr["customerId"]),
                                 DisplayName = dr["fullName"].ToString()
                             };
+                            Debug.WriteLine("ID: " + item.Id + "Müşteriler: " + item.DisplayName);
 
                             comboBox.Items.Add(item);
                         }
@@ -771,7 +773,7 @@ public class DatabaseManagament
 
 
 
-    public void AddMedicineStocksToDatabase(int businessid ,int medicineid, string medicinename , int medicinequantity, int redflag)
+    public void AddMedicineStocksToDatabase(int businessid, int medicineid, string medicinename, int medicinequantity, int redflag)
     {
         try
         {
@@ -784,7 +786,7 @@ public class DatabaseManagament
 
                 if (count > 0)
                 {
-                    MessageBox.Show("Bu İlaç zaten stoklarda mevcut!" , "Hata", MessageBoxButtons.OK , MessageBoxIcon.Error);
+                    MessageBox.Show("Bu İlaç zaten stoklarda mevcut!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -799,11 +801,12 @@ public class DatabaseManagament
                         cmd.ExecuteNonQuery();
 
                     }
-                    MessageBox.Show("Stok Başarılı bir şekilde eklendi!" , "Başarılı" , MessageBoxButtons.OK , MessageBoxIcon.Information);
+                    MessageBox.Show("Stok Başarılı bir şekilde eklendi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             Debug.WriteLine("Stok eklenirken hata oluştu: " + ex.Message);
         }
         //Debug.WriteLine("Business Id: " + businessid + " Name: " + medicinename + " quantity: " + medicinequantity + " redflag: "+ redflag);
@@ -863,5 +866,125 @@ public class DatabaseManagament
 
 
     }
-}
 
+    public void GetPets(int customerid, Control combobox)
+    {
+        if (combobox is ComboBox comboBox)
+        {
+            try
+            {
+                string query = "SELECT * FROM \"pets\" WHERE \"customerId\" = @customerid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("customerid", customerid);
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        comboBox.Items.Clear();
+                        while (dr.Read())
+                        {
+                            var item = new ComboBoxItem
+                            {
+                                Id = Convert.ToInt32(dr["petId"]),
+                                DisplayName = dr["petName"].ToString()
+                            };
+                            comboBox.Items.Add(item);
+                            Debug.WriteLine("Müşteriler: " + item.DisplayName);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Hayvanları çekme hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+        }
+    }
+
+    public void GetVets(int businessid, Control combobox)
+    {
+        if (combobox is ComboBox comboBox)
+        {
+            try
+            {
+                string query = "SELECT * FROM \"users\" WHERE \"businessId\" = @businessid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("businessid", businessid);
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        comboBox.Items.Clear();
+                        while (dr.Read())
+                        {
+                            var item = new ComboBoxItem
+                            {
+                                Id = Convert.ToInt32(dr["userId"]),
+                                DisplayName = dr["fullName"].ToString()
+                            };
+                            comboBox.Items.Add(item);
+                            Debug.WriteLine("Veterinerler: " + item.DisplayName);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Veterinerleri çekme hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+        }
+    }
+
+    public bool AddMeeting(int petid, DateTime visitdate, string visitreason, int vetid)
+    {
+        try
+        {
+            string query = "INSERT INTO \"visits\" (\"petId\", \"visitDate\", \"visitReason\", \"vetId\", \"businessid\") VALUES (@petid, @visitdate, @visitreason, @vetid, @businessid)";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("petid", petid);
+                cmd.Parameters.AddWithValue("visitdate", visitdate);
+                cmd.Parameters.AddWithValue("visitreason", visitreason);
+                cmd.Parameters.AddWithValue("vetid", vetid);
+                cmd.Parameters.AddWithValue("businessid", Globals.CurrentUserBusinessAdminID);
+                Debug.WriteLine(vetid);
+                cmd.ExecuteNonQuery();
+
+            }
+            Debug.WriteLine("Randevu eklendi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Randevu ekleme hatası: " + ex.Message);
+        }
+        return false;
+    }
+
+    public bool DeleteVisits(int visitid)
+    {
+        try
+        {
+            string query = "DELETE FROM \"visits\" WHERE \"visitId\" = @visitid";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("visitid", visitid);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Randevu silindi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Randevu silme hatası: " + ex.Message);
+            return false;
+        }
+    }
+
+}

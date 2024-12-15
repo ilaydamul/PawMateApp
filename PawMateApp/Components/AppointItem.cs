@@ -1,7 +1,10 @@
-﻿using System;
+﻿using PawMateApp.Screens;
+using PawMateApp.Screens.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,8 @@ namespace PawMateApp.Components
 {
     public partial class AppointItem : UserControl
     {
+        DatabaseManagament db = new DatabaseManagament();
+        private AppointManagement AppointManagement;
         public AppointItem()
         {
             InitializeComponent();
@@ -85,6 +90,29 @@ namespace PawMateApp.Components
 
         private void AppointItem_Load(object sender, EventArgs e)
         {
+
+        }
+
+        public AppointItem(AppointManagement form)
+        {
+            AppointManagement = form;
+            InitializeComponent();
+        }
+
+        private void btn_deleteStock_Click(object sender, EventArgs e)
+        {
+            AppointManagement appointManagement = Application.OpenForms["AppointManagement"] as AppointManagement;
+            DialogResult dialogResult = MessageBox.Show("Randevuyu silmek istediğinize emin misiniz?", "Randevu Silme", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(dialogResult == DialogResult.Yes)
+            {
+                db.OpenConnection();
+                db.DeleteVisits(int.Parse(VisitId));
+                this.Dispose();
+                appointManagement.ReloadAppointments();
+                MessageBox.Show("Randevu başarıyla silindi", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                db.CloseConnection();
+                return;
+            }
 
         }
     }

@@ -190,6 +190,7 @@
             this.btn_deleteStock.Size = new System.Drawing.Size(35, 34);
             this.btn_deleteStock.TabIndex = 148;
             this.btn_deleteStock.UseVisualStyleBackColor = false;
+            this.btn_deleteStock.Click += new System.EventHandler(this.btn_deleteStock_Click);
             // 
             // AppointItem
             // 
