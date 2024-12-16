@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PawMateApp.Login;
 
 namespace PawMateApp.Screens
 {
@@ -152,8 +153,8 @@ namespace PawMateApp.Screens
                         else if (btn_addCustomer.Text == "Ekle")
                         {
                             // Müşteri ekleme işlemi
-                            query = "INSERT INTO \"customers\" (\"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\") " +
-                                    "VALUES (@fullName, @phone, @email, @address, @alternateName, @alternatePhone)";
+                            query = "INSERT INTO \"customers\" (\"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" , \"businessId\") " +
+                                    "VALUES (@fullName, @phone, @email, @address, @alternateName, @alternatePhone, @businessid)";
 
                             using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                             {
@@ -163,6 +164,7 @@ namespace PawMateApp.Screens
                                 cmd.Parameters.AddWithValue("@address", txt_customerAddress.Text);
                                 cmd.Parameters.AddWithValue("@alternateName", txt_customerAlternate.Text);
                                 cmd.Parameters.AddWithValue("@alternatePhone", txt_customerAlternatePhone.Text);
+                                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
                                 
                                 cmd.ExecuteNonQuery();
                                 baglan.Close();
