@@ -318,6 +318,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\user.png" />
     <None Include="Resources\rec.png" />
     <None Include="Resources\oval2.png" />
     <None Include="Resources\oval.png" />

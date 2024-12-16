@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.userImage = new System.Windows.Forms.PictureBox();
             this.lbl_name = new System.Windows.Forms.Label();
             this.btn_updateProfileInfos = new System.Windows.Forms.Button();
@@ -66,9 +65,10 @@
             this.lbl_pets = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.profile_img = new System.Windows.Forms.PictureBox();
             this.lbl_totalAppo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.profile_img = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.userImage)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -78,18 +78,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pc_vets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profile_img)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profile_img)).BeginInit();
             this.SuspendLayout();
             // 
             // userImage
             // 
             this.userImage.BackColor = System.Drawing.Color.White;
-            this.userImage.Image = ((System.Drawing.Image)(resources.GetObject("userImage.Image")));
+            this.userImage.Image = global::PawMateApp.Properties.Resources.user;
             this.userImage.Location = new System.Drawing.Point(67, 55);
             this.userImage.Name = "userImage";
             this.userImage.Size = new System.Drawing.Size(139, 131);
-            this.userImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.userImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.userImage.TabIndex = 0;
             this.userImage.TabStop = false;
             // 
@@ -241,6 +241,7 @@
             this.btn_updateImage.TabIndex = 100;
             this.btn_updateImage.Text = "Fotoğrafımı Güncelle";
             this.btn_updateImage.UseVisualStyleBackColor = false;
+            this.btn_updateImage.Click += new System.EventHandler(this.btn_updateImage_Click);
             // 
             // txt_title
             // 
@@ -512,16 +513,6 @@
             this.panel2.Size = new System.Drawing.Size(537, 590);
             this.panel2.TabIndex = 129;
             // 
-            // profile_img
-            // 
-            this.profile_img.Image = global::PawMateApp.Properties.Resources.profile_img21;
-            this.profile_img.Location = new System.Drawing.Point(0, 3);
-            this.profile_img.Name = "profile_img";
-            this.profile_img.Size = new System.Drawing.Size(534, 170);
-            this.profile_img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.profile_img.TabIndex = 129;
-            this.profile_img.TabStop = false;
-            // 
             // lbl_totalAppo
             // 
             this.lbl_totalAppo.AutoSize = true;
@@ -543,6 +534,20 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 130;
             this.pictureBox1.TabStop = false;
+            // 
+            // profile_img
+            // 
+            this.profile_img.Image = global::PawMateApp.Properties.Resources.profile_img21;
+            this.profile_img.Location = new System.Drawing.Point(0, 3);
+            this.profile_img.Name = "profile_img";
+            this.profile_img.Size = new System.Drawing.Size(534, 170);
+            this.profile_img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.profile_img.TabIndex = 129;
+            this.profile_img.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Profile
             // 
@@ -570,8 +575,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profile_img)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profile_img)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -619,5 +624,6 @@
         private System.Windows.Forms.PictureBox profile_img;
         private System.Windows.Forms.Label lbl_totalAppo;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
