@@ -23,6 +23,9 @@ namespace PawMateApp.Screens
 
         private void Profile_Load(object sender, EventArgs e)
         {
+            //İşletme sahibi ise toplam veteriner sayısı kısmı gösterilecek, değilse visible hide olacak
+
+
             try
             {
                 if (baglan.State == ConnectionState.Closed)
@@ -43,7 +46,7 @@ namespace PawMateApp.Screens
                             txt_username.Text = reader["username"].ToString();
                             txt_password.Text = reader["password"].ToString();
                             txt_phone.Text = reader["phone"].ToString();
-                            lbl_name.Text = $"Hoş geldiniz, {reader["fullName"].ToString()}!";
+                            lbl_name.Text = $"{reader["fullName"].ToString()}!";
                         }
                     }
                 }
@@ -141,7 +144,6 @@ namespace PawMateApp.Screens
             }
         }
 
-              
-
+     
     }
 }
