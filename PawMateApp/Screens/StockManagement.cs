@@ -28,6 +28,8 @@ namespace PawMateApp.Screens
 
         private void StockManagement_Load(object sender, EventArgs e)
         {
+            //Stok kaydınız bulunamamaktadır yazısı stok yokken gelmeli.
+
             databaseManagament.OpenConnection();
             databaseManagament.GetMedicines(Globals.CurrentUserBusinessAdminID, cb_medicines);
             StockItem();
