@@ -29,8 +29,7 @@ namespace PawMateApp.Screens
             db.OpenConnection();
             db.GetAppoints(Globals.CurrentUserBusinessAdminID, cb_customers);
             db.GetVets(Globals.CurrentUserBusinessAdminID, cb_vets);
-            dp_date.Format = DateTimePickerFormat.Custom;
-            dp_date.CustomFormat = "yyyy - MM - dd";
+            dp_date.Format = DateTimePickerFormat.Long;
 
             string getallvisitsqueryBefore = @"
 SELECT v.""visitId"", v.""visitDate"", v.""visitReason"", p.""petName"", c.""fullName"", c.""phone"", u.""username"" 
@@ -110,19 +109,20 @@ ORDER BY v.""visitDate"" DESC;";
 
         private void btn_addVisit_Click(object sender, EventArgs e)
         {
+            DateTime date = dp_date.Value;
             db.OpenConnection();
             if (cb_customers.SelectedItem != null && cb_pets.SelectedItem != null && cb_vets.SelectedItem != null)
             {
                 if (cb_customers.SelectedItem is ComboBoxItem selected && cb_pets.SelectedItem is ComboBoxItem petselected && cb_vets.SelectedItem is ComboBoxItem vetsselected)
                 {
-                    CheckClass check = new CheckClass(new string[] { txt_visitReason.Text, dp_date.Value.ToString()});
+                    CheckClass check = new CheckClass(new string[] { txt_visitReason.Text, dp_date.Value.ToString() });
                     if (!check.Check(""))
                     {
                         return;
                     }
                     else
                     {
-                        if (db.AddMeeting(petselected.Id, dp_date.Value.Date, txt_visitReason.Text.Trim(), vetsselected.Id))
+                        if (db.AddMeeting(petselected.Id, date, txt_visitReason.Text.Trim(), vetsselected.Id))
                         {
                             MessageBox.Show("Randevu başarıyla eklendi", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ReloadAppointments();
