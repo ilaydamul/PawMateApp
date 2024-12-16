@@ -14,12 +14,14 @@ namespace PawMateApp.Screens
 {
     public partial class MedicineManagement : Form
     {
+        public Inputs inputs;
          DatabaseManagament db = new DatabaseManagament();
         public MedicineManagement()
         {
             InitializeComponent();
             LoadMedicines();
             ConfigureDataTable();
+            inputs = new Inputs(new Control[] { txt_medicineDesc, txt_medicinePrice, txt_medicineTitle, txt_medicineUnit });
         }
 
         private void btn_addMedicine_Click(object sender, EventArgs e)
@@ -38,6 +40,8 @@ namespace PawMateApp.Screens
                     if (db.AddMedicineToDatabase(txt_medicineTitle.Text, txt_medicineDesc.Text, txt_medicineUnit.Text, Convert.ToInt32(txt_medicinePrice.Text), Globals.CurrentUserBusinessAdminID))
                     {
                         MessageBox.Show("İlaç eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
+                        inputs.ClearInputs();
                         LoadMedicines();
                     }
                     else
@@ -53,6 +57,7 @@ namespace PawMateApp.Screens
                         MessageBox.Show("İlaç güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadMedicines();
                         btn_addMedicine.Text = "Ekle";
+                        inputs.ClearInputs();
                     }
                     else
                     {
