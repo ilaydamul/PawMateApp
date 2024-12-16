@@ -65,6 +65,7 @@
             // 
             this.btn_addUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addUser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addUser.ForeColor = System.Drawing.Color.White;
             this.btn_addUser.Location = new System.Drawing.Point(638, 39);
             this.btn_addUser.Name = "btn_addUser";
@@ -108,9 +109,10 @@
             // isBusinessAdmin
             // 
             this.isBusinessAdmin.AutoSize = true;
-            this.isBusinessAdmin.Location = new System.Drawing.Point(12, 258);
+            this.isBusinessAdmin.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.isBusinessAdmin.Location = new System.Drawing.Point(15, 272);
             this.isBusinessAdmin.Name = "isBusinessAdmin";
-            this.isBusinessAdmin.Size = new System.Drawing.Size(93, 17);
+            this.isBusinessAdmin.Size = new System.Drawing.Size(93, 18);
             this.isBusinessAdmin.TabIndex = 6;
             this.isBusinessAdmin.Text = "İşletme Admini";
             this.isBusinessAdmin.UseVisualStyleBackColor = true;
@@ -118,110 +120,117 @@
             // cb_businesses
             // 
             this.cb_businesses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_businesses.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_businesses.FormattingEnabled = true;
-            this.cb_businesses.Location = new System.Drawing.Point(12, 225);
+            this.cb_businesses.Location = new System.Drawing.Point(14, 239);
             this.cb_businesses.Name = "cb_businesses";
-            this.cb_businesses.Size = new System.Drawing.Size(227, 21);
+            this.cb_businesses.Size = new System.Drawing.Size(227, 24);
             this.cb_businesses.TabIndex = 5;
             // 
             // txt_email
             // 
             this.txt_email.BackColor = System.Drawing.Color.White;
-            this.txt_email.Location = new System.Drawing.Point(12, 193);
+            this.txt_email.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_email.Location = new System.Drawing.Point(14, 209);
             this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(226, 20);
+            this.txt_email.Size = new System.Drawing.Size(226, 22);
             this.txt_email.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 176);
+            this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(11, 190);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 14);
+            this.label2.Size = new System.Drawing.Size(84, 16);
             this.label2.TabIndex = 124;
             this.label2.Text = "E-Mail Adresi";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 135);
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label1.Location = new System.Drawing.Point(12, 146);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 14);
+            this.label1.Size = new System.Drawing.Size(106, 16);
             this.label1.TabIndex = 121;
             this.label1.Text = "Telefon Numarası";
             // 
             // txt_phone
             // 
             this.txt_phone.BackColor = System.Drawing.Color.White;
-            this.txt_phone.Location = new System.Drawing.Point(12, 153);
+            this.txt_phone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_phone.Location = new System.Drawing.Point(14, 165);
             this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(226, 20);
+            this.txt_phone.Size = new System.Drawing.Size(226, 22);
             this.txt_phone.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 54);
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(12, 58);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 14);
+            this.label3.Size = new System.Drawing.Size(78, 16);
             this.label3.TabIndex = 120;
             this.label3.Text = "Kullanıcı Adı";
             // 
             // txt_username
             // 
             this.txt_username.BackColor = System.Drawing.Color.White;
-            this.txt_username.Location = new System.Drawing.Point(12, 72);
+            this.txt_username.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_username.Location = new System.Drawing.Point(14, 77);
             this.txt_username.Name = "txt_username";
-            this.txt_username.Size = new System.Drawing.Size(226, 20);
+            this.txt_username.Size = new System.Drawing.Size(226, 22);
             this.txt_username.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(9, 95);
+            this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label7.Location = new System.Drawing.Point(10, 102);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(33, 14);
+            this.label7.Size = new System.Drawing.Size(33, 16);
             this.label7.TabIndex = 119;
             this.label7.Text = "Şifre";
             // 
             // txt_password
             // 
             this.txt_password.BackColor = System.Drawing.Color.White;
-            this.txt_password.Location = new System.Drawing.Point(12, 112);
+            this.txt_password.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_password.Location = new System.Drawing.Point(14, 121);
             this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(226, 20);
+            this.txt_password.Size = new System.Drawing.Size(226, 22);
             this.txt_password.TabIndex = 2;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(11, 13);
+            this.label8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label8.Location = new System.Drawing.Point(11, 14);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 14);
+            this.label8.Size = new System.Drawing.Size(64, 16);
             this.label8.TabIndex = 118;
             this.label8.Text = "Ad Soyad";
             // 
             // txt_fullname
             // 
             this.txt_fullname.BackColor = System.Drawing.Color.White;
-            this.txt_fullname.Location = new System.Drawing.Point(13, 31);
+            this.txt_fullname.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_fullname.Location = new System.Drawing.Point(15, 33);
             this.txt_fullname.Name = "txt_fullname";
-            this.txt_fullname.Size = new System.Drawing.Size(226, 20);
+            this.txt_fullname.Size = new System.Drawing.Size(226, 22);
             this.txt_fullname.TabIndex = 0;
             // 
             // btn_addUpdateUser
             // 
             this.btn_addUpdateUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addUpdateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addUpdateUser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addUpdateUser.ForeColor = System.Drawing.Color.White;
-            this.btn_addUpdateUser.Location = new System.Drawing.Point(13, 451);
+            this.btn_addUpdateUser.Location = new System.Drawing.Point(15, 448);
             this.btn_addUpdateUser.Name = "btn_addUpdateUser";
-            this.btn_addUpdateUser.Size = new System.Drawing.Size(226, 37);
+            this.btn_addUpdateUser.Size = new System.Drawing.Size(227, 37);
             this.btn_addUpdateUser.TabIndex = 7;
             this.btn_addUpdateUser.Text = "Ekle";
             this.btn_addUpdateUser.UseVisualStyleBackColor = false;
@@ -242,6 +251,7 @@
             // 
             this.btn_deleteUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_deleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deleteUser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_deleteUser.ForeColor = System.Drawing.Color.White;
             this.btn_deleteUser.Location = new System.Drawing.Point(638, 545);
             this.btn_deleteUser.Name = "btn_deleteUser";

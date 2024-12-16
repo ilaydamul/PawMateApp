@@ -56,10 +56,10 @@
             // txt_noNotif
             // 
             this.txt_noNotif.AutoSize = true;
-            this.txt_noNotif.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_noNotif.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txt_noNotif.Location = new System.Drawing.Point(3, 0);
             this.txt_noNotif.Name = "txt_noNotif";
-            this.txt_noNotif.Size = new System.Drawing.Size(260, 26);
+            this.txt_noNotif.Size = new System.Drawing.Size(241, 24);
             this.txt_noNotif.TabIndex = 9;
             this.txt_noNotif.Text = "Henüz bir bildiriminiz yok.";
             this.txt_noNotif.Visible = false;

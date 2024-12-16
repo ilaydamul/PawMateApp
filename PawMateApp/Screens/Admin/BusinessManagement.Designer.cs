@@ -32,6 +32,7 @@
             this.txt_title = new System.Windows.Forms.Label();
             this.businessesList = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cb_approved = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_address = new System.Windows.Forms.TextBox();
             this.businessLogo = new System.Windows.Forms.PictureBox();
@@ -48,7 +49,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btn_addBusiness = new System.Windows.Forms.Button();
             this.btn_deleteBusiness = new System.Windows.Forms.Button();
-            this.cb_approved = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessesList)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.businessLogo)).BeginInit();
@@ -97,20 +97,32 @@
             this.panel1.Size = new System.Drawing.Size(256, 500);
             this.panel1.TabIndex = 105;
             // 
+            // cb_approved
+            // 
+            this.cb_approved.AutoSize = true;
+            this.cb_approved.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.cb_approved.Location = new System.Drawing.Point(19, 377);
+            this.cb_approved.Name = "cb_approved";
+            this.cb_approved.Size = new System.Drawing.Size(56, 18);
+            this.cb_approved.TabIndex = 125;
+            this.cb_approved.Text = "Onaylı";
+            this.cb_approved.UseVisualStyleBackColor = true;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 261);
+            this.label2.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label2.Location = new System.Drawing.Point(11, 274);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 14);
+            this.label2.Size = new System.Drawing.Size(89, 16);
             this.label2.TabIndex = 124;
             this.label2.Text = "İşletme Adresi";
             // 
             // txt_address
             // 
             this.txt_address.BackColor = System.Drawing.Color.White;
-            this.txt_address.Location = new System.Drawing.Point(13, 279);
+            this.txt_address.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_address.Location = new System.Drawing.Point(14, 293);
             this.txt_address.Multiline = true;
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(226, 60);
@@ -130,81 +142,86 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 220);
+            this.label1.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label1.Location = new System.Drawing.Point(11, 230);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 14);
+            this.label1.Size = new System.Drawing.Size(100, 16);
             this.label1.TabIndex = 121;
             this.label1.Text = "İşletme Telefonu";
             // 
             // txt_phone
             // 
             this.txt_phone.BackColor = System.Drawing.Color.White;
-            this.txt_phone.Location = new System.Drawing.Point(13, 238);
+            this.txt_phone.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_phone.Location = new System.Drawing.Point(14, 249);
             this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(226, 20);
+            this.txt_phone.Size = new System.Drawing.Size(226, 22);
             this.txt_phone.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(11, 139);
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label3.Location = new System.Drawing.Point(11, 142);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 14);
+            this.label3.Size = new System.Drawing.Size(90, 16);
             this.label3.TabIndex = 120;
             this.label3.Text = "Yetkili Kişi Adı";
             // 
             // txt_authName
             // 
             this.txt_authName.BackColor = System.Drawing.Color.White;
-            this.txt_authName.Location = new System.Drawing.Point(13, 157);
+            this.txt_authName.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_authName.Location = new System.Drawing.Point(14, 161);
             this.txt_authName.Name = "txt_authName";
-            this.txt_authName.Size = new System.Drawing.Size(226, 20);
+            this.txt_authName.Size = new System.Drawing.Size(226, 22);
             this.txt_authName.TabIndex = 1;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(10, 180);
+            this.label7.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label7.Location = new System.Drawing.Point(11, 186);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 14);
+            this.label7.Size = new System.Drawing.Size(90, 16);
             this.label7.TabIndex = 119;
             this.label7.Text = "İşletme E-Mail";
             // 
             // txt_businessEmail
             // 
             this.txt_businessEmail.BackColor = System.Drawing.Color.White;
-            this.txt_businessEmail.Location = new System.Drawing.Point(13, 197);
+            this.txt_businessEmail.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_businessEmail.Location = new System.Drawing.Point(14, 205);
             this.txt_businessEmail.Name = "txt_businessEmail";
-            this.txt_businessEmail.Size = new System.Drawing.Size(226, 20);
+            this.txt_businessEmail.Size = new System.Drawing.Size(226, 22);
             this.txt_businessEmail.TabIndex = 2;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Arial", 9.75F);
             this.label8.Location = new System.Drawing.Point(12, 98);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 14);
+            this.label8.Size = new System.Drawing.Size(88, 16);
             this.label8.TabIndex = 118;
             this.label8.Text = "İşletme Adınız";
             // 
             // txt_businessName
             // 
             this.txt_businessName.BackColor = System.Drawing.Color.White;
-            this.txt_businessName.Location = new System.Drawing.Point(14, 116);
+            this.txt_businessName.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_businessName.Location = new System.Drawing.Point(15, 117);
             this.txt_businessName.Name = "txt_businessName";
-            this.txt_businessName.Size = new System.Drawing.Size(226, 20);
+            this.txt_businessName.Size = new System.Drawing.Size(226, 22);
             this.txt_businessName.TabIndex = 0;
             // 
             // btn_addUpdateBusiness
             // 
             this.btn_addUpdateBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addUpdateBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addUpdateBusiness.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addUpdateBusiness.ForeColor = System.Drawing.Color.White;
-            this.btn_addUpdateBusiness.Location = new System.Drawing.Point(13, 451);
+            this.btn_addUpdateBusiness.Location = new System.Drawing.Point(14, 450);
             this.btn_addUpdateBusiness.Name = "btn_addUpdateBusiness";
             this.btn_addUpdateBusiness.Size = new System.Drawing.Size(226, 37);
             this.btn_addUpdateBusiness.TabIndex = 6;
@@ -215,10 +232,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 351);
+            this.label6.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label6.Location = new System.Drawing.Point(14, 358);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 14);
+            this.label6.Size = new System.Drawing.Size(110, 16);
             this.label6.TabIndex = 110;
             this.label6.Text = "Hesap Onaylı mı?";
             // 
@@ -236,6 +253,7 @@
             // 
             this.btn_addBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addBusiness.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addBusiness.ForeColor = System.Drawing.Color.White;
             this.btn_addBusiness.Location = new System.Drawing.Point(638, 39);
             this.btn_addBusiness.Name = "btn_addBusiness";
@@ -249,6 +267,7 @@
             // 
             this.btn_deleteBusiness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_deleteBusiness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deleteBusiness.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_deleteBusiness.ForeColor = System.Drawing.Color.White;
             this.btn_deleteBusiness.Location = new System.Drawing.Point(638, 545);
             this.btn_deleteBusiness.Name = "btn_deleteBusiness";
@@ -257,16 +276,6 @@
             this.btn_deleteBusiness.Text = "Sil";
             this.btn_deleteBusiness.UseVisualStyleBackColor = false;
             this.btn_deleteBusiness.Click += new System.EventHandler(this.btn_deleteBusiness_Click);
-            // 
-            // cb_approved
-            // 
-            this.cb_approved.AutoSize = true;
-            this.cb_approved.Location = new System.Drawing.Point(14, 369);
-            this.cb_approved.Name = "cb_approved";
-            this.cb_approved.Size = new System.Drawing.Size(55, 17);
-            this.cb_approved.TabIndex = 125;
-            this.cb_approved.Text = "Onaylı";
-            this.cb_approved.UseVisualStyleBackColor = true;
             // 
             // BusinessManagement
             // 

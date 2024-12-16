@@ -60,6 +60,7 @@
             // 
             this.btn_deleteUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_deleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_deleteUser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_deleteUser.ForeColor = System.Drawing.Color.White;
             this.btn_deleteUser.Location = new System.Drawing.Point(638, 545);
             this.btn_deleteUser.Name = "btn_deleteUser";
@@ -73,6 +74,7 @@
             // 
             this.btn_addUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addUser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addUser.ForeColor = System.Drawing.Color.White;
             this.btn_addUser.Location = new System.Drawing.Point(638, 39);
             this.btn_addUser.Name = "btn_addUser";
@@ -108,17 +110,18 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 53);
+            this.label3.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.label3.Location = new System.Drawing.Point(11, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 14);
+            this.label3.Size = new System.Drawing.Size(61, 16);
             this.label3.TabIndex = 120;
             this.label3.Text = "Açıklama";
             // 
             // txt_treatmentdesc
             // 
             this.txt_treatmentdesc.BackColor = System.Drawing.Color.White;
-            this.txt_treatmentdesc.Location = new System.Drawing.Point(13, 70);
+            this.txt_treatmentdesc.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_treatmentdesc.Location = new System.Drawing.Point(13, 75);
             this.txt_treatmentdesc.Multiline = true;
             this.txt_treatmentdesc.Name = "txt_treatmentdesc";
             this.txt_treatmentdesc.Size = new System.Drawing.Size(226, 113);
@@ -127,25 +130,27 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Arial", 9.75F);
             this.label8.Location = new System.Drawing.Point(11, 12);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 14);
+            this.label8.Size = new System.Drawing.Size(64, 16);
             this.label8.TabIndex = 118;
             this.label8.Text = "Tedavi Adı";
             // 
             // txt_treatmenttitle
             // 
             this.txt_treatmenttitle.BackColor = System.Drawing.Color.White;
-            this.txt_treatmenttitle.Location = new System.Drawing.Point(13, 30);
+            this.txt_treatmenttitle.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.txt_treatmenttitle.Location = new System.Drawing.Point(13, 31);
             this.txt_treatmenttitle.Name = "txt_treatmenttitle";
-            this.txt_treatmenttitle.Size = new System.Drawing.Size(226, 20);
+            this.txt_treatmenttitle.Size = new System.Drawing.Size(226, 22);
             this.txt_treatmenttitle.TabIndex = 0;
             // 
             // btn_addUpdateUser
             // 
             this.btn_addUpdateUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
             this.btn_addUpdateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_addUpdateUser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_addUpdateUser.ForeColor = System.Drawing.Color.White;
             this.btn_addUpdateUser.Location = new System.Drawing.Point(13, 305);
             this.btn_addUpdateUser.Name = "btn_addUpdateUser";
