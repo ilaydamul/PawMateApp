@@ -30,6 +30,8 @@ namespace PawMateApp.Screens
             dt_diagnosisDate.Format = DateTimePickerFormat.Long;
             db.GetTreatmentsForCombo(cb_treatments);
             db.CloseConnection();
+
+
         }
 
         private void cb_customers_SelectedIndexChanged(object sender, EventArgs e)

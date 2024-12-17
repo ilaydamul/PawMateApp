@@ -14,6 +14,7 @@ namespace PawMateApp.Screens
 {
     public partial class PetAndCustomerManagement : Form
     {
+        string sendMailTo;
         public PetAndCustomerManagement()
         {
             InitializeComponent();
@@ -142,7 +143,6 @@ namespace PawMateApp.Screens
                                 cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(customerList.SelectedRows[0].Cells["customerId"].Value));
                                 cmd.ExecuteNonQuery();
                                 baglan.Close();
-
                                 Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
                                 inputs.ClearInputs();
                             }
@@ -168,12 +168,47 @@ namespace PawMateApp.Screens
                                 
                                 cmd.ExecuteNonQuery();
                                 baglan.Close();
-
+                                sendMailTo = txt_customerEmail.Text.Trim();
                                 Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
                                 inputs.ClearInputs();
                             }
 
                             MessageBox.Show("Müşteri başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            string body = $@"
+<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Merhabalar, {Globals.CurrentName}! 👋</strong><br><br>
+        <span style=""font-size:22px;line-height:30px;color:#2d2d2d;"">
+          Veteriner kliniğiniz, {Globals.BusinessName} tarafından başarıyla sisteme kaydınız yapıldı! 🎉
+        </span><br><br>
+        Harika bir haber! <strong> {Globals.BusinessName} </strong> adlı veteriner kliniğiniz, siz ve sevimli dostunuzun kaydını başarıyla tamamladı🐾<br><br>
+        <strong style=""font-size:20px;color:#ff3c00;"">Bundan sonra küçük dostumuzun işlemleri güvenli bir altyapı sağlayan Pawmate'in güvenlikli duvarlaklarının arkasında!🌟</strong><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:20px;color:#2d2d2d;"">Veteriner kliniğinizle sağlıklı bir yolculuğa çıkmaya hazır olun! 🚀</strong><br><br>
+        Sizi ve sevimli dostunuzu daha yakından tanımak için sabırsızlanıyoruz! Kliniğinizle birlikte birçok güzel anı paylaşacağımıza eminiz. <br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em><br>
+        <span style=""font-size:14px;color:#cccccc;"">Herhangi bir sorunuz olduğunda bizimle iletişime geçebilirsiniz!</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+";
+                            SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                            sendMail.SendMail(Globals.BusinessName+ " veteriner bilgilendirmesi", body, sendMailTo);
+
+                            MessageBox.Show("Kayıt talebiniz alınmıştır. Yakın zamanda size mail ile dönüş yapacağız.",
+                                            "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
 
                         PetAndCustomerManagement_Load(null, null); 

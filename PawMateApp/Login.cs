@@ -37,7 +37,9 @@ namespace PawMateApp
             public static bool CurrentUserBusinessAdminStatus { get; set; }   
             public static bool CurrentUserAppAdminStatus { get; set; }   
             public static int CurrentUserBusinessAdminID { get; set; }   
-            
+            public static string BusinessName { get; set; }
+            public static string CurrentName { get; set; }
+
         }
 
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
@@ -81,7 +83,6 @@ namespace PawMateApp
                     cmd.Parameters.AddWithValue("@P1", txt_username.Text);
                     cmd.Parameters.AddWithValue("@P2", txt_password.Text);
                     NpgsqlDataReader dr = cmd.ExecuteReader();
-
                     if (dr.Read())
                     {
 
@@ -96,13 +97,13 @@ namespace PawMateApp
                         this.Hide();
                         Panel panel = new Panel(); // messagebox yerine panel eklendi.
                         panel.Show();
-
                     }
                     else
                     {
 
                         MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
                 }
 
                 catch (Exception ex)
@@ -117,9 +118,43 @@ namespace PawMateApp
                         baglan.Close();
                     }
                 }
-
-
-
+                try
+                {
+                    baglan.Open();
+                    string getBusinessName = "SELECT \"businessName\" FROM \"businesses\" WHERE \"businessId\" = @P1";
+                    NpgsqlCommand cmd2 = new NpgsqlCommand(getBusinessName, baglan);
+                    cmd2.Parameters.AddWithValue("@P1", Globals.CurrentUserBusinessAdminID);
+                    NpgsqlDataReader dr2 = cmd2.ExecuteReader();
+                    Globals.BusinessName = dr2.Read() ? dr2["businessName"].ToString() : "Hata";
+                    Debug.WriteLine(Globals.BusinessName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    baglan.Close();
+                }
+                try
+                {
+                    baglan.Open();
+                    string getUsername = "SELECT \"fullName\" FROM \"users\" WHERE \"userId\" = @P1";
+                    NpgsqlCommand cmd3 = new NpgsqlCommand(getUsername, baglan);
+                    cmd3.Parameters.AddWithValue("@P1", Globals.CurrentUserID);
+                    NpgsqlDataReader dr3 = cmd3.ExecuteReader();
+                    Globals.CurrentName = dr3.Read() ? dr3["fullName"].ToString() : "Hata";
+                    Debug.WriteLine(Globals.CurrentName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    baglan.Close();
+                }
+                
             }
 
         }
