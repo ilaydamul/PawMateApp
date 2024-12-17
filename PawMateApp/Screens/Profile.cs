@@ -78,6 +78,53 @@ namespace PawMateApp.Screens
                     baglan.Close();
             }
 
+            baglan.Open();
+
+            // 1. Randevu sayısını alıyoruz
+            NpgsqlCommand cmdVisits = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"userId\" = @userId", baglan);
+            cmdVisits.Parameters.AddWithValue("@userId", Globals.CurrentUserID);
+            int randevuSayisi = Convert.ToInt32(cmdVisits.ExecuteScalar());
+            lbl_totalAppo.Text = randevuSayisi.ToString(); 
+
+            // 2. İlaç stoğu sayısını alıyoruz
+            NpgsqlCommand cmdMedicineStock = new NpgsqlCommand("SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"userId\" = @userid", baglan);
+            cmdMedicineStock.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            int ilacStogu = Convert.ToInt32(cmdMedicineStock.ExecuteScalar());
+            lbl_totalMedicine.Text = ilacStogu.ToString(); 
+
+            // 3. Yazılan reçetelerin sayısını alıyoruz
+            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand("SELECT COUNT(*) FROM \"prescriptions\" WHERE \"userId\" = @userid", baglan);
+            cmdPrescriptions.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            int receteSayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
+            lbl_allPresp.Text = receteSayisi.ToString();
+
+            // 4. Müşterilerin sayısını alıyoruz
+            NpgsqlCommand cmdCostumers = new NpgsqlCommand("SELECT COUNT(*) FROM \"costumers\" WHERE \"userId\" = @userid", baglan);
+            cmdPrescriptions.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            int musterisayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
+            lbl_customers.Text = musterisayisi.ToString(); 
+
+
+            // 5. Hayvan sayısını alıyoruz
+            NpgsqlCommand cmdPets = new NpgsqlCommand(@"
+            SELECT COUNT(*) 
+            FROM ""pets"" 
+            WHERE ""customerId"" IN (
+                SELECT ""customerId"" 
+                FROM ""customers"" 
+                WHERE ""businessId"" IN (
+                    SELECT ""businessId"" 
+                    FROM ""users"" 
+                    WHERE ""userId"" = @userid
+                )
+            )", baglan);
+
+            cmdPets.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            int hayvanSayisi = Convert.ToInt32(cmdPets.ExecuteScalar());
+            lbl_pets.Text = hayvanSayisi.ToString(); 
+         
+            baglan.Close();
+
         }
 
         private void btn_updateProfileInfos_Click(object sender, EventArgs e)
