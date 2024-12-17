@@ -109,6 +109,7 @@ namespace PawMateApp.Screens
                 }
                 else
                 {
+
                     try
                     {
                         if (baglan.State == ConnectionState.Closed)
@@ -152,6 +153,7 @@ namespace PawMateApp.Screens
 
                         else if (btn_addCustomer.Text == "Ekle")
                         {
+                            string customerName = txt_customerName.Text;
                             // Müşteri ekleme işlemi
                             query = "INSERT INTO \"customers\" (\"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" , \"businessId\") " +
                                     "VALUES (@fullName, @phone, @email, @address, @alternateName, @alternatePhone, @businessid)";
@@ -184,7 +186,7 @@ namespace PawMateApp.Screens
     </tr>
     <tr>
       <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
-        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Merhabalar, {Globals.CurrentName}! 👋</strong><br><br>
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Merhabalar, {customerName}! 👋</strong><br><br>
         <span style=""font-size:22px;line-height:30px;color:#2d2d2d;"">
           Veteriner kliniğiniz, {Globals.BusinessName} tarafından başarıyla sisteme kaydınız yapıldı! 🎉
         </span><br><br>

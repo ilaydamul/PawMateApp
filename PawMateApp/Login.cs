@@ -38,7 +38,6 @@ namespace PawMateApp
             public static bool CurrentUserAppAdminStatus { get; set; }   
             public static int CurrentUserBusinessAdminID { get; set; }   
             public static string BusinessName { get; set; }
-            public static string CurrentName { get; set; }
 
         }
 
@@ -127,24 +126,6 @@ namespace PawMateApp
                     NpgsqlDataReader dr2 = cmd2.ExecuteReader();
                     Globals.BusinessName = dr2.Read() ? dr2["businessName"].ToString() : "Hata";
                     Debug.WriteLine(Globals.BusinessName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    baglan.Close();
-                }
-                try
-                {
-                    baglan.Open();
-                    string getUsername = "SELECT \"fullName\" FROM \"users\" WHERE \"userId\" = @P1";
-                    NpgsqlCommand cmd3 = new NpgsqlCommand(getUsername, baglan);
-                    cmd3.Parameters.AddWithValue("@P1", Globals.CurrentUserID);
-                    NpgsqlDataReader dr3 = cmd3.ExecuteReader();
-                    Globals.CurrentName = dr3.Read() ? dr3["fullName"].ToString() : "Hata";
-                    Debug.WriteLine(Globals.CurrentName);
                 }
                 catch (Exception ex)
                 {
