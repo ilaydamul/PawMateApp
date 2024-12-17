@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,7 +31,36 @@ namespace PawMateApp.Screens
 
             try
             {
+
                 if (baglan.State == ConnectionState.Closed)
+                    baglan.Open();
+             
+                string sqlAdminCheck = "SELECT \"isBusinessAdmin\" FROM \"users\" WHERE \"userId\" = @UserID";
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sqlAdminCheck, baglan))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", Globals.CurrentUserID);
+
+                    using (NpgsqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            
+                            Globals.CurrentUserBusinessAdminStatus = dr["isBusinessAdmin"] != DBNull.Value
+                                ? Convert.ToBoolean(dr["isBusinessAdmin"])
+                                : false;
+
+                            // Admin durumuna göre panel görünürlüğü ayarlıyoruz.
+                            pc_vets.Visible = Globals.CurrentUserBusinessAdminStatus;
+                            lbl_vets.Visible = Globals.CurrentUserBusinessAdminStatus;
+                            txtt_vets.Visible = Globals.CurrentUserBusinessAdminStatus;
+                        }
+                    }
+
+                }
+              
+                     
+                    if (baglan.State == ConnectionState.Closed)
                     baglan.Open();
 
                 string sql = "SELECT \"fullName\", \"username\", \"email\", \"password\", \"phone\", \"image\" FROM \"users\" WHERE \"userId\" = @UserID";
@@ -121,8 +151,7 @@ namespace PawMateApp.Screens
 
             cmdPets.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
             int hayvanSayisi = Convert.ToInt32(cmdPets.ExecuteScalar());
-            lbl_pets.Text = hayvanSayisi.ToString(); 
-         
+            lbl_pets.Text = hayvanSayisi.ToString();        
             baglan.Close();
 
         }
