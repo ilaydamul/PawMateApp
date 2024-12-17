@@ -15,48 +15,22 @@ namespace PawMateApp
 {
     public partial class Panel : Form
     {
-        // Formları önbelleğe alalım
-        private BusinessManagement businessManagementForm;
-        private UserManagement userManagementForm;
-        private TreatmentManagement treatmentManagementForm;
-        private Notifications notificationsForm;
-        private Profile profileForm;
-        private VetManagement vetManagementForm;
-        private AppointManagement appointManagementForm;
-        private PatientManagement patientManagementForm;
-        private MedicineManagement medicineManagementForm;
-        private StockManagement stockManagementForm;
-        private PetAndCustomerManagement petManagementForm;
-        private TreatmentPresManagement treatmentPresManagementForm;
 
         public Panel()
         {
+
             MoveForm moveForm = new MoveForm(this);
             InitializeComponent();
             this.topMenuPanel.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
             this.topMenuPanel.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
             this.topMenuPanel.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
-            this.businessPanel.Paint += new PaintEventHandler(businessPanel_Paint);
-            this.topMenuPanel.MouseDown += new MouseEventHandler(topMenuPanel_MouseDown);
+
         }
 
         private void btn_closeApp_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        
-        private void businessPanel_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
-
-       
-        private void topMenuPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-           
-        }
-
 
         private void btn_minimizeApp_Click(object sender, EventArgs e)
         {
@@ -95,7 +69,12 @@ namespace PawMateApp
             btn_minimizeApp.BackColor = Color.FromArgb(41, 33, 230);
         }
 
-        // Formları önbellekten göster
+        private void topMenuPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+
         public void showForm(Form form)
         {
             contentPanel.Controls.Clear(); // Paneli temizle
@@ -104,7 +83,19 @@ namespace PawMateApp
             form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             form.Dock = DockStyle.Fill;
             form.Show();
+
+            //contentPanel.Controls.Clear();
+            //form.MdiParent = this;
+            //form.FormBorderStyle = FormBorderStyle.None;
+            //contentPanel.Controls.Add(form);
+            //form.Show();
         }
+
+        //private void ProfileButton_Click(object sender, EventArgs e)
+        //{
+        //    Profile profile = new Profile();
+        //    showForm(profile);
+        //}
 
         private void Panel_Load(object sender, EventArgs e)
         {
@@ -125,120 +116,95 @@ namespace PawMateApp
                 btn_vetManagement.Visible = false;
                 btn_profile.Visible = true;
             }
-
-
-            this.businessPanel.Paint += new PaintEventHandler(businessPanel_Paint);
-            this.topMenuPanel.MouseDown += new MouseEventHandler(topMenuPanel_MouseDown);
         }
-
-
 
         private void btn_showBusinessManagement_Click(object sender, EventArgs e)
         {
-            if (businessManagementForm == null || businessManagementForm.IsDisposed)
-            {
-                businessManagementForm = new BusinessManagement();
-            }
-            showForm(businessManagementForm);
+            BusinessManagement businessManagement = new BusinessManagement();
+            showForm(businessManagement);
+
         }
 
         private void btn_showUserManagement_Click(object sender, EventArgs e)
         {
-            if (userManagementForm == null || userManagementForm.IsDisposed)
-            {
-                userManagementForm = new UserManagement();
-            }
-            showForm(userManagementForm);
+            UserManagement userManagement = new UserManagement();
+            showForm(userManagement);
+
         }
 
         private void btn_showTreatmentManagement_Click(object sender, EventArgs e)
         {
-            if (treatmentManagementForm == null || treatmentManagementForm.IsDisposed)
-            {
-                treatmentManagementForm = new TreatmentManagement();
-            }
-            showForm(treatmentManagementForm);
+            TreatmentManagement treatmentManagement = new TreatmentManagement();
+            showForm(treatmentManagement);
+
         }
 
         private void btn_showNotifications_Click(object sender, EventArgs e)
         {
-            if (notificationsForm == null || notificationsForm.IsDisposed)
-            {
-                notificationsForm = new Notifications();
-            }
-            showForm(notificationsForm);
+            Notifications notifications = new Notifications();
+            showForm(notifications);
+
+        }
+
+        private void businessPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void btn_profile_Click(object sender, EventArgs e)
         {
-            if (profileForm == null || profileForm.IsDisposed)
-            {
-                profileForm = new Profile();
-            }
-            showForm(profileForm);
+            Profile profile = new Profile();
+            showForm(profile);
+
         }
 
         private void btn_vetManagement_Click(object sender, EventArgs e)
         {
-            if (vetManagementForm == null || vetManagementForm.IsDisposed)
-            {
-                vetManagementForm = new VetManagement();
-            }
-            showForm(vetManagementForm);
+            VetManagement vetManagement = new VetManagement();
+            showForm(vetManagement);
+
         }
 
         private void btn_appointManagement_Click(object sender, EventArgs e)
         {
-            if (appointManagementForm == null || appointManagementForm.IsDisposed)
-            {
-                appointManagementForm = new AppointManagement();
-            }
-            showForm(appointManagementForm);
+            AppointManagement appointManagement = new AppointManagement();
+            showForm(appointManagement);
+
         }
 
         private void btn_patientManagement_Click(object sender, EventArgs e)
         {
-            if (patientManagementForm == null || patientManagementForm.IsDisposed)
-            {
-                patientManagementForm = new PatientManagement();
-            }
-            showForm(patientManagementForm);
+            PatientManagement patientManagement = new PatientManagement();
+            showForm(patientManagement);
+
         }
 
         private void btn_medicineManagement_Click(object sender, EventArgs e)
         {
-            if (medicineManagementForm == null || medicineManagementForm.IsDisposed)
-            {
-                medicineManagementForm = new MedicineManagement();
-            }
-            showForm(medicineManagementForm);
+            MedicineManagement medicineManagement = new MedicineManagement();
+            showForm(medicineManagement);
+
         }
 
         private void btn_stockManagement_Click(object sender, EventArgs e)
         {
-            if (stockManagementForm == null || stockManagementForm.IsDisposed)
-            {
-                stockManagementForm = new StockManagement();
-            }
-            showForm(stockManagementForm);
+            StockManagement stockManagement = new StockManagement();
+            showForm(stockManagement);
+
         }
 
         private void btn_petManagement_Click(object sender, EventArgs e)
         {
-            if (petManagementForm == null || petManagementForm.IsDisposed)
-            {
-                petManagementForm = new PetAndCustomerManagement();
-            }
-            showForm(petManagementForm);
+            PetAndCustomerManagement petManagement = new PetAndCustomerManagement();
+            showForm(petManagement);
+
         }
 
         private void btn_treatmentManagement_Click(object sender, EventArgs e)
         {
-            if (treatmentPresManagementForm == null || treatmentPresManagementForm.IsDisposed)
-            {
-                treatmentPresManagementForm = new TreatmentPresManagement();
-            }
-            showForm(treatmentPresManagementForm);
+            TreatmentPresManagement treatmentManagement = new TreatmentPresManagement();
+            showForm(treatmentManagement);
+
         }
     }
 }

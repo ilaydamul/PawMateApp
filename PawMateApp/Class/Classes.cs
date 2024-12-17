@@ -328,6 +328,27 @@ public class DatabaseManagament
         }
         return dataTable;
     }
+
+    public void GetTreatmentsForCombo(ComboBox comboBox)
+    {
+        string getTreatmensQuery = "SELECT * FROM \"treatments\"";
+        using (var cmd = new Npgsql.NpgsqlCommand(getTreatmensQuery, baglan))
+        {
+            using (var dr = cmd.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    var item = new ComboBoxItem
+                    {
+                        Id = Convert.ToInt32(dr["treatmentId"]),
+                        DisplayName = dr["treatmentName"].ToString()
+                    };
+                    comboBox.Items.Add(item);
+                }
+            }
+        }
+    }
+
     public void UpdateTreatment(int id, string treatmentName, string treatmentDescription)
     {
         try
@@ -986,5 +1007,33 @@ public class DatabaseManagament
             return false;
         }
     }
-
+    public bool AddHealthRecords(int customer_id, int pet_id, string ill_name, DateTime diagnosis_date, int medicine_id, string diagnosis_time, string diagnosis_note)
+    {
+        try
+        {
+            string query = "INSERT INTO \"healthRecords\" (customerid, \"petId\", \"diagnosis\", \"diagnosis_date\", \"treatmentId\", \"ill_duration\", \"notes\") VALUES (@customer_id, @pet_id, @ill_name, @diagnosis_date, @medicine_id, @diagnosis_time, @diagnosis_note)";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("customer_id", customer_id);
+                cmd.Parameters.AddWithValue("pet_id", pet_id);
+                cmd.Parameters.AddWithValue("ill_name", ill_name);
+                cmd.Parameters.AddWithValue("diagnosis_date", diagnosis_date);
+                cmd.Parameters.AddWithValue("medicine_id", medicine_id);
+                cmd.Parameters.AddWithValue("diagnosis_time", diagnosis_time);
+                cmd.Parameters.AddWithValue("diagnosis_note", diagnosis_note);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Sağlık kaydı eklendi");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Sağlık kaydı ekleme hatası: " + ex.Message);
+        }
+        finally
+        {
+            Debug.WriteLine("Sağlık kaydı metodu başarıyla çalıştırıldı!");
+        }
+        return false;
+    }
 }
