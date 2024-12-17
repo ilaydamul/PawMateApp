@@ -261,6 +261,7 @@
             this.cb_customers.Name = "cb_customers";
             this.cb_customers.Size = new System.Drawing.Size(227, 21);
             this.cb_customers.TabIndex = 1;
+            this.cb_customers.SelectedIndexChanged += new System.EventHandler(this.cb_customers_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -294,6 +295,7 @@
             this.btn_addPrescription.TabIndex = 4;
             this.btn_addPrescription.Text = "Ekle";
             this.btn_addPrescription.UseVisualStyleBackColor = false;
+            this.btn_addPrescription.Click += new System.EventHandler(this.btn_addPrescription_Click);
             // 
             // PatientManagement
             // 

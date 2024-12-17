@@ -694,7 +694,7 @@ public class DatabaseManagament
         }
     }
 
-    public void GetAppoints(int businessid, Control combobox)
+    public void GetCustomers(int businessid, Control combobox)
     {
 
         if (combobox is ComboBox comboBox)

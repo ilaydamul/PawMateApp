@@ -27,7 +27,7 @@ namespace PawMateApp.Screens
         private void AppointManagement_Load(object sender, EventArgs e)
         {
             db.OpenConnection();
-            db.GetAppoints(Globals.CurrentUserBusinessAdminID, cb_customers);
+            db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
             db.GetVets(Globals.CurrentUserBusinessAdminID, cb_vets);
             dp_date.Format = DateTimePickerFormat.Long;
 
