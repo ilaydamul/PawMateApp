@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +33,7 @@ namespace PawMateApp.Screens
                 if (baglan.State == ConnectionState.Closed)
                     baglan.Open();
 
-                string sql = "SELECT \"fullName\", \"username\", \"email\", \"password\", \"phone\" FROM \"users\" WHERE \"userId\" = @UserID";
+                string sql = "SELECT \"fullName\", \"username\", \"email\", \"password\", \"phone\", \"image\" FROM \"users\" WHERE \"userId\" = @UserID";
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(sql, baglan))
                 {
@@ -47,6 +49,21 @@ namespace PawMateApp.Screens
                             txt_password.Text = reader["password"].ToString();
                             txt_phone.Text = reader["phone"].ToString();
                             lbl_name.Text = $"{reader["fullName"].ToString()}!";
+
+
+                            if (reader["image"] != DBNull.Value)
+                            {
+                                byte[] imageData = (byte[])reader["image"];
+                                using (MemoryStream ms = new MemoryStream(imageData))
+                                {
+                                    userImage.Image = Image.FromStream(ms); 
+                                }
+                            }
+                            else
+                            {
+                                userImage.Image = Properties.Resources.user;
+                            }
+
                         }
                     }
                 }
@@ -144,6 +161,54 @@ namespace PawMateApp.Screens
             }
         }
 
-     
+        private void btn_updateImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+
+            try
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string imagePath = openFileDialog.FileName;
+
+                    byte[] imageData = File.ReadAllBytes(imagePath);
+
+
+                    using (baglan)
+                    {
+                        baglan.Open();
+
+                        string query = "UPDATE \"users\" SET \"image\" = @ImageData WHERE \"userId\" = @userId";
+
+                        using (NpgsqlCommand command = new NpgsqlCommand(query, baglan))
+                        {
+                            command.Parameters.AddWithValue("@ImageData", imageData);
+                            command.Parameters.AddWithValue("@userId", Globals.CurrentUserID);
+
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Görsel başarıyla kaydedildi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            using (MemoryStream ms = new MemoryStream(imageData))
+                            {
+                                userImage.Image = Image.FromStream(ms);
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("Bir hata meydana  geldi!"+ ex, "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            finally
+            {
+                baglan.Close();
+            }
+           
+        }
     }
 }
