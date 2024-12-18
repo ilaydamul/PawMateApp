@@ -27,8 +27,6 @@ namespace PawMateApp.Screens
         private void Profile_Load(object sender, EventArgs e)
         {
             //İşletme sahibi ise toplam veteriner sayısı kısmı gösterilecek, değilse visible hide olacak
-
-
             try
             {
 

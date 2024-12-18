@@ -38,7 +38,7 @@ FROM ""visits"" v
 JOIN ""pets"" p ON p.""petId"" = v.""petId""
 JOIN ""customers"" c ON c.""customerId"" = p.""customerId""
 JOIN ""users"" u ON u.""userId"" = v.""vetId""
-WHERE v.""businessid"" = @businessid AND v.""visitDate"" >= current_date
+WHERE v.""businessId"" = @businessid AND v.""visitDate"" >= current_date
 ORDER BY v.""visitDate"" ASC;";
 
 
@@ -71,7 +71,7 @@ FROM ""visits"" v
 JOIN ""pets"" p ON p.""petId"" = v.""petId""
 JOIN ""customers"" c ON c.""customerId"" = p.""customerId""
 JOIN ""users"" u ON u.""userId"" = v.""vetId""
-WHERE v.""businessid"" = @businessid AND v.""visitDate"" < current_date
+WHERE v.""businessId"" = @businessId AND v.""visitDate"" < current_date
 ORDER BY v.""visitDate"" DESC;";
 
 
@@ -79,7 +79,7 @@ ORDER BY v.""visitDate"" DESC;";
 
             using (var cmd = new Npgsql.NpgsqlCommand(getallvisitsqueryAfter, db.baglan))
             {
-                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+                cmd.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
                 using (var dr = cmd.ExecuteReader())
                 {
 
