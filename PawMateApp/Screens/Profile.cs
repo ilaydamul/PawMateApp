@@ -130,12 +130,18 @@ namespace PawMateApp.Screens
 
             // 4. Müşterilerin sayısını alıyoruz
             NpgsqlCommand cmdCostumers = new NpgsqlCommand("SELECT COUNT(*) FROM \"costumers\" WHERE \"userId\" = @userid", baglan);
-            cmdPrescriptions.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            cmdCostumers.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
             int musterisayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
-            lbl_customers.Text = musterisayisi.ToString(); 
+            lbl_customers.Text = musterisayisi.ToString();
+
+            // 5. Aktif randevu sayısını alıyoruz
+            NpgsqlCommand cmdAppo = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"userId\" = @userid", baglan);
+            cmdAppo.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            int aktifRandevusayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
+            lbl_activeAppo.Text =aktifRandevusayisi.ToString();
 
 
-            // 5. Hayvan sayısını alıyoruz
+            // 6. Hayvan sayısını alıyoruz
             NpgsqlCommand cmdPets = new NpgsqlCommand(@"
             SELECT COUNT(*) 
             FROM ""pets"" 
