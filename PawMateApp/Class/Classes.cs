@@ -453,8 +453,6 @@ public class DatabaseManagament
                 cmd.Parameters.AddWithValue("isAppAdmin", false);
                 cmd.ExecuteNonQuery();
             }
-
-            MessageBox.Show("Kullanıcı başarıyla eklendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
         catch (Exception ex)
