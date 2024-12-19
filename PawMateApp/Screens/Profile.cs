@@ -76,7 +76,29 @@ namespace PawMateApp.Screens
                             txt_username.Text = reader["username"].ToString();
                             txt_password.Text = reader["password"].ToString();
                             txt_phone.Text = reader["phone"].ToString();
-                            lbl_name.Text = $"{reader["fullName"].ToString()}!";
+                            string username = reader["username"].ToString();//name yerine username yaptım businessname için businesstan veri çekmemiz gerekir.
+                            string greeting;
+                            int currentHour = DateTime.Now.Hour;
+
+                            if (currentHour >= 6 && currentHour < 12)
+                            {
+                                greeting = "Günaydın";
+                            }
+                            else if (currentHour >= 12 && currentHour < 18)
+                            {
+                                greeting = "İyi günler";
+                            }
+                            else if (currentHour >= 18 && currentHour < 22)
+                            {
+                                greeting = "İyi akşamlar";
+                            }
+                            else
+                            {
+                                greeting = "İyi geceler";
+                            }
+
+                            lbl_name.Text = $"{greeting}, {username}!";
+                            //bunu isterseniz silerim ama güzel oldu bence :3
 
 
                             if (reader["image"] != DBNull.Value)
@@ -138,8 +160,10 @@ namespace PawMateApp.Screens
             int aktifRandevusayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
             lbl_activeAppo.Text =aktifRandevusayisi.ToString();
 
+            // 6. Veteriner sayısını alıyoruz.
 
-            // 6. Hayvan sayısını alıyoruz
+
+            // 7. Hayvan sayısını alıyoruz
             NpgsqlCommand cmdPets = new NpgsqlCommand(@"
             SELECT COUNT(*) 
             FROM ""pets"" 
