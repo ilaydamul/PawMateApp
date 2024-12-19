@@ -468,8 +468,10 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
-    public DataTable GetAllUsers(int businessid)
+    public DataTable GetAllUsers()
     {
+
+        Debug.WriteLine("Business id: " + Globals.CurrentUserBusinessAdminID);
         DataTable dataTable = new DataTable();
         try
         {
@@ -481,7 +483,7 @@ public class DatabaseManagament
             string query = "SELECT \"userId\", \"username\", \"email\", \"phone\", \"fullName\", \"isBusinessAdmin\", password FROM \"users\" WHERE \"businessId\" = @businessid ORDER BY \"userId\" ASC";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
-                cmd.Parameters.AddWithValue("@businessid", businessid);
+                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
                 using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
                 {
                     adapter.Fill(dataTable);

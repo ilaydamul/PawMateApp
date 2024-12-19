@@ -24,7 +24,7 @@ namespace PawMateApp.Screens
 
         private void LoadUsersToDataGridView()
         {
-            DataTable usersTable = db.GetAllUsers(Globals.CurrentUserBusinessAdminID);
+            DataTable usersTable = db.GetAllUsers();
             vetList.DataSource = usersTable;
         }
         private void CustomizeDataGridView()
