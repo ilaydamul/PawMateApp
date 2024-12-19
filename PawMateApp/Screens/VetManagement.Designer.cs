@@ -39,7 +39,6 @@
             this.isBusinessAdmin = new System.Windows.Forms.CheckBox();
             this.vetImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_phone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_username = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,6 +47,7 @@
             this.txt_fullname = new System.Windows.Forms.TextBox();
             this.btn_addUpdateVet = new System.Windows.Forms.Button();
             this.vetList = new System.Windows.Forms.DataGridView();
+            this.txt_phone = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vetImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vetList)).BeginInit();
@@ -104,12 +104,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txt_email);
             this.panel1.Controls.Add(this.isBusinessAdmin);
             this.panel1.Controls.Add(this.vetImage);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txt_username);
             this.panel1.Controls.Add(this.label7);
@@ -171,14 +171,6 @@
             this.label1.Size = new System.Drawing.Size(105, 15);
             this.label1.TabIndex = 121;
             this.label1.Text = "Telefon Numarası";
-            // 
-            // txt_phone
-            // 
-            this.txt_phone.BackColor = System.Drawing.Color.White;
-            this.txt_phone.Location = new System.Drawing.Point(13, 304);
-            this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(226, 20);
-            this.txt_phone.TabIndex = 3;
             // 
             // label3
             // 
@@ -259,6 +251,14 @@
             this.vetList.TabIndex = 134;
             this.vetList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.vetList_CellClick);
             // 
+            // txt_phone
+            // 
+            this.txt_phone.Location = new System.Drawing.Point(14, 304);
+            this.txt_phone.Mask = "9990000000";
+            this.txt_phone.Name = "txt_phone";
+            this.txt_phone.Size = new System.Drawing.Size(226, 20);
+            this.txt_phone.TabIndex = 3;
+            // 
             // VetManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,7 +293,6 @@
         private System.Windows.Forms.CheckBox isBusinessAdmin;
         private System.Windows.Forms.PictureBox vetImage;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_username;
         private System.Windows.Forms.Label label7;
@@ -304,5 +303,6 @@
         private System.Windows.Forms.DataGridView vetList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txt_email;
+        private System.Windows.Forms.MaskedTextBox txt_phone;
     }
 }

@@ -37,7 +37,6 @@
             this.txt_email = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_phone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_username = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.btn_addUpdateUser = new System.Windows.Forms.Button();
             this.userList = new System.Windows.Forms.DataGridView();
             this.btn_deleteUser = new System.Windows.Forms.Button();
+            this.txt_phone = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userList)).BeginInit();
             this.SuspendLayout();
@@ -88,12 +88,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.isBusinessAdmin);
             this.panel1.Controls.Add(this.cb_businesses);
             this.panel1.Controls.Add(this.txt_email);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txt_username);
             this.panel1.Controls.Add(this.label7);
@@ -109,10 +109,10 @@
             // isBusinessAdmin
             // 
             this.isBusinessAdmin.AutoSize = true;
-            this.isBusinessAdmin.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.isBusinessAdmin.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.isBusinessAdmin.Location = new System.Drawing.Point(15, 272);
             this.isBusinessAdmin.Name = "isBusinessAdmin";
-            this.isBusinessAdmin.Size = new System.Drawing.Size(93, 18);
+            this.isBusinessAdmin.Size = new System.Drawing.Size(107, 19);
             this.isBusinessAdmin.TabIndex = 6;
             this.isBusinessAdmin.Text = "İşletme Admini";
             this.isBusinessAdmin.UseVisualStyleBackColor = true;
@@ -155,15 +155,6 @@
             this.label1.Size = new System.Drawing.Size(106, 16);
             this.label1.TabIndex = 121;
             this.label1.Text = "Telefon Numarası";
-            // 
-            // txt_phone
-            // 
-            this.txt_phone.BackColor = System.Drawing.Color.White;
-            this.txt_phone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_phone.Location = new System.Drawing.Point(14, 165);
-            this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(226, 22);
-            this.txt_phone.TabIndex = 3;
             // 
             // label3
             // 
@@ -261,6 +252,14 @@
             this.btn_deleteUser.UseVisualStyleBackColor = false;
             this.btn_deleteUser.Click += new System.EventHandler(this.btn_deleteUser_Click);
             // 
+            // txt_phone
+            // 
+            this.txt_phone.Location = new System.Drawing.Point(15, 165);
+            this.txt_phone.Mask = "9990000000";
+            this.txt_phone.Name = "txt_phone";
+            this.txt_phone.Size = new System.Drawing.Size(226, 20);
+            this.txt_phone.TabIndex = 3;
+            // 
             // UserManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,7 +292,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_username;
         private System.Windows.Forms.Label label7;
@@ -306,5 +304,6 @@
         private System.Windows.Forms.ComboBox cb_businesses;
         private System.Windows.Forms.CheckBox isBusinessAdmin;
         private System.Windows.Forms.Button btn_deleteUser;
+        private System.Windows.Forms.MaskedTextBox txt_phone;
     }
 }

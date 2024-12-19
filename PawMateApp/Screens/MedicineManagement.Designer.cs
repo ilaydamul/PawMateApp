@@ -118,7 +118,7 @@
             this.txt_medicinePrice.Mask = "00000";
             this.txt_medicinePrice.Name = "txt_medicinePrice";
             this.txt_medicinePrice.Size = new System.Drawing.Size(226, 22);
-            this.txt_medicinePrice.TabIndex = 126;
+            this.txt_medicinePrice.TabIndex = 3;
             // 
             // txt_medicineUnit
             // 
@@ -127,7 +127,7 @@
             this.txt_medicineUnit.Mask = "00000";
             this.txt_medicineUnit.Name = "txt_medicineUnit";
             this.txt_medicineUnit.Size = new System.Drawing.Size(226, 22);
-            this.txt_medicineUnit.TabIndex = 125;
+            this.txt_medicineUnit.TabIndex = 2;
             this.txt_medicineUnit.ValidatingType = typeof(int);
             // 
             // label2
