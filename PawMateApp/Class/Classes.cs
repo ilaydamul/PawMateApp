@@ -205,6 +205,7 @@ namespace PawMateApp
                 };
                 mailMessage.To.Add(toAddress);
                 smtpClient.Send(mailMessage);
+                mailMessage.Priority = MailPriority.High;
                 Debug.WriteLine("Mail gönderildi.");
             }
             catch (Exception ex)
