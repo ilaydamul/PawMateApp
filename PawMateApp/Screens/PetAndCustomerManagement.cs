@@ -15,6 +15,7 @@ namespace PawMateApp.Screens
 {
     public partial class PetAndCustomerManagement : Form
     {
+        DatabaseManagament databaseManagament = new DatabaseManagament();
         string sendMailTo;
         public PetAndCustomerManagement()
         {
@@ -35,6 +36,87 @@ namespace PawMateApp.Screens
 
         private void PetAndCustomerManagement_Load(object sender, EventArgs e)
         {
+
+            //databaseManagament.GetPetOwners(cb_customers);
+            //databaseManagament.GetPetSpecies(cb_species);
+
+            //customer cb  
+            try
+            {
+                if (baglan.State == ConnectionState.Closed)
+                    baglan.Open();
+
+                string query = "SELECT \"customerId\", \"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\", \"alternateNote\" " +
+                               "FROM \"customers\" ";
+                                                          
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                petList.DataSource = dt;
+
+                string query2 = "SELECT \"customerId\", \"fullName\" FROM \"customers\" ORDER BY \"customerId\" ASC";
+                NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(query2, baglan);
+                DataTable dtcostumers = new DataTable();
+                da2.Fill(dtcostumers);
+
+                DataRow dr = dtcostumers.NewRow();
+                dr["customerId"] = DBNull.Value;
+                dr["fullName"] = "Seçiniz";
+                dtcostumers.Rows.InsertAt(dr, 0);
+
+                cb_customers.DataSource = dtcostumers;
+                cb_customers.DisplayMember = "fullName";
+                cb_customers.ValueMember = "customerId";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglan.State == ConnectionState.Open)
+                    baglan.Close();
+            }
+
+            // cb species
+            try
+            {
+                if (baglan.State == ConnectionState.Closed)
+                    baglan.Open();
+
+                string query = "SELECT \"speciesId\", \"speciesTitle\" " +
+                               "FROM \"species\" ";
+
+
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                petList.DataSource = dt;
+
+                string query2 = "SELECT \"speciesId\", \"speciesTitle\" FROM \"species\" ORDER BY \"speciesId\" ASC";
+                NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(query2, baglan);
+                DataTable dtspecies = new DataTable();
+                da2.Fill(dtspecies);
+
+                DataRow dr = dtspecies.NewRow();
+                dr["speciesId"] = DBNull.Value;
+                dr["speciesTitle"] = "Seçiniz";
+                dtspecies.Rows.InsertAt(dr, 0);
+
+                cb_species.DataSource = dtspecies;
+                cb_species.DisplayMember = "speciesTitle";
+                cb_species.ValueMember = "speciesId";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglan.State == ConnectionState.Open)
+                    baglan.Close();
+            }
+          
             try
             {
                 baglan.Open();
@@ -51,8 +133,7 @@ namespace PawMateApp.Screens
                         dt.Load(reader);
 
                         if (dt.Rows.Count > 0)
-                        {
-                            MessageBox.Show($"Tabloya {dt.Rows.Count} kayıt yüklendi.");
+                        {                          
                             customerList.DataSource = null; 
                             customerList.DataSource = dt;
                             customerList.AutoGenerateColumns = true; 
@@ -72,7 +153,35 @@ namespace PawMateApp.Screens
             {
                 baglan.Close();
             }
-            
+
+
+            try
+            {
+                baglan.Open();
+                string query = "SELECT \"pets\".\"petId\", " +
+                               "\"customers\".\"fullName\" AS \"Sahibi\", " +
+                               "\"pets\".\"petName\" AS \"Pet Adı\", " +
+                               "\"species\".\"speciesTitle\" AS \"Türü\", " +
+                               "\"pets\".\"breed\" AS \"Cinsi\", " +
+                               "\"pets\".\"gender\" AS \"Cinsiyet\" " +
+                               "FROM \"pets\" " +
+                               "JOIN \"customers\" ON \"pets\".\"customerId\" = \"customers\".\"customerId\" " +
+                               "JOIN \"species\" ON \"pets\".\"speciesId\" = \"species\".\"speciesId\"";
+
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                petList.DataSource = dt; 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                baglan.Close();
+            }
+
         }
 
         private void customerList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -255,16 +364,154 @@ namespace PawMateApp.Screens
 
         private void tab_pets_Click(object sender, EventArgs e)
         {
-            //Sahibi müşterilerden çekilmeli
-           
+                     
         }
-
         private void btn_addPet_Click(object sender, EventArgs e)
         {
-           
+            try
+            {
+                if (baglan.State == ConnectionState.Closed)
+                    baglan.Open();
+
+                string query;
+
+                if (btn_addPet.Text == "Güncelle")
+                {
+                    // Pet güncelleme işlemi
+                    if (petList.SelectedRows.Count == 0)
+                    {
+                        MessageBox.Show("Lütfen güncellemek için bir pet seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    query = "UPDATE \"pets\" SET \"customerId\" = @customerId, \"petName\" = @petName, " +
+                            "\"speciesId\" = @speciesId, \"breed\" = @breed, \"gender\" = @gender " +
+                            "WHERE \"petId\" = @petId";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(cb_customers.SelectedValue)); 
+                        cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
+                        cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue)); 
+                        cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
+                        cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek"); 
+                        cmd.Parameters.AddWithValue("@petId", Convert.ToInt32(petList.SelectedRows[0].Cells["petId"].Value));
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Pet bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                else if (btn_addPet.Text == "Ekle")
+                {
+                    // Pet ekleme işlemi
+                    query = "INSERT INTO \"pets\" (\"customerId\", \"petName\", \"speciesId\", \"breed\", \"gender\") " +
+                            "VALUES (@customerId, @petName, @speciesId, @breed, @gender)";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(cb_customers.SelectedValue)); 
+                        cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
+                        cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue)); 
+                        cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
+                        cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek"); 
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    MessageBox.Show("Pet başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            
+                Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);
+                inputs.ClearInputs();
+                PetAndCustomerManagement_Load(null,null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (baglan.State == ConnectionState.Open)
+                    baglan.Close();
+            }
+
         }
 
-      
+        private void btn_addPetBtn_Click(object sender, EventArgs e)
+        {
+            Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);
+            inputs.ClearInputs();
+            btn_addPet.Text = "Ekle";
+        }
+
+        private void petList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = petList.Rows[e.RowIndex]; 
+                cb_customers.SelectedValue = row.Cells["Sahibi"].Value?.ToString(); 
+                txt_petName.Text = row.Cells["Pet Adı"].Value?.ToString(); 
+                cb_species.SelectedValue = row.Cells["Türü"].Value?.ToString(); 
+                txt_breed.Text = row.Cells["Cinsi"].Value?.ToString(); 
+                if (row.Cells["Cinsiyet"].Value?.ToString() == "Dişi") 
+                {
+                    radio_disi.Checked = true;
+                }
+                else if (row.Cells["Cinsiyet"].Value?.ToString() == "Erkek")
+                {
+                    radio_erkek.Checked = true;
+                }
+
+                btn_addPet.Text = "Güncelle"; 
+            }
+
+        }
+
+        private void btn_deletePet_Click(object sender, EventArgs e)
+        {
+            if (petList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen silmek için bir pet seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("Seçilen peti silmek istediğinizden emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    baglan.Open();
+
+                    string query = "DELETE FROM \"pets\" WHERE \"petId\" = @petId";
+
+                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    {
+                       
+                        cmd.Parameters.AddWithValue("@petId", Convert.ToInt32(petList.SelectedRows[0].Cells["petId"].Value));
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    baglan.Close();
+                    MessageBox.Show("Pet başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    PetAndCustomerManagement_Load(null, null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    baglan.Close();
+                }
+              
+                Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);
+                inputs.ClearInputs();             
+                btn_addPet.Text = "Ekle";
+            }
+
+        }
     }
 }
 
