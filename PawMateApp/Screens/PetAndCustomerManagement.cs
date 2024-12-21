@@ -15,7 +15,8 @@ namespace PawMateApp.Screens
 {
     public partial class PetAndCustomerManagement : Form
     {
-        DatabaseManagament databaseManagament = new DatabaseManagament();
+        //DatabaseManagament databaseManagament = new DatabaseManagament();
+        DatabaseManagament db = new DatabaseManagament();
         string sendMailTo;
         public PetAndCustomerManagement()
         {
@@ -37,46 +38,13 @@ namespace PawMateApp.Screens
         private void PetAndCustomerManagement_Load(object sender, EventArgs e)
         {
 
-            //databaseManagament.GetPetOwners(cb_customers);
+            
             //databaseManagament.GetPetSpecies(cb_species);
 
             //customer cb  
-            try
-            {
-                if (baglan.State == ConnectionState.Closed)
-                    baglan.Open();
-
-                string query = "SELECT \"customerId\", \"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\", \"alternateNote\" " +
-                               "FROM \"customers\" ";
-                                                          
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                petList.DataSource = dt;
-
-                string query2 = "SELECT \"customerId\", \"fullName\" FROM \"customers\" ORDER BY \"customerId\" ASC";
-                NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(query2, baglan);
-                DataTable dtcostumers = new DataTable();
-                da2.Fill(dtcostumers);
-
-                DataRow dr = dtcostumers.NewRow();
-                dr["customerId"] = DBNull.Value;
-                dr["fullName"] = "Seçiniz";
-                dtcostumers.Rows.InsertAt(dr, 0);
-
-                cb_customers.DataSource = dtcostumers;
-                cb_customers.DisplayMember = "fullName";
-                cb_customers.ValueMember = "customerId";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (baglan.State == ConnectionState.Open)
-                    baglan.Close();
-            }
+            db.OpenConnection();
+            db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
+                  
 
             // cb species
             try

@@ -1038,50 +1038,6 @@ public class DatabaseManagament
         return false;
     }
 
-    //public void GetPetOwners(Control combobox)
-    //{
-    //    if (combobox is ComboBox comboBox)
-    //    {
-    //        try
-    //        {
-    //            if (baglan.State == ConnectionState.Closed)
-    //                baglan.Open();
-
-    //            string query = "SELECT \"customerId\", \"fullName\" FROM \"customers\""; 
-    //            using (var cmd = new NpgsqlCommand(query, baglan))
-    //            {
-    //                using (var dr = cmd.ExecuteReader())
-    //                {
-    //                    comboBox.Items.Clear();
-    //                    while (dr.Read())
-    //                    {
-    //                        var item = new ComboBoxItem
-    //                        {
-    //                            Id = Convert.ToInt32(dr["customerId"]),
-    //                            DisplayName = dr["fullName"].ToString()
-    //                        };
-    //                        Debug.WriteLine("ID: " + item.Id + " Sahip Adı: " + item.DisplayName);
-
-    //                        comboBox.Items.Add(item);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Debug.WriteLine("Sahipleri çekme hatası: " + ex.Message);
-    //        }
-    //        finally
-    //        {
-    //            if (baglan.State == ConnectionState.Open)
-    //                baglan.Close();
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
-    //    }
-    //}
 
     //public void GetPetSpecies(Control combobox)
     //{
