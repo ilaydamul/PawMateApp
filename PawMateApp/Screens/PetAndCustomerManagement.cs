@@ -422,7 +422,7 @@ namespace PawMateApp.Screens
                     
                 }
             
-                Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);
+                Inputs inputs = new Inputs( txt_petName, txt_breed);
                 inputs.ClearInputs();
                 PetAndCustomerManagement_Load(null,null);
             }
@@ -518,7 +518,7 @@ namespace PawMateApp.Screens
                     baglan.Close();
                 }
               
-                Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);
+                Inputs inputs = new Inputs( txt_petName, txt_breed);
                 inputs.ClearInputs();             
                 btn_addPet.Text = "Ekle";
             }
