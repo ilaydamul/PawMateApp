@@ -53,13 +53,14 @@ namespace PawMateApp.Components
 
         private void StockItem_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine(_quantity + "Kadar Birim var" + _threshold + "Red Line");
+            Debug.WriteLine(_quantity + " Adet birim var" + _threshold + "Red Line");
             if(Convert.ToInt32(_quantity) < Convert.ToInt32(_threshold))
             {
-                img_stock.ImageLocation = "C:\\Users\\ASUS\\source\\repos\\ilaydamul\\PawMateApp\\PawMateApp\\Resources\\green_light.png";
+                img_stock.Image = Properties.Resources.red_light;
             }
             else
             {
+                img_stock.Image = Properties.Resources.green_light;
                 return;
             }
             
@@ -77,6 +78,8 @@ namespace PawMateApp.Components
                 db.CloseConnection();
                 MessageBox.Show("Başarılı bir şekilde silindi!");
             }
+
+
         }
     }
 }

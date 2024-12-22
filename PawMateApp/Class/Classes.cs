@@ -738,10 +738,19 @@ public class DatabaseManagament
                                 Id = Convert.ToInt32(dr["customerId"]),
                                 DisplayName = dr["fullName"].ToString()
                             };
+
                             Debug.WriteLine("ID: " + item.Id + "Müşteriler: " + item.DisplayName);
 
                             comboBox.Items.Add(item);
                         }
+
+                        // DisplayMember ve ValueMember ayarlarını yap
+                        comboBox.DisplayMember = "DisplayName";
+                        comboBox.ValueMember = "Id";
+
+                        // İlk öğeyi varsayılan olarak seç
+                        if (comboBox.Items.Count > 0)
+                            comboBox.SelectedIndex = 0;
                     }
                 }
             }
@@ -808,11 +817,11 @@ public class DatabaseManagament
 
                 if (count > 0)
                 {
-                    MessageBox.Show("Bu İlaç zaten stoklarda mevcut!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Bu ilaç zaten stoklarda mevcut!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    string query = "INSERT INTO \"medicineStocks\" (\"medicineId\", quantity , threshold, medicinename, businessid) VALUES (@medicineid, @quantity, @redflag, @medicinename, @businessid)";
+                    string query = "INSERT INTO \"medicineStocks\" (\"medicineId\", quantity , threshold, medicinename, businessid, \"userId\") VALUES (@medicineid, @quantity, @redflag, @medicinename, @businessid, @userid)";
                     using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
                     {
                         cmd.Parameters.AddWithValue("medicineid", medicineid);
@@ -820,10 +829,11 @@ public class DatabaseManagament
                         cmd.Parameters.AddWithValue("redflag", redflag);
                         cmd.Parameters.AddWithValue("medicinename", medicinename);
                         cmd.Parameters.AddWithValue("businessid", businessid);
+                        cmd.Parameters.AddWithValue("userid", Globals.CurrentUserID);
                         cmd.ExecuteNonQuery();
 
                     }
-                    MessageBox.Show("Stok Başarılı bir şekilde eklendi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Stok başarılı bir şekilde eklendi!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
