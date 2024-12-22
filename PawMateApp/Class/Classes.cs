@@ -733,6 +733,14 @@ public class DatabaseManagament
                     using (var dr = cmd.ExecuteReader())
                     {
                         comboBox.Items.Clear();
+
+                        // "Seçiniz" varsayılan öğesini ekle
+                        var defaultItem = new ComboBoxItem
+                        {
+                            Id = -1, // Varsayılan bir ID değeri (-1 gibi, kullanılmayan bir değer)
+                            DisplayName = "Seçiniz"
+                        };
+                        comboBox.Items.Add(defaultItem);                       
                         while (dr.Read())
                         {
                             var item = new ComboBoxItem
@@ -741,30 +749,24 @@ public class DatabaseManagament
                                 DisplayName = dr["fullName"].ToString()
                             };
 
-                            Debug.WriteLine("ID: " + item.Id + "Müşteriler: " + item.DisplayName);
+                            Debug.WriteLine("ID: " + item.Id + " Müşteriler: " + item.DisplayName);
 
                             comboBox.Items.Add(item);
-                        }
-
-                        // DisplayMember ve ValueMember ayarlarını yap
+                        }                      
                         comboBox.DisplayMember = "DisplayName";
                         comboBox.ValueMember = "Id";
 
-                        // İlk öğeyi varsayılan olarak seç
-                        if (comboBox.Items.Count > 0)
-                            comboBox.SelectedIndex = 0;
+                        
+                        comboBox.SelectedIndex = 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Randevuları çekme hatası: " + ex.Message);
+                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        else
-        {
-            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
-        }
+
     }
     public void GetMedicines(int businessid, Control combobox)
     {

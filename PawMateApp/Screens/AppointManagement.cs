@@ -26,7 +26,7 @@ namespace PawMateApp.Screens
         }
 
         private void AppointManagement_Load(object sender, EventArgs e)
-        {
+        {   
             db.OpenConnection();
             db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
             db.GetVets(Globals.CurrentUserBusinessAdminID, cb_vets);
@@ -43,9 +43,9 @@ ORDER BY v.""visitDate"" ASC;";
 
 
 
-
+            
             using (var cmd = new Npgsql.NpgsqlCommand(getallvisitsqueryBefore, db.baglan))
-            {
+            {     
                  cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
                 using (var dr = cmd.ExecuteReader()) {
 
