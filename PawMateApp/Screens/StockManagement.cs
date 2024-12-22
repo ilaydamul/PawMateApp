@@ -91,7 +91,6 @@ namespace PawMateApp.Screens
                     else
                     {
                         databaseManagament.AddMedicineStocksToDatabase(businessid, selected.Id , selected.DisplayName, int.Parse(txt_stockUnit.Text) ,int.Parse(txt_stockThreshold.Text));
-                        StockItem();
                     }
                 }
 
