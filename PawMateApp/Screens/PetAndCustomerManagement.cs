@@ -216,60 +216,70 @@ namespace PawMateApp.Screens
                                 MessageBox.Show("Lütfen güncellemek için bir müşteri seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-
-                            query = "UPDATE \"customers\" SET \"fullName\" = @fullName, \"phone\" = @phone, " +
+                            if (CheckClass.IsValidPhone(txt_customerPhone.Text))
+                            {
+                                if (CheckClass.IsValidPhone(txt_customerAlternatePhone.Text) == true)
+                                {
+                                    query = "UPDATE \"customers\" SET \"fullName\" = @fullName, \"phone\" = @phone, " +
                                    "\"email\" = @email, \"address\" = @address, \"alternateName\" = @alternateName, " +
-                                   "\"alternatePhone\" = @alternatePhone " + 
+                                   "\"alternatePhone\" = @alternatePhone " +
                                    "WHERE \"customerId\" = @customerId";
 
 
-                            using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
-                            {
-                                cmd.Parameters.AddWithValue("@fullName", txt_customerName.Text);
-                                cmd.Parameters.AddWithValue("@phone", txt_customerPhone.Text);
-                                cmd.Parameters.AddWithValue("@email", txt_customerEmail.Text);
-                                cmd.Parameters.AddWithValue("@address", txt_customerAddress.Text);
-                                cmd.Parameters.AddWithValue("@alternateName", txt_customerAlternate.Text);
-                                cmd.Parameters.AddWithValue("@alternatePhone", txt_customerAlternatePhone.Text);
-                                
-                                cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(customerList.SelectedRows[0].Cells["customerId"].Value));
-                                cmd.ExecuteNonQuery();
-                                baglan.Close();
-                                Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
-                                inputs.ClearInputs();
-                            }
+                                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                                    {
+                                        cmd.Parameters.AddWithValue("@fullName", txt_customerName.Text);
+                                        cmd.Parameters.AddWithValue("@phone", txt_customerPhone.Text);
+                                        cmd.Parameters.AddWithValue("@email", txt_customerEmail.Text);
+                                        cmd.Parameters.AddWithValue("@address", txt_customerAddress.Text);
+                                        cmd.Parameters.AddWithValue("@alternateName", txt_customerAlternate.Text);
+                                        cmd.Parameters.AddWithValue("@alternatePhone", txt_customerAlternatePhone.Text);
 
-                            MessageBox.Show("Müşteri bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(customerList.SelectedRows[0].Cells["customerId"].Value));
+                                        cmd.ExecuteNonQuery();
+                                        baglan.Close();
+                                        Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
+                                        inputs.ClearInputs();
+                                    }
+
+                                    MessageBox.Show("Müşteri bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
                         }
 
                         else if (btn_addCustomer.Text == "Ekle")
                         {
-                            string customerName = txt_customerName.Text;
-
-                            // Müşteri ekleme işlemi
-                            query = "INSERT INTO \"customers\" (\"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" , \"businessId\") " +
-                                    "VALUES (@fullName, @phone, @email, @address, @alternateName, @alternatePhone, @businessid)";
-
-                            using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                            if (CheckClass.IsValidPhone(txt_customerPhone.Text))
                             {
-                                cmd.Parameters.AddWithValue("@fullName", txt_customerName.Text);
-                                cmd.Parameters.AddWithValue("@phone", txt_customerPhone.Text);
-                                cmd.Parameters.AddWithValue("@email", txt_customerEmail.Text);
-                                cmd.Parameters.AddWithValue("@address", txt_customerAddress.Text);
-                                cmd.Parameters.AddWithValue("@alternateName", txt_customerAlternate.Text);
-                                cmd.Parameters.AddWithValue("@alternatePhone", txt_customerAlternatePhone.Text);
-                                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
-                                
-                                cmd.ExecuteNonQuery();
-                                baglan.Close();
-                                sendMailTo = txt_customerEmail.Text.Trim();
-                                Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
-                                inputs.ClearInputs();
+                                if (CheckClass.IsValidPhone(txt_customerAlternatePhone.Text) == true)
+                                {
+                                    string customerName = txt_customerName.Text;
+
+                                    // Müşteri ekleme işlemi
+                                    query = "INSERT INTO \"customers\" (\"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" , \"businessId\") " +
+                                            "VALUES (@fullName, @phone, @email, @address, @alternateName, @alternatePhone, @businessid)";
+
+                                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                                    {
+                                        cmd.Parameters.AddWithValue("@fullName", txt_customerName.Text);
+                                        cmd.Parameters.AddWithValue("@phone", txt_customerPhone.Text);
+                                        cmd.Parameters.AddWithValue("@email", txt_customerEmail.Text);
+                                        cmd.Parameters.AddWithValue("@address", txt_customerAddress.Text);
+                                        cmd.Parameters.AddWithValue("@alternateName", txt_customerAlternate.Text);
+                                        cmd.Parameters.AddWithValue("@alternatePhone", txt_customerAlternatePhone.Text);
+                                        cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+
+                                        cmd.ExecuteNonQuery();
+                                        baglan.Close();
+                                        sendMailTo = txt_customerEmail.Text.Trim();
+                                        Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
+                                        inputs.ClearInputs();
+                                    }
+
+                                    MessageBox.Show("Müşteri başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
                             }
 
-                            MessageBox.Show("Müşteri başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                          
-                            
                         }
 
                         PetAndCustomerManagement_Load(null, null); 
@@ -351,42 +361,52 @@ namespace PawMateApp.Screens
                         MessageBox.Show("Lütfen güncellemek için bir pet seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-
-                    query = "UPDATE \"pets\" SET \"customerId\" = @customerId, \"petName\" = @petName, " +
+                    if (cb_customers.SelectedItem is ComboBoxItem selectedcustomer2)
+                    {
+                        query = "UPDATE \"pets\" SET \"customerId\" = @customerId, \"petName\" = @petName, " +
                             "\"speciesId\" = @speciesId, \"breed\" = @breed, \"gender\" = @gender " +
                             "WHERE \"petId\" = @petId";
 
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
-                    {
-                        cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(cb_customers.SelectedValue)); 
-                        cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
-                        cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue)); 
-                        cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
-                        cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek"); 
-                        cmd.Parameters.AddWithValue("@petId", Convert.ToInt32(petList.SelectedRows[0].Cells["petId"].Value));
-                        cmd.ExecuteNonQuery();
-                    }
+                        using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                        {
+                            cmd.Parameters.AddWithValue("@customerId", selectedcustomer2.Id);
+                            cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
+                            cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue));
+                            cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
+                            cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek");
+                            cmd.Parameters.AddWithValue("@petId", Convert.ToInt32(petList.SelectedRows[0].Cells["petId"].Value));
+                            cmd.ExecuteNonQuery();
+                        }
 
-                    MessageBox.Show("Pet bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Pet bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
 
                 else if (btn_addPet.Text == "Ekle")
                 {
-                    // Pet ekleme işlemi
-                    query = "INSERT INTO \"pets\" (\"customerId\", \"petName\", \"speciesId\", \"breed\", \"gender\") " +
-                            "VALUES (@customerId, @petName, @speciesId, @breed, @gender)";
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                    if(cb_customers.SelectedItem is ComboBoxItem selectedcustomer)
                     {
-                        cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(cb_customers.SelectedValue)); 
-                        cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
-                        cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue)); 
-                        cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
-                        cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek"); 
-                        cmd.ExecuteNonQuery();
-                    }
+                        // Pet ekleme işlemi
+                        query = "INSERT INTO \"pets\" (\"customerId\", \"petName\", \"speciesId\", \"breed\", \"gender\") " +
+                                "VALUES (@customerId, @petName, @speciesId, @breed, @gender)";
 
-                    MessageBox.Show("Pet başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                        {
+                            cmd.Parameters.AddWithValue("@customerId", selectedcustomer.Id);
+                            cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
+                            cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue));
+                            cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
+                            cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek");
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        MessageBox.Show("Pet başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lütfen bir müşteri seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                 }
             
                 Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);

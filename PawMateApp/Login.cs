@@ -38,7 +38,6 @@ namespace PawMateApp
             public static bool CurrentUserAppAdminStatus { get; set; }   
             public static int CurrentUserBusinessAdminID { get; set; }   
             public static string BusinessName { get; set; }
-            public static int CurrentBusinessId { get; set; }   //buraya getset eklendi
 
         }
 
