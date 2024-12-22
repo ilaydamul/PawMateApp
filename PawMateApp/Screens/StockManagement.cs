@@ -28,8 +28,6 @@ namespace PawMateApp.Screens
 
         private void StockManagement_Load(object sender, EventArgs e)
         {
-            //Stok kaydınız bulunamamaktadır yazısı stok yokken gelmeli.
-
             databaseManagament.OpenConnection();
             databaseManagament.GetMedicines(Globals.CurrentUserBusinessAdminID, cb_medicines);
             StockItem();
@@ -50,6 +48,7 @@ namespace PawMateApp.Screens
                 if (rowCount == 0)
                 {
                     Debug.WriteLine("Stok yoktur");
+                    txt_noStock.Visible = true;
                 }
                 else
                 {
@@ -66,6 +65,7 @@ namespace PawMateApp.Screens
                             flowLayoutPanel1.Controls.Add(stockItem);
                         }
                     }
+                    txt_noStock.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace PawMateApp.Screens
                     else
                     {
                         databaseManagament.AddMedicineStocksToDatabase(businessid, selected.Id , selected.DisplayName, int.Parse(txt_stockUnit.Text) ,int.Parse(txt_stockThreshold.Text));
-
+                        StockItem();
                     }
                 }
 

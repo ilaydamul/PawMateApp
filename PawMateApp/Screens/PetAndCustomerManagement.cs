@@ -38,13 +38,10 @@ namespace PawMateApp.Screens
         private void PetAndCustomerManagement_Load(object sender, EventArgs e)
         {
 
-            
             //databaseManagament.GetPetSpecies(cb_species);
-
             //customer cb  
             db.OpenConnection();
             db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
-                  
 
             // cb species
             try
@@ -52,15 +49,12 @@ namespace PawMateApp.Screens
                 if (baglan.State == ConnectionState.Closed)
                     baglan.Open();
 
-                string query = "SELECT \"speciesId\", \"speciesTitle\" " +
-                               "FROM \"species\" ";
-
-
+                string query = "SELECT \"speciesId\", \"speciesTitle\" FROM \"species\" ";
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 petList.DataSource = dt;
-
+               
                 string query2 = "SELECT \"speciesId\", \"speciesTitle\" FROM \"species\" ORDER BY \"speciesId\" ASC";
                 NpgsqlDataAdapter da2 = new NpgsqlDataAdapter(query2, baglan);
                 DataTable dtspecies = new DataTable();
@@ -74,6 +68,7 @@ namespace PawMateApp.Screens
                 cb_species.DataSource = dtspecies;
                 cb_species.DisplayMember = "speciesTitle";
                 cb_species.ValueMember = "speciesId";
+
             }
             catch (Exception ex)
             {
@@ -336,6 +331,14 @@ namespace PawMateApp.Screens
         }
         private void btn_addPet_Click(object sender, EventArgs e)
         {
+
+            MessageBox.Show($"Seçilen Müşteri ID: {cb_customers.SelectedValue}");
+
+            Debug.WriteLine("SelectedValue: " + cb_customers.SelectedValue);
+            Debug.WriteLine("SelectedItem: " + cb_customers.SelectedItem);
+            Debug.WriteLine("SelectedItem: " + cb_customers);
+            Debug.WriteLine("Text: " + cb_customers.Text);
+
             try
             {
                 if (baglan.State == ConnectionState.Closed)
@@ -378,6 +381,7 @@ namespace PawMateApp.Screens
 
                     using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
                     {
+                        //MessageBox.Show(cb_customers.SelectedValue);
                         cmd.Parameters.AddWithValue("@customerId", Convert.ToInt32(cb_customers.SelectedValue)); 
                         cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
                         cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue)); 
