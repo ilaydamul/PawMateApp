@@ -332,6 +332,8 @@ public class DatabaseManagament
 
     public void GetTreatmentsForCombo(ComboBox comboBox)
     {
+
+        OpenConnection();
         string getTreatmensQuery = "SELECT * FROM \"treatments\"";
         using (var cmd = new Npgsql.NpgsqlCommand(getTreatmensQuery, baglan))
         {

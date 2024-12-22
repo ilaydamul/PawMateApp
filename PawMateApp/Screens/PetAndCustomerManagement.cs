@@ -449,12 +449,23 @@ namespace PawMateApp.Screens
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = petList.Rows[e.RowIndex]; 
-                cb_customers.SelectedValue = row.Cells["Sahibi"].Value?.ToString(); 
-                txt_petName.Text = row.Cells["Pet Adı"].Value?.ToString(); 
-                cb_species.SelectedValue = row.Cells["Türü"].Value?.ToString(); 
-                txt_breed.Text = row.Cells["Cinsi"].Value?.ToString(); 
-                if (row.Cells["Cinsiyet"].Value?.ToString() == "Dişi") 
+                DataGridViewRow row = petList.Rows[e.RowIndex];
+
+                txt_petName.Text = row.Cells["Pet Adı"].Value?.ToString();
+                cb_customers.SelectedValue = row.Cells["Sahibi"].Value?.ToString();
+
+                if (int.TryParse(row.Cells["Türü"].Value?.ToString(), out int selectedSpeciesId))
+                {
+                    cb_species.SelectedValue = selectedSpeciesId;
+                }
+                else
+                {
+                    cb_species.SelectedIndex = 0; //Varsayılan "Seçiniz" seçeneği
+                }
+
+                txt_breed.Text = row.Cells["Cinsi"].Value?.ToString();
+
+                if (row.Cells["Cinsiyet"].Value?.ToString() == "Dişi")
                 {
                     radio_disi.Checked = true;
                 }
@@ -463,7 +474,7 @@ namespace PawMateApp.Screens
                     radio_erkek.Checked = true;
                 }
 
-                btn_addPet.Text = "Güncelle"; 
+                btn_addPet.Text = "Güncelle";
             }
 
         }

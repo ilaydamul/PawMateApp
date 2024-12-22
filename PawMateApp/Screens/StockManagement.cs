@@ -40,8 +40,9 @@ namespace PawMateApp.Screens
                 databaseManagament.OpenConnection();
                 baglan.Open();
                 string query = "SELECT * FROM \"medicineStocks\" WHERE businessid = "+businessid+" ORDER BY \"stockId\" DESC";
-                string countQuery = "SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"businessid\"= "+businessid;
-                
+                string countQuery = "SELECT * FROM \"medicineStocks\" WHERE \"businessid\" = " + businessid + " ORDER BY CASE WHEN \"quantity\" < \"threshold\" THEN 0 ELSE 1 END, \"stockId\" DESC;";
+
+
                 NpgsqlCommand countCmd = new NpgsqlCommand(countQuery, baglan);
                 int rowCount = Convert.ToInt32(countCmd.ExecuteScalar());
                 Debug.WriteLine(rowCount+ "tane stok var");
