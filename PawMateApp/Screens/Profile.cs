@@ -76,7 +76,7 @@ namespace PawMateApp.Screens
                             txt_username.Text = reader["username"].ToString();
                             txt_password.Text = reader["password"].ToString();
                             txt_phone.Text = reader["phone"].ToString();
-                            string username = reader["username"].ToString();//name yerine username yaptım businessname için businesstan veri çekmemiz gerekir.
+                            string username = reader["fullName"].ToString();//username yerine fullName yaptım businessname için businesstan veri çekmemiz gerekir.
                             string greeting;
                             int currentHour = DateTime.Now.Hour;
 
@@ -149,19 +149,19 @@ namespace PawMateApp.Screens
             lbl_allPresp.Text = receteSayisi.ToString();
 
             // 4. Müşterilerin sayısını alıyoruz
-            NpgsqlCommand cmdCostumers = new NpgsqlCommand("SELECT COUNT(*) FROM \"costumers\" WHERE \"userId\" = @userid", baglan);
-            cmdCostumers.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
-            int musterisayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
+            NpgsqlCommand cmdCustomers = new NpgsqlCommand("SELECT COUNT(*) FROM \"customers\" WHERE \"userId\" = @userid", baglan);
+            cmdCustomers.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            int musterisayisi = Convert.ToInt32(cmdCustomers.ExecuteScalar()); 
             lbl_customers.Text = musterisayisi.ToString();
 
             // 5. Aktif randevu sayısını alıyoruz
             NpgsqlCommand cmdAppo = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"userId\" = @userid", baglan);
             cmdAppo.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
-            int aktifRandevusayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
+            int aktifRandevusayisi = Convert.ToInt32(cmdAppo.ExecuteScalar());
             lbl_activeAppo.Text =aktifRandevusayisi.ToString();
 
             // 6. Veteriner sayısını alıyoruz.
-
+            //bakılacak.
 
             // 7. Hayvan sayısını alıyoruz
             NpgsqlCommand cmdPets = new NpgsqlCommand(@"

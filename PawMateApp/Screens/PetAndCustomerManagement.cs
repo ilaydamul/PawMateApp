@@ -440,7 +440,7 @@ namespace PawMateApp.Screens
 
         private void btn_addPetBtn_Click(object sender, EventArgs e)
         {
-            Inputs inputs = new Inputs(cb_customers, txt_petName, cb_species, txt_breed);
+            Inputs inputs = new Inputs( txt_petName, txt_breed);
             inputs.ClearInputs();
             btn_addPet.Text = "Ekle";
         }
@@ -518,7 +518,7 @@ namespace PawMateApp.Screens
                     baglan.Close();
                 }
               
-                Inputs inputs = new Inputs( txt_petName, txt_breed);
+                Inputs inputs = new Inputs( txt_petName,txt_breed);
                 inputs.ClearInputs();             
                 btn_addPet.Text = "Ekle";
             }
