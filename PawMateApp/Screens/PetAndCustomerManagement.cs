@@ -34,17 +34,28 @@ namespace PawMateApp.Screens
         {
 
         }
+        private void LoadConfig()
+        {
+            customerList.Columns["customerId"].HeaderText = "Müşteri ID";
+            customerList.Columns["fullName"].HeaderText = "İsim Soyisim";
+            customerList.Columns["phone"].HeaderText = "Telefon No";
+            customerList.Columns["email"].HeaderText = "Email";
+            customerList.Columns["address"].HeaderText = "Adress";
+            customerList.Columns["alternateName"].HeaderText = "Alternatif İsim";
+            customerList.Columns["alternatePhone"].HeaderText = "Alternatif Telefon";
+            customerList.Columns["alternateNote"].HeaderText = "Notlar";
+            petList.Columns["petId"].HeaderText = "Pet ID";
+        }
 
         private void PetAndCustomerManagement_Load(object sender, EventArgs e)
         {
 
-            
+           
             //databaseManagament.GetPetSpecies(cb_species);
 
             //customer cb  
             db.OpenConnection();
             db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
-                  
 
             // cb species
             try
@@ -139,7 +150,8 @@ namespace PawMateApp.Screens
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                petList.DataSource = dt; 
+                petList.DataSource = dt;
+                
             }
             catch (Exception ex)
             {
@@ -147,9 +159,10 @@ namespace PawMateApp.Screens
             }
             finally
             {
+                LoadConfig();
                 baglan.Close();
             }
-
+            
         }
 
         private void customerList_CellClick(object sender, DataGridViewCellEventArgs e)
