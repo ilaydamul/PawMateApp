@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PawMateApp.Screens;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,6 +78,16 @@ namespace PawMateApp.Components
                 db.DeleteMedicineStock(StockId);
                 db.CloseConnection();
                 MessageBox.Show("Başarılı bir şekilde silindi!");
+                var stockmanagement = Application.OpenForms["StockManagement"];
+                if (stockmanagement != null)
+                {
+                    StockManagement stock = stockmanagement as StockManagement;
+                    stock?.StockManagement_Load(null, null); 
+                }
+                else
+                {
+                    MessageBox.Show("PatientManagements formu açık değil!");
+                }
             }
 
 

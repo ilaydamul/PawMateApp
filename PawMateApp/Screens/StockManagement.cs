@@ -26,7 +26,7 @@ namespace PawMateApp.Screens
             InitializeComponent();
         }
 
-        private void StockManagement_Load(object sender, EventArgs e)
+        public void StockManagement_Load(object sender, EventArgs e)
         {
             databaseManagament.OpenConnection();
             databaseManagament.GetMedicines(Globals.CurrentUserBusinessAdminID, cb_medicines);
@@ -36,6 +36,7 @@ namespace PawMateApp.Screens
 
         private void StockItem()
         {
+            flowLayoutPanel1.Controls.Clear();
             try
             {
                 databaseManagament.OpenConnection();
@@ -93,6 +94,8 @@ namespace PawMateApp.Screens
                     else
                     {
                         databaseManagament.AddMedicineStocksToDatabase(businessid, selected.Id , selected.DisplayName, int.Parse(txt_stockUnit.Text) ,int.Parse(txt_stockThreshold.Text));
+                        flowLayoutPanel1.Controls.Clear();
+                        StockItem();
                     }
                 }
 
