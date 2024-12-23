@@ -39,14 +39,13 @@ namespace PawMateApp.Screens
         {
             if (noCustomer == 0)
             {
-                customerList.Columns["customerId"].HeaderText = "Müşteri ID";
-                customerList.Columns["fullName"].HeaderText = "İsim Soyisim";
+                customerList.Columns["customerId"].HeaderText = "ID";
+                customerList.Columns["fullName"].HeaderText = "Ad Soyad";
                 customerList.Columns["phone"].HeaderText = "Telefon No";
                 customerList.Columns["email"].HeaderText = "Email";
                 customerList.Columns["address"].HeaderText = "Adress";
                 customerList.Columns["alternateName"].HeaderText = "Alternatif İsim";
                 customerList.Columns["alternatePhone"].HeaderText = "Alternatif Telefon";
-                customerList.Columns["alternateNote"].HeaderText = "Notlar";
                 petList.Columns["petId"].HeaderText = "Pet ID";
             }
         }
@@ -103,7 +102,7 @@ namespace PawMateApp.Screens
             try
             {
                 baglan.Open();
-                string query = "SELECT \"customerId\", \"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\", \"alternateNote\" " +
+                string query = "SELECT \"customerId\", \"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" " +
                                "FROM \"customers\" " +
                                "WHERE \"businessId\" = @businessId";
                 using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))

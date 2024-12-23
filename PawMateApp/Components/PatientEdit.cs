@@ -85,7 +85,7 @@ namespace PawMateApp.Components
         public string Notes
         {
             get { return _notes; }
-            set { _notes = value; lbl_notes.Text = value; txt_notes.Text = value; }
+            set { _notes = value; txt_notes.Text = value; }
         }
 
         private void btn_closePatient_Click(object sender, EventArgs e)

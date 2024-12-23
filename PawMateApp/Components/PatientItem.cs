@@ -60,6 +60,24 @@ namespace PawMateApp.Components
         private void btn_edit_Click(object sender, EventArgs e)
         {
             Debug.WriteLine(_patientId);
+
+            // PatientEdit formunu oluştur
+            PatientEdit editForm = new PatientEdit
+            {
+                _patientId = this._patientId,
+                CustomerName = this._customerName,
+                CustomerPhone = "05333333333",
+                PetName = this._petName,
+                PatientName = "Hasta İsmi",
+                DiagnosisDate = DateTime.Now.ToString("dd/MM/yyyy"), // Örnek, doğru tarihi geçmelisiniz
+                TreatmentType = "Tedavi Türü", // Örnek, doğru tedavi türünü geçmelisiniz
+                TreatmentDuration = "1 Ay", // Örnek süre, doğru değeri geçmelisiniz
+                Notes = "Notlar buraya gelecek" // Örnek notlar, doğru bilgiyi geçmelisiniz
+            };
+
+            // Formu göster
+            editForm.ShowDialog();
+
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
