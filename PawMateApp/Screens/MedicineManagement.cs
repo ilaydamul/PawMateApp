@@ -96,7 +96,6 @@ namespace PawMateApp.Screens
                 db.OpenConnection();
                 if (db.DeleteMedicine(medicineId))
                 {
-                    MessageBox.Show("İlaç silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Debug.WriteLine(medicineList.SelectedRows[0].Cells["medicineId"].Value.ToString());
                     LoadMedicines();
                     Inputs inputs = new Inputs(new Control[] {txt_medicineDesc,txt_medicinePrice,txt_medicineTitle,txt_medicineUnit});
