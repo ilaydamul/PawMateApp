@@ -26,78 +26,67 @@ namespace PawMateApp.Screens
         }
 
         private void AppointManagement_Load(object sender, EventArgs e)
-        {   
-            db.OpenConnection();
-            db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
-            db.GetVets(Globals.CurrentUserBusinessAdminID, cb_vets);
-            dp_date.Format = DateTimePickerFormat.Long;
-
-            string getallvisitsqueryBefore = @"
-SELECT v.""visitId"", v.""visitDate"", v.""visitReason"", p.""petName"", c.""fullName"", c.""phone"", u.""username"" 
-FROM ""visits"" v
-JOIN ""pets"" p ON p.""petId"" = v.""petId""
-JOIN ""customers"" c ON c.""customerId"" = p.""customerId""
-JOIN ""users"" u ON u.""userId"" = v.""vetId""
-WHERE v.""businessid"" = @businessid AND v.""visitDate"" >= current_date
-ORDER BY v.""visitDate"" ASC;";
-
-
-
-            
-            using (var cmd = new Npgsql.NpgsqlCommand(getallvisitsqueryBefore, db.baglan))
-            {     
-                 cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
-                using (var dr = cmd.ExecuteReader()) {
-
-                    while (dr.Read())
-                    {
-                        AppointItem appointItem = new AppointItem();
-                        appointItem.VisitId = dr["visitId"].ToString();
-                        appointItem.VisitDate = dr["visitDate"].ToString();
-                        appointItem.CustomerName = dr["fullName"].ToString(); 
-                        appointItem.CustomerPhone = dr["phone"].ToString(); 
-                        appointItem.PetName = dr["petName"].ToString(); 
-                        appointItem.VetName = dr["fullName"].ToString();
-                        appointItem.Reason = dr["visitReason"].ToString(); 
-                        upcomingAppointments.Controls.Add(appointItem);
-                    }
-                }
-            };
-
-
-            string getallvisitsqueryAfter = @"
-SELECT v.""visitId"", v.""visitDate"", v.""visitReason"", p.""petName"", c.""fullName"", c.""phone"", u.""username"" 
-FROM ""visits"" v
-JOIN ""pets"" p ON p.""petId"" = v.""petId""
-JOIN ""customers"" c ON c.""customerId"" = p.""customerId""
-JOIN ""users"" u ON u.""userId"" = v.""vetId""
-WHERE v.""businessid"" = @businessId AND v.""visitDate"" < current_date
-ORDER BY v.""visitDate"" DESC;";
-
-
-
-
-            using (var cmd = new Npgsql.NpgsqlCommand(getallvisitsqueryAfter, db.baglan))
+        {
+            try
             {
-                cmd.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
+                db.OpenConnection();
+                db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
+                db.GetVets(Globals.CurrentUserBusinessAdminID, cb_vets);
+                dp_date.Format = DateTimePickerFormat.Long;
+
+                ExecuteQueryAndLoadItems(@"
+            SELECT v.""visitId"", v.""visitDate"", v.""visitReason"", p.""petName"", c.""fullName"", c.""phone"", u.""username"" 
+            FROM ""visits"" v
+            JOIN ""pets"" p ON p.""petId"" = v.""petId""
+            JOIN ""customers"" c ON c.""customerId"" = p.""customerId""
+            JOIN ""users"" u ON u.""userId"" = v.""vetId""
+            WHERE v.""businessid"" = @businessid AND v.""visitDate"" >= current_date
+            ORDER BY v.""visitDate"" ASC;", upcomingAppointments);
+
+                ExecuteQueryAndLoadItems(@"
+            SELECT v.""visitId"", v.""visitDate"", v.""visitReason"", p.""petName"", c.""fullName"", c.""phone"", u.""username"" 
+            FROM ""visits"" v
+            JOIN ""pets"" p ON p.""petId"" = v.""petId""
+            JOIN ""customers"" c ON c.""customerId"" = p.""customerId""
+            JOIN ""users"" u ON u.""userId"" = v.""vetId""
+            WHERE v.""businessid"" = @businessId AND v.""visitDate"" < current_date
+            ORDER BY v.""visitDate"" DESC;", pastAppointments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                db.CloseConnection(); // Bağlantıyı yalnızca bir kez kapat
+            }
+        }
+
+
+        private void ExecuteQueryAndLoadItems(string query, Control container)
+        {
+            using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
+            {
+                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+
                 using (var dr = cmd.ExecuteReader())
                 {
-
                     while (dr.Read())
                     {
-                        AppointItem appointItem = new AppointItem();
-                        appointItem.VisitId = dr["visitId"].ToString();
-                        appointItem.VisitDate = dr["visitDate"].ToString();
-                        appointItem.CustomerName = dr["fullName"].ToString();
-                        appointItem.CustomerPhone = dr["phone"].ToString();
-                        appointItem.PetName = dr["petName"].ToString();
-                        appointItem.VetName = dr["fullName"].ToString();
-                        appointItem.Reason = dr["visitReason"].ToString();
-                        pastAppointments.Controls.Add(appointItem);
+                        AppointItem appointItem = new AppointItem
+                        {
+                            VisitId = dr["visitId"].ToString(),
+                            VisitDate = dr["visitDate"].ToString(),
+                            CustomerName = dr["fullName"].ToString(),
+                            CustomerPhone = dr["phone"].ToString(),
+                            PetName = dr["petName"].ToString(),
+                            VetName = dr["fullName"].ToString(),
+                            Reason = dr["visitReason"].ToString()
+                        };
+                        container.Controls.Add(appointItem);
                     }
                 }
-            };
-            db.CloseConnection();
+            }
         }
 
         public void ReloadAppointments()
@@ -124,7 +113,7 @@ ORDER BY v.""visitDate"" DESC;";
                     }
                     else
                     {
-                        if (db.AddMeeting(petselected.Id, date, txt_visitReason.Text.Trim(), vetsselected.Id))
+                        if (db.AddMeeting(petselected.Id, date, txt_visitReason.Text.Trim(), vetsselected.Id, selected.Id))
                         {
 
                             MessageBox.Show("Randevu başarıyla eklendi", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);

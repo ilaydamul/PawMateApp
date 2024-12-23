@@ -163,6 +163,7 @@
             this.btn_delete.Size = new System.Drawing.Size(38, 37);
             this.btn_delete.TabIndex = 165;
             this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // PatientItem
             // 

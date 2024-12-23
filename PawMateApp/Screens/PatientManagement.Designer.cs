@@ -212,9 +212,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.Location = new System.Drawing.Point(14, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 16);
+            this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 131;
-            this.label1.Text = "Pet";
+            this.label1.Text = "Randevular";
             // 
             // cb_pets
             // 

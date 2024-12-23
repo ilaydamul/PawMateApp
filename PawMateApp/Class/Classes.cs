@@ -10,6 +10,9 @@ using static PawMateApp.Login;
 using Npgsql;
 using System.Text.RegularExpressions;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
+using TextBox = System.Windows.Forms.TextBox;
 
 
 namespace PawMateApp
@@ -262,17 +265,30 @@ public class DatabaseManagament
 
     public void OpenConnection()
     {
-        this.baglan = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
-        try
+        if (baglan == null)
         {
-            this.baglan.Open();
-            Debug.WriteLine("Bağlantı açıldı.");
+            baglan = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
         }
-        catch (Exception ex)
+
+        if (baglan.State != System.Data.ConnectionState.Open)
         {
-            Debug.WriteLine("Bağlantı hatası: " + ex.Message);
+            try
+            {
+                baglan.Open();
+                Debug.WriteLine("Bağlantı açıldı.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Bağlantı hatası: " + ex.Message);
+                throw; // Hatanın üst seviyede ele alınması için fırlatılır.
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Bağlantı zaten açık.");
         }
     }
+
 
     public void AddTreatmentToDatabase(string treatmentName, string treatmentDescription)
     {
@@ -295,12 +311,24 @@ public class DatabaseManagament
 
     public void CloseConnection()
     {
-        if (baglan != null && baglan.State == ConnectionState.Open)
+        if (baglan != null && baglan.State == System.Data.ConnectionState.Open)
         {
-            baglan.Close();
-            Debug.WriteLine("Bağlantı kapatıldı.");
+            try
+            {
+                baglan.Close();
+                Debug.WriteLine("Bağlantı kapatıldı.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Bağlantı kapatma hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Bağlantı zaten kapalı.");
         }
     }
+
 
     public DataTable GetTreatments()
     {
@@ -718,56 +746,47 @@ public class DatabaseManagament
         }
     }
 
-    public void GetCustomers(int businessid, Control combobox)
+    public void GetCustomers(int businessId, ComboBox comboBox)
     {
-
-        if (combobox is ComboBox comboBox)
+        using (var connection = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
         {
             try
             {
-                string query = "SELECT * FROM \"customers\" WHERE \"businessId\" = @businessid";
-                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
-                {
-                    cmd.Parameters.AddWithValue("businessid", businessid);
+                connection.Open();
+                Debug.WriteLine("Bağlantı açıldı.");
 
-                    using (var dr = cmd.ExecuteReader())
+                string query = @"SELECT ""customerId"", ""fullName"" FROM ""customers"" WHERE ""businessId"" = @businessid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@businessid", businessId);
+
+                    using (var reader = cmd.ExecuteReader())
                     {
                         comboBox.Items.Clear();
-
-                        // "Seçiniz" varsayılan öğesini ekle
-                        var defaultItem = new ComboBoxItem
+                        while (reader.Read())
                         {
-                            Id = -1, // Varsayılan bir ID değeri (-1 gibi, kullanılmayan bir değer)
-                            DisplayName = "Seçiniz"
-                        };
-                        comboBox.Items.Add(defaultItem);                       
-                        while (dr.Read())
-                        {
-                            var item = new ComboBoxItem
+                            comboBox.Items.Add(new ComboBoxItem
                             {
-                                Id = Convert.ToInt32(dr["customerId"]),
-                                DisplayName = dr["fullName"].ToString()
-                            };
-
-                            Debug.WriteLine("ID: " + item.Id + " Müşteriler: " + item.DisplayName);
-
-                            comboBox.Items.Add(item);
-                        }                      
-                        comboBox.DisplayMember = "DisplayName";
-                        comboBox.ValueMember = "Id";
-
-                        
-                        comboBox.SelectedIndex = 0;
+                                Id = reader.GetInt32(0), // customerId sütunu integer olduğu için GetInt32 kullanılır.
+                                DisplayName = reader.GetString(1) // fullName sütunu string olduğu için GetString kullanılır.
+                            });
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Hayvanları çekme hatası: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+                Debug.WriteLine("Bağlantı kapatıldı.");
             }
         }
-
     }
+
+
     public void GetMedicines(int businessid, Control combobox)
     {
         if (combobox is ComboBox comboBox)
@@ -940,28 +959,30 @@ public class DatabaseManagament
         }
     }
 
-    public void GetVets(int businessid, Control combobox)
+    public void GetVets(int businessId, ComboBox comboBox)
     {
-        if (combobox is ComboBox comboBox)
+        using (var connection = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
         {
             try
             {
-                string query = "SELECT * FROM \"users\" WHERE \"businessId\" = @businessid";
-                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                connection.Open();
+                Debug.WriteLine("Bağlantı açıldı.");
+
+                string query = @"SELECT ""userId"", ""username"" FROM ""users"" WHERE ""businessId"" = @businessid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("businessid", businessid);
-                    using (var dr = cmd.ExecuteReader())
+                    cmd.Parameters.AddWithValue("@businessid", businessId);
+
+                    using (var reader = cmd.ExecuteReader())
                     {
                         comboBox.Items.Clear();
-                        while (dr.Read())
+                        while (reader.Read())
                         {
-                            var item = new ComboBoxItem
+                            comboBox.Items.Add(new ComboBoxItem
                             {
-                                Id = Convert.ToInt32(dr["userId"]),
-                                DisplayName = dr["fullName"].ToString()
-                            };
-                            comboBox.Items.Add(item);
-                            Debug.WriteLine("Veterinerler: " + item.DisplayName);
+                                Id = reader.GetInt32(0), // vetId sütunu integer olduğu için GetInt32 kullanılır.
+                                DisplayName = reader.GetString(1) // vetName sütunu string olduğu için GetString kullanılır.
+                            });
                         }
                     }
                 }
@@ -970,18 +991,20 @@ public class DatabaseManagament
             {
                 Debug.WriteLine("Veterinerleri çekme hatası: " + ex.Message);
             }
-        }
-        else
-        {
-            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+            finally
+            {
+                connection.Close();
+                Debug.WriteLine("Bağlantı kapatıldı.");
+            }
         }
     }
 
-    public bool AddMeeting(int petid, DateTime visitdate, string visitreason, int vetid)
+
+    public bool AddMeeting(int petid, DateTime visitdate, string visitreason, int vetid, int customerid)
     {
         try
         {
-            string query = "INSERT INTO \"visits\" (\"petId\", \"visitDate\", \"visitReason\", \"vetId\", \"businessid\") VALUES (@petid, @visitdate, @visitreason, @vetid, @businessid)";
+            string query = "INSERT INTO \"visits\" (\"petId\", \"visitDate\", \"visitReason\", \"vetId\", \"businessid\" , \"customerid\") VALUES (@petid, @visitdate, @visitreason, @vetid, @businessid,@customerid)";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("petid", petid);
@@ -989,6 +1012,7 @@ public class DatabaseManagament
                 cmd.Parameters.AddWithValue("visitreason", visitreason);
                 cmd.Parameters.AddWithValue("vetid", vetid);
                 cmd.Parameters.AddWithValue("businessid", Globals.CurrentUserBusinessAdminID);
+                cmd.Parameters.AddWithValue("customerid", customerid);
                 Debug.WriteLine(vetid);
                 cmd.ExecuteNonQuery();
 
@@ -1026,7 +1050,7 @@ public class DatabaseManagament
     {
         try
         {
-            string query = "INSERT INTO \"healthRecords\" (customerid, \"petId\", \"diagnosis\", \"diagnosis_date\", \"treatmentId\", \"ill_duration\", \"notes\") VALUES (@customer_id, @pet_id, @ill_name, @diagnosis_date, @medicine_id, @diagnosis_time, @diagnosis_note)";
+            string query = "INSERT INTO \"healthRecords\" (customerid, \"visitid\", \"diagnosis\", \"diagnosis_date\", \"treatmentId\", \"ill_duration\", \"notes\") VALUES (@customer_id, @pet_id, @ill_name, @diagnosis_date, @medicine_id, @diagnosis_time, @diagnosis_note)";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("customer_id", customer_id);
@@ -1052,48 +1076,65 @@ public class DatabaseManagament
         return false;
     }
 
+    public void GetVisits(int customerId, Control combobox)
+    {
+        if (combobox is ComboBox comboBox)
+        {
+            try
+            {
+                string query = @"
+SELECT v.""visitId"", p.""petName"" , v.""visitDate""
+FROM ""visits"" v
+JOIN ""pets"" p ON v.""petId"" = p.""petId""
+WHERE v.""customerid"" = @customerId";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("@customerId", customerId);
 
-    //public void GetPetSpecies(Control combobox)
-    //{
-    //    if (combobox is ComboBox comboBox)
-    //    {
-    //        try
-    //        {
-    //            if (baglan.State == ConnectionState.Closed)
-    //                baglan.Open();
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        comboBox.Items.Clear();
+                        while (dr.Read())
+                        {
+                            var item = new ComboBoxItem
+                            {
+                                Id = Convert.ToInt32(dr["visitId"]),
+                                DisplayName = dr["petName"].ToString() + " " + dr["visitDate"].ToString()
+                            };
 
-    //            string query = "SELECT DISTINCT \"speciesId\" FROM \"pets\""; 
-    //            using (var cmd = new NpgsqlCommand(query, baglan))
-    //            {
-    //                using (var dr = cmd.ExecuteReader())
-    //                {
-    //                    comboBox.Items.Clear();
-    //                    while (dr.Read())
-    //                    {
-    //                        var species = dr["species"].ToString();
-    //                        Debug.WriteLine("Tür: " + species);
+                            comboBox.Items.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Randevuları çekme hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+        }
+    }
 
-    //                        comboBox.Items.Add(species);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        catch (Exception ex)
-    //        {
-    //            Debug.WriteLine("Türleri çekme hatası: " + ex.Message);
-    //        }
-    //        finally
-    //        {
-    //            if (baglan.State == ConnectionState.Open)
-    //                baglan.Close();
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
-    //    }
-    //}
-
-
-
+    public bool DeletePatient(int patientid)
+    {
+        try
+        {
+            string query = "DELETE FROM \"healthRecords\" WHERE \"recordId\" = @patientid";
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("patientid", patientid);
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Kayıt silindi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kayıt silme hatası: " + ex.Message);
+            return false;
+        }
+    }
 }

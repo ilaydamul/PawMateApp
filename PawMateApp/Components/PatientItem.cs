@@ -1,7 +1,10 @@
-﻿using System;
+﻿using PawMateApp.Screens;
+using PawMateApp.Screens.Admin;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,7 @@ namespace PawMateApp.Components
 {
     public partial class PatientItem : UserControl
     {
+        DatabaseManagament db = new DatabaseManagament();
         public PatientItem()
         {
             InitializeComponent();
@@ -55,7 +59,39 @@ namespace PawMateApp.Components
 
         private void btn_edit_Click(object sender, EventArgs e)
         {
-            //PatientEdit sayfası açılacak
+            Debug.WriteLine(_patientId);
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bu kaydı silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                db.OpenConnection();
+                if (db.DeletePatient(Convert.ToInt32(_patientId)))
+                {
+                    MessageBox.Show("Kayıt başarıyla silindi", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var patientForm = Application.OpenForms["PatientManagement"];
+                    if (patientForm != null)
+                    {
+                        PatientManagement patient = patientForm as PatientManagement;
+                        patient?.PatientManagement_Load(null, null); // Eğer form bulunursa yükle
+                    }
+                    else
+                    {
+                        MessageBox.Show("PatientManagements formu açık değil!");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Bir hata oluştu", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
