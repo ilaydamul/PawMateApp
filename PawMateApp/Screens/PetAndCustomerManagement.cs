@@ -19,6 +19,7 @@ namespace PawMateApp.Screens
         DatabaseManagament db = new DatabaseManagament();
         string sendMailTo;
         int noCustomer = 0;
+        string customerName;
         public PetAndCustomerManagement()
         {
             InitializeComponent();
@@ -288,7 +289,44 @@ namespace PawMateApp.Screens
                                         sendMailTo = txt_customerEmail.Text.Trim();
                                         Inputs inputs = new Inputs(txt_customerName, txt_customerPhone, txt_customerEmail, txt_customerAddress, txt_customerAlternate, txt_customerAlternatePhone);
                                         inputs.ClearInputs();
-                                    }
+                                    string body = $@"
+<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto; font-family: Arial, sans-serif; width: 100%; max-width: 600px;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#ff6b00;font-size:36px;line-height:42px;padding-top:40px;text-align:center;font-weight:bold;"">
+         {Globals.BusinessName} Adlı Veteriner Kliniğine Hoş Geldiniz! 🎉
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#333333;font-size:22px;line-height:30px;padding-top:20px;text-align:center;"">
+        <span style=""font-size:20px;color:#555555;"">Artık {Globals.BusinessName} adlı veteriner kliniğinin bir pati dostusunuz! Süreçlerinizi daha hızlı ve daha verimli yöneteceğimizden emin olun! 🌟</span><br><br>
+        <span style=""font-size:20px;color:#333333;"">Siz ve sevimli dostlarınız için harika bir deneyim başlıyor! 🐾</span><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#fff;font-size:18px;line-height:26px;padding:20px;text-align:center;border:1px solid #ff6b00;background-color:#ff6b00;"">
+        <strong style=""font-size:24px;color:#ffffff;"">Sağlıklı dostlarımız için her şeyi yapacağımızdan emin olabilirsiniz! Eğer beğenirseniz de, bizi sosyal medyadan puanlamayı unutmayın! 🐶🐱</strong><br><br>
+        <span style=""font-size:16px;color:#ffffff;"">Minik dostlarımızın sağlığı bizim için çok değerli. Siz ve dostlarınız için her zaman yanınızdayız! 🚀</span><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:22px;color:#2d2d2d;"">Hayvan dostlarınız için daha parlak bir gelecek, Pawmate ile mümkün! 🌈</strong><br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+";
+                                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                                    sendMail.SendMail("Pawmate Müşteri Bilgilendirmesi", body, sendMailTo);
+                                }
 
                                     MessageBox.Show("Müşteri başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
@@ -399,21 +437,79 @@ namespace PawMateApp.Screens
                 {
                     if(cb_customers.SelectedItem is ComboBoxItem selectedcustomer)
                     {
-                        // Pet ekleme işlemi
-                        query = "INSERT INTO \"pets\" (\"customerId\", \"petName\", \"speciesId\", \"breed\", \"gender\") " +
-                                "VALUES (@customerId, @petName, @speciesId, @breed, @gender)";
+                        CheckClass check = new CheckClass(new string[] { txt_petName.Text, txt_breed.Text, cb_species.Text });
+                        if (check.Check(""))
+                        { 
+                            query = "INSERT INTO \"pets\" (\"customerId\", \"petName\", \"speciesId\", \"breed\", \"gender\") " +
+                                    "VALUES (@customerId, @petName, @speciesId, @breed, @gender)";
 
-                        using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
-                        {
-                            cmd.Parameters.AddWithValue("@customerId", selectedcustomer.Id);
-                            cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
-                            cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue));
-                            cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
-                            cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek");
-                            cmd.ExecuteNonQuery();
+                            using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                            {
+                                cmd.Parameters.AddWithValue("@customerId", selectedcustomer.Id);
+                                cmd.Parameters.AddWithValue("@petName", txt_petName.Text);
+                                cmd.Parameters.AddWithValue("@speciesId", Convert.ToInt32(cb_species.SelectedValue));
+                                cmd.Parameters.AddWithValue("@breed", txt_breed.Text);
+                                cmd.Parameters.AddWithValue("@gender", radio_disi.Checked ? "Dişi" : "Erkek");
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            string getCustomerMailQuery = @"SELECT ""email"", ""fullName"" FROM ""customers"" WHERE ""customerId"" = @customerId";
+                            using (var cmd = new NpgsqlCommand(getCustomerMailQuery, baglan))
+                            {
+                                cmd.Parameters.AddWithValue("@customerId", selectedcustomer.Id);
+                                using (var dr = cmd.ExecuteReader())
+                                {
+                                    while (dr.Read())
+                                    {
+                                        sendMailTo = dr["email"].ToString().Trim();
+                                        customerName = dr["fullName"].ToString().Trim();
+                                    }
+                                }
+                            }
+                            MessageBox.Show("Pet başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            string petStatus = radio_disi.Checked ? "Dişi" : "Erkek";
+                            string body = $@"<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto; font-family: Arial, sans-serif; width: 100%; max-width: 600px;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#ff6b00;font-size:36px;line-height:42px;padding-top:40px;text-align:center;font-weight:bold;"">
+        Merhaba {customerName}! 🎉 <br> {Globals.BusinessName} tarafından evcil hayvanınız sisteme başarıyla eklendi! 🐾
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#333333;font-size:22px;line-height:30px;padding-top:20px;text-align:center;"">
+        <span style=""font-size:20px;color:#555555;"">Tebrikler, artık {Globals.BusinessName} ailesinin bir parçasısınız! Evcil dostunuzla birlikte harika bir yolculuğa başlıyorsunuz. Sağlıkları ve mutlulukları bizim için çok değerli! 🌟</span><br><br>
+        <span style=""font-size:20px;color:#333333;"">Bizimle geçireceğiniz her an, dostunuz için daha sağlıklı ve mutlu bir gelecek demek! 🐶🐱</span><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#fff;font-size:18px;line-height:26px;padding:20px;text-align:center;border:1px solid #ff6b00;background-color:#ff6b00;"">
+        <strong style=""font-size:24px;color:#ffffff;"">Hayvan bilgileriniz aşağıdaki gibidir:</strong><br><br>
+        <span style=""font-size:16px;color:#ffffff;"">Evcil hayvan isimi: {txt_petName.Text}</span><br>
+        <span style=""font-size:16px;color:#ffffff;"">Evcil hayvan Cinsiyeti: {petStatus}</span><br>
+        <span style=""font-size:16px;color:#ffffff;"">Evcil Hayvan Cinsi: {txt_breed.Text}</span><br><br>
+        <span style=""font-size:14px;color:#ffffff;""><b>Eğer bu bilgilerin, hayvanınıza ait olmadığını düşünüyorsanız, bizimle iletişime geçin. Yardımcı olmaktan memnuniyet duyarız!</b> 🐾</span><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:22px;color:#2d2d2d;"">Hayvan dostlarınız için daha parlak bir gelecek, Pawmate ile mümkün! 🌈</strong><br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>";
+                            SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                            sendMail.SendMail("Pawmate Müşteri Bilgilendirmesi", body, sendMailTo);
                         }
-
-                        MessageBox.Show("Pet başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                        {
+                            return;
+                        }
                     }
                     else
                     {

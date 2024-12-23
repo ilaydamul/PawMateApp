@@ -43,8 +43,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txt_usageInstructions = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.pet_image = new System.Windows.Forms.PictureBox();
+            this.btn_pdf = new System.Windows.Forms.Button();
             this.btn_deletePresp = new System.Windows.Forms.Button();
+            this.pet_image = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pet_image)).BeginInit();
             this.SuspendLayout();
             // 
@@ -212,17 +213,19 @@
             this.label10.TabIndex = 182;
             this.label10.Text = "Kullanım Talimatı:";
             // 
-            // pet_image
+            // btn_pdf
             // 
-            this.pet_image.BackColor = System.Drawing.Color.White;
-            this.pet_image.Image = global::PawMateApp.Properties.Resources.icon;
-            this.pet_image.Location = new System.Drawing.Point(476, 120);
-            this.pet_image.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pet_image.Name = "pet_image";
-            this.pet_image.Size = new System.Drawing.Size(34, 36);
-            this.pet_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pet_image.TabIndex = 173;
-            this.pet_image.TabStop = false;
+            this.btn_pdf.BackColor = System.Drawing.Color.Transparent;
+            this.btn_pdf.BackgroundImage = global::PawMateApp.Properties.Resources.pdf;
+            this.btn_pdf.FlatAppearance.BorderSize = 0;
+            this.btn_pdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_pdf.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btn_pdf.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_pdf.Location = new System.Drawing.Point(417, 122);
+            this.btn_pdf.Name = "btn_pdf";
+            this.btn_pdf.Size = new System.Drawing.Size(35, 34);
+            this.btn_pdf.TabIndex = 185;
+            this.btn_pdf.UseVisualStyleBackColor = false;
             // 
             // btn_deletePresp
             // 
@@ -240,11 +243,24 @@
             this.btn_deletePresp.UseVisualStyleBackColor = false;
             this.btn_deletePresp.Click += new System.EventHandler(this.btn_deletePresp_Click);
             // 
+            // pet_image
+            // 
+            this.pet_image.BackColor = System.Drawing.Color.White;
+            this.pet_image.Image = global::PawMateApp.Properties.Resources.icon;
+            this.pet_image.Location = new System.Drawing.Point(476, 120);
+            this.pet_image.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pet_image.Name = "pet_image";
+            this.pet_image.Size = new System.Drawing.Size(34, 36);
+            this.pet_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pet_image.TabIndex = 173;
+            this.pet_image.TabStop = false;
+            // 
             // PrescriptionItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btn_pdf);
             this.Controls.Add(this.btn_deletePresp);
             this.Controls.Add(this.txt_usageInstructions);
             this.Controls.Add(this.label10);
@@ -291,5 +307,6 @@
         private System.Windows.Forms.Label txt_usageInstructions;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btn_deletePresp;
+        private System.Windows.Forms.Button btn_pdf;
     }
 }
