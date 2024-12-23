@@ -31,6 +31,7 @@ namespace PawMateApp.Screens
             databaseManagament.OpenConnection();
             databaseManagament.GetMedicines(Globals.CurrentUserBusinessAdminID, cb_medicines);
             StockItem();
+            
         }
 
         private void StockItem()

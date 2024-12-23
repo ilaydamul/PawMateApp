@@ -37,7 +37,6 @@
             this.txt_address = new System.Windows.Forms.TextBox();
             this.businessLogo = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_phone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_authName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -49,6 +48,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btn_addBusiness = new System.Windows.Forms.Button();
             this.btn_deleteBusiness = new System.Windows.Forms.Button();
+            this.txt_phone = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.businessesList)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.businessLogo)).BeginInit();
@@ -78,12 +78,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.cb_approved);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txt_address);
             this.panel1.Controls.Add(this.businessLogo);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.txt_phone);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txt_authName);
             this.panel1.Controls.Add(this.label7);
@@ -148,15 +148,6 @@
             this.label1.Size = new System.Drawing.Size(100, 16);
             this.label1.TabIndex = 121;
             this.label1.Text = "İşletme Telefonu";
-            // 
-            // txt_phone
-            // 
-            this.txt_phone.BackColor = System.Drawing.Color.White;
-            this.txt_phone.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.txt_phone.Location = new System.Drawing.Point(14, 249);
-            this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(226, 22);
-            this.txt_phone.TabIndex = 3;
             // 
             // label3
             // 
@@ -277,6 +268,14 @@
             this.btn_deleteBusiness.UseVisualStyleBackColor = false;
             this.btn_deleteBusiness.Click += new System.EventHandler(this.btn_deleteBusiness_Click);
             // 
+            // txt_phone
+            // 
+            this.txt_phone.Location = new System.Drawing.Point(15, 249);
+            this.txt_phone.Mask = "9990000000";
+            this.txt_phone.Name = "txt_phone";
+            this.txt_phone.Size = new System.Drawing.Size(226, 20);
+            this.txt_phone.TabIndex = 126;
+            // 
             // BusinessManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,7 +309,6 @@
         private System.Windows.Forms.Button btn_addUpdateBusiness;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txt_authName;
         private System.Windows.Forms.Label label7;
@@ -324,5 +322,6 @@
         private System.Windows.Forms.Button btn_addBusiness;
         private System.Windows.Forms.Button btn_deleteBusiness;
         private System.Windows.Forms.CheckBox cb_approved;
+        private System.Windows.Forms.MaskedTextBox txt_phone;
     }
 }
