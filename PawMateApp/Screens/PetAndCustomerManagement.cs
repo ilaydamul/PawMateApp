@@ -102,7 +102,7 @@ namespace PawMateApp.Screens
             try
             {
                 baglan.Open();
-                string query = "SELECT \"customerId\", \"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\", \"alternateNote\" " +
+                string query = "SELECT \"customerId\", \"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" " +
                                "FROM \"customers\" " +
                                "WHERE \"businessId\" = @businessId";
                 using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
