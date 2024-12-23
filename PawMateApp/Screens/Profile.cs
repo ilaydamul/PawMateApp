@@ -131,32 +131,32 @@ namespace PawMateApp.Screens
             baglan.Open();
 
             // 1. Randevu sayısını alıyoruz
-            NpgsqlCommand cmdVisits = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"userId\" = @userId", baglan);
-            cmdVisits.Parameters.AddWithValue("@userId", Globals.CurrentUserID);
+            NpgsqlCommand cmdVisits = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"businessid\" = @businessId", baglan);
+            cmdVisits.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int randevuSayisi = Convert.ToInt32(cmdVisits.ExecuteScalar());
             lbl_totalAppo.Text = randevuSayisi.ToString(); 
 
             // 2. İlaç stoğu sayısını alıyoruz
-            NpgsqlCommand cmdMedicineStock = new NpgsqlCommand("SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"userId\" = @userid", baglan);
-            cmdMedicineStock.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            NpgsqlCommand cmdMedicineStock = new NpgsqlCommand("SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"businessid\" = @businessId", baglan);
+            cmdMedicineStock.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int ilacStogu = Convert.ToInt32(cmdMedicineStock.ExecuteScalar());
             lbl_totalMedicine.Text = ilacStogu.ToString(); 
 
             // 3. Yazılan reçetelerin sayısını alıyoruz
-            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand("SELECT COUNT(*) FROM \"prescriptions\" WHERE \"userId\" = @userid", baglan);
-            cmdPrescriptions.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand("SELECT COUNT(*) FROM \"prescriptions\" WHERE \"businessid\" = @businessId", baglan);
+            cmdPrescriptions.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int receteSayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
             lbl_allPresp.Text = receteSayisi.ToString();
 
             // 4. Müşterilerin sayısını alıyoruz
-            NpgsqlCommand cmdCustomers = new NpgsqlCommand("SELECT COUNT(*) FROM \"customers\" WHERE \"userId\" = @userid", baglan);
-            cmdCustomers.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            NpgsqlCommand cmdCustomers = new NpgsqlCommand("SELECT COUNT(*) FROM \"customers\" WHERE \"businessid\" = @businessId", baglan);
+            cmdCustomers.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int musterisayisi = Convert.ToInt32(cmdCustomers.ExecuteScalar()); 
             lbl_customers.Text = musterisayisi.ToString();
 
             // 5. Aktif randevu sayısını alıyoruz
-            NpgsqlCommand cmdAppo = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"userId\" = @userid", baglan);
-            cmdAppo.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            NpgsqlCommand cmdAppo = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"businessid\" = @businessId", baglan);
+            cmdAppo.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int aktifRandevusayisi = Convert.ToInt32(cmdAppo.ExecuteScalar());
             lbl_activeAppo.Text =aktifRandevusayisi.ToString();
 
