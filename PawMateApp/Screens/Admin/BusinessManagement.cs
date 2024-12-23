@@ -150,9 +150,9 @@ namespace PawMateApp.Screens.Admin
 
 
             private void BusinessManagement_Load(object sender, EventArgs e)//Ekrana gelindiğinde işletme bilgilerinin businessesList'de görünmesi
-        {
+        { 
 
-            CustomizeBusinessListHeaders();
+
 
             try
             {
@@ -171,7 +171,7 @@ namespace PawMateApp.Screens.Admin
             {
                 baglan.Close();
             }
-
+            CustomizeBusinessListHeaders();
         }
 
         private void businessesList_CellClick(object sender, DataGridViewCellEventArgs e)

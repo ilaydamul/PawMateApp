@@ -267,11 +267,8 @@ namespace PawMateApp.Screens
                         else if (btn_addCustomer.Text == "Ekle")
                         {
                             if (CheckClass.IsValidPhone(txt_customerPhone.Text))
-                            {
-                                if (CheckClass.IsValidPhone(txt_customerAlternatePhone.Text) == true)
-                                {
+                            { 
                                     string customerName = txt_customerName.Text;
-
                                     // Müşteri ekleme işlemi
                                     query = "INSERT INTO \"customers\" (\"fullName\", \"phone\", \"email\", \"address\", \"alternateName\", \"alternatePhone\" , \"businessId\") " +
                                             "VALUES (@fullName, @phone, @email, @address, @alternateName, @alternatePhone, @businessid)";
@@ -294,7 +291,6 @@ namespace PawMateApp.Screens
                                     }
 
                                     MessageBox.Show("Müşteri başarıyla eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
                             }
 
                         }
@@ -456,8 +452,7 @@ namespace PawMateApp.Screens
                 DataGridViewRow row = petList.Rows[e.RowIndex];
 
                 txt_petName.Text = row.Cells["Pet Adı"].Value?.ToString();
-                cb_customers.SelectedValue = row.Cells["Sahibi"].Value?.ToString();
-
+                cb_customers.Text = row.Cells["Sahibi"].Value?.ToString();
                 if (int.TryParse(row.Cells["Türü"].Value?.ToString(), out int selectedSpeciesId))
                 {
                     cb_species.SelectedValue = selectedSpeciesId;

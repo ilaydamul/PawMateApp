@@ -124,7 +124,7 @@ namespace PawMateApp
                     NpgsqlCommand cmd2 = new NpgsqlCommand(getBusinessName, baglan);
                     cmd2.Parameters.AddWithValue("@P1", Globals.CurrentUserBusinessAdminID);
                     NpgsqlDataReader dr2 = cmd2.ExecuteReader();
-                    Globals.BusinessName = dr2.Read() ? dr2["businessName"].ToString() : "Hata";
+                    Globals.BusinessName = dr2.Read() ? dr2["businessName"].ToString() : "Business Name Yok";
                     Debug.WriteLine(Globals.BusinessName);
                 }
                 catch (Exception ex)
