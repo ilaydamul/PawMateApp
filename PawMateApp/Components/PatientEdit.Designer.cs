@@ -55,8 +55,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.lbl_treatmentDuration = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lbl_notes = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.btn_updatePatient = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.btn_closePatient)).BeginInit();
             this.SuspendLayout();
@@ -332,28 +330,6 @@
             this.label15.TabIndex = 211;
             this.label15.Text = "Tedavi Süresi:";
             // 
-            // lbl_notes
-            // 
-            this.lbl_notes.AutoSize = true;
-            this.lbl_notes.Font = new System.Drawing.Font("Arial", 9.25F);
-            this.lbl_notes.Location = new System.Drawing.Point(87, 178);
-            this.lbl_notes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_notes.Name = "lbl_notes";
-            this.lbl_notes.Size = new System.Drawing.Size(41, 16);
-            this.lbl_notes.TabIndex = 214;
-            this.lbl_notes.Text = "Notlar";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label17.Location = new System.Drawing.Point(16, 177);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(65, 16);
-            this.label17.TabIndex = 213;
-            this.label17.Text = "Ek Notlar:";
-            // 
             // btn_updatePatient
             // 
             this.btn_updatePatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(33)))), ((int)(((byte)(230)))));
@@ -373,8 +349,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(351, 444);
             this.Controls.Add(this.btn_updatePatient);
-            this.Controls.Add(this.lbl_notes);
-            this.Controls.Add(this.label17);
             this.Controls.Add(this.lbl_treatmentDuration);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.lbl_treatmentType);
@@ -438,8 +412,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lbl_treatmentDuration;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label lbl_notes;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btn_updatePatient;
     }
 }
