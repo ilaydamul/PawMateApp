@@ -130,35 +130,41 @@ namespace PawMateApp.Screens
 
             baglan.Open();
 
-            // 1. Randevu sayısını alıyoruz
+            // 1. Total Appointments (visits)
             NpgsqlCommand cmdVisits = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"businessid\" = @businessId", baglan);
             cmdVisits.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int randevuSayisi = Convert.ToInt32(cmdVisits.ExecuteScalar());
-            lbl_totalAppo.Text = randevuSayisi.ToString(); 
+            lbl_totalAppo.Text = randevuSayisi.ToString();
 
-            // 2. İlaç stoğu sayısını alıyoruz
+            // 2. Medicine Stock (medicineStocks)
             NpgsqlCommand cmdMedicineStock = new NpgsqlCommand("SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"businessid\" = @businessId", baglan);
             cmdMedicineStock.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int ilacStogu = Convert.ToInt32(cmdMedicineStock.ExecuteScalar());
-            lbl_totalMedicine.Text = ilacStogu.ToString(); 
+            lbl_totalMedicine.Text = ilacStogu.ToString();
 
-            // 3. Yazılan reçetelerin sayısını alıyoruz
-            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand("SELECT COUNT(*) FROM \"prescriptions\" WHERE \"businessid\" = @businessId", baglan);
+            // 3. Prescriptions (healthRecords -> visits)
+            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand(@"
+SELECT COUNT(*) 
+FROM ""healthRecords"" hr
+        
+            JOIN ""visits"" v ON hr.""visitid"" = v.""visitId"" 
+        
+            WHERE v.""businessid"" = @businessId", baglan);
             cmdPrescriptions.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int receteSayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
             lbl_allPresp.Text = receteSayisi.ToString();
 
-            // 4. Müşterilerin sayısını alıyoruz
-            NpgsqlCommand cmdCustomers = new NpgsqlCommand("SELECT COUNT(*) FROM \"customers\" WHERE \"businessid\" = @businessId", baglan);
+            // 4. Total Customers (customers)
+            NpgsqlCommand cmdCustomers = new NpgsqlCommand("SELECT COUNT(*) FROM \"customers\" WHERE \"businessId\" = @businessId", baglan);
             cmdCustomers.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
-            int musterisayisi = Convert.ToInt32(cmdCustomers.ExecuteScalar()); 
+            int musterisayisi = Convert.ToInt32(cmdCustomers.ExecuteScalar());
             lbl_customers.Text = musterisayisi.ToString();
 
-            // 5. Aktif randevu sayısını alıyoruz
+            // 5. Active Appointments (visits)
             NpgsqlCommand cmdAppo = new NpgsqlCommand("SELECT COUNT(*) FROM \"visits\" WHERE \"businessid\" = @businessId", baglan);
             cmdAppo.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int aktifRandevusayisi = Convert.ToInt32(cmdAppo.ExecuteScalar());
-            lbl_activeAppo.Text =aktifRandevusayisi.ToString();
+            lbl_activeAppo.Text = aktifRandevusayisi.ToString();
 
             // 6. Veteriner sayısını alıyoruz.
             //bakılacak.
