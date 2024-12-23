@@ -13,6 +13,11 @@ using System.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ComboBox = System.Windows.Forms.ComboBox;
 using TextBox = System.Windows.Forms.TextBox;
+using Microsoft.Extensions.Logging;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Collections.Generic;
 
 
 namespace PawMateApp
@@ -1213,7 +1218,48 @@ WHERE v.""customerid"" = @customerId";
         {
             CloseConnection();
         }
+    }
     
+    public Dictionary<String, String> GetInformationsForEdit(int patientid)
+    {
+        Dictionary<String, String> informations = new Dictionary<String, String>();
+        string query = @"SELECT hr.""diagnosis"", hr.""notes"", hr.""ill_duration"", 
+       p.""petName"", c.""fullName"", c.""phone"", 
+       tr.""treatmentName"",
+TO_CHAR(hr.""diagnosis_date"", 'DD/MM/YYYY') AS Date
+FROM ""healthRecords"" hr
+JOIN ""visits"" v ON v.""visitId"" = hr.""visitid""
+JOIN ""pets"" p ON p.""petId"" = v.""petId""
+JOIN ""customers"" c ON c.""customerId"" = hr.""customerid""
+JOIN ""treatments"" tr ON tr.""treatmentId"" = hr.""treatmentId""
+WHERE hr.""recordId"" = @patientid;
+";
+        try
+        {
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("@patientid", patientid);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        
+                        informations.Add("diagnosis", dr["diagnosis"].ToString());
+                        informations.Add("notes", dr["notes"].ToString());
+                        informations.Add("ill_duration", dr["ill_duration"].ToString());
+                        informations.Add("petName", dr["petName"].ToString());
+                        informations.Add("customerName", dr["fullName"].ToString());
+                        informations.Add("phone", dr["phone"].ToString());
+                        informations.Add("treatmentName", dr["treatmentName"].ToString());
+                        informations.Add("diagnosis_date", dr["Date"].ToString());
+                    }
+                }
+            }
+        }catch(Exception ex)
+        {
+            Debug.WriteLine("Hasta bilgilerini çekerken hata oluştu: " + ex.Message);
+        }
+        return informations;
     }
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace PawMateApp.Components
 {
     public partial class PatientEdit : Form
     {
+        DatabaseManagament db = new DatabaseManagament();
+        Dictionary<String, String> informations;
         public PatientEdit()
         {
             InitializeComponent();
@@ -91,6 +94,36 @@ namespace PawMateApp.Components
         private void btn_closePatient_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void PatientEdit_Load(object sender, EventArgs e)
+        {
+            db.OpenConnection();
+            informations = db.GetInformationsForEdit(Convert.ToInt32(this._patientId));
+            db.CloseConnection();
+            LoadValues();
+        }
+
+        private void LoadValues()
+        {
+            this.PatientName = informations["diagnosis"];
+            this.Notes = informations["notes"];
+            this.TreatmentDuration = informations["ill_duration"];
+            this.PetName = informations["petName"];
+            this.CustomerName = informations["customerName"];
+            this.CustomerPhone = informations["phone"];
+            this.TreatmentType = informations["treatmentName"];
+            lbl_customerName.Text = informations["customerName"];
+            lbl_customerPhone.Text = informations["phone"];
+            lbl_patientName.Text = informations["diagnosis"];
+            lbl_petName.Text = informations["petName"];
+            lbl_treatmentDuration.Text = informations["ill_duration"];
+            lbl_treatmentType.Text = informations["treatmentName"];
+            lbl_diagnosisDate.Text = informations["diagnosis_date"];
+            this.DiagnosisDate = informations["diagnosis_date"];
+            db.GetTreatmentsForCombo(cb_treatments);
+            cb_treatments.SelectedIndex = cb_treatments.FindStringExact(informations["treatmentName"]);
+
         }
     }
 }

@@ -24,7 +24,8 @@ namespace PawMateApp.Screens
                 hr.""recordId"",
                 c.""fullName"" AS ""customerName"",
                 p.""petName"",
-                u.""username"" AS ""vetName""
+                u.""username"" AS ""vetName"",
+                TO_CHAR(hr.""diagnosis_date"", 'DD/MM/YYYY') AS Date
             FROM ""healthRecords"" hr
             JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
             JOIN ""customers"" c ON v.""customerid"" = c.""customerId""
@@ -62,10 +63,13 @@ namespace PawMateApp.Screens
                     {
                         PatientItem patientItem= new PatientItem
                         {
+                            Date = dr["Date"].ToString(),
                             _patientId = dr["recordId"].ToString(),
                             CustomerName = dr["customerName"].ToString(),
                             PetName = dr["petName"].ToString(),
                             VetName = dr["vetName"].ToString()
+                            
+
                         };
                         container.Controls.Add(patientItem);
                     }

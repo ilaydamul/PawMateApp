@@ -379,6 +379,7 @@
             this.Name = "PatientEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PatientEdit";
+            this.Load += new System.EventHandler(this.PatientEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btn_closePatient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -112,6 +112,7 @@
             this.txt_visitDate.Size = new System.Drawing.Size(79, 16);
             this.txt_visitDate.TabIndex = 166;
             this.txt_visitDate.Text = "02.08.2024";
+            this.txt_visitDate.Click += new System.EventHandler(this.txt_visitDate_Click);
             // 
             // btn_edit
             // 

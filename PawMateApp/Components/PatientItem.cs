@@ -26,13 +26,21 @@ namespace PawMateApp.Components
         public string _petName { get; set; }
         public string _petImage { get; set; }
         public string _vetName { get; set; }
-     
+        public string _date { get; set; }
+
 
         [Category("Props")]
         public string CustomerName
         {
             get { return _customerName; }
             set { _customerName = value; txt_customerName.Text = value; }
+        }
+
+        [Category("Props")]
+        public string Date
+        {
+            get { return _date; }
+            set { _date = value; txt_visitDate.Text = value; }
         }
 
         [Category("Props")]
@@ -60,8 +68,6 @@ namespace PawMateApp.Components
         private void btn_edit_Click(object sender, EventArgs e)
         {
             Debug.WriteLine(_patientId);
-
-            // PatientEdit formunu oluştur
             PatientEdit editForm = new PatientEdit
             {
                 _patientId = this._patientId,
@@ -74,8 +80,6 @@ namespace PawMateApp.Components
                 TreatmentDuration = "1 Ay", // Örnek süre, doğru değeri geçmelisiniz
                 Notes = "Notlar buraya gelecek" // Örnek notlar, doğru bilgiyi geçmelisiniz
             };
-
-            // Formu göster
             editForm.ShowDialog();
 
         }
@@ -110,6 +114,11 @@ namespace PawMateApp.Components
             {
                 return;
             }
+        }
+
+        private void txt_visitDate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
