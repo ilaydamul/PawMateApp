@@ -435,14 +435,13 @@ public class DatabaseManagament
             }
 
             string query = @"
-            SELECT username, email, phone 
+            SELECT username, phone 
             FROM users 
-            WHERE username = @username OR email = @email OR phone = @phone";
+            WHERE username = @username OR phone = @phone";
 
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("username", username);
-                cmd.Parameters.AddWithValue("email", email);
                 cmd.Parameters.AddWithValue("phone", phone);
 
                 using (var dr = cmd.ExecuteReader())
