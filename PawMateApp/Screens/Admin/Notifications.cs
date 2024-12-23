@@ -41,6 +41,7 @@ namespace PawMateApp.Screens.Admin
                 if (rowCount == 0)
                 {
                     Debug.WriteLine("Bildirim yoktur");
+                    flowLayoutPanel1.Visible = false;
                     txt_noNotif.Visible = true;
                 }
                 else

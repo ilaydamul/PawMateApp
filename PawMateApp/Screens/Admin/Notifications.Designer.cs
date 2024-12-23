@@ -31,7 +31,6 @@
             this.txt_title = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.txt_noNotif = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_title
@@ -47,7 +46,6 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.txt_noNotif);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 44);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(784, 534);
@@ -57,7 +55,7 @@
             // 
             this.txt_noNotif.AutoSize = true;
             this.txt_noNotif.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_noNotif.Location = new System.Drawing.Point(3, 0);
+            this.txt_noNotif.Location = new System.Drawing.Point(252, 17);
             this.txt_noNotif.Name = "txt_noNotif";
             this.txt_noNotif.Size = new System.Drawing.Size(241, 24);
             this.txt_noNotif.TabIndex = 9;
@@ -70,14 +68,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(808, 590);
+            this.Controls.Add(this.txt_noNotif);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.txt_title);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Notifications";
             this.Text = "Notifications";
             this.Load += new System.EventHandler(this.Notifications_Load);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
