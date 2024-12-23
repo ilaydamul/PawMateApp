@@ -32,7 +32,7 @@ namespace PawMateApp.Screens
                 db.OpenConnection();
                 db.GetCustomers(Globals.CurrentUserBusinessAdminID, cb_customers);
                 db.GetVets(Globals.CurrentUserBusinessAdminID, cb_vets);
-                dp_date.Format = DateTimePickerFormat.Long;
+                //dp_date.Format = DateTimePickerFormat.Long;
 
                 ExecuteQueryAndLoadItems(@"
             SELECT v.""visitId"", v.""visitDate"", v.""visitReason"", p.""petName"", c.""fullName"", c.""phone"", u.""username"" 
