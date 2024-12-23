@@ -135,10 +135,24 @@ namespace PawMateApp.Screens.Admin
             btn_addUpdateBusiness.Text = "Ekle";
         }
 
-        private void BusinessManagement_Load(object sender, EventArgs e)//Ekrana gelindiğinde işletme bilgilerinin businessesList'de görünmesi
+
+        private void CustomizeBusinessListHeaders()
+        {
+            
+            businessesList.Columns["businessName"].HeaderText = "İşletme Adı";
+            businessesList.Columns["authorizedName"].HeaderText = "Yetkili Kişi";
+            businessesList.Columns["email"].HeaderText = "Email Adresi";
+            businessesList.Columns["phone"].HeaderText = "Telefon";
+            businessesList.Columns["address"].HeaderText = "Adres";
+            businessesList.Columns["isApproved"].HeaderText = "Onay Durumu";
+
+        }
+
+
+            private void BusinessManagement_Load(object sender, EventArgs e)//Ekrana gelindiğinde işletme bilgilerinin businessesList'de görünmesi
         {
 
-
+            CustomizeBusinessListHeaders();
 
             try
             {

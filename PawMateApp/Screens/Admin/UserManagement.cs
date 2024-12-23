@@ -21,8 +21,23 @@ namespace PawMateApp.Screens.Admin
 
         NpgsqlConnection baglan = new NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
 
+
+        private void CustomizeUserListHeaders()
+        {
+            
+            userList.Columns["username"].HeaderText = "Kullanıcı Adı";
+            userList.Columns["password"].HeaderText = "Şifre";
+            userList.Columns["fullName"].HeaderText = "Tam İsim";
+            userList.Columns["phone"].HeaderText = "Telefon";
+            userList.Columns["email"].HeaderText = "Email Adresi";
+            userList.Columns["businessId"].HeaderText = "İşletme ID";
+            userList.Columns["isBusinessAdmin"].HeaderText = "İşletme Yöneticisi";
+            userList.Columns["userId"].HeaderText = "Kullanıcı ID";
+        }
         private void UserManagement_Load(object sender, EventArgs e)
         {
+
+            CustomizeUserListHeaders();
 
             try
             {

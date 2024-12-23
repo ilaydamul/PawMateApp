@@ -838,7 +838,7 @@ public class DatabaseManagament
                 }
                 else
                 {
-                    string query = "INSERT INTO \"medicineStocks\" (\"medicineId\", quantity , threshold, medicinename, businessid, \"userId\") VALUES (@medicineid, @quantity, @redflag, @medicinename, @businessid, @userid)";
+                    string query = "INSERT INTO \"medicineStocks\" (\"medicineId\", quantity , threshold, medicinename, businessid) VALUES (@medicineid, @quantity, @redflag, @medicinename, @businessid)";
                     using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
                     {
                         cmd.Parameters.AddWithValue("medicineid", medicineid);
@@ -846,7 +846,6 @@ public class DatabaseManagament
                         cmd.Parameters.AddWithValue("redflag", redflag);
                         cmd.Parameters.AddWithValue("medicinename", medicinename);
                         cmd.Parameters.AddWithValue("businessid", businessid);
-                        cmd.Parameters.AddWithValue("userid", Globals.CurrentUserID);
                         cmd.ExecuteNonQuery();
 
                     }
