@@ -144,8 +144,8 @@ namespace PawMateApp.Screens
 
             // 3. Prescriptions (healthRecords -> visits)
             NpgsqlCommand cmdPrescriptions = new NpgsqlCommand(@"
-SELECT COUNT(*) 
-FROM ""healthRecords"" hr
+            SELECT COUNT(*) 
+            FROM ""healthRecords"" hr
         
             JOIN ""visits"" v ON hr.""visitid"" = v.""visitId"" 
         
@@ -168,24 +168,48 @@ FROM ""healthRecords"" hr
 
             // 6. Veteriner sayısını alıyoruz.
             //bakılacak.
+            NpgsqlCommand cmdvet;
 
-            // 7. Hayvan sayısını alıyoruz
+            if (Globals.CurrentUserBusinessAdminStatus && Globals.CurrentUserAppAdminStatus)
+            {            
+                cmdvet = new NpgsqlCommand("SELECT COUNT(*) FROM \"users\" WHERE \"businessid\" = @businessId", baglan);
+                cmdvet.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
+            }
+            else
+            {
+                // Eğer kullanıcı BusinessAdmin veya AppAdmin değilse, users tablosundan businessId alınacak
+                cmdvet = new NpgsqlCommand(@"
+        SELECT COUNT(*) 
+        FROM ""users"" u
+            
+                    JOIN ""visits"" v ON u.""businessId"" = v.""businessid"" 
+            
+                    WHERE u.""userId"" = @userid", baglan);
+                cmdvet.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
+            }
+            int veterinersayisi = Convert.ToInt32(cmdvet.ExecuteScalar());
+            lbl_vets.Text = veterinersayisi.ToString();
+
+            // 7. Hayvan sayısını alıyoruz (Pets)
             NpgsqlCommand cmdPets = new NpgsqlCommand(@"
-            SELECT COUNT(*) 
-            FROM ""pets"" 
-            WHERE ""customerId"" IN (
-                SELECT ""customerId"" 
-                FROM ""customers"" 
-                WHERE ""businessId"" IN (
-                    SELECT ""businessId"" 
-                    FROM ""users"" 
-                    WHERE ""userId"" = @userid
-                )
-            )", baglan);
+    SELECT COUNT(*) 
+    FROM ""pets"" p
+    WHERE p.""customerId"" IN (
+        SELECT c.""customerId""
+        FROM ""customers"" c
+        JOIN ""visits"" v ON c.""businessId"" = v.""businessid""
+        WHERE v.""businessid"" IN (
+            SELECT u.""businessId""
+            FROM ""users"" u
+            WHERE u.""userId"" = @userid
+        )
+    )", baglan);
 
-            cmdPets.Parameters.AddWithValue("@userid", Globals.CurrentUserID);
-            int hayvanSayisi = Convert.ToInt32(cmdPets.ExecuteScalar());
-            lbl_pets.Text = hayvanSayisi.ToString();        
+            cmdPets.Parameters.AddWithValue("@userid", Globals.CurrentUserID);  // userId parametresini ekliyoruz
+
+            int petSayisi = Convert.ToInt32(cmdPets.ExecuteScalar());
+            lbl_pets.Text = petSayisi.ToString();
+
             baglan.Close();
 
         }
