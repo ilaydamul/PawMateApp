@@ -18,6 +18,7 @@ namespace PawMateApp.Screens
         //DatabaseManagament databaseManagament = new DatabaseManagament();
         DatabaseManagament db = new DatabaseManagament();
         string sendMailTo;
+        int noCustomer = 0;
         public PetAndCustomerManagement()
         {
             InitializeComponent();
@@ -36,15 +37,18 @@ namespace PawMateApp.Screens
         }
         private void LoadConfig()
         {
-            customerList.Columns["customerId"].HeaderText = "Müşteri ID";
-            customerList.Columns["fullName"].HeaderText = "İsim Soyisim";
-            customerList.Columns["phone"].HeaderText = "Telefon No";
-            customerList.Columns["email"].HeaderText = "Email";
-            customerList.Columns["address"].HeaderText = "Adress";
-            customerList.Columns["alternateName"].HeaderText = "Alternatif İsim";
-            customerList.Columns["alternatePhone"].HeaderText = "Alternatif Telefon";
-            customerList.Columns["alternateNote"].HeaderText = "Notlar";
-            petList.Columns["petId"].HeaderText = "Pet ID";
+            if (noCustomer == 0)
+            {
+                customerList.Columns["customerId"].HeaderText = "Müşteri ID";
+                customerList.Columns["fullName"].HeaderText = "İsim Soyisim";
+                customerList.Columns["phone"].HeaderText = "Telefon No";
+                customerList.Columns["email"].HeaderText = "Email";
+                customerList.Columns["address"].HeaderText = "Adress";
+                customerList.Columns["alternateName"].HeaderText = "Alternatif İsim";
+                customerList.Columns["alternatePhone"].HeaderText = "Alternatif Telefon";
+                customerList.Columns["alternateNote"].HeaderText = "Notlar";
+                petList.Columns["petId"].HeaderText = "Pet ID";
+            }
         }
 
         private void PetAndCustomerManagement_Load(object sender, EventArgs e)
@@ -120,6 +124,7 @@ namespace PawMateApp.Screens
                         else
                         {
                             MessageBox.Show("Hiçbir müşteri bulunamadı!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            noCustomer = 1;
                         }
                     }
                 }
