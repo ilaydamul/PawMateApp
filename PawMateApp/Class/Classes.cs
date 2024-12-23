@@ -1210,9 +1210,11 @@ WHERE v.""customerid"" = @customerId";
             MessageBox.Show("Bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
+        finally
+        {
+            CloseConnection();
+        }
     
     }
-
-
 
 }
