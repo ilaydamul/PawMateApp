@@ -455,12 +455,6 @@ public class DatabaseManagament
                             return false;
                         }
 
-                        if (dr["email"].ToString() == email)
-                        {
-                            MessageBox.Show("Bu e-posta adresi zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return false;
-                        }
-
                         if (dr["phone"].ToString() == phone)
                         {
                             MessageBox.Show("Bu telefon numarası zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1136,4 +1130,89 @@ WHERE v.""customerid"" = @customerId";
             return false;
         }
     }
+
+    public bool InsertUserManagementAdmin(string username, string password, string fullname, string phone, string email, int businessid, bool isbusinessadmin)
+    {
+        try
+        {
+            if (!CheckClass.IsValidEmail(email))
+            {
+                MessageBox.Show("Lütfen geçerli bir e-posta adresi giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (!CheckClass.IsValidPhone(phone))
+            {
+                MessageBox.Show("Lütfen geçerli bir telefon numarası giriniz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+
+                string query = "SELECT username, email, phone FROM users WHERE (username = @username OR email = @email OR phone = @phone)";
+
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("username", username);
+                    cmd.Parameters.AddWithValue("phone", phone);
+                    cmd.Parameters.AddWithValue("email", email);
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+                                if (dr["username"].ToString() == username)
+                                {
+                                    MessageBox.Show("Bu kullanıcı adı zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return false;
+                                }
+
+                                if (dr["email"].ToString() == email)
+                                {
+                                    MessageBox.Show("Bu e-posta adresi zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return false;
+                                }
+
+                                if (dr["phone"].ToString() == phone)
+                                {
+                                    MessageBox.Show("Bu telefon numarası zaten kullanılmakta.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                string query2 = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\") " +
+                "VALUES (@username, @password, @fullName, @phone, @email, @businessId, @isBusinessAdmin)";
+
+                using (var cmd = new Npgsql.NpgsqlCommand(query2, baglan))
+                {
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@phone", phone);
+                    cmd.Parameters.AddWithValue("@fullname", fullname);
+                    cmd.Parameters.AddWithValue("@businessId", businessid);
+                    cmd.Parameters.AddWithValue("@isBusinessAdmin", isbusinessadmin);
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Kullanıcı başarılı bir şekilde eklendi..", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kullanıcı ekleme hatası: " + ex.Message);
+            MessageBox.Show("Bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    
+    }
+
+
+
 }

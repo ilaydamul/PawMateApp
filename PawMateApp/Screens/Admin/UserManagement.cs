@@ -13,6 +13,7 @@ namespace PawMateApp.Screens.Admin
 {
     public partial class UserManagement : Form
     {
+        DatabaseManagament db = new DatabaseManagament();
         public UserManagement()
         {
             InitializeComponent();
@@ -119,10 +120,8 @@ namespace PawMateApp.Screens.Admin
                 try
                 {
                     if (baglan.State == ConnectionState.Closed)
-                        baglan.Open();
-
+                        db.OpenConnection();
                     string query;
-
                     if (btn_addUpdateUser.Text == "Güncelle")
                     {
                         if (userList.SelectedRows.Count == 0)
@@ -154,25 +153,12 @@ namespace PawMateApp.Screens.Admin
                     }
                     else if (btn_addUpdateUser.Text == "Ekle")
                     {
-                        query = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"phone\", \"email\", \"businessId\", \"isBusinessAdmin\") " +
-                                "VALUES (@username, @password, @fullName, @phone, @email, @businessId, @isBusinessAdmin)";
-
-                        using (NpgsqlCommand cmd = new NpgsqlCommand(query, baglan))
+                       if(db.InsertUserManagementAdmin(txt_username.Text,txt_password.Text,txt_fullname.Text,txt_phone.Text,txt_email.Text,Convert.ToInt32(cb_businesses.SelectedValue), isBusinessAdmin.Checked))
                         {
-                            cmd.Parameters.AddWithValue("@username", txt_username.Text);
-                            cmd.Parameters.AddWithValue("@password", txt_password.Text);
-                            cmd.Parameters.AddWithValue("@fullName", txt_fullname.Text);
-                            cmd.Parameters.AddWithValue("@phone", txt_phone.Text);
-                            cmd.Parameters.AddWithValue("@email", txt_email.Text);
-                            cmd.Parameters.AddWithValue("@businessId", Convert.ToInt32(cb_businesses.SelectedValue));
-                            cmd.Parameters.AddWithValue("@isBusinessAdmin", isBusinessAdmin.Checked);
-                            cmd.ExecuteNonQuery();
-                            baglan.Close();
-                            Inputs inputs = new Inputs(txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses);
+                            Inputs inputs = new Inputs(new Control[] { txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses });
                             inputs.ClearInputs();
                         }
                     }
-
                     UserManagement_Load(null, null);
 
                 }
