@@ -16,6 +16,7 @@ namespace PawMateApp.Components
 {
     public partial class PrescriptionItem : UserControl
     {
+        DatabaseManagament db = new DatabaseManagament();
         public PrescriptionItem()
         {
             InitializeComponent();
@@ -100,6 +101,19 @@ namespace PawMateApp.Components
 
         private void btn_deletePresp_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show("Reçeteyi Silmek İstediğinize Emin Misiniz?", "Reçete Silme", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                db.OpenConnection();
+                string query = @"DELETE FROM prescriptions WHERE ""prescriptionId"" = @psid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
+                {
+                    cmd.Parameters.AddWithValue("@psid", PrescriptionId);
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Reçete başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                db.CloseConnection();
+            }
         }
 
         private void btn_pdf_Click(object sender, EventArgs e)

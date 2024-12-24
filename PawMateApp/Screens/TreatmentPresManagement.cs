@@ -112,7 +112,7 @@ namespace PawMateApp.Screens
                 if(cb_medicines.SelectedItem is ComboBoxItem cb_medicine_item && cb_visits.SelectedItem is ComboBoxItem cb_visit_item)
                 {
                     db.CheckMedicineStocksAsync(cb_medicine_item.Id, Convert.ToInt32(txt_quantity.Text),cb_visit_item.Id,Convert.ToInt32(txt_quantity.Text),txt_usageInstructions.Text);
-
+                    ExecuteQueryAndLoadItems(query, prescriptionList);
                 }
                 
             }

@@ -142,6 +142,7 @@ namespace PawMateApp.Screens
             try
             {
                 baglan.Open();
+
                 string query = "SELECT \"pets\".\"petId\", " +
                                "\"customers\".\"fullName\" AS \"Sahibi\", " +
                                "\"pets\".\"petName\" AS \"Pet Adı\", " +
@@ -150,13 +151,22 @@ namespace PawMateApp.Screens
                                "\"pets\".\"gender\" AS \"Cinsiyet\" " +
                                "FROM \"pets\" " +
                                "JOIN \"customers\" ON \"pets\".\"customerId\" = \"customers\".\"customerId\" " +
-                               "JOIN \"species\" ON \"pets\".\"speciesId\" = \"species\".\"speciesId\"";
+                               "JOIN \"species\" ON \"pets\".\"speciesId\" = \"species\".\"speciesId\" " +
+                               "WHERE \"customers\".\"businessId\" = @businessid";
 
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter(query, baglan);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                petList.DataSource = dt;
-                
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    // Parametreyi ekle
+                    cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+
+                    // NpgsqlDataAdapter'a komutu bağla
+                    using (var da = new NpgsqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        petList.DataSource = dt; // petList bir DataGridView ise DataSource ile bağlanır
+                    }
+                }
             }
             catch (Exception ex)
             {
