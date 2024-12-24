@@ -122,8 +122,7 @@ namespace PawMateApp.Screens
                             customerList.AutoGenerateColumns = true; 
                         }
                         else
-                        {
-                            MessageBox.Show("Hiçbir müşteri bulunamadı!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        {                        
                             noCustomer = 1;
                         }
                     }
