@@ -430,6 +430,44 @@ namespace PawMateApp.Screens
                         }
 
                         MessageBox.Show("Pet bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string petStatus = radio_disi.Checked ? "Dişi" : "Erkek";
+                        string body = $@"<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto; font-family: Arial, sans-serif; width: 100%; max-width: 600px;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#ff6b00;font-size:36px;line-height:42px;padding-top:40px;text-align:center;font-weight:bold;"">
+        Merhaba {customerName}! 🎉 <br> {Globals.BusinessName} tarafından evcil hayvanınızın bilgileri güncellendi! 🐾
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#333333;font-size:22px;line-height:30px;padding-top:20px;text-align:center;"">
+        <span style=""font-size:20px;color:#555555;"">Merhabalar, veteriner kliniğiniz tarafından evcil hayvanınızın bilgileri güncellendi! Aşağıda bilgileri görebilirsiniz 🌟</span><br><br>
+        <span style=""font-size:20px;color:#333333;"">Bizimle geçireceğiniz her an, dostunuz için daha sağlıklı ve mutlu bir gelecek demek! 🐶🐱</span><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#fff;font-size:18px;line-height:26px;padding:20px;text-align:center;border:1px solid #ff6b00;background-color:#ff6b00;"">
+        <strong style=""font-size:24px;color:#ffffff;"">Hayvan bilgileriniz aşağıdaki gibidir:</strong><br><br>
+        <span style=""font-size:16px;color:#ffffff;"">Evcil hayvan isimi: {txt_petName.Text}</span><br>
+        <span style=""font-size:16px;color:#ffffff;"">Evcil hayvan Cinsiyeti: {petStatus}</span><br>
+        <span style=""font-size:16px;color:#ffffff;"">Evcil Hayvan Cinsi: {txt_breed.Text}</span><br><br>
+        <span style=""font-size:14px;color:#ffffff;""><b>Eğer bu bilgilerin, hayvanınıza ait olmadığını düşünüyorsanız, bizimle iletişime geçin. Yardımcı olmaktan memnuniyet duyarız!</b> 🐾</span><br><br>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:22px;color:#2d2d2d;"">Hayvan dostlarınız için daha parlak bir gelecek, Pawmate ile mümkün! 🌈</strong><br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>";
+                        SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                        sendMail.SendMail("Pawmate Müşteri Bilgilendirmesi", body, sendMailTo);
                     }
                 }
 

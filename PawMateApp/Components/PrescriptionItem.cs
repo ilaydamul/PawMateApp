@@ -160,19 +160,12 @@ namespace PawMateApp.Components
                         Table medsTable = new Table(3).UseAllAvailableWidth();
                         medsTable.AddHeaderCell(new Cell().Add(new Paragraph("İlaç Adı").SetFont(font)));
                         medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Doz").SetFont(font)));
-                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Açıklama").SetFont(font)));
+                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Kullanım Detayları").SetFont(font)));
 
-                        medsTable.AddCell(new Paragraph("Antibiyotik X").SetFont(font));
-                        medsTable.AddCell(new Paragraph("2x1").SetFont(font));
-                        medsTable.AddCell(new Paragraph("Sabah ve akşam verilecek").SetFont(font));
+                        medsTable.AddCell(new Paragraph($"{MedicineName}").SetFont(font));
+                        medsTable.AddCell(new Paragraph($"{MedicineUnit}").SetFont(font));
+                        medsTable.AddCell(new Paragraph($"{UsageInstructions}").SetFont(font));
 
-                        medsTable.AddCell(new Paragraph("Vitamin C").SetFont(font));
-                        medsTable.AddCell(new Paragraph("1x1").SetFont(font));
-                        medsTable.AddCell(new Paragraph("Yemek sonrası").SetFont(font));
-
-                        medsTable.AddCell(new Paragraph("Pire Spreyi").SetFont(font));
-                        medsTable.AddCell(new Paragraph("1x uygulama").SetFont(font));
-                        medsTable.AddCell(new Paragraph("Dış mekan kullanımına uygun").SetFont(font));
 
                         medsTable.SetMarginBottom(20);
                         document.Add(medsTable);
@@ -184,9 +177,7 @@ namespace PawMateApp.Components
                             .SetFontColor(ColorConstants.GRAY)
                             .SetMarginTop(30);
                         document.Add(footer);
-
                         document.Close();
-
                         Console.WriteLine("PDF başarıyla oluşturuldu: " + dest);
                         MessageBox.Show("Reçete başarıyla PDF olarak masaüstüne " + fileName + " olarak kaydedildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
