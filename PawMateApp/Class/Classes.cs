@@ -174,7 +174,6 @@ namespace PawMateApp
     }
     public class SendMailClass
     {
-        private string mailadress;
         private string fromadress;
         private string frompassword;
         private string smtp;
