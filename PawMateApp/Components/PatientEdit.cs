@@ -142,13 +142,22 @@ namespace PawMateApp.Components
                 {
                     DateTime dt = Convert.ToDateTime(dt_diagnosisDate.Text).Date;
                     Debug.WriteLine(dt);
-                        db.OpenConnection();
-                        db.UpdatePatient(Convert.ToInt32(this._patientId), txt_patientName.Text, cbitem.Id, dt, this.TreatmentDuration, txt_notes.Text);
+                    db.OpenConnection();
+                    if (db.UpdatePatient(Convert.ToInt32(this._patientId), txt_patientName.Text, cbitem.Id, dt, this.TreatmentDuration, txt_notes.Text))
+                    {
+                        MessageBox.Show("Hasta bilgileri başarıyla güncellendi.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hasta bilgileri güncellenirken bir hata oluştu.");
+
+                    }
                 }
                 else
                 {
                     return;
                 }
+
             }
         }
     }

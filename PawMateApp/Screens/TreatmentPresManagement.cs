@@ -8,36 +8,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PawMateApp.Login;
 
 namespace PawMateApp.Screens
 {
+    
     public partial class TreatmentPresManagement : Form
     {
+        DatabaseManagament db = new DatabaseManagament();
         public TreatmentPresManagement()
         {
             InitializeComponent();
             //btn_dateChange.Click += btn_dateChange_Click;
+            //PrescriptionItem prescriptionItem = new PrescriptionItem();
+            //prescriptionItem.CustomerName = "İlayda";
+            //prescriptionItem.CustomerPhone = "0541 569 4337";
+            //prescriptionItem.PetName = "Sıla";
+            //prescriptionItem.VetName = "Barış";
+            //prescriptionItem.MedicineName = "Parol";
+            //prescriptionItem.MedicineUnit = "2";
+            //prescriptionItem.UsageInstructions = "Şu şekilde kullanılmalı: ..";
+            //prescriptionList.Controls.Add(prescriptionItem);
         }
 
         private void TreatmentPresManagement_Load(object sender, EventArgs e)
         {
-            //Randevu tarihi olan checkbox içerikleri(cb_visits) şu şekilde olmalı = "Veteriner Adı - Müşteri Adı - Randevu Tarihi"
-
-            //Burada kullanıcı admin değilse ve başka bir veterinerin randevusu var ise burada reçete yazamamalı, direkt combobox'a gelmemeli
-            //Örneğin 2 adet sıla ve ilayda veterineri var, burada sılanın randevusu varsa ve ilayda bu hastaya reçete yazamamalı,-
-            //direkt sılanın ve diğer veterinerlerin randevuları cb_visits'e gelmemeli.
-
-
-            PrescriptionItem prescriptionItem = new PrescriptionItem();
-            prescriptionItem.CustomerName = "İlayda";
-            prescriptionItem.CustomerPhone = "0541 569 4337";
-            prescriptionItem.PetName = "Sıla";
-            prescriptionItem.VetName = "Barış";
-            prescriptionItem.MedicineName = "Parol";
-            prescriptionItem.MedicineUnit = "2";
-            prescriptionItem.UsageInstructions = "Şu şekilde kullanılmalı: ..";
-            prescriptionList.Controls.Add(prescriptionItem);
-
+            db.OpenConnection();
+            db.GetVisits(null , Globals.CurrentUserBusinessAdminID, cb_visits);
         }
         private bool isDateAscending = true;
 

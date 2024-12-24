@@ -635,16 +635,15 @@ public class DatabaseManagament
         }
     }
 
-    public bool AddMedicineToDatabase(string medicineTitle, string medicineDesc, string medicineUnit, int medicinePrice, int businessid)
+    public bool AddMedicineToDatabase(string medicineTitle, string medicineDesc ,int medicinePrice, int businessid)
     {
         try
         {
-            string query = "INSERT INTO \"medicines\" (\"medicineName\", \"businessId\" , \"description\", \"unit\", \"price\") VALUES (@title, @businessId, @desc, @unit, @price)";
+            string query = "INSERT INTO \"medicines\" (\"medicineName\", \"businessId\" , \"description\", \"price\") VALUES (@title, @businessId, @desc, @price)";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("@title", medicineTitle);
                 cmd.Parameters.AddWithValue("@desc", medicineDesc);
-                cmd.Parameters.AddWithValue("@unit", medicineUnit);
                 cmd.Parameters.AddWithValue("@businessId", businessid);
                 cmd.Parameters.AddWithValue("@price", medicinePrice);
                 cmd.ExecuteNonQuery();
@@ -672,7 +671,7 @@ public class DatabaseManagament
             {
                 OpenConnection();
             }
-            string query = "SELECT \"medicineId\", \"medicineName\", \"description\", \"unit\", \"price\" FROM \"medicines\" WHERE \"businessId\" = " + businessId;
+            string query = "SELECT \"medicineId\", \"medicineName\", \"description\", \"price\" FROM \"medicines\" WHERE \"businessId\" = " + businessId;
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 using (var adapter = new Npgsql.NpgsqlDataAdapter(cmd))
@@ -716,16 +715,15 @@ public class DatabaseManagament
             CloseConnection();
         }
     }
-    public bool UpdateMedicine(int medicineId, string medicineTitle, string medicineDesc, string medicineUnit, int medicinePrice)
+    public bool UpdateMedicine(int medicineId, string medicineTitle, string medicineDesc,int medicinePrice)
     {
         try
         {
-            string query = "UPDATE \"medicines\" SET \"medicineName\" = @name, \"description\" = @desc, \"unit\" = @unit, \"price\" = @price WHERE \"medicineId\" = @medicineId";
+            string query = "UPDATE \"medicines\" SET \"medicineName\" = @name, \"description\" = @desc, \"price\" = @price WHERE \"medicineId\" = @medicineId";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("name", medicineTitle);
                 cmd.Parameters.AddWithValue("desc", medicineDesc);
-                cmd.Parameters.AddWithValue("unit", medicineUnit);
                 cmd.Parameters.AddWithValue("price", medicinePrice);
                 cmd.Parameters.AddWithValue("medicineId", medicineId);
                 cmd.ExecuteNonQuery();
@@ -1073,33 +1071,63 @@ public class DatabaseManagament
         return false;
     }
 
-    public void GetVisits(int customerId, Control combobox)
+    public void GetVisits(int? customerId, int? business_id, Control combobox)
     {
         if (combobox is ComboBox comboBox)
         {
             try
             {
-                string query = @"
+                if (customerId.HasValue && !business_id.HasValue)
+                {
+                    string query = @"
 SELECT v.""visitId"", p.""petName"" , v.""visitDate""
 FROM ""visits"" v
 JOIN ""pets"" p ON v.""petId"" = p.""petId""
 WHERE v.""customerid"" = @customerId";
-                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
-                {
-                    cmd.Parameters.AddWithValue("@customerId", customerId);
-
-                    using (var dr = cmd.ExecuteReader())
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
                     {
-                        comboBox.Items.Clear();
-                        while (dr.Read())
-                        {
-                            var item = new ComboBoxItem
-                            {
-                                Id = Convert.ToInt32(dr["visitId"]),
-                                DisplayName = dr["petName"].ToString() + " " + dr["visitDate"].ToString()
-                            };
+                        cmd.Parameters.AddWithValue("@customerId", customerId);
 
-                            comboBox.Items.Add(item);
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            comboBox.Items.Clear();
+                            while (dr.Read())
+                            {
+                                var item = new ComboBoxItem
+                                {
+                                    Id = Convert.ToInt32(dr["visitId"]),
+                                    DisplayName = dr["petName"].ToString() + " " + dr["visitDate"].ToString()
+                                };
+
+                                comboBox.Items.Add(item);
+                            }
+                        }
+                    }
+                }
+                else if (!customerId.HasValue && business_id.HasValue)
+                {
+                    string query = @"
+SELECT v.""visitId"", p.""petName"" , v.""visitDate""
+FROM ""visits"" v
+JOIN ""pets"" p ON v.""petId"" = p.""petId""
+WHERE v.""businessid"" = @businessid";
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@businessid", business_id);
+
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            comboBox.Items.Clear();
+                            while (dr.Read())
+                            {
+                                var item = new ComboBoxItem
+                                {
+                                    Id = Convert.ToInt32(dr["visitId"]),
+                                    DisplayName = dr["petName"].ToString() + " " + dr["visitDate"].ToString()
+                                };
+
+                                comboBox.Items.Add(item);
+                            }
                         }
                     }
                 }

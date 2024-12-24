@@ -21,13 +21,13 @@ namespace PawMateApp.Screens
             InitializeComponent();
             LoadMedicines();
             ConfigureDataTable();
-            inputs = new Inputs(new Control[] { txt_medicineDesc, txt_medicinePrice, txt_medicineTitle, txt_medicineUnit });
+            inputs = new Inputs(new Control[] { txt_medicineDesc, txt_medicinePrice, txt_medicineTitle});
         }
 
         private void btn_addMedicine_Click(object sender, EventArgs e)
         {
             db.OpenConnection();
-            CheckClass check = new CheckClass(new string[] { txt_medicineDesc.Text, txt_medicinePrice.Text, txt_medicineTitle.Text, txt_medicineUnit.Text });
+            CheckClass check = new CheckClass(new string[] { txt_medicineDesc.Text, txt_medicinePrice.Text, txt_medicineTitle.Text});
             if (!check.Check(""))
             {
                 return;
@@ -37,7 +37,7 @@ namespace PawMateApp.Screens
                 if (btn_addMedicine.Text == "Ekle")
                 {
 
-                    if (db.AddMedicineToDatabase(txt_medicineTitle.Text, txt_medicineDesc.Text, txt_medicineUnit.Text, Convert.ToInt32(txt_medicinePrice.Text), Globals.CurrentUserBusinessAdminID))
+                    if (db.AddMedicineToDatabase(txt_medicineTitle.Text, txt_medicineDesc.Text ,Convert.ToInt32(txt_medicinePrice.Text), Globals.CurrentUserBusinessAdminID))
                     {
                         MessageBox.Show("İlaç eklendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
@@ -52,7 +52,7 @@ namespace PawMateApp.Screens
                 else
                 {
                     int medicineId = int.Parse(medicineList.SelectedRows[0].Cells["medicineId"].Value.ToString());
-                    if (db.UpdateMedicine(medicineId, txt_medicineTitle.Text, txt_medicineDesc.Text, txt_medicineUnit.Text, int.Parse(txt_medicinePrice.Text)))
+                    if (db.UpdateMedicine(medicineId, txt_medicineTitle.Text, txt_medicineDesc.Text ,int.Parse(txt_medicinePrice.Text)))
                     {
                         MessageBox.Show("İlaç güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadMedicines();
@@ -76,7 +76,6 @@ namespace PawMateApp.Screens
             medicineList.Columns["medicineId"].HeaderText = "ID";
             medicineList.Columns["medicineName"].HeaderText = "İlaç Adı";
             medicineList.Columns["description"].HeaderText = "Açıklama";
-            medicineList.Columns["unit"].HeaderText = "Stok";
             medicineList.Columns["price"].HeaderText = "Fiyat";
         }
 
@@ -98,7 +97,7 @@ namespace PawMateApp.Screens
                 {
                     Debug.WriteLine(medicineList.SelectedRows[0].Cells["medicineId"].Value.ToString());
                     LoadMedicines();
-                    Inputs inputs = new Inputs(new Control[] {txt_medicineDesc,txt_medicinePrice,txt_medicineTitle,txt_medicineUnit});
+                    Inputs inputs = new Inputs(new Control[] {txt_medicineDesc,txt_medicinePrice,txt_medicineTitle});
                     inputs.ClearInputs();
                 }
                 else
@@ -112,7 +111,7 @@ namespace PawMateApp.Screens
 
         private void btn_addMedicineBtn_Click(object sender, EventArgs e)
         {
-            Inputs inputs = new Inputs(new Control[] {txt_medicineDesc,txt_medicinePrice,txt_medicineTitle,txt_medicineUnit});
+            Inputs inputs = new Inputs(new Control[] {txt_medicineDesc,txt_medicinePrice,txt_medicineTitle});
             inputs.ClearInputs();
             btn_addMedicine.Text = "Ekle";
         }
@@ -122,7 +121,6 @@ namespace PawMateApp.Screens
             txt_medicineDesc.Text = medicineList.SelectedRows[0].Cells["description"].Value.ToString();
             txt_medicinePrice.Text = medicineList.SelectedRows[0].Cells["price"].Value.ToString();
             txt_medicineTitle.Text = medicineList.SelectedRows[0].Cells["medicineName"].Value.ToString();
-            txt_medicineUnit.Text = medicineList.SelectedRows[0].Cells["unit"].Value.ToString();
             btn_addMedicine.Text = "Güncelle";
         }
     }

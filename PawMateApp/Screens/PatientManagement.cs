@@ -83,7 +83,7 @@ namespace PawMateApp.Screens
             if(cb_customers.SelectedItem is ComboBoxItem selecteditem)
             {
                 db.OpenConnection();
-                db.GetVisits(selecteditem.Id, cb_pets);
+                db.GetVisits(selecteditem.Id, null , cb_pets);
                 db.CloseConnection();
             }
             else

@@ -34,9 +34,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_medicinePrice = new System.Windows.Forms.MaskedTextBox();
-            this.txt_medicineUnit = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_medicineDesc = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -98,9 +96,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_medicinePrice);
-            this.panel1.Controls.Add(this.txt_medicineUnit);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txt_medicineDesc);
             this.panel1.Controls.Add(this.label8);
@@ -114,41 +110,21 @@
             // txt_medicinePrice
             // 
             this.txt_medicinePrice.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_medicinePrice.Location = new System.Drawing.Point(13, 198);
+            this.txt_medicinePrice.Location = new System.Drawing.Point(14, 155);
             this.txt_medicinePrice.Mask = "00000";
             this.txt_medicinePrice.Name = "txt_medicinePrice";
             this.txt_medicinePrice.Size = new System.Drawing.Size(226, 22);
             this.txt_medicinePrice.TabIndex = 3;
             // 
-            // txt_medicineUnit
-            // 
-            this.txt_medicineUnit.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_medicineUnit.Location = new System.Drawing.Point(13, 156);
-            this.txt_medicineUnit.Mask = "00000";
-            this.txt_medicineUnit.Name = "txt_medicineUnit";
-            this.txt_medicineUnit.Size = new System.Drawing.Size(226, 22);
-            this.txt_medicineUnit.TabIndex = 2;
-            this.txt_medicineUnit.ValidatingType = typeof(int);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(10, 179);
+            this.label2.Location = new System.Drawing.Point(11, 136);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 16);
             this.label2.TabIndex = 124;
             this.label2.Text = "Fiyat";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(9, 137);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 16);
-            this.label1.TabIndex = 122;
-            this.label1.Text = "Birim";
             // 
             // label3
             // 
@@ -265,9 +241,7 @@
         private System.Windows.Forms.Button btn_addMedicine;
         private System.Windows.Forms.DataGridView medicineList;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_addMedicineBtn;
         private System.Windows.Forms.MaskedTextBox txt_medicinePrice;
-        private System.Windows.Forms.MaskedTextBox txt_medicineUnit;
     }
 }
