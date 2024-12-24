@@ -11,6 +11,8 @@ using iText.IO.Font;
 using iText.IO.Image;
 using static PawMateApp.Login;
 using System.ComponentModel;
+using System.Diagnostics;
+using PawMateApp.Screens;
 
 namespace PawMateApp.Components
 {
@@ -108,12 +110,24 @@ namespace PawMateApp.Components
                 string query = @"DELETE FROM prescriptions WHERE ""prescriptionId"" = @psid";
                 using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
                 {
-                    cmd.Parameters.AddWithValue("@psid", PrescriptionId);
+                    cmd.Parameters.AddWithValue("@psid", Convert.ToInt32(PrescriptionId));
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Reçete başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 db.CloseConnection();
             }
+            TreatmentPresManagement treatmentPresManagement = Application.OpenForms["TreatmentPresManagement"] as TreatmentPresManagement;
+            string query2 = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""quantity"", ""usageInstructions""
+            FROM ""prescriptions"" p
+            JOIN ""healthRecords"" hr ON p.""recordId"" = hr.""recordId""
+			JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
+            JOIN ""customers"" c ON hr.""customerid"" = c.""customerId""
+            JOIN ""pets"" pe ON v.""petId"" = pe.""petId""
+            JOIN ""users"" u ON v.""vetId"" = u.""userId""
+            JOIN ""medicineStocks"" ms ON p.""medicineId"" = ms.""medicineId""
+			JOIN ""medicines"" m ON ms.""medicineId"" = m.""medicineId""
+            WHERE v.""businessid"" = @businessid";
+            treatmentPresManagement.ExecuteQueryAndLoadItems(query2, treatmentPresManagement.prescriptionList);
         }
 
         private void btn_pdf_Click(object sender, EventArgs e)

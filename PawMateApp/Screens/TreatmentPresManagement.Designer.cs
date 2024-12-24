@@ -294,7 +294,7 @@
         private System.Windows.Forms.Label txt_title;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FlowLayoutPanel prescriptionList;
+        public System.Windows.Forms.FlowLayoutPanel prescriptionList;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cb_visits;

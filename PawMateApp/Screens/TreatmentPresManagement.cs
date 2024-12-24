@@ -17,7 +17,7 @@ namespace PawMateApp.Screens
     public partial class TreatmentPresManagement : Form
     {
         DatabaseManagament db = new DatabaseManagament();
-        string query = @"SELECT c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""quantity"", ""usageInstructions""
+        string query = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""quantity"", ""usageInstructions""
             FROM ""prescriptions"" p
             JOIN ""healthRecords"" hr ON p.""recordId"" = hr.""recordId""
 			JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
@@ -31,16 +31,6 @@ namespace PawMateApp.Screens
         public TreatmentPresManagement()
         {
             InitializeComponent();
-            //btn_dateChange.Click += btn_dateChange_Click;
-            //PrescriptionItem prescriptionItem = new PrescriptionItem();
-            //prescriptionItem.CustomerName = "İlayda";
-            //prescriptionItem.CustomerPhone = "0541 569 4337";
-            //prescriptionItem.PetName = "Sıla";
-            //prescriptionItem.VetName = "Barış";
-            //prescriptionItem.MedicineName = "Parol";
-            //prescriptionItem.MedicineUnit = "2";
-            //prescriptionItem.UsageInstructions = "Şu şekilde kullanılmalı: ..";
-            //prescriptionList.Controls.Add(prescriptionItem);
         }
 
         private void TreatmentPresManagement_Load(object sender, EventArgs e)
@@ -52,8 +42,9 @@ namespace PawMateApp.Screens
 
         }
 
-        private void ExecuteQueryAndLoadItems(string query, Control container)
+        public void ExecuteQueryAndLoadItems(string query, Control container)
         {
+            container.Controls.Clear();
             using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
             {
                 cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
@@ -64,6 +55,7 @@ namespace PawMateApp.Screens
                     {
                         PrescriptionItem prescriptionItem= new PrescriptionItem()
                         {
+                            _prescriptionId = dr["prescriptionId"].ToString(),
                             CustomerName = dr["fullName"].ToString(),
                             CustomerPhone = dr["phone"].ToString(),
                             PetName = dr["petName"].ToString(),
@@ -76,6 +68,7 @@ namespace PawMateApp.Screens
                     }
                 }
             }
+            Debug.WriteLine("çalıştı burası !!!!");
         }
 
       
@@ -104,18 +97,19 @@ namespace PawMateApp.Screens
             //Textboxın içi boş olduğunda eski versiyonuna geri dönecek. 
         }
 
-        private void btn_addPrescription_Click(object sender, EventArgs e)
+        private async void btn_addPrescription_Click(object sender, EventArgs e)
         {
             CheckClass check = new CheckClass(new string[] { txt_quantity.Text, txt_usageInstructions.Text, cb_medicines.Text, cb_visits.Text});
             if (check.Check(""))
             {
                 if(cb_medicines.SelectedItem is ComboBoxItem cb_medicine_item && cb_visits.SelectedItem is ComboBoxItem cb_visit_item)
                 {
-                    db.CheckMedicineStocksAsync(cb_medicine_item.Id, Convert.ToInt32(txt_quantity.Text),cb_visit_item.Id,Convert.ToInt32(txt_quantity.Text),txt_usageInstructions.Text);
+                    await db.CheckMedicineStocksAsync(cb_medicine_item.Id, Convert.ToInt32(txt_quantity.Text),cb_visit_item.Id,Convert.ToInt32(txt_quantity.Text),txt_usageInstructions.Text);
                     ExecuteQueryAndLoadItems(query, prescriptionList);
                 }
                 
             }
+            
         }
     }
 }
