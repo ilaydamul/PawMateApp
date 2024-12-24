@@ -144,7 +144,6 @@ namespace PawMateApp.Components
                     Debug.WriteLine(dt);
                         db.OpenConnection();
                         db.UpdatePatient(Convert.ToInt32(this._patientId), txt_patientName.Text, cbitem.Id, dt, this.TreatmentDuration, txt_notes.Text);
-                    //Debug.WriteLine("Ekleme işlemi");
                 }
                 else
                 {
