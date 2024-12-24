@@ -1219,7 +1219,7 @@ WHERE v.""customerid"" = @customerId";
             CloseConnection();
         }
     }
-    
+
     public Dictionary<String, String> GetInformationsForEdit(int patientid)
     {
         Dictionary<String, String> informations = new Dictionary<String, String>();
@@ -1243,7 +1243,7 @@ WHERE hr.""recordId"" = @patientid;
                 {
                     while (dr.Read())
                     {
-                        
+
                         informations.Add("diagnosis", dr["diagnosis"].ToString());
                         informations.Add("notes", dr["notes"].ToString());
                         informations.Add("ill_duration", dr["ill_duration"].ToString());
@@ -1255,11 +1255,50 @@ WHERE hr.""recordId"" = @patientid;
                     }
                 }
             }
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             Debug.WriteLine("Hasta bilgilerini çekerken hata oluştu: " + ex.Message);
         }
         return informations;
+    }
+
+    public bool UpdatePatient(int patientId, string patientName, string treatment, DateTime diagnosisDate, string illDuration, string notes)
+    {
+        try
+        {
+            string query = @"UPDATE ""healthRecords"" 
+                         SET ""diagnosis"" = @diagnosis, 
+                             ""treatmentId"" = (SELECT ""treatmentId"" FROM ""treatments"" WHERE ""treatmentName"" = @treatment),
+                             ""diagnosis_date"" = @diagnosisDate, 
+                             ""ill_duration"" = @illDuration, 
+                             ""notes"" = @notes
+                         WHERE ""recordId"" = @patientId";
+
+            using (var cmd = new NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("@diagnosis", patientName);
+                cmd.Parameters.AddWithValue("@treatment", treatment);
+                cmd.Parameters.AddWithValue("@diagnosisDate", diagnosisDate);
+                cmd.Parameters.AddWithValue("@illDuration", illDuration);
+                cmd.Parameters.AddWithValue("@notes", notes);
+                cmd.Parameters.AddWithValue("@patientId", patientId);
+
+                cmd.ExecuteNonQuery();
+            }
+            Debug.WriteLine("Hasta bilgileri güncellendi.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Hasta bilgileri güncellenirken hata oluştu: " + ex.Message);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+
     }
 
 }
