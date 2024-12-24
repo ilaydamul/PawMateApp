@@ -31,12 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Panel));
             this.menuPanel = new System.Windows.Forms.Panel();
             this.adminPanel = new System.Windows.Forms.Panel();
+            this.has_notif = new System.Windows.Forms.PictureBox();
             this.btn_showUserManagement = new System.Windows.Forms.Button();
             this.btn_showBusinessManagement = new System.Windows.Forms.Button();
             this.btn_showNotifications = new System.Windows.Forms.Button();
             this.btn_showTreatmentManagement = new System.Windows.Forms.Button();
             this.btn_logout = new System.Windows.Forms.Button();
             this.businessPanel = new System.Windows.Forms.Panel();
+            this.stock_warn = new System.Windows.Forms.PictureBox();
             this.btn_treatmentManagement = new System.Windows.Forms.Button();
             this.btn_vetManagement = new System.Windows.Forms.Button();
             this.btn_petManagement = new System.Windows.Forms.Button();
@@ -52,7 +54,9 @@
             this.btn_closeApp = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
             this.adminPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.has_notif)).BeginInit();
             this.businessPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stock_warn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
             this.topMenuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).BeginInit();
@@ -76,6 +80,7 @@
             // adminPanel
             // 
             this.adminPanel.BackColor = System.Drawing.Color.White;
+            this.adminPanel.Controls.Add(this.has_notif);
             this.adminPanel.Controls.Add(this.btn_showUserManagement);
             this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
             this.adminPanel.Controls.Add(this.btn_showNotifications);
@@ -85,6 +90,17 @@
             this.adminPanel.Size = new System.Drawing.Size(192, 206);
             this.adminPanel.TabIndex = 21;
             this.adminPanel.Visible = false;
+            // 
+            // has_notif
+            // 
+            this.has_notif.Image = global::PawMateApp.Properties.Resources.warning;
+            this.has_notif.Location = new System.Drawing.Point(160, 151);
+            this.has_notif.Name = "has_notif";
+            this.has_notif.Size = new System.Drawing.Size(23, 36);
+            this.has_notif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.has_notif.TabIndex = 169;
+            this.has_notif.TabStop = false;
+            this.has_notif.Visible = false;
             // 
             // btn_showUserManagement
             // 
@@ -178,6 +194,7 @@
             // 
             // businessPanel
             // 
+            this.businessPanel.Controls.Add(this.stock_warn);
             this.businessPanel.Controls.Add(this.btn_treatmentManagement);
             this.businessPanel.Controls.Add(this.btn_vetManagement);
             this.businessPanel.Controls.Add(this.btn_petManagement);
@@ -191,6 +208,17 @@
             this.businessPanel.TabIndex = 22;
             this.businessPanel.Visible = false;
             this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
+            // 
+            // stock_warn
+            // 
+            this.stock_warn.Image = global::PawMateApp.Properties.Resources.warning;
+            this.stock_warn.Location = new System.Drawing.Point(160, 153);
+            this.stock_warn.Name = "stock_warn";
+            this.stock_warn.Size = new System.Drawing.Size(23, 36);
+            this.stock_warn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.stock_warn.TabIndex = 168;
+            this.stock_warn.TabStop = false;
+            this.stock_warn.Visible = false;
             // 
             // btn_treatmentManagement
             // 
@@ -413,7 +441,9 @@
             this.Load += new System.EventHandler(this.Panel_Load);
             this.menuPanel.ResumeLayout(false);
             this.adminPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.has_notif)).EndInit();
             this.businessPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.stock_warn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).EndInit();
             this.topMenuPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_minimizeApp)).EndInit();
@@ -444,5 +474,7 @@
         private System.Windows.Forms.Button btn_petManagement;
         private System.Windows.Forms.Button btn_stockManagement;
         private System.Windows.Forms.Button btn_showUserManagement;
+        private System.Windows.Forms.PictureBox stock_warn;
+        private System.Windows.Forms.PictureBox has_notif;
     }
 }

@@ -43,9 +43,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txt_usageInstructions = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.btn_pdf = new System.Windows.Forms.Button();
+            this.btn_pdf = new System.Windows.Forms.PictureBox();
             this.btn_deletePresp = new System.Windows.Forms.Button();
             this.pet_image = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pdf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pet_image)).BeginInit();
             this.SuspendLayout();
             // 
@@ -215,18 +216,14 @@
             // 
             // btn_pdf
             // 
-            this.btn_pdf.BackColor = System.Drawing.Color.Transparent;
-            this.btn_pdf.BackgroundImage = global::PawMateApp.Properties.Resources.pdf;
-            this.btn_pdf.FlatAppearance.BorderSize = 0;
-            this.btn_pdf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_pdf.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btn_pdf.ForeColor = System.Drawing.Color.Transparent;
-            this.btn_pdf.Location = new System.Drawing.Point(417, 122);
+            this.btn_pdf.Image = global::PawMateApp.Properties.Resources.pdf_file;
+            this.btn_pdf.Location = new System.Drawing.Point(433, 120);
             this.btn_pdf.Name = "btn_pdf";
-            this.btn_pdf.Size = new System.Drawing.Size(35, 34);
-            this.btn_pdf.TabIndex = 185;
-            this.btn_pdf.UseVisualStyleBackColor = false;
-            this.btn_pdf.Click += new System.EventHandler(this.btn_pdf_Click);
+            this.btn_pdf.Size = new System.Drawing.Size(36, 36);
+            this.btn_pdf.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_pdf.TabIndex = 186;
+            this.btn_pdf.TabStop = false;
+            this.btn_pdf.Click += new System.EventHandler(this.btn_pdf_Click_1);
             // 
             // btn_deletePresp
             // 
@@ -284,6 +281,7 @@
             this.Name = "PrescriptionItem";
             this.Size = new System.Drawing.Size(514, 162);
             this.Load += new System.EventHandler(this.PrescriptionItem_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.btn_pdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pet_image)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -308,6 +306,6 @@
         private System.Windows.Forms.Label txt_usageInstructions;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btn_deletePresp;
-        private System.Windows.Forms.Button btn_pdf;
+        private System.Windows.Forms.PictureBox btn_pdf;
     }
 }

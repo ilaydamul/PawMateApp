@@ -118,8 +118,13 @@ namespace PawMateApp.Components
 
         private void btn_pdf_Click(object sender, EventArgs e)
         {
+          
+        }
+
+        private void btn_pdf_Click_1(object sender, EventArgs e)
+        {
             string fileName = PetName + " adli hayvanin recetesi.pdf";
-            DialogResult result = MessageBox.Show("Reçeteyi PDF Olarak Kaydetmek İstediğinize Emin Misiniz?", "Reçete PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Reçeteyi PDF olarak kaydetmek istediğinize emin misiniz?", "Reçete PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);

@@ -375,6 +375,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Properties\heart_icon.png" />
     <Content Include="Properties\img.png" />
+    <None Include="Resources\pdf-file.png" />
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\notification.png" />
     <None Include="Resources\pdf.png" />
     <None Include="Resources\user.png" />
     <None Include="Resources\rec.png" />

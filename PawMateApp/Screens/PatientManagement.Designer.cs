@@ -158,7 +158,7 @@
             this.txt_notes.Multiline = true;
             this.txt_notes.Name = "txt_notes";
             this.txt_notes.Size = new System.Drawing.Size(226, 50);
-            this.txt_notes.TabIndex = 136;
+            this.txt_notes.TabIndex = 4;
             // 
             // label9
             // 
