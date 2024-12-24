@@ -103,19 +103,25 @@ namespace PawMateApp
             {
                 adminPanel.Visible = true;
                 btn_profile.Visible = false;
+
+                //Okunmamış bildirim varsa has_notif.Visible=true olacak.
             }
             else if (Globals.CurrentUserBusinessAdminStatus == true)
             {
                 businessPanel.Visible = true;
                 btn_vetManagement.Visible = true;
                 btn_profile.Visible = true;
+                //Stok sayısı, kritik ise has_warning.Visible=true olacak.
             }
             else
             {
                 businessPanel.Visible = true;
                 btn_vetManagement.Visible = false;
                 btn_profile.Visible = true;
+                //Stok sayısı, kritik ise has_warning.Visible=true olacak.
             }
+
+
         }
 
         private void btn_showBusinessManagement_Click(object sender, EventArgs e)
