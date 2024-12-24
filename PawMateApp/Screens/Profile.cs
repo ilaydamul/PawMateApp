@@ -137,7 +137,7 @@ namespace PawMateApp.Screens
             lbl_totalAppo.Text = randevuSayisi.ToString();
 
             // 2. Medicine Stock (medicineStocks)
-            NpgsqlCommand cmdMedicineStock = new NpgsqlCommand("SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"businessid\" = @businessId", baglan);
+            NpgsqlCommand cmdMedicineStock = new NpgsqlCommand("SELECT COUNT(*) FROM \"medicines\" WHERE \"businessId\" = @businessId", baglan);
             cmdMedicineStock.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int ilacStogu = Convert.ToInt32(cmdMedicineStock.ExecuteScalar());
             lbl_totalMedicine.Text = ilacStogu.ToString();
