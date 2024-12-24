@@ -68,7 +68,6 @@ namespace PawMateApp.Screens
                     }
                 }
             }
-            Debug.WriteLine("çalıştı burası !!!!");
         }
 
       

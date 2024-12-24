@@ -36,6 +36,7 @@
             this.txt_noRec = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txt_quantity = new System.Windows.Forms.MaskedTextBox();
             this.txt_usageInstructions = new System.Windows.Forms.TextBox();
             this.cb_visits = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,9 +46,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btn_addPrescription = new System.Windows.Forms.Button();
             this.txt_search = new System.Windows.Forms.TextBox();
-            this.btn_dateChange = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.txt_quantity = new System.Windows.Forms.MaskedTextBox();
+            this.btn_dateChange = new System.Windows.Forms.Button();
             this.prescriptionList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -131,6 +131,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(256, 326);
             this.panel1.TabIndex = 161;
+            // 
+            // txt_quantity
+            // 
+            this.txt_quantity.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_quantity.Location = new System.Drawing.Point(16, 118);
+            this.txt_quantity.Mask = "00000";
+            this.txt_quantity.Name = "txt_quantity";
+            this.txt_quantity.Size = new System.Drawing.Size(226, 22);
+            this.txt_quantity.TabIndex = 129;
             // 
             // txt_usageInstructions
             // 
@@ -223,6 +232,16 @@
             this.txt_search.TabIndex = 129;
             this.txt_search.TextChanged += new System.EventHandler(this.txt_research_TextChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 12F);
+            this.label2.Location = new System.Drawing.Point(272, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 18);
+            this.label2.TabIndex = 168;
+            this.label2.Text = "Arama Yapın:";
+            // 
             // btn_dateChange
             // 
             this.btn_dateChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -240,25 +259,6 @@
             this.btn_dateChange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_dateChange.UseVisualStyleBackColor = false;
             this.btn_dateChange.Click += new System.EventHandler(this.btn_dateChange_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F);
-            this.label2.Location = new System.Drawing.Point(272, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 18);
-            this.label2.TabIndex = 168;
-            this.label2.Text = "Arama Yapın:";
-            // 
-            // txt_quantity
-            // 
-            this.txt_quantity.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_quantity.Location = new System.Drawing.Point(16, 118);
-            this.txt_quantity.Mask = "00000";
-            this.txt_quantity.Name = "txt_quantity";
-            this.txt_quantity.Size = new System.Drawing.Size(226, 22);
-            this.txt_quantity.TabIndex = 129;
             // 
             // TreatmentPresManagement
             // 
@@ -306,9 +306,9 @@
         private System.Windows.Forms.Button btn_addPrescription;
         private System.Windows.Forms.TextBox txt_usageInstructions;
         private System.Windows.Forms.TextBox txt_search;
-        private System.Windows.Forms.Button btn_dateChange;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label txt_noRec;
         private System.Windows.Forms.MaskedTextBox txt_quantity;
+        private System.Windows.Forms.Button btn_dateChange;
     }
 }
