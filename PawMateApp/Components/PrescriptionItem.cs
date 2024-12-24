@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Kernel.Colors;
+using iText.Layout.Properties;
+using iText.Kernel.Font;
+using iText.IO.Font;
+using iText.IO.Image;
 using static PawMateApp.Login;
+using System.ComponentModel;
 
 namespace PawMateApp.Components
 {
@@ -82,9 +85,9 @@ namespace PawMateApp.Components
             get { return _usageInstructions; }
             set { _usageInstructions = value; txt_usageInstructions.Text = value; }
         }
+
         private void PrescriptionItem_Load(object sender, EventArgs e)
         {
-            //Kullanıcı Admin ise silme butonu görünecek.
             if (Globals.CurrentUserBusinessAdminStatus == true)
             {
                 btn_deletePresp.Visible = true;
@@ -97,9 +100,116 @@ namespace PawMateApp.Components
 
         private void btn_deletePresp_Click(object sender, EventArgs e)
         {
-            
         }
 
-      
+        private void btn_pdf_Click(object sender, EventArgs e)
+        {
+            string fileName = PetName + " adli hayvanin recetesi.pdf";
+            DialogResult result = MessageBox.Show("Reçeteyi PDF Olarak Kaydetmek İstediğinize Emin Misiniz?", "Reçete PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+
+                try
+                {
+                    using (PdfWriter writer = new PdfWriter(dest))
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    using (Document document = new Document(pdf))
+                    {
+                        string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "tahoma.ttf");
+                        PdfFont font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.IDENTITY_H);
+                        document.SetFont(font);
+
+                        string imageUrl = "https://i.hizliresim.com/jinrkop.jpeg";
+                        iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(imageUrl))
+                            .SetWidth(210)
+                            .SetHeight(62)
+                            .SetFixedPosition(30, 780);
+
+                        document.Add(img);
+
+                        string headerText = TurkishCharacterConverter.ConvertTurkishCharacters("VETERİNER KLİNİĞİ REÇETESİ");
+                        Paragraph header = new Paragraph(headerText)
+                            .SetFontSize(16)
+                            .SetFont(font)
+                            .SetTextAlignment(TextAlignment.CENTER)
+                            .SetMarginBottom(20)
+                            .SetMarginTop(30)
+                            .SetFontColor(ColorConstants.DARK_GRAY);
+                        document.Add(header);
+
+                        Table infoTable = new Table(2).UseAllAvailableWidth();
+                        infoTable.AddCell(new Cell().Add(new Paragraph("Hasta Adı:").SetFont(font)));
+                        infoTable.AddCell(new Cell().Add(new Paragraph(PetName)));
+                        infoTable.AddCell(new Cell().Add(new Paragraph("Sahip Adı:").SetFont(font)));
+                        infoTable.AddCell(new Cell().Add(new Paragraph(CustomerName)));
+                        infoTable.AddCell(new Cell().Add(new Paragraph("Tarih:").SetFont(font)));
+                        infoTable.AddCell(new Cell().Add(new Paragraph(DateTime.Now.ToShortDateString())));
+                        infoTable.SetMarginBottom(20);
+                        document.Add(infoTable);
+
+                        string medHeaderText = TurkishCharacterConverter.ConvertTurkishCharacters("Reçete Detayları");
+                        Paragraph medHeader = new Paragraph(medHeaderText)
+                            .SetFontSize(14)
+                            .SetFont(font)
+                            .SetTextAlignment(TextAlignment.LEFT)
+                            .SetMarginBottom(10)
+                            .SetFontColor(ColorConstants.BLUE);
+                        document.Add(medHeader);
+
+                        Table medsTable = new Table(3).UseAllAvailableWidth();
+                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("İlaç Adı").SetFont(font)));
+                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Doz").SetFont(font)));
+                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Açıklama").SetFont(font)));
+
+                        medsTable.AddCell(new Paragraph("Antibiyotik X").SetFont(font));
+                        medsTable.AddCell(new Paragraph("2x1").SetFont(font));
+                        medsTable.AddCell(new Paragraph("Sabah ve akşam verilecek").SetFont(font));
+
+                        medsTable.AddCell(new Paragraph("Vitamin C").SetFont(font));
+                        medsTable.AddCell(new Paragraph("1x1").SetFont(font));
+                        medsTable.AddCell(new Paragraph("Yemek sonrası").SetFont(font));
+
+                        medsTable.AddCell(new Paragraph("Pire Spreyi").SetFont(font));
+                        medsTable.AddCell(new Paragraph("1x uygulama").SetFont(font));
+                        medsTable.AddCell(new Paragraph("Dış mekan kullanımına uygun").SetFont(font));
+
+                        medsTable.SetMarginBottom(20);
+                        document.Add(medsTable);
+
+                        string footerText = TurkishCharacterConverter.ConvertTurkishCharacters("Bu reçete veteriner hekiminizin önerilerine göre düzenlenmiştir.");
+                        Paragraph footer = new Paragraph(footerText)
+                            .SetFontSize(10)
+                            .SetTextAlignment(TextAlignment.CENTER)
+                            .SetFontColor(ColorConstants.GRAY)
+                            .SetMarginTop(30);
+                        document.Add(footer);
+
+                        document.Close();
+
+                        Console.WriteLine("PDF başarıyla oluşturuldu: " + dest);
+                        MessageBox.Show("Reçete başarıyla PDF olarak masaüstüne " + fileName + " olarak kaydedildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Bir hata oluştu: " + ex.Message);
+                }
+            }
+        }
+    }
+
+    public class TurkishCharacterConverter
+    {
+        public static string ConvertTurkishCharacters(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+
+            input = input.Replace("ı", "i")
+                         .Replace("ğ", "g")
+                         .Replace("Ğ", "G");
+
+            return input;
+        }
     }
 }

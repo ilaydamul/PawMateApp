@@ -226,6 +226,7 @@
             this.btn_pdf.Size = new System.Drawing.Size(35, 34);
             this.btn_pdf.TabIndex = 185;
             this.btn_pdf.UseVisualStyleBackColor = false;
+            this.btn_pdf.Click += new System.EventHandler(this.btn_pdf_Click);
             // 
             // btn_deletePresp
             // 
