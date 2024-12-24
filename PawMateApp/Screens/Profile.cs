@@ -143,13 +143,7 @@ namespace PawMateApp.Screens
             lbl_totalMedicine.Text = ilacStogu.ToString();
 
             // 3. Prescriptions (healthRecords -> visits)
-            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand(@"
-            SELECT COUNT(*) 
-            FROM ""healthRecords"" hr
-        
-            JOIN ""visits"" v ON hr.""visitid"" = v.""visitId"" 
-        
-            WHERE v.""businessid"" = @businessId", baglan);
+            NpgsqlCommand cmdPrescriptions = new NpgsqlCommand("SELECT COUNT(*) FROM \"prescriptions\" WHERE \"businessid\" = @businessId", baglan);
             cmdPrescriptions.Parameters.AddWithValue("@businessId", Globals.CurrentUserBusinessAdminID);
             int receteSayisi = Convert.ToInt32(cmdPrescriptions.ExecuteScalar());
             lbl_allPresp.Text = receteSayisi.ToString();
