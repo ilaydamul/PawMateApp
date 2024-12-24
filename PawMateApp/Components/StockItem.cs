@@ -58,6 +58,7 @@ namespace PawMateApp.Components
             if(Convert.ToInt32(_quantity) < Convert.ToInt32(_threshold))
             {
                 img_stock.Image = Properties.Resources.red_light;
+                return;
             }
             else
             {

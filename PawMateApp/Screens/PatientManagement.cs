@@ -100,7 +100,7 @@ namespace PawMateApp.Screens
             if (cb_customers.SelectedItem is ComboBoxItem selectedcustomers && cb_pets.SelectedItem is ComboBoxItem selectedpet && cb_treatments.SelectedItem is ComboBoxItem treatmentsSelect) {
                 if (check.Check(""))
                 {
-                   if(db.AddHealthRecords(selectedcustomers.Id, selectedpet.Id, txt_patientName.Text, dat, treatmentsSelect.Id, txt_treatmentDuration.Text, txt_notes.Text))
+                   if(db.AddHealthRecords(selectedcustomers.Id, selectedpet.Id, txt_patientName.Text, dat, treatmentsSelect.Id, txt_treatmentDuration.Text, txt_notes.Text, Globals.CurrentUserBusinessAdminID))
                     {
                         MessageBox.Show("Başarılı bir şekilde eklendi", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         cb_customers.SelectedIndex = -1;

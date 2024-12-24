@@ -37,7 +37,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_usageInstructions = new System.Windows.Forms.TextBox();
-            this.txt_dosage = new System.Windows.Forms.TextBox();
             this.cb_visits = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cb_medicines = new System.Windows.Forms.ComboBox();
@@ -48,6 +47,7 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_dateChange = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.txt_quantity = new System.Windows.Forms.MaskedTextBox();
             this.prescriptionList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -118,8 +118,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.txt_quantity);
             this.panel1.Controls.Add(this.txt_usageInstructions);
-            this.panel1.Controls.Add(this.txt_dosage);
             this.panel1.Controls.Add(this.cb_visits);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.cb_medicines);
@@ -141,15 +141,6 @@
             this.txt_usageInstructions.Name = "txt_usageInstructions";
             this.txt_usageInstructions.Size = new System.Drawing.Size(226, 67);
             this.txt_usageInstructions.TabIndex = 3;
-            // 
-            // txt_dosage
-            // 
-            this.txt_dosage.BackColor = System.Drawing.Color.White;
-            this.txt_dosage.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_dosage.Location = new System.Drawing.Point(15, 118);
-            this.txt_dosage.Name = "txt_dosage";
-            this.txt_dosage.Size = new System.Drawing.Size(226, 22);
-            this.txt_dosage.TabIndex = 2;
             // 
             // cb_visits
             // 
@@ -184,9 +175,9 @@
             this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label4.Location = new System.Drawing.Point(12, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 16);
+            this.label4.Size = new System.Drawing.Size(88, 16);
             this.label4.TabIndex = 126;
-            this.label4.Text = "Dozaj";
+            this.label4.Text = "Dozaj / Miktar";
             // 
             // label1
             // 
@@ -194,9 +185,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.Location = new System.Drawing.Point(13, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
+            this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 122;
-            this.label1.Text = "Randevular";
+            this.label1.Text = "Hastalar";
             // 
             // label8
             // 
@@ -220,6 +211,7 @@
             this.btn_addPrescription.TabIndex = 4;
             this.btn_addPrescription.Text = "Ekle";
             this.btn_addPrescription.UseVisualStyleBackColor = false;
+            this.btn_addPrescription.Click += new System.EventHandler(this.btn_addPrescription_Click);
             // 
             // txt_search
             // 
@@ -258,6 +250,15 @@
             this.label2.Size = new System.Drawing.Size(100, 18);
             this.label2.TabIndex = 168;
             this.label2.Text = "Arama Yapın:";
+            // 
+            // txt_quantity
+            // 
+            this.txt_quantity.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txt_quantity.Location = new System.Drawing.Point(16, 118);
+            this.txt_quantity.Mask = "00000";
+            this.txt_quantity.Name = "txt_quantity";
+            this.txt_quantity.Size = new System.Drawing.Size(226, 22);
+            this.txt_quantity.TabIndex = 129;
             // 
             // TreatmentPresManagement
             // 
@@ -304,10 +305,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btn_addPrescription;
         private System.Windows.Forms.TextBox txt_usageInstructions;
-        private System.Windows.Forms.TextBox txt_dosage;
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Button btn_dateChange;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label txt_noRec;
+        private System.Windows.Forms.MaskedTextBox txt_quantity;
     }
 }

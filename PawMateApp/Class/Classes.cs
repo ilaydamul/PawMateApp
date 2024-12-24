@@ -10,14 +10,10 @@ using static PawMateApp.Login;
 using Npgsql;
 using System.Text.RegularExpressions;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ComboBox = System.Windows.Forms.ComboBox;
 using TextBox = System.Windows.Forms.TextBox;
-using Microsoft.Extensions.Logging;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using System.ComponentModel;
-using System.Security.Cryptography;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace PawMateApp
@@ -917,6 +913,142 @@ public class DatabaseManagament
 
     }
 
+    public void GetMedicineStocks(Control combobox)
+    {
+        if (combobox is ComboBox comboBox)
+        {
+            try
+            {
+                string query = "SELECT * FROM \"medicineStocks\" WHERE \"businessid\" = @businessid";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("businessid", Globals.CurrentUserBusinessAdminID);
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        comboBox.Items.Clear();
+                        while (dr.Read())
+                        {
+                            var item = new ComboBoxItem
+                            {
+                                Id = Convert.ToInt32(dr["medicineId"]),
+                                DisplayName = dr["medicinename"].ToString()
+                            };
+                            comboBox.Items.Add(item);
+                            Debug.WriteLine("Stoklar: " + item.DisplayName);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Stokları çekme hatası: " + ex.Message);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("Verilen kontrol bir ComboBox değil.");
+        }
+    }
+
+    public async Task CheckMedicineStocksAsync(int medicineId, int usedQuantity , int recordId, int dosage , string usage)
+    {
+        try
+        {
+            using (var connection = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT \"quantity\", \"threshold\" FROM \"medicineStocks\" WHERE \"medicineId\" = @medicineId";
+                using (var cmd = new Npgsql.NpgsqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@medicineId", medicineId);
+
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            int quantity = reader.GetInt32(0);
+                            int threshold = reader.GetInt32(1);
+
+                            // İşlemler burada yapılabilir
+                            int remainingQuantity = quantity - usedQuantity;
+                            if (remainingQuantity < 0)
+                            {
+                                MessageBox.Show("Girdiğiniz miktar, stoktaki ilaç miktarından fazla olduğu için işlem yapılamadı. Lütfen stoğunuzu yenileyin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+
+                           else if (remainingQuantity <= threshold)
+                            {
+                                MessageBox.Show("Stoktaki ilaç kritik noktaya ulaştı.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+
+                            // Stok güncellemesi
+                            await UpdateStockAsync(medicineId, remainingQuantity,recordId,dosage,usage);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Hata: {ex.Message}");
+        }
+    }
+    private async Task AddPrescriptionAsync(int recordId, int medicineId, int dosage, string usageInstructions, Npgsql.NpgsqlConnection connection, Npgsql.NpgsqlTransaction transaction)
+    {
+        string insertQuery = @"
+        INSERT INTO ""prescriptions"" (""recordId"", ""medicineId"", ""dosage"", ""usageInstructions"", businessid)
+        VALUES (@recordId, @medicineId, @dosage, @usageInstructions, @businessid)";
+
+        using (var cmd = new Npgsql.NpgsqlCommand(insertQuery, connection, transaction))
+        {
+            cmd.Parameters.AddWithValue("@recordId", recordId);
+            cmd.Parameters.AddWithValue("@medicineId", medicineId);
+            cmd.Parameters.AddWithValue("@dosage", dosage);
+            cmd.Parameters.AddWithValue("@usageInstructions", usageInstructions);
+            cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+
+            await cmd.ExecuteNonQueryAsync();
+            MessageBox.Show("Reçete başarılı bir şekilde oluşturuldu!", "Başarılı" , MessageBoxButtons.OK, MessageBoxIcon.Question);
+        }
+    }
+
+    private async Task UpdateStockAsync(int medicineId, int newQuantity, int recordId, int dosage, string usageInstructions)
+    {
+        using (var connection = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")))
+        {
+            await connection.OpenAsync();
+
+            using (var transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    // Stock update query
+                    string updateQuery = "UPDATE \"medicineStocks\" SET \"quantity\" = @newQuantity WHERE \"medicineId\" = @medicineId";
+                    using (var cmd = new Npgsql.NpgsqlCommand(updateQuery, connection, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@newQuantity", newQuantity);
+                        cmd.Parameters.AddWithValue("@medicineId", medicineId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+
+                    // Call AddPrescriptionAsync to insert prescription record
+                    await AddPrescriptionAsync(recordId, medicineId, dosage, usageInstructions, connection, transaction);
+
+                    // Commit the transaction
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("An error occurred while updating stock and adding prescription: " + ex.Message, ex);
+                }
+            }
+        }
+    }
+
+
     public void GetPets(int customerid, Control combobox)
     {
         if (combobox is ComboBox comboBox)
@@ -1041,11 +1173,11 @@ public class DatabaseManagament
             return false;
         }
     }
-    public bool AddHealthRecords(int customer_id, int pet_id, string ill_name, DateTime diagnosis_date, int medicine_id, string diagnosis_time, string diagnosis_note)
+    public bool AddHealthRecords(int customer_id, int pet_id, string ill_name, DateTime diagnosis_date, int medicine_id, string diagnosis_time, string diagnosis_note, int businessId)
     {
         try
         {
-            string query = "INSERT INTO \"healthRecords\" (customerid, \"visitid\", \"diagnosis\", \"diagnosis_date\", \"treatmentId\", \"ill_duration\", \"notes\") VALUES (@customer_id, @pet_id, @ill_name, @diagnosis_date, @medicine_id, @diagnosis_time, @diagnosis_note)";
+            string query = "INSERT INTO \"healthRecords\" (customerid, \"visitid\", \"diagnosis\", \"diagnosis_date\", \"treatmentId\", \"ill_duration\", \"notes\" , businessid) VALUES (@customer_id, @pet_id, @ill_name, @diagnosis_date, @medicine_id, @diagnosis_time, @diagnosis_note, @businessid)";
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("customer_id", customer_id);
@@ -1055,6 +1187,7 @@ public class DatabaseManagament
                 cmd.Parameters.AddWithValue("medicine_id", medicine_id);
                 cmd.Parameters.AddWithValue("diagnosis_time", diagnosis_time);
                 cmd.Parameters.AddWithValue("diagnosis_note", diagnosis_note);
+                cmd.Parameters.AddWithValue("businessid", businessId);
                 cmd.ExecuteNonQuery();
             }
             Debug.WriteLine("Sağlık kaydı eklendi");
@@ -1327,5 +1460,33 @@ WHERE hr.""recordId"" = @patientid;
         }
 
     }
+    public void GetPatientForCombobox(Control combobox) {
+        string query = "SELECT * FROM \"healthRecords\" WHERE businessid = @businessid";
+        if(combobox is ComboBox comboBox)
+            try
+        {
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var item = new ComboBoxItem
+                        {
+                            Id = Convert.ToInt32(dr["recordId"]),
+                            DisplayName = dr["diagnosis"].ToString()
+                        };
+                        comboBox.Items.Add(item);
+                    }
+                }
+            }
 
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Hasta bilgilerini çekerken hata oluştu: " + ex.Message);
+
+        }
+    }
 }
