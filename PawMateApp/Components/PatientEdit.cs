@@ -121,9 +121,36 @@ namespace PawMateApp.Components
             lbl_treatmentType.Text = informations["treatmentName"];
             lbl_diagnosisDate.Text = informations["diagnosis_date"];
             this.DiagnosisDate = informations["diagnosis_date"];
+            dt_diagnosisDate.Value = Convert.ToDateTime(informations["diagnosis_date"]);
             db.GetTreatmentsForCombo(cb_treatments);
             cb_treatments.SelectedIndex = cb_treatments.FindStringExact(informations["treatmentName"]);
+        }
 
+        private void btn_updatePatient_Click(object sender, EventArgs e)
+        {
+            CheckClass check = new CheckClass(new string[]
+            {
+                txt_patientName.Text,
+                txt_treatmentDuration.Text,
+                txt_notes.Text,
+                dt_diagnosisDate.Text,
+                cb_treatments.Text
+            });
+            if (check.Check(""))
+            {
+                if (cb_treatments.SelectedItem is ComboBoxItem cbitem)
+                {
+                    DateTime dt = Convert.ToDateTime(dt_diagnosisDate.Text).Date;
+                    Debug.WriteLine(dt);
+                        db.OpenConnection();
+                        db.UpdatePatient(Convert.ToInt32(this._patientId), txt_patientName.Text, cbitem.Id, dt, this.TreatmentDuration, txt_notes.Text);
+                    //Debug.WriteLine("Ekleme işlemi");
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 }

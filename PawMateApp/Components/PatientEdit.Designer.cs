@@ -342,6 +342,7 @@
             this.btn_updatePatient.TabIndex = 215;
             this.btn_updatePatient.Text = "Güncelle";
             this.btn_updatePatient.UseVisualStyleBackColor = false;
+            this.btn_updatePatient.Click += new System.EventHandler(this.btn_updatePatient_Click);
             // 
             // PatientEdit
             // 

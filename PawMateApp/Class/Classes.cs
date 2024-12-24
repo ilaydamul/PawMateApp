@@ -1263,13 +1263,13 @@ WHERE hr.""recordId"" = @patientid;
         return informations;
     }
 
-    public bool UpdatePatient(int patientId, string patientName, string treatment, DateTime diagnosisDate, string illDuration, string notes)
+    public bool UpdatePatient(int patientId, string patientName, int treatment_id, DateTime diagnosisDate, string illDuration, string notes)
     {
         try
         {
             string query = @"UPDATE ""healthRecords"" 
                          SET ""diagnosis"" = @diagnosis, 
-                             ""treatmentId"" = (SELECT ""treatmentId"" FROM ""treatments"" WHERE ""treatmentName"" = @treatment),
+                             ""treatmentId"" = @treatment,
                              ""diagnosis_date"" = @diagnosisDate, 
                              ""ill_duration"" = @illDuration, 
                              ""notes"" = @notes
@@ -1278,12 +1278,11 @@ WHERE hr.""recordId"" = @patientid;
             using (var cmd = new NpgsqlCommand(query, baglan))
             {
                 cmd.Parameters.AddWithValue("@diagnosis", patientName);
-                cmd.Parameters.AddWithValue("@treatment", treatment);
+                cmd.Parameters.AddWithValue("@treatment", treatment_id);
                 cmd.Parameters.AddWithValue("@diagnosisDate", diagnosisDate);
                 cmd.Parameters.AddWithValue("@illDuration", illDuration);
                 cmd.Parameters.AddWithValue("@notes", notes);
                 cmd.Parameters.AddWithValue("@patientId", patientId);
-
                 cmd.ExecuteNonQuery();
             }
             Debug.WriteLine("Hasta bilgileri güncellendi.");
