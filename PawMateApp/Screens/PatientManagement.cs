@@ -32,6 +32,20 @@ namespace PawMateApp.Screens
             JOIN ""pets"" p ON v.""petId"" = p.""petId""
             JOIN ""users"" u ON v.""vetId"" = u.""userId""
             WHERE v.""businessid"" = @businessid;
+        "; 
+        string queryfortextsearch = @"
+            SELECT 
+                hr.""recordId"",
+                c.""fullName"" AS ""customerName"",
+                p.""petName"",
+                u.""username"" AS ""vetName"",
+                TO_CHAR(hr.""diagnosis_date"", 'DD/MM/YYYY') AS Date
+            FROM ""healthRecords"" hr
+            JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
+            JOIN ""customers"" c ON v.""customerid"" = c.""customerId""
+            JOIN ""pets"" p ON v.""petId"" = p.""petId""
+            JOIN ""users"" u ON v.""vetId"" = u.""userId""
+            WHERE v.""businessid"" = @businessid AND hr.""customerid"" = @customerid;
         ";
 
         public PatientManagement()
@@ -46,32 +60,61 @@ namespace PawMateApp.Screens
             dt_diagnosisDate.Format = DateTimePickerFormat.Long;
             db.GetTreatmentsForCombo(cb_treatments);
             db.CloseConnection();
-            ExecuteQueryAndLoadItems(query2, patientList);
+            ExecuteQueryAndLoadItems(query2, null, patientList);
 
         }
-        public void ExecuteQueryAndLoadItems(string query, Control container)
+        public void ExecuteQueryAndLoadItems(string query, int ?customerid, Control container)
         {
-            container.Controls.Clear();
-            db.OpenConnection();
-            using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
+            if (customerid == null)
             {
-                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
-
-                using (var dr = cmd.ExecuteReader())
+                container.Controls.Clear();
+                db.OpenConnection();
+                using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
                 {
-                    while (dr.Read())
-                    {
-                        PatientItem patientItem= new PatientItem
-                        {
-                            Date = dr["Date"].ToString(),
-                            _patientId = dr["recordId"].ToString(),
-                            CustomerName = dr["customerName"].ToString(),
-                            PetName = dr["petName"].ToString(),
-                            VetName = dr["vetName"].ToString()
-                            
+                    cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
 
-                        };
-                        container.Controls.Add(patientItem);
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            PatientItem patientItem = new PatientItem
+                            {
+                                Date = dr["Date"].ToString(),
+                                _patientId = dr["recordId"].ToString(),
+                                CustomerName = dr["customerName"].ToString(),
+                                PetName = dr["petName"].ToString(),
+                                VetName = dr["vetName"].ToString()
+
+
+                            };
+                            container.Controls.Add(patientItem);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Debug.WriteLine("burası çalıştı!!!");
+                container.Controls.Clear();
+                db.OpenConnection();
+                using (var cmd = new Npgsql.NpgsqlCommand(queryfortextsearch, db.baglan))
+                {
+                    cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+                    cmd.Parameters.AddWithValue("@customerid", customerid);
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            PatientItem patientItem = new PatientItem
+                            {
+                                Date = dr["Date"].ToString(),
+                                _patientId = dr["recordId"].ToString(),
+                                CustomerName = dr["customerName"].ToString(),
+                                PetName = dr["petName"].ToString(),
+                                VetName = dr["vetName"].ToString()
+                            };
+                            container.Controls.Add(patientItem);
+                         }
                     }
                 }
             }
@@ -126,6 +169,38 @@ namespace PawMateApp.Screens
                 MessageBox.Show("Lütfen boş alanları doldurunuz", "Hata!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             PatientManagement_Load(null, null);
+            db.CloseConnection();
+        }
+
+        private void txt_search_TextChanged(object sender, EventArgs e)
+        {
+            txt_noPat.Visible = false;
+            patientList.Controls.Clear();
+            db.OpenConnection();
+            if(txt_search.Text == "" || txt_search.TextLength == 0)
+            {
+                Debug.WriteLine("Boş geldi");
+                ExecuteQueryAndLoadItems(query2, null, patientList);
+                return;
+            }
+            else
+            {
+               List<int> recordIds = db.SearchTextArea(txt_search.Text);
+                if (recordIds.Count == 0)
+                {
+                    Debug.WriteLine("Hiçbir şey bulunamadı!");
+                    txt_noPat.Visible = true;
+                    return;
+                }
+                else
+                {
+                    foreach (var item in recordIds)
+                    {
+                        Debug.WriteLine(item);
+                        ExecuteQueryAndLoadItems(queryfortextsearch, item, patientList);
+                    }
+                }
+            }
             db.CloseConnection();
         }
     }

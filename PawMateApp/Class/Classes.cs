@@ -1488,4 +1488,31 @@ WHERE hr.""recordId"" = @patientid;
 
         }
     }
+
+    public List<int> SearchTextArea(string value)
+    {
+        List<int> recordIds = new List<int>();
+        value = value.Trim();
+            string query = @"SELECT c.""customerId"" FROM ""customers"" c WHERE c.""fullName"" ILIKE @value AND ""businessId"" = @businessid";
+            try
+            {
+                using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+                {
+                    cmd.Parameters.AddWithValue("@value", "%" + value + "%");
+                    cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            recordIds.Add(dr.GetInt32(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Arama yapılırken hata oluştu: " + ex.Message);
+            }
+        return recordIds;
+    }
 }

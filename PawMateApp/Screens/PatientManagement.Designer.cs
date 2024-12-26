@@ -51,7 +51,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_addPrescription = new System.Windows.Forms.Button();
-            this.patientList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -72,18 +71,19 @@
             this.label2.Font = new System.Drawing.Font("Arial", 12F);
             this.label2.Location = new System.Drawing.Point(272, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 18);
+            this.label2.Size = new System.Drawing.Size(234, 18);
             this.label2.TabIndex = 176;
-            this.label2.Text = "Arama Yapın:";
+            this.label2.Text = "Müşteri ismine göre arama yapın";
             // 
             // txt_search
             // 
             this.txt_search.BackColor = System.Drawing.Color.White;
             this.txt_search.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_search.Location = new System.Drawing.Point(378, 50);
+            this.txt_search.Location = new System.Drawing.Point(512, 50);
             this.txt_search.Name = "txt_search";
             this.txt_search.Size = new System.Drawing.Size(185, 22);
             this.txt_search.TabIndex = 169;
+            this.txt_search.TextChanged += new System.EventHandler(this.txt_search_TextChanged);
             // 
             // label5
             // 
@@ -99,7 +99,6 @@
             // 
             this.patientList.AutoScroll = true;
             this.patientList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(241)))));
-            this.patientList.Controls.Add(this.txt_noPat);
             this.patientList.Location = new System.Drawing.Point(274, 107);
             this.patientList.Name = "patientList";
             this.patientList.Size = new System.Drawing.Size(522, 471);
@@ -109,7 +108,7 @@
             // 
             this.txt_noPat.AutoSize = true;
             this.txt_noPat.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_noPat.Location = new System.Drawing.Point(3, 0);
+            this.txt_noPat.Location = new System.Drawing.Point(361, 86);
             this.txt_noPat.Name = "txt_noPat";
             this.txt_noPat.Size = new System.Drawing.Size(336, 18);
             this.txt_noPat.TabIndex = 10;
@@ -303,6 +302,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(808, 590);
+            this.Controls.Add(this.txt_noPat);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_search);
             this.Controls.Add(this.label5);
@@ -314,8 +314,6 @@
             this.Name = "PatientManagement";
             this.Text = "PatientManagement";
             this.Load += new System.EventHandler(this.PatientManagement_Load);
-            this.patientList.ResumeLayout(false);
-            this.patientList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
