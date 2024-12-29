@@ -15,7 +15,7 @@ namespace PawMateApp
 {
     public partial class Panel : Form
     {
-
+        DatabaseManagament db = new DatabaseManagament();
         public Panel()
         {
 
@@ -103,8 +103,14 @@ namespace PawMateApp
             {
                 adminPanel.Visible = true;
                 btn_profile.Visible = false;
-
-                //Okunmamış bildirim varsa has_notif.Visible=true olacak.
+                if (db.HasUnreadNotifications())//Okunmamış bildirim varsa has_notif.Visible=true olacak.
+                {
+                    has_notif.Visible = true; 
+                }
+                else
+                {
+                    has_notif.Visible = false; 
+                }
             }
             else if (Globals.CurrentUserBusinessAdminStatus == true)
             {

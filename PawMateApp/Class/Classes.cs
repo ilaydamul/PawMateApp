@@ -1515,4 +1515,27 @@ WHERE hr.""recordId"" = @patientid;
             }
         return recordIds;
     }
+
+    public bool HasUnreadNotifications()
+    {
+        string query = "SELECT COUNT(*) FROM \"notifications\" WHERE \"isRead\" = FALSE";
+        try
+        {
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                int unreadCount = Convert.ToInt32(cmd.ExecuteScalar());
+                return unreadCount > 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Bildirim kontrol edilirken hata oluştu: " + ex.Message);
+            return false;
+        }
+
+        finally
+        {
+            CloseConnection();
+        }
+    }
 }
