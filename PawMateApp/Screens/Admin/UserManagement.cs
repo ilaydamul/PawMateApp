@@ -124,7 +124,7 @@ namespace PawMateApp.Screens.Admin
                             MessageBox.Show("Lütfen güncellemek için bir kullanıcı seçin.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        if (db.UpdateUserToDatabase(Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value), txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                        if (db.UpdateUserToDatabase(Convert.ToInt32(userList.SelectedRows[0].Cells["UserId"].Value), CheckClass.ReplaceTurkishCharacters(txt_username.Text.Trim().ToLower()), txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
                         {
                             Inputs inputs = new Inputs(new Control[] { txt_fullname, txt_username, txt_password, txt_phone, txt_email, cb_businesses });
                             inputs.ClearInputs();
@@ -171,7 +171,7 @@ namespace PawMateApp.Screens.Admin
                     }
                     else if (btn_addUpdateUser.Text == "Ekle")
                     {
-                       if(db.InsertUserManagementAdmin(txt_username.Text,txt_password.Text,txt_fullname.Text,txt_phone.Text,txt_email.Text,Convert.ToInt32(cb_businesses.SelectedValue), isBusinessAdmin.Checked))
+                       if(db.InsertUserManagementAdmin(CheckClass.ReplaceTurkishCharacters(txt_username.Text.Trim().ToLower()),txt_password.Text,txt_fullname.Text,txt_phone.Text,txt_email.Text,Convert.ToInt32(cb_businesses.SelectedValue), isBusinessAdmin.Checked))
                         {
                             string body = $@"
 <table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">

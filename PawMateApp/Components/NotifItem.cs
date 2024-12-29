@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using Npgsql;
 using System.ComponentModel;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PawMateApp.Components
 {
@@ -52,7 +52,7 @@ namespace PawMateApp.Components
                 {
                     baglan.Open();
 
-              
+
                     string query = "SELECT \"email\", \"authorizedName\" FROM \"businesses\" WHERE \"businessId\" = @businessId";
                     Npgsql.NpgsqlCommand cmd = new Npgsql.NpgsqlCommand(query, baglan);
                     cmd.Parameters.AddWithValue("@businessId", int.Parse(BusinessId));
@@ -61,15 +61,15 @@ namespace PawMateApp.Components
                     string businessEmail = string.Empty;
                     string authorizedName = string.Empty;
 
-                    
+
                     if (reader.Read())
                     {
-                        businessEmail = reader.GetString(0); 
+                        businessEmail = reader.GetString(0);
                         authorizedName = reader.GetString(1);
                     }
                     reader.Close();
-                    Debug.WriteLine(businessEmail+ " :Mail " + authorizedName + " :AuthorizedName ");
-                    
+                    Debug.WriteLine(businessEmail + " :Mail " + authorizedName + " :AuthorizedName ");
+
                     string updateQuery = "UPDATE \"notifications\" SET \"isRead\"=true WHERE \"businessId\" = @businessId";
                     Npgsql.NpgsqlCommand updateCmd = new Npgsql.NpgsqlCommand(updateQuery, baglan);
                     updateCmd.Parameters.AddWithValue("@businessId", int.Parse(BusinessId));
@@ -77,11 +77,13 @@ namespace PawMateApp.Components
 
                     string currentPassword = CheckClass.GenerateRandomPassword(12); // Default password for new businesses
 
-                  
+
                     string insertToUsers = "INSERT INTO \"users\" (\"username\", \"password\", \"fullName\", \"email\", \"businessId\", \"isBusinessAdmin\")" +
                                            "VALUES (@username, @password, @fullname, @email, @businessId, @isbusinessadmin)";
                     Npgsql.NpgsqlCommand insertCmd = new Npgsql.NpgsqlCommand(insertToUsers, baglan);
-                    insertCmd.Parameters.AddWithValue("@username", BusinessName);
+                    string regexname = CheckClass.ReplaceTurkishCharacters(Regex.Replace(BusinessName, @"\s+", "").ToLower().Trim());
+                    Debug.WriteLine(regexname);
+                    insertCmd.Parameters.AddWithValue("@username", regexname);
                     insertCmd.Parameters.AddWithValue("@password", currentPassword);
                     insertCmd.Parameters.AddWithValue("@fullname", authorizedName);
                     insertCmd.Parameters.AddWithValue("@email", businessEmail);
@@ -98,30 +100,30 @@ namespace PawMateApp.Components
 
                     SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
                     string body = $@"
-<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
-  <tbody>
-    <tr>
-      <td style=""padding-top:50px; text-align:center;"">
-        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
-      </td>
-    </tr>
-    <tr>
-      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
-        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Tebrikler! Veteriner Kliniği Başvurunuz Onaylandı 🎉</strong><br><br>
-        Harika bir haber! Kliniğiniz başarıyla sisteme kaydedildi. Şimdi, veteriner hizmetlerinizi sunmaya başlamak için tek yapmanız gereken giriş yapmak! 🌟<br><br>
-        <strong style=""font-size:20px;color:#ff3c00;"">Hesabınızın Giriş Bilgileri:</strong><br><br>
-        <strong style=""font-size:18px;color:#2d2d2d;"">Kullanıcı Adı: <span style=""color:#ff6b00;"">{BusinessName}</span></strong><br>
-        <strong style=""font-size:18px;color:#2d2d2d;"">Şifre: <span style=""color:#ff6b00;"">{currentPassword}</span></strong><br><br>
-        <strong style=""font-size:20px;color:#ff3c00;"">Veterinerlik hizmetlerinizi kolayca yönetin!</strong><br><br>
-        Giriş yaparak, kliniğinizin yönetim paneline erişebilir ve işlerinizi hızlıca organize edebilirsiniz. Hayalinizdeki başarıyı elde etmek için burada olacağız!<br><br>
-        <strong style=""font-size:20px;color:#2d2d2d;"">Şimdi Giriş Yapın ve Kliniğinizi Yönetin! 🚀</strong><br><br>
-        Unutmayın, her zaman destek ekibimiz yanınızda! Sorularınız olduğunda, bizlere ulaşabilirsiniz.<br><br>
-        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
-      </td>
-    </tr>
-  </tbody>
-</table>
-";
+                <table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
+                  <tbody>
+                    <tr>
+                      <td style=""padding-top:50px; text-align:center;"">
+                        <img alt=""Logo"" src=""https://i.hizliresim.com/jinrkop.jpeg"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+                        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Tebrikler! Veteriner Kliniği Başvurunuz Onaylandı 🎉</strong><br><br>
+                        Harika bir haber! Kliniğiniz başarıyla sisteme kaydedildi. Şimdi, veteriner hizmetlerinizi sunmaya başlamak için tek yapmanız gereken giriş yapmak! 🌟<br><br>
+                        <strong style=""font-size:20px;color:#ff3c00;"">Hesabınızın Giriş Bilgileri:</strong><br><br>
+                        <strong style=""font-size:18px;color:#2d2d2d;"">Kullanıcı Adı: <span style=""color:#ff6b00;"">{regexname}</span></strong><br>
+                        <strong style=""font-size:18px;color:#2d2d2d;"">Şifre: <span style=""color:#ff6b00;"">{currentPassword}</span></strong><br><br>
+                        <strong style=""font-size:20px;color:#ff3c00;"">Veterinerlik hizmetlerinizi kolayca yönetin!</strong><br><br>
+                        Giriş yaparak, kliniğinizin yönetim paneline erişebilir ve işlerinizi hızlıca organize edebilirsiniz. Hayalinizdeki başarıyı elde etmek için burada olacağız!<br><br>
+                        <strong style=""font-size:20px;color:#2d2d2d;"">Şimdi Giriş Yapın ve Kliniğinizi Yönetin! 🚀</strong><br><br>
+                        Unutmayın, her zaman destek ekibimiz yanınızda! Sorularınız olduğunda, bizlere ulaşabilirsiniz.<br><br>
+                        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                ";
 
                     sendMail.SendMail("Pawmate Onay Süreci", body, businessEmail);
                     Debug.WriteLine("Kayıt Talebi bilgilendirilmesi başarıyla gönderildi..");

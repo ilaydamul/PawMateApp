@@ -75,7 +75,7 @@ namespace PawMateApp
                     {
                         try
                         {
-                            txt_businessName.Text = CheckClass.ReplaceTurkishCharacters(txt_businessName.Text.Trim().ToLower());
+                            txt_businessName.Text = CheckClass.ReplaceTurkishCharacters(txt_businessName.Text.Trim());
                             baglan.Open();
                             string insertBusinessQuery = "INSERT INTO \"businesses\" (\"businessName\", \"authorizedName\", \"email\", \"phone\", \"isApproved\") " +
                                                          "VALUES (@businessName, @authorizedName, @email, @phone, FALSE) RETURNING \"businessId\"";
@@ -138,7 +138,8 @@ namespace PawMateApp
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Bir hata oluştu: Lütfen sistem yöneticisiyle iletişime geçin!" , "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Debug.WriteLine(ex.Message);
                         }
                         finally
                         {

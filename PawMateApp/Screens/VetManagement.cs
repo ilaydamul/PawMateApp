@@ -58,7 +58,7 @@ namespace PawMateApp.Screens
                 {
 
 
-                    if (db.AddUserToDatabase(txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                    if (db.AddUserToDatabase(CheckClass.ReplaceTurkishCharacters(txt_username.Text.Trim().ToLower()), txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
                     {
                         string body = $@"
 <table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
@@ -119,7 +119,7 @@ namespace PawMateApp.Screens
                 {
 
 
-                    if (db.UpdateUserToDatabase(Convert.ToInt32(vetList.CurrentRow.Cells["userId"].Value), txt_username.Text, txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
+                    if (db.UpdateUserToDatabase(Convert.ToInt32(vetList.CurrentRow.Cells["userId"].Value),CheckClass.ReplaceTurkishCharacters(txt_username.Text.Trim().ToLower()), txt_password.Text, txt_email.Text, txt_phone.Text, txt_fullname.Text, isBusinessAdmin.Checked))
                     {
                         string body = $@"
 <table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
