@@ -21,7 +21,7 @@ namespace PawMateApp.Screens.Admin
             NotifItems();  // flowLayoutPanel'deki öğeleri yeniden yükle
         }
 
-        private void Notifications_Load(object sender, EventArgs e)
+        public void Notifications_Load(object sender, EventArgs e)
         {
             NotifItems();
         }

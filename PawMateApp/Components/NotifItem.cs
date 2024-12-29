@@ -11,6 +11,8 @@ namespace PawMateApp.Components
     public partial class NotifItem : UserControl
     {
         Npgsql.NpgsqlConnection baglan = new Npgsql.NpgsqlConnection(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
+        Notifications notificationsForm = Application.OpenForms["notifications"] as Notifications;
+        Panel panel = Application.OpenForms["panel"] as Panel;
         public NotifItem()
         {
             InitializeComponent();
@@ -125,7 +127,8 @@ namespace PawMateApp.Components
                     Debug.WriteLine("Kayıt Talebi bilgilendirilmesi başarıyla gönderildi..");
 
                     MessageBox.Show("İşletme onaylandı, bilgilendirme maili yollandı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    notificationsForm.RefreshFlowLayoutPanel();
+                    notificationsForm.Notifications_Load(null, null);
+                    panel.Panel_Load(null, null);
                 }
                 catch (Exception ex)
                 {
@@ -144,7 +147,8 @@ namespace PawMateApp.Components
 
         private void btn_declineBusiness_Click(object sender, EventArgs e)
         {
-            Notifications notificationsForm = Application.OpenForms["notifications"] as Notifications;
+            
+
             if (notificationsForm != null)
             {
                 try
@@ -185,7 +189,8 @@ namespace PawMateApp.Components
                     sendMail.SendMail("Pawmate Onay Süreci", body, BusinessEmail);
                     Debug.WriteLine("Kayıt Talebi bilgilendirilmesi başarıyla gönderildi..");
                     MessageBox.Show("İşletme red edildi., bilgilendirme maili yollandı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    notificationsForm.RefreshFlowLayoutPanel();
+                    notificationsForm.Notifications_Load(null, null);
+                    panel.Panel_Load(null, null);
                 }
                 catch (Exception ex)
                 {

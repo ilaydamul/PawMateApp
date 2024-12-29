@@ -18,7 +18,6 @@ namespace PawMateApp
         DatabaseManagament db = new DatabaseManagament();
         public Panel()
         {
-
             MoveForm moveForm = new MoveForm(this);
             InitializeComponent();
             this.topMenuPanel.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
@@ -97,10 +96,11 @@ namespace PawMateApp
         //    showForm(profile);
         //}
 
-        private void Panel_Load(object sender, EventArgs e)
+        public void Panel_Load(object sender, EventArgs e)
         {
             if (Globals.CurrentUserAppAdminStatus == true)
             {
+                db.OpenConnection();
                 adminPanel.Visible = true;
                 btn_profile.Visible = false;
                 if (db.HasUnreadNotifications())//Okunmamış bildirim varsa has_notif.Visible=true olacak.
