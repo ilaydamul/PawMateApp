@@ -13,6 +13,9 @@ using static PawMateApp.Login;
 using System.ComponentModel;
 using System.Diagnostics;
 using PawMateApp.Screens;
+using iText.Layout.Borders;
+using iText.IO.Font.Constants;
+using iText.Kernel.Geom;
 
 namespace PawMateApp.Components
 {
@@ -137,89 +140,190 @@ namespace PawMateApp.Components
 
         private void btn_pdf_Click_1(object sender, EventArgs e)
         {
-            string fileName = PetName + " adli hayvanin recetesi.pdf";
-            DialogResult result = MessageBox.Show("Reçeteyi PDF olarak kaydetmek istediğinize emin misiniz?", "Reçete PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string fileName = $"{PetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
+            string dest = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+
+            DialogResult result = MessageBox.Show("Reçeteyi PDF olarak kaydetmek istediğinize emin misiniz?", 
+                "Reçete PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        
             if (result == DialogResult.Yes)
             {
-                string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
-
                 try
                 {
-                    using (PdfWriter writer = new PdfWriter(dest))
-                    using (PdfDocument pdf = new PdfDocument(writer))
-                    using (Document document = new Document(pdf))
+                    // PDF'i oluştur
+                    byte[] pdfBytes = GeneratePrescriptionPDF(Convert.ToInt32(PrescriptionId));
+                
+                    if (pdfBytes != null)
                     {
-                        string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "tahoma.ttf");
-                        PdfFont font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.IDENTITY_H);
-                        document.SetFont(font);
-
-                        string imageUrl = "https://i.hizliresim.com/jinrkop.jpeg";
-                        iText.Layout.Element.Image img = new iText.Layout.Element.Image(ImageDataFactory.Create(imageUrl))
-                            .SetWidth(210)
-                            .SetHeight(62)
-                            .SetFixedPosition(30, 780);
-
-                        document.Add(img);
-
-                        string headerText = TurkishCharacterConverter.ConvertTurkishCharacters("VETERİNER KLİNİĞİ REÇETESİ");
-                        Paragraph header = new Paragraph(headerText)
-                            .SetFontSize(16)
-                            .SetFont(font)
-                            .SetTextAlignment(TextAlignment.CENTER)
-                            .SetMarginBottom(20)
-                            .SetMarginTop(30)
-                            .SetFontColor(ColorConstants.DARK_GRAY);
-                        document.Add(header);
-
-                        Table infoTable = new Table(2).UseAllAvailableWidth();
-                        infoTable.AddCell(new Cell().Add(new Paragraph("Hasta Adı:").SetFont(font)));
-                        infoTable.AddCell(new Cell().Add(new Paragraph(PetName)));
-                        infoTable.AddCell(new Cell().Add(new Paragraph("Sahip Adı:").SetFont(font)));
-                        infoTable.AddCell(new Cell().Add(new Paragraph(CustomerName)));
-                        infoTable.AddCell(new Cell().Add(new Paragraph("Tarih:").SetFont(font)));
-                        infoTable.AddCell(new Cell().Add(new Paragraph(DateTime.Now.ToShortDateString())));
-                        infoTable.SetMarginBottom(20);
-                        document.Add(infoTable);
-
-                        string medHeaderText = TurkishCharacterConverter.ConvertTurkishCharacters("Reçete Detayları");
-                        Paragraph medHeader = new Paragraph(medHeaderText)
-                            .SetFontSize(14)
-                            .SetFont(font)
-                            .SetTextAlignment(TextAlignment.LEFT)
-                            .SetMarginBottom(10)
-                            .SetFontColor(ColorConstants.BLUE);
-                        document.Add(medHeader);
-
-                        Table medsTable = new Table(3).UseAllAvailableWidth();
-                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("İlaç Adı").SetFont(font)));
-                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Doz").SetFont(font)));
-                        medsTable.AddHeaderCell(new Cell().Add(new Paragraph("Kullanım Detayları").SetFont(font)));
-
-                        medsTable.AddCell(new Paragraph($"{MedicineName}").SetFont(font));
-                        medsTable.AddCell(new Paragraph($"{MedicineUnit}").SetFont(font));
-                        medsTable.AddCell(new Paragraph($"{UsageInstructions}").SetFont(font));
-
-
-                        medsTable.SetMarginBottom(20);
-                        document.Add(medsTable);
-
-                        string footerText = TurkishCharacterConverter.ConvertTurkishCharacters("Bu reçete veteriner hekiminizin önerilerine göre düzenlenmiştir.");
-                        Paragraph footer = new Paragraph(footerText)
-                            .SetFontSize(10)
-                            .SetTextAlignment(TextAlignment.CENTER)
-                            .SetFontColor(ColorConstants.GRAY)
-                            .SetMarginTop(30);
-                        document.Add(footer);
-                        document.Close();
-                        Console.WriteLine("PDF başarıyla oluşturuldu: " + dest);
-                        MessageBox.Show("Reçete başarıyla PDF olarak masaüstüne " + fileName + " olarak kaydedildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Dosyaya kaydet
+                        File.WriteAllBytes(dest, pdfBytes);
+                
+                        MessageBox.Show($"Reçete başarıyla masaüstüne '{fileName}' olarak kaydedildi.", 
+                            "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                        // PDF'i otomatik aç
+                        System.Diagnostics.Process.Start(dest);
+                    }
+                    else
+                    {
+                        MessageBox.Show("PDF oluşturulurken bir hata oluştu.", 
+                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Bir hata oluştu: " + ex.Message);
+                    MessageBox.Show($"Bir hata oluştu: {ex.Message}", 
+                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Debug.WriteLine("PDF kaydetme hatası: " + ex.Message);
                 }
             }
+        }
+
+        private byte[] GeneratePrescriptionPDF(int prescriptionId)
+        {
+            Document document = null;
+            MemoryStream ms = null;
+
+            try
+            {
+                ms = new MemoryStream();
+                PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdf = new PdfDocument(writer);
+                document = new Document(pdf);
+
+                // Font tanımlamaları için önce encoding provider'ı kaydet
+
+                // Font tanımlamaları
+                PdfFont boldFont = PdfFontFactory.CreateFont("Helvetica-Bold", "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+                PdfFont normalFont = PdfFontFactory.CreateFont("Helvetica", "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+                PdfFont italicFont = PdfFontFactory.CreateFont("Helvetica-Oblique", "Cp1254", PdfFontFactory.EmbeddingStrategy.PREFER_EMBEDDED);
+
+                float pageWidth = pdf.GetDefaultPageSize().GetWidth();
+                float pageHeight = pdf.GetDefaultPageSize().GetHeight();
+
+                // Logo ekle - sayfa ortasında yarı saydam
+                string imagePath = "https://i.hizliresim.com/jinrkop.jpeg";
+                ImageData imageData = ImageDataFactory.Create(new Uri(imagePath));
+                Image img = new Image(imageData)
+                    .SetWidth(400)  // Logo boyutunu büyüt
+                    .SetHeight(150)
+                    .SetFixedPosition(
+                        (pageWidth - 400) / 2,  // Yatayda ortala
+                        (pageHeight - 150) / 2   // Dikeyde ortala
+                    )
+                    .SetOpacity(0.05f);  // Saydamlık ayarı (0.1 = %90 saydam)
+
+                document.Add(img);
+
+                // Başlık tablosu
+                Table headerTable = new Table(UnitValue.CreatePercentArray(1))
+                    .SetWidth(UnitValue.CreatePercentValue(100));
+
+                Cell headerCell = new Cell()
+                    .Add(new Paragraph(_petName?.ToUpper() ?? "")
+                        .SetFont(boldFont)
+                        .SetFontSize(16)
+                        .SetTextAlignment(TextAlignment.CENTER))
+                    .Add(new Paragraph("VETERİNER REÇETESİ")
+                        .SetFont(boldFont)
+                        .SetFontSize(14)
+                        .SetTextAlignment(TextAlignment.CENTER))
+                    .SetBorder(Border.NO_BORDER)
+                    .SetPaddingTop(20);
+
+                headerTable.AddCell(headerCell);
+                document.Add(headerTable);
+
+                // Boşluk ekle
+                document.Add(new Paragraph("\n"));
+
+                // Reçete bilgileri tablosu
+                Table infoTable = new Table(2)
+                    .UseAllAvailableWidth()
+                    .SetMarginTop(20);  // Üstten boşluk ekle
+
+                // Tüm bilgileri aynı formatta ekleyelim
+                AddInfoRow(infoTable, "Reçete No:", prescriptionId.ToString(), boldFont, normalFont);
+                AddInfoRow(infoTable, "Tarih:", DateTime.Now.ToString("dd.MM.yyyy"), boldFont, normalFont);
+                AddInfoRow(infoTable, "Hasta Sahibi:", _customerName, boldFont, normalFont);
+                AddInfoRow(infoTable, "Telefon:", _customerPhone, boldFont, normalFont);
+                AddInfoRow(infoTable, "Hasta Adı:", _petName, boldFont, normalFont);
+                AddInfoRow(infoTable, "Veteriner Hekim:", _vetName, boldFont, normalFont);
+
+                document.Add(infoTable);
+
+                // İlaç tablosu
+                Table medicineTable = new Table(new float[] { 3, 1, 2 })
+                    .UseAllAvailableWidth()
+                    .SetMarginBottom(20);
+
+                medicineTable.AddHeaderCell(CreateHeaderCell("İlaç Adı", boldFont));
+                medicineTable.AddHeaderCell(CreateHeaderCell("Miktar", boldFont));
+                medicineTable.AddHeaderCell(CreateHeaderCell("Kullanım", boldFont));
+
+                medicineTable.AddCell(CreateCell(_medicineName, normalFont));
+                medicineTable.AddCell(CreateCell(_medicineUnit, normalFont));
+                medicineTable.AddCell(CreateCell(_usageInstructions, normalFont));
+
+                document.Add(medicineTable);
+
+                // Alt bilgi ve notlar
+                document.Add(new Paragraph("Önemli Notlar:")
+                    .SetFont(boldFont)
+                    .SetMarginBottom(10));
+
+                document.Add(new Paragraph("• Bu reçete veteriner hekim tarafından düzenlenmiştir.\n" +
+                                                    "• İlaçları belirtilen dozlarda ve sürelerde kullanınız.\n" +
+                                                    "• Tedavi süresince herhangi bir yan etki görülmesi durumunda veteriner hekiminize başvurunuz.")
+                    .SetFont(italicFont)
+                    .SetFontSize(9)
+                    .SetMarginBottom(20));
+
+                document.Close();
+                return ms.ToArray();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("PDF oluşturma hatası: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (document != null)
+                {
+                    document.Close();
+                }
+                if (ms != null)
+                {
+                    ms.Dispose();
+                }
+            }
+        }
+
+        // Yardımcı metodlar
+        private void AddInfoRow(Table table, string label, string value, PdfFont boldFont, PdfFont normalFont)
+        {
+            table.AddCell(new Cell().Add(new Paragraph(label).SetFont(boldFont))
+                .SetBorder(Border.NO_BORDER)
+                .SetPaddingRight(10));
+            table.AddCell(new Cell().Add(new Paragraph(value ?? "").SetFont(normalFont))
+                .SetBorder(Border.NO_BORDER));
+        }
+
+        private Cell CreateHeaderCell(string text, PdfFont font)
+        {
+            return new Cell()
+                .Add(new Paragraph(text).SetFont(font))
+                .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                .SetPadding(5)
+                .SetTextAlignment(TextAlignment.CENTER);
+        }
+
+        private Cell CreateCell(string text, PdfFont font)
+        {
+            return new Cell()
+                .Add(new Paragraph(text ?? "").SetFont(font))
+                .SetPadding(5);
         }
     }
 
