@@ -38,6 +38,7 @@
             this.logoBox = new System.Windows.Forms.PictureBox();
             this.txt_username = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chk_rememberMe = new System.Windows.Forms.CheckBox();
             this.btn_exitApp = new System.Windows.Forms.PictureBox();
             this.btn_minimizeApp = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoBox)).BeginInit();
@@ -81,7 +82,7 @@
             this.lbl_goRegister.AutoSize = true;
             this.lbl_goRegister.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lbl_goRegister.LinkColor = System.Drawing.Color.Black;
-            this.lbl_goRegister.Location = new System.Drawing.Point(15, 192);
+            this.lbl_goRegister.Location = new System.Drawing.Point(15, 211);
             this.lbl_goRegister.Name = "lbl_goRegister";
             this.lbl_goRegister.Size = new System.Drawing.Size(179, 15);
             this.lbl_goRegister.TabIndex = 99;
@@ -96,7 +97,7 @@
             this.btn_login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_login.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btn_login.ForeColor = System.Drawing.Color.White;
-            this.btn_login.Location = new System.Drawing.Point(17, 218);
+            this.btn_login.Location = new System.Drawing.Point(17, 236);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(226, 37);
             this.btn_login.TabIndex = 3;
@@ -149,11 +150,23 @@
             this.panel1.Controls.Add(this.txt_username);
             this.panel1.Controls.Add(this.lbl_goRegister);
             this.panel1.Controls.Add(this.txt_password);
+            this.panel1.Controls.Add(this.chk_rememberMe);
             this.panel1.Location = new System.Drawing.Point(371, 174);
             this.panel1.Name = "panel1";
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panel1.Size = new System.Drawing.Size(258, 273);
+            this.panel1.Size = new System.Drawing.Size(258, 290);
             this.panel1.TabIndex = 2;
+            // 
+            // chk_rememberMe
+            // 
+            this.chk_rememberMe.AutoSize = true;
+            this.chk_rememberMe.Font = new System.Drawing.Font("Arial", 9F);
+            this.chk_rememberMe.Location = new System.Drawing.Point(17, 186);
+            this.chk_rememberMe.Name = "chk_rememberMe";
+            this.chk_rememberMe.Size = new System.Drawing.Size(90, 19);
+            this.chk_rememberMe.TabIndex = 3;
+            this.chk_rememberMe.Text = "Beni Hatırla";
+            this.chk_rememberMe.UseVisualStyleBackColor = true;
             // 
             // btn_exitApp
             // 
@@ -215,6 +228,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox btn_exitApp;
         private System.Windows.Forms.PictureBox btn_minimizeApp;
+        private System.Windows.Forms.CheckBox chk_rememberMe;
     }
 }
 

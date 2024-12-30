@@ -28,6 +28,7 @@ namespace PawMateApp
             this.MouseDown += new MouseEventHandler(moveForm.Form_MouseDown);
             this.MouseMove += new MouseEventHandler(moveForm.Form_MouseMove);
             this.MouseUp += new MouseEventHandler(moveForm.Form_MouseUp);
+            LoadSavedCredentials();
             
         }
 
@@ -55,19 +56,19 @@ namespace PawMateApp
             }
         }
 
-        static string GenerateRandomPassword(int length)
+        private void LoadSavedCredentials()
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            Random random = new Random();
-            return new string(Enumerable.Repeat(chars, length)
-                                        .Select(s => s[random.Next(s.Length)])
-                                        .ToArray());
+            var (username, password) = UserSettings.LoadCredentials();
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+            {
+                txt_username.Text = username;
+                txt_password.Text = password;
+                chk_rememberMe.Checked = true;
+            }
         }
-
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-           
             checkinputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text });
             if (!checkinputs.Check(""))
             {
@@ -84,38 +85,36 @@ namespace PawMateApp
                     NpgsqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-
-                        Globals.CurrentUserID = dr["userId"] != DBNull.Value ? Convert.ToInt32(dr["userId"]) : 0; // Varsayılan olarak 0
-                        Globals.CurrentUserBusinessAdminStatus = dr["IsBusinessAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsBusinessAdmin"]) : false; // Varsayılan olarak false
+                        Globals.CurrentUserID = dr["userId"] != DBNull.Value ? Convert.ToInt32(dr["userId"]) : 0;
+                        Globals.CurrentUserBusinessAdminStatus = dr["IsBusinessAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsBusinessAdmin"]) : false;
                         Globals.CurrentUserAppAdminStatus = dr["IsAppAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsAppAdmin"]) : false; 
                         Globals.CurrentUserBusinessAdminID = dr["businessId"] != DBNull.Value ? Convert.ToInt32(dr["businessId"]) : 0; 
-                        //bool qwe = Convert.ToBoolean(dr["IsBusinessAdmin"]);
-                        //MessageBox.Show(qwe);
 
+                        if (chk_rememberMe.Checked)
+                        {
+                            UserSettings.SaveCredentials(txt_username.Text, txt_password.Text);
+                        }
+                        else
+                        {
+                            UserSettings.ClearCredentials();
+                        }
 
                         this.Hide();
-                        Panel panel = new Panel(); // messagebox yerine panel eklendi.
+                        Panel panel = new Panel();
                         panel.Show();
                     }
                     else
                     {
-
                         MessageBox.Show("Kullanıcı adı ya da şifre yanlış.", "Hatalı Giriş!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
-
                 catch (Exception ex)
                 {
-
                     MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
-
-                    {
-                        baglan.Close();
-                    }
+                    baglan.Close();
                 }
                 try
                 {
@@ -135,9 +134,58 @@ namespace PawMateApp
                 {
                     baglan.Close();
                 }
-                
             }
+        }
 
+        private bool LoginSuccessful()
+        {
+            checkinputs = new CheckClass(new string[] { txt_username.Text, txt_password.Text });
+            if (!checkinputs.Check(""))
+            {
+                return false;
+            }
+            else
+            {
+                try
+                {
+                    baglan.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM \"users\" WHERE \"username\"=@P1 AND \"password\"=@P2", baglan);
+                    cmd.Parameters.AddWithValue("@P1", txt_username.Text);
+                    cmd.Parameters.AddWithValue("@P2", txt_password.Text);
+                    NpgsqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.Read())
+                    {
+                        Globals.CurrentUserID = dr["userId"] != DBNull.Value ? Convert.ToInt32(dr["userId"]) : 0;
+                        Globals.CurrentUserBusinessAdminStatus = dr["IsBusinessAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsBusinessAdmin"]) : false;
+                        Globals.CurrentUserAppAdminStatus = dr["IsAppAdmin"] != DBNull.Value ? Convert.ToBoolean(dr["IsAppAdmin"]) : false; 
+                        Globals.CurrentUserBusinessAdminID = dr["businessId"] != DBNull.Value ? Convert.ToInt32(dr["businessId"]) : 0; 
+
+                        if (chk_rememberMe.Checked)
+                        {
+                            UserSettings.SaveCredentials(txt_username.Text, txt_password.Text);
+                        }
+                        else
+                        {
+                            UserSettings.ClearCredentials();
+                        }
+
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hata: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                finally
+                {
+                    baglan.Close();
+                }
+            }
         }
 
         private void cb_showPass_CheckedChanged(object sender, EventArgs e)
@@ -175,7 +223,6 @@ namespace PawMateApp
         {
             if (e.KeyCode == Keys.Enter) 
             {
-               
                 btn_login.PerformClick(); 
                 e.Handled = true;        
                 e.SuppressKeyPress = true; 

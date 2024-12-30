@@ -14,6 +14,7 @@ using ComboBox = System.Windows.Forms.ComboBox;
 using TextBox = System.Windows.Forms.TextBox;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.IO;
 
 
 namespace PawMateApp
@@ -215,6 +216,73 @@ namespace PawMateApp
             {
                 Debug.WriteLine("Mail gönderme hatası: " + ex.Message);
 
+            }
+        }
+    }
+
+    public class UserSettings
+    {
+        private const string SettingsPath = "userSettings.dat";
+
+        public static void SaveCredentials(string username, string password)
+        {
+            try
+            {
+                // Basit bir şifreleme için
+                string encryptedPassword = Convert.ToBase64String(
+                    System.Text.Encoding.UTF8.GetBytes(password));
+
+                string[] lines = {
+                    username,
+                    encryptedPassword
+                };
+
+                File.WriteAllLines(SettingsPath, lines);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Kullanıcı bilgileri kaydedilemedi: " + ex.Message);
+            }
+        }
+
+        public static (string username, string password) LoadCredentials()
+        {
+            try
+            {
+                if (File.Exists(SettingsPath))
+                {
+                    string[] lines = File.ReadAllLines(SettingsPath);
+                    if (lines.Length == 2)
+                    {
+                        string username = lines[0];
+                        // Şifreyi çöz
+                        string password = System.Text.Encoding.UTF8.GetString(
+                            Convert.FromBase64String(lines[1]));
+
+                        return (username, password);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Kullanıcı bilgileri okunamadı: " + ex.Message);
+            }
+
+            return (null, null);
+        }
+
+        public static void ClearCredentials()
+        {
+            try
+            {
+                if (File.Exists(SettingsPath))
+                {
+                    File.Delete(SettingsPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Kullanıcı bilgileri silinemedi: " + ex.Message);
             }
         }
     }
