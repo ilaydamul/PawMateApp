@@ -83,7 +83,7 @@ namespace PawMateApp.Components
                 if (stockmanagement != null)
                 {
                     StockManagement stock = stockmanagement as StockManagement;
-                    stock.StockManagement_Load(null, null); 
+                    stock?.StockManagement_Load(null, null); 
                 }
                 else
                 {

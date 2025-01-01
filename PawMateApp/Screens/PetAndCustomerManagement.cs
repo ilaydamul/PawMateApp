@@ -245,8 +245,7 @@ namespace PawMateApp.Screens
                             }
                             if (CheckClass.IsValidPhone(txt_customerPhone.Text))
                             {
-                                if (CheckClass.IsValidPhone(txt_customerAlternatePhone.Text) == true)
-                                {
+                                
                                     query = "UPDATE \"customers\" SET \"fullName\" = @fullName, \"phone\" = @phone, " +
                                    "\"email\" = @email, \"address\" = @address, \"alternateName\" = @alternateName, " +
                                    "\"alternatePhone\" = @alternatePhone " +
@@ -270,7 +269,7 @@ namespace PawMateApp.Screens
                                     }
 
                                     MessageBox.Show("Müşteri bilgileri başarıyla güncellendi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
+                                
                             }
                         }
 

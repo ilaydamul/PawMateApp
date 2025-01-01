@@ -140,39 +140,40 @@ namespace PawMateApp.Components
 
         private void btn_pdf_Click_1(object sender, EventArgs e)
         {
-            string fileName = $"{PetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
+            string sanitizedPetName = PetName.Replace("\n", "").Replace("\r", "").Replace(" ", "_");
+            string fileName = $"{sanitizedPetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
             string dest = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
 
-            DialogResult result = MessageBox.Show("Reçeteyi PDF olarak kaydetmek istediğinize emin misiniz?", 
+            DialogResult result = MessageBox.Show("Reçeteyi PDF olarak kaydetmek istediğinize emin misiniz?",
                 "Reçete PDF", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        
+
             if (result == DialogResult.Yes)
             {
                 try
                 {
                     // PDF'i oluştur
                     byte[] pdfBytes = GeneratePrescriptionPDF(Convert.ToInt32(PrescriptionId));
-                
+
                     if (pdfBytes != null)
                     {
                         // Dosyaya kaydet
                         File.WriteAllBytes(dest, pdfBytes);
-                
-                        MessageBox.Show($"Reçete başarıyla masaüstüne '{fileName}' olarak kaydedildi.", 
+
+                        MessageBox.Show($"Reçete başarıyla masaüstüne '{fileName}' olarak kaydedildi.",
                             "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                         // PDF'i otomatik aç
                         System.Diagnostics.Process.Start(dest);
                     }
                     else
                     {
-                        MessageBox.Show("PDF oluşturulurken bir hata oluştu.", 
+                        MessageBox.Show("PDF oluşturulurken bir hata oluştu.",
                             "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Bir hata oluştu: {ex.Message}", 
+                    MessageBox.Show($"Bir hata oluştu: {ex.Message}",
                         "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Debug.WriteLine("PDF kaydetme hatası: " + ex.Message);
                 }
@@ -324,6 +325,11 @@ namespace PawMateApp.Components
             return new Cell()
                 .Add(new Paragraph(text ?? "").SetFont(font))
                 .SetPadding(5);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
