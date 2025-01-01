@@ -46,8 +46,10 @@
             this.btn_pdf = new System.Windows.Forms.PictureBox();
             this.btn_deletePresp = new System.Windows.Forms.Button();
             this.pet_image = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btn_pdf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pet_image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_vetName
@@ -253,11 +255,23 @@
             this.pet_image.TabIndex = 173;
             this.pet_image.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PawMateApp.Properties.Resources.mail;
+            this.pictureBox1.Location = new System.Drawing.Point(391, 120);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(36, 36);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 187;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // PrescriptionItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_pdf);
             this.Controls.Add(this.btn_deletePresp);
             this.Controls.Add(this.txt_usageInstructions);
@@ -283,6 +297,7 @@
             this.Load += new System.EventHandler(this.PrescriptionItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btn_pdf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pet_image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,5 +322,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btn_deletePresp;
         private System.Windows.Forms.PictureBox btn_pdf;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

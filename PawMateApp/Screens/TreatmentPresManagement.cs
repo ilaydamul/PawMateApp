@@ -17,7 +17,7 @@ namespace PawMateApp.Screens
     public partial class TreatmentPresManagement : Form
     {
         DatabaseManagament db = new DatabaseManagament();
-        string query = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""quantity"", ""usageInstructions""
+        string query = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""dosage"", ""usageInstructions""
             FROM ""prescriptions"" p
             JOIN ""healthRecords"" hr ON p.""recordId"" = hr.""recordId""
 			JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
@@ -53,7 +53,7 @@ namespace PawMateApp.Screens
                 {
                     while (dr.Read())
                     {
-                        PrescriptionItem prescriptionItem= new PrescriptionItem()
+                        PrescriptionItem prescriptionItem = new PrescriptionItem()
                         {
                             _prescriptionId = dr["prescriptionId"].ToString(),
                             CustomerName = dr["fullName"].ToString(),
@@ -61,7 +61,7 @@ namespace PawMateApp.Screens
                             PetName = dr["petName"].ToString(),
                             VetName = dr["fullName"].ToString(),
                             MedicineName = dr["medicineName"].ToString(),
-                            MedicineUnit = dr["quantity"].ToString(),
+                            MedicineUnit = dr["dosage"].ToString(),
                             UsageInstructions = dr["usageInstructions"].ToString()
                         };
                         container.Controls.Add(prescriptionItem);
@@ -69,33 +69,6 @@ namespace PawMateApp.Screens
                 }
             }
         }
-
-      
-
-
-        private bool isDateAscending = true;
-
-        private void btn_dateChange_Click(object sender, EventArgs e)
-        {
-            if (isDateAscending)
-            {
-                btn_dateChange.Text = "Tarih Azalan";
-            }
-            else
-            {
-                btn_dateChange.Text = "Tarih Artan";
-            }
-
-            isDateAscending = !isDateAscending;
-        }
-
-        private void txt_research_TextChanged(object sender, EventArgs e)
-        {
-            //Her text değiştiğinde ilgili reçetelerin içindeki tüm veriler taranacak ve ilgili reçeteler gelecek. 
-            //Aranan kritere uygun reçete yoksa txt_noRec visible=true olacak.
-            //Textboxın içi boş olduğunda eski versiyonuna geri dönecek. 
-        }
-
         private async void btn_addPrescription_Click(object sender, EventArgs e)
         {
             CheckClass check = new CheckClass(new string[] { txt_quantity.Text, txt_usageInstructions.Text, cb_medicines.Text, cb_visits.Text});
@@ -105,6 +78,8 @@ namespace PawMateApp.Screens
                 {
                     await db.CheckMedicineStocksAsync(cb_medicine_item.Id, Convert.ToInt32(txt_quantity.Text),cb_visit_item.Id,Convert.ToInt32(txt_quantity.Text),txt_usageInstructions.Text);
                     ExecuteQueryAndLoadItems(query, prescriptionList);
+                    Inputs inp = new Inputs(new Control[] {txt_usageInstructions,txt_quantity,cb_medicines,cb_visits});
+                    inp.ClearInputs();
                 }
                 
             }

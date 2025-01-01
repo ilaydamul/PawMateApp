@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TreatmentPresManagement));
             this.txt_title = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,9 +44,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_addPrescription = new System.Windows.Forms.Button();
-            this.txt_search = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btn_dateChange = new System.Windows.Forms.Button();
             this.prescriptionList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -88,9 +84,9 @@
             this.prescriptionList.AutoScroll = true;
             this.prescriptionList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(179)))), ((int)(((byte)(241)))));
             this.prescriptionList.Controls.Add(this.txt_noRec);
-            this.prescriptionList.Location = new System.Drawing.Point(274, 109);
+            this.prescriptionList.Location = new System.Drawing.Point(273, 109);
             this.prescriptionList.Name = "prescriptionList";
-            this.prescriptionList.Size = new System.Drawing.Size(522, 466);
+            this.prescriptionList.Size = new System.Drawing.Size(523, 466);
             this.prescriptionList.TabIndex = 163;
             // 
             // txt_noRec
@@ -222,53 +218,12 @@
             this.btn_addPrescription.UseVisualStyleBackColor = false;
             this.btn_addPrescription.Click += new System.EventHandler(this.btn_addPrescription_Click);
             // 
-            // txt_search
-            // 
-            this.txt_search.BackColor = System.Drawing.Color.White;
-            this.txt_search.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txt_search.Location = new System.Drawing.Point(378, 46);
-            this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(185, 22);
-            this.txt_search.TabIndex = 129;
-            this.txt_search.TextChanged += new System.EventHandler(this.txt_research_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F);
-            this.label2.Location = new System.Drawing.Point(272, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 18);
-            this.label2.TabIndex = 168;
-            this.label2.Text = "Arama Yapın:";
-            // 
-            // btn_dateChange
-            // 
-            this.btn_dateChange.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btn_dateChange.FlatAppearance.BorderSize = 0;
-            this.btn_dateChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_dateChange.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btn_dateChange.ForeColor = System.Drawing.Color.Black;
-            this.btn_dateChange.Image = ((System.Drawing.Image)(resources.GetObject("btn_dateChange.Image")));
-            this.btn_dateChange.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_dateChange.Location = new System.Drawing.Point(569, 46);
-            this.btn_dateChange.Name = "btn_dateChange";
-            this.btn_dateChange.Size = new System.Drawing.Size(105, 22);
-            this.btn_dateChange.TabIndex = 167;
-            this.btn_dateChange.Text = "Tarih Azalan";
-            this.btn_dateChange.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_dateChange.UseVisualStyleBackColor = false;
-            this.btn_dateChange.Click += new System.EventHandler(this.btn_dateChange_Click);
-            // 
             // TreatmentPresManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(808, 590);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btn_dateChange);
-            this.Controls.Add(this.txt_search);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.prescriptionList);
@@ -305,10 +260,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btn_addPrescription;
         private System.Windows.Forms.TextBox txt_usageInstructions;
-        private System.Windows.Forms.TextBox txt_search;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label txt_noRec;
         private System.Windows.Forms.MaskedTextBox txt_quantity;
-        private System.Windows.Forms.Button btn_dateChange;
     }
 }

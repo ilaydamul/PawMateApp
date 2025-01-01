@@ -1075,7 +1075,6 @@ public class DatabaseManagament
             cmd.Parameters.AddWithValue("@dosage", dosage);
             cmd.Parameters.AddWithValue("@usageInstructions", usageInstructions);
             cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
-
             await cmd.ExecuteNonQueryAsync();
             MessageBox.Show("Reçete başarılı bir şekilde oluşturuldu!", "Başarılı" , MessageBoxButtons.OK, MessageBoxIcon.Question);
         }
@@ -1099,11 +1098,7 @@ public class DatabaseManagament
                         cmd.Parameters.AddWithValue("@medicineId", medicineId);
                         await cmd.ExecuteNonQueryAsync();
                     }
-
-                    // Call AddPrescriptionAsync to insert prescription record
                     await AddPrescriptionAsync(recordId, medicineId, dosage, usageInstructions, connection, transaction);
-
-                    // Commit the transaction
                     transaction.Commit();
                 }
                 catch (Exception ex)
