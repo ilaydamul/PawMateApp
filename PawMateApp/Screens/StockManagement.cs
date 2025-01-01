@@ -84,18 +84,27 @@ namespace PawMateApp.Screens
         {
             if (cb_medicines.SelectedItem != null)
             {
-                if(cb_medicines.SelectedItem is ComboBoxItem selected)
+                if (Convert.ToInt32(txt_stockUnit.Text) < Convert.ToInt32(txt_stockThreshold.Text))
                 {
-                    CheckClass check = new CheckClass(new string[] { txt_stockThreshold.Text, txt_stockUnit.Text });
-                    if (!check.Check(""))
+                    MessageBox.Show("Stok birim sayısı, eşik değerinden küçük olamaz", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+
+                    if (cb_medicines.SelectedItem is ComboBoxItem selected)
                     {
-                        return;
-                    }
-                    else
-                    {
-                        databaseManagament.AddMedicineStocksToDatabase(businessid, selected.Id , selected.DisplayName, int.Parse(txt_stockUnit.Text) ,int.Parse(txt_stockThreshold.Text));
-                        flowLayoutPanel1.Controls.Clear();
-                        StockItem();
+                        CheckClass check = new CheckClass(new string[] { txt_stockThreshold.Text, txt_stockUnit.Text });
+                        if (!check.Check(""))
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            databaseManagament.AddMedicineStocksToDatabase(businessid, selected.Id, selected.DisplayName, int.Parse(txt_stockUnit.Text), int.Parse(txt_stockThreshold.Text));
+                            flowLayoutPanel1.Controls.Clear();
+                            StockItem();
+                        }
                     }
                 }
 

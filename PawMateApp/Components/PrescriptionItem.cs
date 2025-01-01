@@ -120,7 +120,7 @@ namespace PawMateApp.Components
                 db.CloseConnection();
             }
             TreatmentPresManagement treatmentPresManagement = Application.OpenForms["TreatmentPresManagement"] as TreatmentPresManagement;
-            string query2 = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""quantity"", ""usageInstructions""
+            string query2 = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""dosage"", ""usageInstructions""
             FROM ""prescriptions"" p
             JOIN ""healthRecords"" hr ON p.""recordId"" = hr.""recordId""
 			JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
