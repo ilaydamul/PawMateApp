@@ -118,12 +118,20 @@ namespace PawMateApp
                 btn_vetManagement.Visible = true;
                 btn_profile.Visible = true;
                 //Stok sayısı, kritik ise has_warning.Visible=true olacak.
+                if (db.HasCriticalStock())
+                {
+                    stock_warn.Visible = true;  
+                }
+                else
+                {
+                    stock_warn.Visible = false;
+                }
             }
             else
             {
                 businessPanel.Visible = true;
                 btn_vetManagement.Visible = false;
-                btn_profile.Visible = true;
+                btn_profile.Visible = true;            
                 //Stok sayısı, kritik ise has_warning.Visible=true olacak.
             }
 
@@ -216,6 +224,11 @@ namespace PawMateApp
         {
             TreatmentPresManagement treatmentManagement = new TreatmentPresManagement();
             showForm(treatmentManagement);
+
+        }
+
+        private void menuPanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

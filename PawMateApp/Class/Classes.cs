@@ -1606,4 +1606,28 @@ WHERE hr.""recordId"" = @patientid;
             CloseConnection();
         }
     }
+
+    public bool HasCriticalStock()
+    {
+        string query = "SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"quantity\" <= \"threshold\"";
+        try
+        {               
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                int criticalStockCount = Convert.ToInt32(cmd.ExecuteScalar());
+                Debug.WriteLine("Kritik stok sayısı: " + criticalStockCount);
+                return criticalStockCount > 0; 
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Kritik stok kontrol edilirken hata oluştu: " + ex.Message);
+            return false;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
+
 }

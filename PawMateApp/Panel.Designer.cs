@@ -73,9 +73,11 @@
             this.menuPanel.Controls.Add(this.btn_profile);
             this.menuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuPanel.Location = new System.Drawing.Point(0, 0);
+            this.menuPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.menuPanel.Name = "menuPanel";
-            this.menuPanel.Size = new System.Drawing.Size(192, 620);
+            this.menuPanel.Size = new System.Drawing.Size(256, 763);
             this.menuPanel.TabIndex = 16;
+            this.menuPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.menuPanel_Paint);
             // 
             // adminPanel
             // 
@@ -85,18 +87,20 @@
             this.adminPanel.Controls.Add(this.btn_showBusinessManagement);
             this.adminPanel.Controls.Add(this.btn_showNotifications);
             this.adminPanel.Controls.Add(this.btn_showTreatmentManagement);
-            this.adminPanel.Location = new System.Drawing.Point(0, 63);
+            this.adminPanel.Location = new System.Drawing.Point(0, 78);
+            this.adminPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.adminPanel.Name = "adminPanel";
-            this.adminPanel.Size = new System.Drawing.Size(192, 206);
+            this.adminPanel.Size = new System.Drawing.Size(256, 254);
             this.adminPanel.TabIndex = 21;
             this.adminPanel.Visible = false;
             // 
             // has_notif
             // 
             this.has_notif.Image = global::PawMateApp.Properties.Resources.warning;
-            this.has_notif.Location = new System.Drawing.Point(160, 151);
+            this.has_notif.Location = new System.Drawing.Point(213, 186);
+            this.has_notif.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.has_notif.Name = "has_notif";
-            this.has_notif.Size = new System.Drawing.Size(23, 36);
+            this.has_notif.Size = new System.Drawing.Size(31, 44);
             this.has_notif.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.has_notif.TabIndex = 169;
             this.has_notif.TabStop = false;
@@ -111,10 +115,11 @@
             this.btn_showUserManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_showUserManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showUserManagement.Image")));
             this.btn_showUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showUserManagement.Location = new System.Drawing.Point(-1, 49);
+            this.btn_showUserManagement.Location = new System.Drawing.Point(-1, 60);
+            this.btn_showUserManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_showUserManagement.Name = "btn_showUserManagement";
-            this.btn_showUserManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showUserManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showUserManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_showUserManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_showUserManagement.TabIndex = 21;
             this.btn_showUserManagement.Text = "Kullanıcılar";
             this.btn_showUserManagement.UseVisualStyleBackColor = false;
@@ -129,10 +134,11 @@
             this.btn_showBusinessManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_showBusinessManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showBusinessManagement.Image")));
             this.btn_showBusinessManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showBusinessManagement.Location = new System.Drawing.Point(-1, 3);
+            this.btn_showBusinessManagement.Location = new System.Drawing.Point(-1, 4);
+            this.btn_showBusinessManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_showBusinessManagement.Name = "btn_showBusinessManagement";
-            this.btn_showBusinessManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showBusinessManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showBusinessManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_showBusinessManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_showBusinessManagement.TabIndex = 18;
             this.btn_showBusinessManagement.Text = "İşletmeler";
             this.btn_showBusinessManagement.UseVisualStyleBackColor = false;
@@ -147,10 +153,11 @@
             this.btn_showNotifications.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_showNotifications.Image = ((System.Drawing.Image)(resources.GetObject("btn_showNotifications.Image")));
             this.btn_showNotifications.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showNotifications.Location = new System.Drawing.Point(-1, 145);
+            this.btn_showNotifications.Location = new System.Drawing.Point(-1, 178);
+            this.btn_showNotifications.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_showNotifications.Name = "btn_showNotifications";
-            this.btn_showNotifications.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showNotifications.Size = new System.Drawing.Size(192, 48);
+            this.btn_showNotifications.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_showNotifications.Size = new System.Drawing.Size(256, 59);
             this.btn_showNotifications.TabIndex = 20;
             this.btn_showNotifications.Text = "Bildirimler";
             this.btn_showNotifications.UseVisualStyleBackColor = false;
@@ -165,10 +172,11 @@
             this.btn_showTreatmentManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_showTreatmentManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_showTreatmentManagement.Image")));
             this.btn_showTreatmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_showTreatmentManagement.Location = new System.Drawing.Point(-1, 97);
+            this.btn_showTreatmentManagement.Location = new System.Drawing.Point(-1, 119);
+            this.btn_showTreatmentManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_showTreatmentManagement.Name = "btn_showTreatmentManagement";
-            this.btn_showTreatmentManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_showTreatmentManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_showTreatmentManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_showTreatmentManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_showTreatmentManagement.TabIndex = 19;
             this.btn_showTreatmentManagement.Text = "Tedaviler";
             this.btn_showTreatmentManagement.UseVisualStyleBackColor = false;
@@ -183,10 +191,11 @@
             this.btn_logout.ForeColor = System.Drawing.Color.White;
             this.btn_logout.Image = ((System.Drawing.Image)(resources.GetObject("btn_logout.Image")));
             this.btn_logout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_logout.Location = new System.Drawing.Point(8, 569);
+            this.btn_logout.Location = new System.Drawing.Point(11, 700);
+            this.btn_logout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_logout.Name = "btn_logout";
-            this.btn_logout.Padding = new System.Windows.Forms.Padding(8, 0, 0, 0);
-            this.btn_logout.Size = new System.Drawing.Size(175, 42);
+            this.btn_logout.Padding = new System.Windows.Forms.Padding(11, 0, 0, 0);
+            this.btn_logout.Size = new System.Drawing.Size(233, 52);
             this.btn_logout.TabIndex = 17;
             this.btn_logout.Text = "Çıkış Yap";
             this.btn_logout.UseVisualStyleBackColor = false;
@@ -202,9 +211,10 @@
             this.businessPanel.Controls.Add(this.btn_appointManagement);
             this.businessPanel.Controls.Add(this.btn_medicineManagement);
             this.businessPanel.Controls.Add(this.btn_patientManagement);
-            this.businessPanel.Location = new System.Drawing.Point(0, 63);
+            this.businessPanel.Location = new System.Drawing.Point(0, 78);
+            this.businessPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.businessPanel.Name = "businessPanel";
-            this.businessPanel.Size = new System.Drawing.Size(192, 349);
+            this.businessPanel.Size = new System.Drawing.Size(256, 430);
             this.businessPanel.TabIndex = 22;
             this.businessPanel.Visible = false;
             this.businessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.businessPanel_Paint);
@@ -212,9 +222,10 @@
             // stock_warn
             // 
             this.stock_warn.Image = global::PawMateApp.Properties.Resources.warning;
-            this.stock_warn.Location = new System.Drawing.Point(160, 153);
+            this.stock_warn.Location = new System.Drawing.Point(213, 188);
+            this.stock_warn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.stock_warn.Name = "stock_warn";
-            this.stock_warn.Size = new System.Drawing.Size(23, 36);
+            this.stock_warn.Size = new System.Drawing.Size(31, 44);
             this.stock_warn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.stock_warn.TabIndex = 168;
             this.stock_warn.TabStop = false;
@@ -229,10 +240,11 @@
             this.btn_treatmentManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_treatmentManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_treatmentManagement.Image")));
             this.btn_treatmentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_treatmentManagement.Location = new System.Drawing.Point(0, 243);
+            this.btn_treatmentManagement.Location = new System.Drawing.Point(0, 299);
+            this.btn_treatmentManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_treatmentManagement.Name = "btn_treatmentManagement";
-            this.btn_treatmentManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_treatmentManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_treatmentManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_treatmentManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_treatmentManagement.TabIndex = 24;
             this.btn_treatmentManagement.Text = "Tedavi ve Reçete Planlama";
             this.btn_treatmentManagement.UseVisualStyleBackColor = false;
@@ -247,10 +259,11 @@
             this.btn_vetManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_vetManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_vetManagement.Image")));
             this.btn_vetManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_vetManagement.Location = new System.Drawing.Point(0, 291);
+            this.btn_vetManagement.Location = new System.Drawing.Point(0, 358);
+            this.btn_vetManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_vetManagement.Name = "btn_vetManagement";
-            this.btn_vetManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_vetManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_vetManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_vetManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_vetManagement.TabIndex = 23;
             this.btn_vetManagement.Text = "    Veteriner Yönetimi";
             this.btn_vetManagement.UseVisualStyleBackColor = false;
@@ -265,10 +278,11 @@
             this.btn_petManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_petManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_petManagement.Image")));
             this.btn_petManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_petManagement.Location = new System.Drawing.Point(0, 195);
+            this.btn_petManagement.Location = new System.Drawing.Point(0, 240);
+            this.btn_petManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_petManagement.Name = "btn_petManagement";
-            this.btn_petManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_petManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_petManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_petManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_petManagement.TabIndex = 22;
             this.btn_petManagement.Text = "     Pet ve Müşteri      Yönetimi\r\n";
             this.btn_petManagement.UseVisualStyleBackColor = false;
@@ -283,10 +297,11 @@
             this.btn_stockManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_stockManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_stockManagement.Image")));
             this.btn_stockManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_stockManagement.Location = new System.Drawing.Point(0, 147);
+            this.btn_stockManagement.Location = new System.Drawing.Point(0, 181);
+            this.btn_stockManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_stockManagement.Name = "btn_stockManagement";
-            this.btn_stockManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_stockManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_stockManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_stockManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_stockManagement.TabIndex = 21;
             this.btn_stockManagement.Text = "Stok Yönetimi";
             this.btn_stockManagement.UseVisualStyleBackColor = false;
@@ -301,10 +316,11 @@
             this.btn_appointManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_appointManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_appointManagement.Image")));
             this.btn_appointManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_appointManagement.Location = new System.Drawing.Point(0, 3);
+            this.btn_appointManagement.Location = new System.Drawing.Point(0, 4);
+            this.btn_appointManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_appointManagement.Name = "btn_appointManagement";
-            this.btn_appointManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_appointManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_appointManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_appointManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_appointManagement.TabIndex = 18;
             this.btn_appointManagement.Text = "             Randevu               Planlama";
             this.btn_appointManagement.UseVisualStyleBackColor = false;
@@ -319,10 +335,11 @@
             this.btn_medicineManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_medicineManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_medicineManagement.Image")));
             this.btn_medicineManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_medicineManagement.Location = new System.Drawing.Point(0, 99);
+            this.btn_medicineManagement.Location = new System.Drawing.Point(0, 122);
+            this.btn_medicineManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_medicineManagement.Name = "btn_medicineManagement";
-            this.btn_medicineManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_medicineManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_medicineManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_medicineManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_medicineManagement.TabIndex = 20;
             this.btn_medicineManagement.Text = "İlaç Yönetimi";
             this.btn_medicineManagement.UseVisualStyleBackColor = false;
@@ -337,10 +354,11 @@
             this.btn_patientManagement.Font = new System.Drawing.Font("Arial", 9.25F, System.Drawing.FontStyle.Bold);
             this.btn_patientManagement.Image = ((System.Drawing.Image)(resources.GetObject("btn_patientManagement.Image")));
             this.btn_patientManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_patientManagement.Location = new System.Drawing.Point(0, 51);
+            this.btn_patientManagement.Location = new System.Drawing.Point(0, 63);
+            this.btn_patientManagement.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_patientManagement.Name = "btn_patientManagement";
-            this.btn_patientManagement.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btn_patientManagement.Size = new System.Drawing.Size(192, 48);
+            this.btn_patientManagement.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.btn_patientManagement.Size = new System.Drawing.Size(256, 59);
             this.btn_patientManagement.TabIndex = 19;
             this.btn_patientManagement.Text = "Hasta Yönetimi";
             this.btn_patientManagement.UseVisualStyleBackColor = false;
@@ -349,9 +367,10 @@
             // logoBox
             // 
             this.logoBox.Image = ((System.Drawing.Image)(resources.GetObject("logoBox.Image")));
-            this.logoBox.Location = new System.Drawing.Point(8, 9);
+            this.logoBox.Location = new System.Drawing.Point(11, 11);
+            this.logoBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logoBox.Name = "logoBox";
-            this.logoBox.Size = new System.Drawing.Size(175, 48);
+            this.logoBox.Size = new System.Drawing.Size(233, 59);
             this.logoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoBox.TabIndex = 16;
             this.logoBox.TabStop = false;
@@ -364,9 +383,10 @@
             this.btn_profile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.btn_profile.Image = ((System.Drawing.Image)(resources.GetObject("btn_profile.Image")));
             this.btn_profile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_profile.Location = new System.Drawing.Point(8, 517);
+            this.btn_profile.Location = new System.Drawing.Point(11, 636);
+            this.btn_profile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_profile.Name = "btn_profile";
-            this.btn_profile.Size = new System.Drawing.Size(175, 44);
+            this.btn_profile.Size = new System.Drawing.Size(233, 54);
             this.btn_profile.TabIndex = 15;
             this.btn_profile.Text = "          Profilimi Görüntüle";
             this.btn_profile.UseVisualStyleBackColor = false;
@@ -378,9 +398,10 @@
             this.contentPanel.AutoScroll = true;
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.contentPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.contentPanel.Location = new System.Drawing.Point(192, 30);
+            this.contentPanel.Location = new System.Drawing.Point(256, 37);
+            this.contentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(808, 590);
+            this.contentPanel.Size = new System.Drawing.Size(1077, 726);
             this.contentPanel.TabIndex = 17;
             // 
             // topMenuPanel
@@ -389,9 +410,10 @@
             this.topMenuPanel.Controls.Add(this.btn_minimizeApp);
             this.topMenuPanel.Controls.Add(this.btn_closeApp);
             this.topMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topMenuPanel.Location = new System.Drawing.Point(192, 0);
+            this.topMenuPanel.Location = new System.Drawing.Point(256, 0);
+            this.topMenuPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.topMenuPanel.Name = "topMenuPanel";
-            this.topMenuPanel.Size = new System.Drawing.Size(808, 30);
+            this.topMenuPanel.Size = new System.Drawing.Size(1077, 37);
             this.topMenuPanel.TabIndex = 18;
             this.topMenuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.topMenuPanel_MouseDown);
             // 
@@ -399,10 +421,10 @@
             // 
             this.btn_minimizeApp.BackColor = System.Drawing.Color.Transparent;
             this.btn_minimizeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_minimizeApp.Image")));
-            this.btn_minimizeApp.Location = new System.Drawing.Point(761, 2);
-            this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_minimizeApp.Location = new System.Drawing.Point(1015, 2);
+            this.btn_minimizeApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_minimizeApp.Name = "btn_minimizeApp";
-            this.btn_minimizeApp.Size = new System.Drawing.Size(20, 24);
+            this.btn_minimizeApp.Size = new System.Drawing.Size(27, 30);
             this.btn_minimizeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btn_minimizeApp.TabIndex = 9;
             this.btn_minimizeApp.TabStop = false;
@@ -414,10 +436,10 @@
             // 
             this.btn_closeApp.BackColor = System.Drawing.Color.Transparent;
             this.btn_closeApp.Image = ((System.Drawing.Image)(resources.GetObject("btn_closeApp.Image")));
-            this.btn_closeApp.Location = new System.Drawing.Point(785, 2);
-            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_closeApp.Location = new System.Drawing.Point(1047, 2);
+            this.btn_closeApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_closeApp.Name = "btn_closeApp";
-            this.btn_closeApp.Size = new System.Drawing.Size(21, 24);
+            this.btn_closeApp.Size = new System.Drawing.Size(28, 30);
             this.btn_closeApp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btn_closeApp.TabIndex = 8;
             this.btn_closeApp.TabStop = false;
@@ -427,14 +449,15 @@
             // 
             // Panel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 620);
+            this.ClientSize = new System.Drawing.Size(1333, 763);
             this.Controls.Add(this.topMenuPanel);
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.menuPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Panel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Anasayfa";
