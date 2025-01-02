@@ -22,6 +22,7 @@ namespace PawMateApp.Components
     public partial class PrescriptionItem : UserControl
     {
         DatabaseManagament db = new DatabaseManagament();
+        int LastQuantity;
         public PrescriptionItem()
         {
             InitializeComponent();
@@ -109,18 +110,41 @@ namespace PawMateApp.Components
             DialogResult result = MessageBox.Show("Reçeteyi Silmek İstediğinize Emin Misiniz?", "Reçete Silme", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                db.OpenConnection();
-                string query = @"DELETE FROM prescriptions WHERE ""prescriptionId"" = @psid";
-                using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@psid", Convert.ToInt32(PrescriptionId));
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Reçete başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                db.CloseConnection();
-            }
-            TreatmentPresManagement treatmentPresManagement = Application.OpenForms["TreatmentPresManagement"] as TreatmentPresManagement;
-            string query2 = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""dosage"", ""usageInstructions""
+                    db.OpenConnection();
+                    string getMedicineStock = @"SELECT m.""quantity"" FROM ""medicineStocks"" m JOIN ""prescriptions"" p ON p.""medicineId"" = m.""medicineId"" WHERE p.""prescriptionId"" = @presid";
+                    using (var cmd = new Npgsql.NpgsqlCommand(getMedicineStock, db.baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@presid", Convert.ToInt32(PrescriptionId));
+                        using (var dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                int quantity = Convert.ToInt32(dr["quantity"]);
+                                LastQuantity = quantity + Convert.ToInt32(MedicineUnit);
+                            }
+                            else
+                            {
+                                Debug.WriteLine("Okunmadı! Pres ID: " + PrescriptionId);
+                            }
+                        }
+                    }
+                    string updateMedicineStock = @"UPDATE ""medicineStocks"" SET ""quantity"" = @quantity WHERE ""stockId"" = (SELECT m.""stockId"" FROM ""medicineStocks"" m JOIN ""prescriptions"" p ON p.""medicineId"" = m.""medicineId"" WHERE p.""prescriptionId"" = @presid LIMIT 1);";
+                    using (var cmd2 = new Npgsql.NpgsqlCommand(updateMedicineStock, db.baglan))
+                    {
+                        cmd2.Parameters.AddWithValue("@quantity", LastQuantity);
+                        cmd2.Parameters.AddWithValue("@presid", Convert.ToInt32(PrescriptionId));
+                        cmd2.ExecuteNonQuery();
+                    }
+                    string query = @"DELETE FROM prescriptions WHERE ""prescriptionId"" = @psid";
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, db.baglan))
+                    {
+                        cmd.Parameters.AddWithValue("@psid", Convert.ToInt32(PrescriptionId));
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Reçete başarıyla silindi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        TreatmentPresManagement treatmentPresManagement = Application.OpenForms["TreatmentPresManagement"] as TreatmentPresManagement;
+                        string query2 = @"SELECT p.""prescriptionId"", c.""fullName"", c.""phone"", ""petName"", u.""fullName"" AS ""vetname"", ""medicineName"", ""dosage"", ""usageInstructions""
             FROM ""prescriptions"" p
             JOIN ""healthRecords"" hr ON p.""recordId"" = hr.""recordId""
 			JOIN ""visits"" v ON hr.""visitid"" = v.""visitId""
@@ -130,7 +154,15 @@ namespace PawMateApp.Components
             JOIN ""medicineStocks"" ms ON p.""medicineId"" = ms.""medicineId""
 			JOIN ""medicines"" m ON ms.""medicineId"" = m.""medicineId""
             WHERE v.""businessid"" = @businessid";
-            treatmentPresManagement.ExecuteQueryAndLoadItems(query2, treatmentPresManagement.prescriptionList);
+                        treatmentPresManagement.ExecuteQueryAndLoadItems(query2, treatmentPresManagement.prescriptionList);
+                    }
+                    db.CloseConnection();
+
+                }
+                catch (Exception ex) {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
         }
 
         private void btn_pdf_Click(object sender, EventArgs e)
