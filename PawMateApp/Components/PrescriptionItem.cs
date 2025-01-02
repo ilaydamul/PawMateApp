@@ -172,7 +172,7 @@ namespace PawMateApp.Components
         }
 
         private void btn_pdf_Click_1(object sender, EventArgs e)
-        {
+        { 
             string sanitizedPetName = PetName.Replace("\n", "").Replace("\r", "").Replace(" ", "_");
             string fileName = $"{sanitizedPetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
             string dest = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
@@ -362,17 +362,20 @@ namespace PawMateApp.Components
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult result = MessageBox.Show("Reçete PDF'i Müşterinin Mail Adresine Gönderilecektir. Onaylıyor Musunuz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                string sanitizedPetName = PetName.Replace("\n", "").Replace("\r", "").Replace(" ", "_");
-                string fileName = $"{sanitizedPetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
-                string dest = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
-                byte[] pdfBytes = GeneratePrescriptionPDF(Convert.ToInt32(PrescriptionId));
-
-                if (pdfBytes != null)
+                try
                 {
-                    File.WriteAllBytes(dest, pdfBytes);
-                    string body = $@"
+                    string sanitizedPetName = PetName.Replace("\n", "").Replace("\r", "").Replace(" ", "_");
+                    string fileName = $"{sanitizedPetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
+                    string dest = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+                    byte[] pdfBytes = GeneratePrescriptionPDF(Convert.ToInt32(PrescriptionId));
+
+                    if (pdfBytes != null)
+                    {
+                        File.WriteAllBytes(dest, pdfBytes);
+                        string body = $@"
 <table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
   <tbody>
     <tr>
@@ -417,17 +420,19 @@ namespace PawMateApp.Components
 </table>
 ";
 
-                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
-                    sendMail.SendMailWithAttachment("Pawmate Randevu Bilgilendirme", body, "baris19052003@gmail.com", dest);
+                        SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                        sendMail.SendMailWithAttachment("Pawmate Randevu Bilgilendirme", body, "baris19052003@gmail.com", dest);
+                    }
+                    else
+                    {
+                        MessageBox.Show("PDF oluşturulurken bir hata oluştu.",
+                            "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("PDF oluşturulurken bir hata oluştu.",
-                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Debug.WriteLine(ex.Message);
                 }
-                }catch(Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
             }
         }
     }
