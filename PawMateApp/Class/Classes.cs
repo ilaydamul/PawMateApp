@@ -218,6 +218,46 @@ namespace PawMateApp
 
             }
         }
+
+        public void SendMailWithAttachment(string subject, string body, string customermail, string pdfpath)
+        {
+            try
+            {
+                string toAddress = customermail;
+                Debug.WriteLine("mailadress: " + customermail);
+
+                // MailMessage nesnesi oluşturuluyor
+                MailMessage mailMessage = new MailMessage
+                {
+                    From = new MailAddress(this.fromadress, "PawMate"),
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                };
+
+                // Alıcıyı ekle
+                mailMessage.To.Add(toAddress);
+
+                // PDF dosyasını attachment olarak ekle
+                Attachment attachment = new Attachment(pdfpath);
+                mailMessage.Attachments.Add(attachment);
+
+                // Mail gönderimi
+                smtpClient.Send(mailMessage);
+                mailMessage.Priority = MailPriority.High;
+
+                Debug.WriteLine("Mail gönderildi ve ek dosya eklendi.");
+                if (File.Exists(pdfpath))
+                {
+                    attachment.Dispose();
+                    File.Delete(pdfpath);
+                    Debug.WriteLine("Dosya silindi: " + pdfpath);
+                }            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Mail gönderme hatası: " + ex.Message);
+            }
+        }
     }
 
     public class UserSettings

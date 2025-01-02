@@ -16,6 +16,7 @@ using PawMateApp.Screens;
 using iText.Layout.Borders;
 using iText.IO.Font.Constants;
 using iText.Kernel.Geom;
+using iText.StyledXmlParser.Jsoup.Select;
 
 namespace PawMateApp.Components
 {
@@ -361,7 +362,73 @@ namespace PawMateApp.Components
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string sanitizedPetName = PetName.Replace("\n", "").Replace("\r", "").Replace(" ", "_");
+                string fileName = $"{sanitizedPetName}_recete_{DateTime.Now:yyyyMMdd}.pdf";
+                string dest = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+                byte[] pdfBytes = GeneratePrescriptionPDF(Convert.ToInt32(PrescriptionId));
 
+                if (pdfBytes != null)
+                {
+                    File.WriteAllBytes(dest, pdfBytes);
+                    string body = $@"
+<table align=""center"" bgcolor=""#ffffff"" style=""border-top:4px solid #ffffff;background-color:#ffffff;padding-bottom:60px;margin: 0 auto;"">
+  <tbody>
+    <tr>
+      <td style=""padding-top:50px; text-align:center;"">
+        <img alt=""Logo"" src=""https://i.hizliresim.com/8wrfqod.png"" width=""300"" height=""auto"" border=""0"" hspace=""0"" vspace=""0"" style=""display:block; margin-left:auto; margin-right:auto;"">
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:32px;line-height:38px;color:#ff6b00;"">Reçeteniz Başarıyla Hazırlanmıştır 🎉</strong><br><br>
+        Sayın {CustomerName}, aşağıda belirtilen bilgiler başarıyla hazırlanmıştır ve reçeteniz ektedir:<br><br>
+        <table style=""margin:0 auto;border-collapse:collapse;width:80%;"">
+          <tr>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;""><strong>İsim Soyisim:</strong></td>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;"">{CustomerName}</td>
+          </tr>
+          <tr>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;""><strong>Yazılan İlaç:</strong></td>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;"">{MedicineName}</td>
+          </tr>
+          <tr>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;""><strong>Kullanma Talimatı:</strong></td>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;"">{UsageInstructions}</td>
+          </tr>
+          <tr>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;""><strong>Yazan Veteriner:</strong></td>
+            <td style=""text-align:left;padding:10px;border:1px solid #ddd;"">{VetName}</td>
+          </tr>
+        </table>
+        <br><br>
+        Reçeteniz ekteki dosya olarak gönderilmiştir.<br><br>
+        <strong style=""font-size:20px;color:#ff3c00;"">Herhangi bir sorunuz varsa bizimle iletişime geçmekten çekinmeyin.</strong>
+      </td>
+    </tr>
+    <tr>
+      <td style=""color:#505050;font-family:adobe-clean,Helvetica Neue,Helvetica,Verdana,Arial,sans-serif;font-size:18px;line-height:26px;padding-top:40px;text-align:center;"">
+        <strong style=""font-size:20px;color:#2d2d2d;"">Veteriner Kliniğinizde Görüşmek Üzere! 🐾</strong><br><br>
+        <em style=""font-size:16px;color:#888888;"">Pawmate Destek Ekibi</em>
+      </td>
+    </tr>
+  </tbody>
+</table>
+";
+
+                    SendMailClass sendMail = new SendMailClass("pawmateinfo@gmail.com", "shiw ndqo tvfw dzte", "smtp.gmail.com", 587);
+                    sendMail.SendMailWithAttachment("Pawmate Randevu Bilgilendirme", body, "baris19052003@gmail.com", dest);
+                }
+                else
+                {
+                    MessageBox.Show("PDF oluşturulurken bir hata oluştu.",
+                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                }catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 
