@@ -1626,4 +1626,25 @@ WHERE hr.""recordId"" = @patientid;
         }
     }
 
-}
+    public string getCustomerMail(int customerid)
+    {
+        string query = "SELECT email FROM \"customers\" WHERE \"customerId\" = @customerid";
+        try
+        {
+            using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
+            {
+                cmd.Parameters.AddWithValue("@customerid", customerid);
+                return cmd.ExecuteScalar().ToString();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Müşteri maili çekilirken hata oluştu: " + ex.Message);
+            return null;
+        }
+        finally
+        {
+            CloseConnection();
+        }
+    }
+    }
