@@ -55,7 +55,7 @@ namespace PawMateApp.Components
         private void StockItem_Load(object sender, EventArgs e)
         {
             Debug.WriteLine(_quantity + " Adet birim var" + _threshold + "Red Line");
-            if(Convert.ToInt32(_quantity) < Convert.ToInt32(_threshold))
+            if(Convert.ToInt32(_quantity) <= Convert.ToInt32(_threshold))
             {
                 img_stock.Image = Properties.Resources.red_light;
                 return;
@@ -82,8 +82,16 @@ namespace PawMateApp.Components
                 var stockmanagement = Application.OpenForms["StockManagement"];
                 if (stockmanagement != null)
                 {
-                    StockManagement stock = stockmanagement as StockManagement;
-                    stock?.StockManagement_Load(null, null); 
+                    StockManagement stock = Application.OpenForms.OfType<StockManagement>().FirstOrDefault();
+                    if(stock != null)
+                    {
+                        stock.StockItem();
+                    }
+                    Panel panelForm = Application.OpenForms.OfType<Panel>().FirstOrDefault();
+                    if (panelForm != null)
+                    {
+                        panelForm.Panel_Load(null, EventArgs.Empty);
+                    }
                 }
                 else
                 {

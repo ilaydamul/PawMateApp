@@ -111,9 +111,11 @@ namespace PawMateApp
                 {
                     has_notif.Visible = false; 
                 }
+                db.CloseConnection();
             }
             else if (Globals.CurrentUserBusinessAdminStatus == true)
             {
+                db.OpenConnection();
                 businessPanel.Visible = true;
                 btn_vetManagement.Visible = true;
                 btn_profile.Visible = true;
@@ -126,6 +128,7 @@ namespace PawMateApp
                 {
                     stock_warn.Visible = false;
                 }
+                db.CloseConnection();
             }
             else
             {

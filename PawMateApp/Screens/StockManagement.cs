@@ -34,7 +34,7 @@ namespace PawMateApp.Screens
             
         }
 
-        private void StockItem()
+        public void StockItem()
         {
             flowLayoutPanel1.Controls.Clear();
             try
@@ -42,7 +42,7 @@ namespace PawMateApp.Screens
                 databaseManagament.OpenConnection();
                 baglan.Open();
                 string query = "SELECT * FROM \"medicineStocks\" WHERE businessid = "+businessid+" ORDER BY \"stockId\" DESC";
-                string countQuery = "SELECT * FROM \"medicineStocks\" WHERE \"businessid\" = " + businessid + " ORDER BY CASE WHEN \"quantity\" < \"threshold\" THEN 0 ELSE 1 END, \"stockId\" DESC;";
+                string countQuery = "SELECT * FROM \"medicineStocks\" WHERE \"businessid\" = " + businessid + " ORDER BY CASE WHEN \"quantity\" <= \"threshold\" THEN 0 ELSE 1 END, \"stockId\" DESC;";
 
 
                 NpgsqlCommand countCmd = new NpgsqlCommand(countQuery, baglan);
@@ -104,6 +104,11 @@ namespace PawMateApp.Screens
                             databaseManagament.AddMedicineStocksToDatabase(businessid, selected.Id, selected.DisplayName, int.Parse(txt_stockUnit.Text), int.Parse(txt_stockThreshold.Text));
                             flowLayoutPanel1.Controls.Clear();
                             StockItem();
+                            Panel panelForm = Application.OpenForms.OfType<Panel>().FirstOrDefault();
+                            if (panelForm != null)
+                            {
+                                panelForm.Panel_Load(null, EventArgs.Empty);
+                            }
                         }
                     }
                 }

@@ -1604,14 +1604,15 @@ WHERE hr.""recordId"" = @patientid;
 
     public bool HasCriticalStock()
     {
-        string query = "SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"quantity\" <= \"threshold\"";
+        string query = "SELECT COUNT(*) FROM \"medicineStocks\" WHERE \"quantity\" <= \"threshold\" AND businessid = @businessid";
         try
-        {               
+        {
             using (var cmd = new Npgsql.NpgsqlCommand(query, baglan))
             {
+                cmd.Parameters.AddWithValue("@businessid", Globals.CurrentUserBusinessAdminID);
                 int criticalStockCount = Convert.ToInt32(cmd.ExecuteScalar());
                 Debug.WriteLine("Kritik stok sayısı: " + criticalStockCount);
-                return criticalStockCount > 0; 
+                return criticalStockCount > 0;
             }
         }
         catch (Exception ex)

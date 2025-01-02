@@ -80,6 +80,11 @@ namespace PawMateApp.Screens
                     ExecuteQueryAndLoadItems(query, prescriptionList);
                     Inputs inp = new Inputs(new Control[] {txt_usageInstructions,txt_quantity,cb_medicines,cb_visits});
                     inp.ClearInputs();
+                    Panel panelForm = Application.OpenForms.OfType<Panel>().FirstOrDefault();
+                    if (panelForm != null)
+                    {
+                        panelForm.Panel_Load(null, EventArgs.Empty);
+                    }
                 }
                 
             }
